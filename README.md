@@ -1,7 +1,3 @@
-# MAKE AI REAL — React + Vite
-
-Hero-osio Reactilla. Valmis GitHub + Vercel deploymenttiin.
-
 ---
 
 ## 📁 Kansiorakenne
