@@ -82,7 +82,7 @@
   --z-overlay: 200;
   --z-modal:   300;
 
-  --nav-height:            72px;
+  --nav-height:            80px;
   --nav-bg:                rgba(255,255,255,0.96);
   --nav-border:            var(--border-color);
   --nav-link-color:        var(--color-black);
