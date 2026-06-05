@@ -9,17 +9,13 @@
   right: 0;
   z-index: var(--z-nav);
   height: var(--nav-height);
-  background: transparent;
-  transition: background var(--transition-normal), box-shadow var(--transition-normal);
-}
-
-.navbar--scrolled {
-  background: var(--nav-bg);
-  box-shadow: var(--shadow-sm);
+  background: var(--color-white, #ffffff);
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.08));
+  /* ei scroll-efektiä – pysyy aina valkoisena ja paikallaan */
 }
 
 .navbar--menu-open {
-  background: var(--color-white);
+  background: var(--color-white, #ffffff);
 }
 
 .navbar__inner {
@@ -32,39 +28,60 @@
   padding-inline: var(--gutter);
 }
 
-.navbar__logo { display: flex; align-items: center; flex-shrink: 0; }
-.navbar__logo-text {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: var(--font-bold);
-  letter-spacing: -0.02em;
-  color: var(--color-white);
-  transition: color var(--transition-fast);
+/* Logo – vasemmalle (flex-start automaattisesti) */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
-.navbar--scrolled .navbar__logo-text,
-.navbar--menu-open .navbar__logo-text { color: var(--color-black); }
+.navbar__logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
 
-.navbar__nav { display: flex; align-items: center; }
-.navbar__list { display: flex; align-items: center; gap: var(--space-8); }
+/* Desktop nav – oikealle (margin-left: auto) */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.navbar__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8, 2rem);
+}
 .navbar__link {
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-medium, 500);
   letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.9);
-  transition: color var(--transition-fast);
+  color: var(--color-black, #111);
+  transition: color var(--transition-fast, 0.15s ease);
   white-space: nowrap;
 }
-.navbar__link:hover { color: var(--color-white); }
-.navbar--scrolled .navbar__link,
-.navbar--menu-open .navbar__link { color: var(--nav-link-color); }
-.navbar--scrolled .navbar__link:hover { color: var(--nav-link-hover-color); }
-
-.navbar__link--cta {
-  height: 38px !important;
-  padding-inline: var(--space-6) !important;
-  font-size: var(--text-xs) !important;
+.navbar__link:hover {
+  color: var(--text-muted, #555);
 }
 
+/* CTA button – musta */
+.navbar__link--cta {
+  display: inline-flex;
+  align-items: center;
+  height: 38px !important;
+  padding-inline: var(--space-6, 1.25rem) !important;
+  font-size: var(--text-sm, 0.875rem) !important;
+  font-weight: var(--font-semibold, 600) !important;
+  background: var(--color-black, #111) !important;
+  color: var(--color-white, #fff) !important;
+  border-radius: var(--radius-md, 6px);
+  transition: background var(--transition-fast, 0.15s ease), color var(--transition-fast, 0.15s ease);
+}
+.navbar__link--cta:hover {
+  background: #333 !important;
+  color: var(--color-white, #fff) !important;
+}
+
+/* Hamburger */
 .navbar__hamburger {
   display: none;
   flex-direction: column;
@@ -73,46 +90,65 @@
   width: 36px;
   height: 36px;
   cursor: pointer;
+  margin-left: auto;
 }
 .navbar__hamburger span {
   display: block;
   height: 1.5px;
-  background: var(--color-white);
-  transition: transform var(--transition-normal), opacity var(--transition-normal);
+  background: var(--color-black, #111);
+  transition: transform var(--transition-normal, 0.25s ease), opacity var(--transition-normal, 0.25s ease);
   transform-origin: center;
 }
-.navbar--scrolled .navbar__hamburger span,
-.navbar--menu-open .navbar__hamburger span { background: var(--color-black); }
-
 .navbar__hamburger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .navbar__hamburger--open span:nth-child(2) { opacity: 0; }
 .navbar__hamburger--open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
+/* Mobile menu */
 .navbar__mobile-menu {
   position: absolute;
   top: var(--nav-height);
   left: 0;
   right: 0;
-  background: var(--color-white);
-  padding: var(--space-8) var(--gutter) var(--space-12);
+  background: var(--color-white, #fff);
+  padding: var(--space-8, 2rem) var(--gutter) var(--space-12, 3rem);
   transform: translateY(-8px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
-  box-shadow: var(--shadow-lg);
+  transition: opacity var(--transition-normal, 0.25s ease), transform var(--transition-normal, 0.25s ease);
+  box-shadow: var(--shadow-lg, 0 8px 24px rgba(0,0,0,0.12));
 }
-.navbar__mobile-menu--open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-.navbar__mobile-list { display: flex; flex-direction: column; gap: var(--space-4); }
+.navbar__mobile-menu--open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.navbar__mobile-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 1rem);
+}
 .navbar__mobile-link {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
-  color: var(--color-black);
+  font-size: var(--text-2xl, 1.5rem);
+  font-weight: var(--font-bold, 700);
+  color: var(--color-black, #111);
   display: block;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: var(--space-4);
-  transition: color var(--transition-fast);
+  border-bottom: 1px solid var(--border-color, #eee);
+  padding-bottom: var(--space-4, 1rem);
+  transition: color var(--transition-fast, 0.15s ease);
 }
-.navbar__mobile-link:hover { color: var(--text-muted); }
+.navbar__mobile-link:hover { color: var(--text-muted, #555); }
+.navbar__mobile-link--cta {
+  margin-top: var(--space-4, 1rem);
+  border-bottom: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3, 0.75rem) var(--space-6, 1.25rem);
+  background: var(--color-black, #111);
+  color: var(--color-white, #fff) !important;
+  border-radius: var(--radius-md, 6px);
+  font-size: var(--text-base, 1rem);
+}
 
 @media (max-width: 1024px) {
   .navbar__nav { display: none; }
