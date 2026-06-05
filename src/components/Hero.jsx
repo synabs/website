@@ -6,7 +6,7 @@ export default function Hero() {
       {/* Background image */}
       <div className="hero__bg" aria-hidden="true">
         <img
-          src="/public/synabs-hero.avif"
+          src="/synabs-hero.avif"
           alt=""
           loading="eager"
           fetchPriority="high"
