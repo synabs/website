@@ -37,23 +37,25 @@
   margin-inline: auto;
   padding-inline: var(--gutter);
   padding-top: calc(var(--nav-height) + var(--space-16));
+  margin-left: 0;
 }
 
 .hero__title {
   font-size: clamp(4.5rem, 14vw, 12rem);
   line-height: 0.88;
   letter-spacing: -0.04em;
-  font-weight: var(--font-light);
+  font-weight: var(--font-bold);
   color: var(--color-white);
   margin-bottom: var(--space-10);
   max-width: none;
+  text-align: left;
 }
 
 .hero__lead {
-  font-size: clamp(var(--text-base), 1.4vw, var(--text-lg));
+  font-size: clamp(var(--text-xl), 2.5vw, var(--text-4xl));
   font-weight: var(--font-light);
   color: rgba(255,255,255,0.85);
-  max-width: 460px;
+  max-width: 700px;
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-10);
 }
@@ -67,4 +69,5 @@
 @media (max-width: 768px) {
   .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
   .hero__content { padding-inline: var(--space-6); }
+  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
 }
