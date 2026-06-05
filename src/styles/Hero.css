@@ -7,7 +7,7 @@
   min-height: var(--hero-min-height);
   background: var(--hero-bg);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   padding-bottom: var(--space-20);
   overflow: hidden;
 }
@@ -41,7 +41,7 @@
 }
 
 .hero__title {
-  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-size: clamp(4.5rem, 14vw, 12rem);
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
