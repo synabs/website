@@ -23,8 +23,7 @@
   --border-color:       var(--color-grey-200);
   --border-dark:        var(--color-black);
 
-  --font-sans:          'DM Sans', sans-serif;
-  --font-display:       'DM Serif Display', serif;
+  --font-sans:          'Space Grotesk', sans-serif;
 
   --text-xs:    0.75rem;
   --text-sm:    0.875rem;
