@@ -2,43 +2,35 @@ import { useState, useEffect } from 'react'
 import '../styles/Navbar.css'
 
 const navLinks = [
-  { href: '/about',      label: 'About Us' },
-  { href: '/services',   label: 'Services' },
-  { href: '/industries', label: 'Industries' },
-  { href: '/cases',      label: 'Cases' },
-  { href: '/news',       label: 'News & Insights' },
-  { href: '/join',       label: 'Join Us' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/login',   label: 'Login' },
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false)
-  const [menuOpen, setMenuOpen]   = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const toggleMenu = () => setMenuOpen(prev => !prev)
   const closeMenu  = () => setMenuOpen(false)
 
   const navClass = [
     'navbar',
-    scrolled  ? 'navbar--scrolled'   : '',
-    menuOpen  ? 'navbar--menu-open'  : '',
+    menuOpen ? 'navbar--menu-open' : '',
   ].filter(Boolean).join(' ')
 
   return (
     <nav className={navClass} id="navbar">
       <div className="navbar__inner">
 
-        {/* Logo */}
+        {/* Logo – aivan vasemmalle */}
         <a href="/" className="navbar__logo" aria-label="Home">
-          <span className="navbar__logo-text">LOGO</span>
+          <img
+            src="/synabs-black.avif"
+            alt="Synabs logo"
+            className="navbar__logo-img"
+          />
         </a>
 
-        {/* Desktop nav */}
+        {/* Desktop nav – aivan oikealle */}
         <nav className="navbar__nav" aria-label="Päävalikko">
           <ul className="navbar__list">
             {navLinks.map(({ href, label }) => (
@@ -48,10 +40,10 @@ export default function Navbar() {
             ))}
             <li>
               <a
-                href="/contact"
-                className="navbar__link navbar__link--cta btn btn--white"
+                href="/start"
+                className="navbar__link navbar__link--cta btn btn--black"
               >
-                Contact Us
+                Start free trial
               </a>
             </li>
           </ul>
@@ -85,7 +77,9 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="/contact" className="navbar__mobile-link" onClick={closeMenu}>Contact Us</a>
+            <a href="/start" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
+              Start free trial
+            </a>
           </li>
         </ul>
       </div>
