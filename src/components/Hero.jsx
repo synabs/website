@@ -16,17 +16,16 @@ export default function Hero() {
       {/* Content */}
       <div className="hero__content">
         <h1 className="hero__title">
-          MAKE<br />
+          EVOLVING<br />
           AI<br />
-          REAL
+          AGENTS
         </h1>
         <p className="hero__lead">
-          We transform organizations and create new business opportunities
-          with elite talent trained in AI.
+          We transform organizations and boost leads with next generation self-learning AI agents.
         </p>
         <div className="hero__buttons">
-          <a href="/contact" className="btn btn--white">Let's talk</a>
-          <a href="/join"    className="btn btn--outline">Join the team</a>
+          <a href="/contact" className="btn btn--white">See it live</a>
+          <a href="/join"    className="btn btn--outline">Start free trial</a>
         </div>
       </div>
     </section>
