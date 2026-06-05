@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react'
 import '../styles/Navbar.css'
 
 const navLinks = [
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/login',   label: 'Login' },
+  { href: '/performance',  label: 'Performance' },
+  { href: '/integrations', label: 'Integrations' },
+  { href: '/technology',   label: 'Technology' },
+  { href: '/about',        label: 'About' },
+  { href: '/pricing',      label: 'Pricing' },
 ]
 
 export default function Navbar() {
@@ -40,10 +43,10 @@ export default function Navbar() {
             ))}
             <li>
               <a
-                href="/start"
+                href="/apply"
                 className="navbar__link navbar__link--cta btn btn--black"
               >
-                Start free trial
+                Apply for Free Testing
               </a>
             </li>
           </ul>
@@ -77,8 +80,8 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="/start" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
-              Start free trial
+            <a href="/apply" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
+              Apply for Free Testing
             </a>
           </li>
         </ul>
