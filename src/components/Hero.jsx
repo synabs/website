@@ -6,7 +6,7 @@ export default function Hero() {
       {/* Background image */}
       <div className="hero__bg" aria-hidden="true">
         <img
-          src="https://www.siili.com/hubfs/optimized/hero/SIILI-Hero-2560x1440px-2026.jpg"
+          src="/public/synabs-hero.avif"
           alt=""
           loading="eager"
           fetchPriority="high"
