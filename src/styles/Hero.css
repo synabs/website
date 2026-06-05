@@ -41,7 +41,7 @@
 }
 
 .hero__title {
-  font-size: clamp(4.5rem, 14vw, 12rem);
+  font-size: clamp(3.5rem, 10vw, 9rem);
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
@@ -52,9 +52,9 @@
 }
 
 .hero__lead {
-  font-size: clamp(var(--text-xl), 2.5vw, var(--text-4xl));
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-light);
-  color: rgba(255,255,255,0.85);
+  color: var(--color-white);
   max-width: 700px;
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-10);
