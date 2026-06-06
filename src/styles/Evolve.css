@@ -1,0 +1,55 @@
+/* ============================================================
+   EVOLVE.CSS
+   ============================================================ */
+
+.evolve {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 120px var(--gutter);
+}
+
+.evolve__content {
+  flex: 1;
+}
+
+.evolve__title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--font-bold);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-6);
+}
+
+.evolve__lead {
+  font-size: clamp(var(--text-base), 1.4vw, var(--text-xl));
+  font-weight: var(--font-light);
+  line-height: var(--leading-relaxed);
+  color: #444;
+  max-width: 520px;
+}
+
+.evolve__image {
+  flex: 1;
+  aspect-ratio: 4/3;
+  background: #f0f0f0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.evolve__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .evolve {
+    flex-direction: column;
+    gap: 40px;
+    padding: 80px var(--gutter);
+  }
+}
