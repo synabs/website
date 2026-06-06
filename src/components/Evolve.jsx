@@ -4,6 +4,7 @@ export default function Evolve() {
   return (
     <>
       <section className="evolve evolve--reversed">
+        <div className="evolve__content">
           <h2 className="evolve__title">Evolves every week, outplays competitors</h2>
           <p className="evolve__lead">
             Synbot learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
