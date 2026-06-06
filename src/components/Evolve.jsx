@@ -12,13 +12,13 @@ export default function Evolve() {
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
         <div className="evolve__image">
-          <div className="evolve__placeholder" />
+          <img src="/evo-bg.avif" alt="" className="evolve__img" />
         </div>
       </section>
 
       <section className="evolve">
         <div className="evolve__image">
-          <div className="evolve__placeholder" />
+          <img src="/complex-bg.avif" alt="" className="evolve__img" />
         </div>
         <div className="evolve__content">
           <h2 className="evolve__title">Built for complexity</h2>
