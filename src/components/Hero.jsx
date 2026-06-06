@@ -65,7 +65,7 @@ export default function Hero() {
             display: 'block',
             borderRadius: '8px',
             boxShadow: '0 0 0 1px rgba(0,0,0,0.15)',
-            transform: 'scale(1.28)',
+            transform: 'scale(1.024)',
             transformOrigin: 'center center',
           }}
         />
