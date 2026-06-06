@@ -15,11 +15,12 @@
 }
 
 .evolve__title {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: var(--font-bold);
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: var(--space-6);
+  color: #000;
 }
 
 .evolve__lead {
