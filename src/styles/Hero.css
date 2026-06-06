@@ -100,18 +100,6 @@
     linear-gradient(to left,   white 0px, transparent 80px);
 }
 
-.hero-video iframe {
-  position: relative;
-  z-index: 2;
-}
-
-/* pehmeä valkoinen kehys iframen ympärille */
-.hero-video iframe {
-  box-shadow:
-    0 0 0 40px white,
-    0 0 60px 60px white;
-}
-
 .hero-video video {
   width: 60%;
   max-width: 900px;
