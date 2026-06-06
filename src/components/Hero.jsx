@@ -59,8 +59,8 @@ export default function Hero() {
           title="Synbot Demo"
           scrolling="no"
           style={{
-            width: '320px',
-            height: '540px',
+            width: '640px',
+            height: '1080px',
             border: 'none',
             display: 'block',
             borderRadius: '8px',
