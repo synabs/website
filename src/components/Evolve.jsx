@@ -24,7 +24,7 @@ export default function Evolve() {
       </section>
 
       <section className="evolve-cards">
-        <h2 className="evolve-cards__heading">Beyond Human</h2>
+        <h2 className="evolve-cards__heading">Human was a prototype</h2>
         <div className="evolve-card">
           <div className="evolve-card__image">
             <img src="/complex-bg.avif" alt="" className="evolve__img" />
