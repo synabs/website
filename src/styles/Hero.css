@@ -84,14 +84,18 @@
   background-position: center;
   opacity: 0.15;
   z-index: 0;
-  mask-image:
-    linear-gradient(to right, transparent 0px, black 300px, black calc(100% - 300px), transparent 100%),
-    linear-gradient(to bottom, transparent 0px, black 120px, black calc(100% - 120px), transparent 100%);
-  mask-composite: intersect;
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0px, black 300px, black calc(100% - 300px), transparent 100%),
-    linear-gradient(to bottom, transparent 0px, black 120px, black calc(100% - 120px), transparent 100%);
-  -webkit-mask-composite: destination-in;
+  mask-image: radial-gradient(
+    ellipse 55% 75% at 50% 50%,
+    black 0%,
+    black 40%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 55% 75% at 50% 50%,
+    black 0%,
+    black 40%,
+    transparent 100%
+  );
 }
 
 .hero-video iframe {
