@@ -75,7 +75,6 @@
   overflow: hidden;
 }
 
-/* taustakuva 15% opacity, fullscreen */
 .hero-video::before {
   content: '';
   position: absolute;
@@ -85,19 +84,19 @@
   background-position: center;
   opacity: 0.15;
   z-index: 0;
+  mask-image:
+    linear-gradient(to right, transparent 0px, black 160px, black calc(100% - 160px), transparent 100%),
+    linear-gradient(to bottom, transparent 0px, black 120px, black calc(100% - 120px), transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0px, black 160px, black calc(100% - 160px), transparent 100%),
+    linear-gradient(to bottom, transparent 0px, black 120px, black calc(100% - 120px), transparent 100%);
+  -webkit-mask-composite: destination-in;
 }
 
-/* valkoinen fadeout reunoilta — peittää taustakuvan reunat */
-.hero-video::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to bottom, white 0px, transparent 80px),
-    linear-gradient(to top,    white 0px, transparent 80px),
-    linear-gradient(to right,  white 0px, transparent 80px),
-    linear-gradient(to left,   white 0px, transparent 80px);
+.hero-video iframe {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-video video {
