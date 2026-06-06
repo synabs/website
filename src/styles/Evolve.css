@@ -68,6 +68,10 @@
   display: block;
 }
 
+.evolve--reversed {
+  padding: 120px 160px 120px 80px;
+}
+
 @media (max-width: 768px) {
   .evolve {
     flex-direction: column;
