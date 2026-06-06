@@ -7,11 +7,7 @@ export default function Hero() {
   useEffect(() => {
     let blobUrl = null
 
-    fetch('/api/demo', {
-      headers: {
-        'x-demo-key': import.meta.env.VITE_DEMO_API_KEY,
-      },
-    })
+    fetch('/api/demo')
       .then((res) => {
         if (!res.ok) throw new Error('Unauthorized')
         return res.text()
