@@ -50,7 +50,7 @@
 }
 
 .evolve__image {
-  flex: 1;
+  flex: 0 0 40%;
 }
 
 .evolve__placeholder {
