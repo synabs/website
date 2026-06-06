@@ -85,7 +85,7 @@
 }
 
 .evolve-card__title {
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
   font-weight: var(--font-bold);
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -94,7 +94,7 @@
 }
 
 .evolve-card__text {
-  font-size: var(--text-base);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
   font-weight: var(--font-light);
   line-height: var(--leading-relaxed);
   color: #000;
