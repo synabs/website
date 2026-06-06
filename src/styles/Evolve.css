@@ -11,7 +11,7 @@
 }
 
 .evolve__content {
-  flex: 0 0 45%;
+  flex: 1;
 }
 
 .evolve__title {
@@ -50,7 +50,7 @@
 }
 
 .evolve__image {
-  flex: 0 0 40%;
+  flex: 1;
   overflow: hidden;
 }
 
@@ -69,8 +69,8 @@
   display: block;
 }
 
-.evolve--reversed {
-  padding: 120px 160px 120px 80px;
+.evolve--reversed .evolve__image {
+  margin-right: 80px;
 }
 
 @media (max-width: 768px) {
