@@ -31,7 +31,7 @@ export default function Evolve() {
           </div>
           <h3 className="evolve-card__title">Built for complexity</h3>
           <p className="evolve-card__text">
-            Combining customer support, sales, and strategic intelligence, Synbot handles complex conversations and turns them into results.
+            Combining customer support, sales, and strategic intelligence, AI agent handles it all.
           </p>
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
@@ -42,7 +42,7 @@ export default function Evolve() {
           </div>
           <h3 className="evolve-card__title">Works any website</h3>
           <p className="evolve-card__text">
-            Compatible with WordPress, Shopify and custom websites. Works with a single line of code, no technical skills required.
+            Compatible with WordPress, Shopify and custom websites. Works with a single line of code.
           </p>
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
@@ -53,7 +53,7 @@ export default function Evolve() {
           </div>
           <h3 className="evolve-card__title">Cortex Engine</h3>
           <p className="evolve-card__text">
-            Placeholder text for this feature goes here. The Cortex Engine powers every decision.
+            The brain behind every conversation. Analyzes intent, context, and sentiment in real time.
           </p>
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
