@@ -80,7 +80,17 @@
   padding: 80px 160px 120px 160px;
 }
 
-.evolve-card__image {
+.evolve-cards__heading {
+  grid-column: 1 / -1;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--font-bold);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #000;
+  margin-bottom: var(--space-6);
+}
+
+
   margin-bottom: var(--space-6);
 }
 
