@@ -60,6 +60,14 @@
   border-radius: 16px;
 }
 
+.evolve__img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
 @media (max-width: 768px) {
   .evolve {
     flex-direction: column;
