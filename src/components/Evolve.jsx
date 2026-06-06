@@ -3,8 +3,7 @@ import '../styles/Evolve.css'
 export default function Evolve() {
   return (
     <>
-      <section className="evolve">
-        <div className="evolve__content">
+      <section className="evolve evolve--reversed">
           <h2 className="evolve__title">Evolves every week, outplays competitors</h2>
           <p className="evolve__lead">
             Synbot learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
