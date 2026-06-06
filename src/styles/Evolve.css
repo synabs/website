@@ -15,7 +15,7 @@
 }
 
 .evolve__title {
-  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: var(--font-bold);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -24,10 +24,10 @@
 }
 
 .evolve__lead {
-  font-size: clamp(var(--text-base), 1.4vw, var(--text-xl));
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
   font-weight: var(--font-light);
   line-height: var(--leading-relaxed);
-  color: #444;
+  color: #000;
   max-width: 520px;
   margin-bottom: var(--space-8);
 }
