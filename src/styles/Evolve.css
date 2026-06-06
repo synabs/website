@@ -6,9 +6,8 @@
   display: flex;
   align-items: center;
   gap: 80px;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding: 120px var(--gutter);
+  width: 100%;
+  padding: 120px 80px;
 }
 
 .evolve__content {
@@ -50,6 +49,6 @@
   .evolve {
     flex-direction: column;
     gap: 40px;
-    padding: 80px var(--gutter);
+    padding: 80px 24px;
   }
 }
