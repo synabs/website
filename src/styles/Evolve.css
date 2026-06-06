@@ -98,6 +98,7 @@
 
 .evolve-card .evolve__readmore {
   margin-top: auto;
+  align-self: flex-start;
 }
 
 .evolve-card__image {
