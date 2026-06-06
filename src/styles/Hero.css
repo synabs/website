@@ -73,11 +73,11 @@
 }
 
 
-/* hero-video — video centered, full-width section */
+/* hero-video — full viewport height, centered */
 .hero-video {
   width: 100%;
+  min-height: 100vh;
   background: #fff;
-  padding: 80px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,4 +95,3 @@
     width: 90%;
   }
 }
-
