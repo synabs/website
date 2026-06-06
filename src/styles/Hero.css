@@ -71,29 +71,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/demo-bg.avif');
-  background-size: cover;
-  background-position: center;
+  background: #fff;
 }
 
 .hero-video::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.90);
+  background-image: url('/demo-bg.avif');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.10;
   z-index: 0;
-  mask-image: 
-    radial-gradient(ellipse 80% 60% at 15% 30%, transparent 0%, white 55%),
-    radial-gradient(ellipse 60% 80% at 85% 70%, transparent 0%, white 50%),
-    radial-gradient(ellipse 90% 50% at 50% 5%, transparent 0%, white 60%),
-    radial-gradient(ellipse 70% 60% at 20% 90%, transparent 0%, white 55%);
-  mask-composite: intersect;
-  -webkit-mask-image: 
-    radial-gradient(ellipse 80% 60% at 15% 30%, transparent 0%, white 55%),
-    radial-gradient(ellipse 60% 80% at 85% 70%, transparent 0%, white 50%),
-    radial-gradient(ellipse 90% 50% at 50% 5%, transparent 0%, white 60%),
-    radial-gradient(ellipse 70% 60% at 20% 90%, transparent 0%, white 55%);
-  -webkit-mask-composite: destination-in;
+  mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    black 30%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    black 30%,
+    transparent 100%
+  );
 }
 
 .hero-video iframe {
