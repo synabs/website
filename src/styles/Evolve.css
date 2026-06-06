@@ -91,12 +91,21 @@
   text-align: center;
 }
 
+.evolve-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.evolve-card .evolve__readmore {
+  margin-top: auto;
+}
+
 .evolve-card__image {
   padding-top: 24px;
   margin-bottom: var(--space-6);
 }
 
-
+.evolve-card__title {
   font-size: clamp(1.5rem, 2.5vw, 2.2rem);
   font-weight: var(--font-bold);
   line-height: 1.2;
