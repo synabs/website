@@ -7,7 +7,7 @@
   align-items: center;
   gap: 80px;
   width: 100%;
-  padding: 120px 80px 120px var(--gutter);
+  padding: 120px 80px 120px 160px;
 }
 
 .evolve__content {
