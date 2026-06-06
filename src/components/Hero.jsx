@@ -4,7 +4,6 @@ export default function Hero() {
   return (
     <>
       <section className="hero">
-        {/* Background image */}
         <div className="hero__bg" aria-hidden="true">
           <img
             src="/synabs-hero.avif"
@@ -13,8 +12,6 @@ export default function Hero() {
             fetchPriority="high"
           />
         </div>
-
-        {/* Content */}
         <div className="hero__content">
           <h1 className="hero__title">
             EVOLVING<br />
@@ -31,38 +28,8 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* Stats + video section */}
-      <section className="hero-stat">
-        <div className="hero-stat__inner">
-          {/* Left: text */}
-          <div className="hero-stat__text">
-            <h2 className="hero-stat__heading">
-              88% of Finns have used AI in their daily lives
-            </h2>
-            <p className="hero-stat__body">
-              AI is changing how people buy.
-            </p>
-            <p className="hero-stat__body">
-              More customers now use AI to discover, compare, and evaluate
-              products before making decisions.
-            </p>
-            <a href="/insights" className="hero-stat__link">
-              <span className="hero-stat__link-icon">→</span>
-              READ MORE
-            </a>
-          </div>
-
-          {/* Right: video */}
-          <div className="hero-stat__media">
-            <video
-              src="/synbot.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-            />
-          </div>
-        </div>
+      <section className="hero-video">
+        <video src="/synbot.mp4" autoPlay muted loop playsInline />
       </section>
     </>
   )
