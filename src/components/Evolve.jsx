@@ -42,7 +42,7 @@ export default function Evolve() {
           </div>
           <h3 className="evolve-card__title">Works any website</h3>
           <p className="evolve-card__text">
-            Placeholder text for this feature goes here. Synbot integrates seamlessly into any stack.
+            Compatible with WordPress, Shopify and custom websites. Works with a single line of code, no technical skills required.
           </p>
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
