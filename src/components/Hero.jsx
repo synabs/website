@@ -29,7 +29,17 @@ export default function Hero() {
       </section>
 
       <section className="hero-video">
-        <video src="/synbot.mp4" autoPlay muted loop playsInline />
+        <iframe
+          src="/synabs-demo.html"
+          title="Synbot Demo"
+          scrolling="no"
+          style={{
+            width: '380px',
+            height: '580px',
+            border: 'none',
+            display: 'block',
+          }}
+        />
       </section>
     </>
   )
