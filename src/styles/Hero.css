@@ -72,8 +72,10 @@
   justify-content: center;
   align-items: center;
   background: #fff;
+  overflow: hidden;
 }
 
+/* taustakuva 15% opacity, fullscreen */
 .hero-video::before {
   content: '';
   position: absolute;
@@ -81,23 +83,33 @@
   background-image: url('/demo-bg.avif');
   background-size: cover;
   background-position: center;
-  opacity: 0.10;
+  opacity: 0.15;
   z-index: 0;
-  mask-image: radial-gradient(
-    ellipse 70% 70% at 50% 50%,
-    black 30%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 70% 70% at 50% 50%,
-    black 30%,
-    transparent 100%
-  );
+}
+
+/* valkoinen fadeout reunoilta — peittää taustakuvan reunat */
+.hero-video::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, white 0px, transparent 80px),
+    linear-gradient(to top,    white 0px, transparent 80px),
+    linear-gradient(to right,  white 0px, transparent 80px),
+    linear-gradient(to left,   white 0px, transparent 80px);
 }
 
 .hero-video iframe {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+}
+
+/* pehmeä valkoinen kehys iframen ympärille */
+.hero-video iframe {
+  box-shadow:
+    0 0 0 40px white,
+    0 0 60px 60px white;
 }
 
 .hero-video video {
