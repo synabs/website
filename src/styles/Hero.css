@@ -85,11 +85,11 @@
   opacity: 0.15;
   z-index: 0;
   mask-image:
-    linear-gradient(to right, transparent 0px, black 160px, black calc(100% - 160px), transparent 100%),
+    linear-gradient(to right, transparent 0px, black 300px, black calc(100% - 300px), transparent 100%),
     linear-gradient(to bottom, transparent 0px, black 120px, black calc(100% - 120px), transparent 100%);
   mask-composite: intersect;
   -webkit-mask-image:
-    linear-gradient(to right, transparent 0px, black 160px, black calc(100% - 160px), transparent 100%),
+    linear-gradient(to right, transparent 0px, black 300px, black calc(100% - 300px), transparent 100%),
     linear-gradient(to bottom, transparent 0px, black 120px, black calc(100% - 120px), transparent 100%);
   -webkit-mask-composite: destination-in;
 }
