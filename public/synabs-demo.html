@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synbot Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e8e6e0; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: 'DM Sans', sans-serif; }
+
+  :root {
+    --main: #0d0a1b;
+    --user-bubble: #ff4c00;
+    --font: 'DM Sans', system-ui, sans-serif;
+  }
+
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+  @keyframes botIn { from{opacity:0;transform:translateY(8px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+  @keyframes userIn { from{opacity:0;transform:translateX(12px) scale(0.96)} to{opacity:1;transform:translateX(0) scale(1)} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  .synbot-floating { animation: float 3.5s ease-in-out infinite; }
+  .synbot-dot { animation: bounce 1.2s infinite; }
+  .synbot-msgs::-webkit-scrollbar { display: none; }
+
+  .synbot-hbtn {
+    all: unset; cursor: pointer; color: #fff; width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: opacity 0.15s; opacity: 0.7;
+    outline: none !important; padding: 4px; box-sizing: content-box;
+  }
+  .synbot-hbtn:hover { opacity: 1; box-shadow: 0 0 0 1.5px #fff; border-radius: 50%; }
+  .synbot-hbtn.synbot-active { opacity: 1; box-shadow: 0 0 0 1.5px #fff; border-radius: 50%; }
+
+  .synbot-send {
+    all: unset; cursor: pointer; color: #fff; width: 26px; height: 26px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: opacity 0.15s; opacity: 0.6; outline: none !important;
+  }
+  .synbot-send:hover { opacity: 1; }
+
+  #input-area {
+    position: relative; background: var(--main) !important;
+  }
+  #input-area::after {
+    content: ''; position: absolute; top: 2px; bottom: 15px; left: 10px; right: 10px;
+    background: transparent; border: 1px solid #fff; border-radius: 6px;
+    pointer-events: none; z-index: 0; opacity: 0.3; transition: opacity 0.15s;
+  }
+  #input-area.ia-focused::after { opacity: 0.8; }
+  #inp-wrap { position: relative; flex: 1; min-width: 0; }
+  #inp::placeholder { opacity: 0.35; color: #fff; }
+  #inp { caret-color: #fff; }
+
+  .synbot-chip {
+    background: var(--main) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    color: rgba(255,255,255,0.35) !important;
+    border-radius: 20px; padding: 5px 12px; font-size: 12px;
+    cursor: default; white-space: nowrap; font-family: var(--font);
+    font-weight: 200; letter-spacing: 0.01em; transition: all 0.15s;
+  }
+  .synbot-chip:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0) !important; color: #ffffff !important; }
+
+  .synbot-iitem {
+    width: auto; display: flex; align-items: center; justify-content: center;
+    gap: 10px; padding: 13px 16px; cursor: pointer; border-radius: 6px;
+    position: relative; outline: none;
+  }
+  .synbot-iitem:hover { box-shadow: 0 0 0 1px #fff; }
+  .synbot-iitem:hover .synbot-iitem-icon { opacity: 1; }
+  .synbot-iitem:hover .synbot-iitem-label { opacity: 1; color: #fff; }
+  .synbot-iitem-icon { opacity: 0.5; display: flex; transition: opacity 0.15s; color: #fff; }
+  .synbot-iitem-label { font-size:15px; color:#fff; opacity:0.7; font-family:var(--font); font-weight:200; transition: opacity 0.2s, color 0.2s; }
+
+  .synbot-back-btn {
+    all: unset; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 32px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px; font-size: 14px; font-weight: 200; color: #fff; font-family: var(--font);
+    margin-top: 10px; letter-spacing: 0.04em; transition: background 0.15s, border-color 0.15s;
+  }
+  .synbot-back-btn:hover { box-shadow: 0 0 0 1px #fff; }
+
+  .action-btns {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;
+    animation: fadeInUp 0.3s ease;
+  }
+  .action-btn {
+    all: unset; cursor: pointer; padding: 7px 16px; border-radius: 20px;
+    font-size: 12px; font-family: var(--font); font-weight: 300;
+    letter-spacing: 0.03em; transition: all 0.15s; white-space: nowrap;
+  }
+  .action-btn-primary { background: #ff4c00; color: #000; }
+  .action-btn-primary:hover { background: #ff6520; }
+  .action-btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+  .action-btn-secondary:hover { border-color: #fff; }
+
+  .chat-link {
+    color: rgba(255,255,255,0.75); text-decoration: underline; text-underline-offset: 2px;
+    text-decoration-color: rgba(255,255,255,0.3); cursor: pointer; transition: color 0.15s;
+  }
+  .chat-link:hover { color: #fff; text-decoration-color: #fff; }
+
+  .demo-label {
+    position: absolute; top: 12px; left: 16px; font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(0,0,0,0.3); font-weight: 300; font-family: var(--font);
+    pointer-events: none;
+  }
+
+  .emoji-picker-popup {
+    position: absolute; bottom: 52px; right: 8px;
+    background: var(--main); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 8px;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;
+    z-index: 100; box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .emoji-picker-popup span {
+    font-size: 18px; cursor: pointer; text-align: center; padding: 3px;
+    border-radius: 4px; transition: background 0.1s; line-height: 1;
+  }
+  .emoji-picker-popup span:hover { background: rgba(255,255,255,0.12); }
+
+  .emoji-btn {
+    all: unset; cursor: pointer; width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+    opacity: 0.35; transition: opacity 0.15s;
+  }
+  .emoji-btn:hover { opacity: 1; }
+  .emoji-btn img { width: 18px; height: 18px; display: block; }
+
+  #win { user-select: none; -webkit-user-select: none; }
+  #win *:focus, #win *:focus-visible { outline: none !important; -webkit-tap-highlight-color: transparent; }
+</style>
+</head>
+<body>
+
+<div style="min-height:580px;background:#f0efeb;border-radius:16px;display:flex;align-items:flex-end;justify-content:flex-end;padding:0 15px;position:relative;width:380px;">
+
+  <span class="demo-label">Live demo</span>
+
+
+  <div id="win" style="position:absolute;bottom:0;right:26px;width:320px;border-radius:8px;background:transparent;z-index:20;opacity:1;transform:translateY(0);pointer-events:all;height:540px;will-change:transform,opacity;">
+
+    <!-- SHARED HEADER -->
+    <div id="shared-header" style="position:absolute;top:0;left:0;right:0;height:46px;z-index:10;padding:0 6px 0 14px;display:flex;align-items:center;justify-content:space-between;background:var(--main);border-radius:8px 8px 0 0;">
+      <span id="header-border" style="position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.3);transition:opacity 0.15s;"></span>
+      <span style="font-size:14px;font-weight:300;color:#fff;font-family:var(--font);letter-spacing:0.04em;">Synbot</span>
+      <div style="display:flex;align-items:center;gap:2px;">
+        <button class="synbot-hbtn" id="hbtn-dots" onclick="_activateBtn(this);_togglePanel()">
+          <svg width="3" height="12" viewBox="0 0 4 16" fill="currentColor" style="pointer-events:none"><circle cx="2" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/></svg>
+        </button>
+        <button class="synbot-hbtn" id="hbtn-close">
+          <svg width="14" height="14" viewBox="0 0 10 10" fill="none" style="pointer-events:none"><line x1="1" y1="1" x2="9" y2="9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="9" y1="1" x2="1" y2="9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- CHAT PANEL -->
+    <div id="chat-panel" style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:1;pointer-events:all;border-radius:8px;overflow:hidden;">
+      <div style="height:46px;flex-shrink:0;background:var(--main);"></div>
+      <div style="display:flex;flex-direction:column;flex:1;background:var(--main);min-height:0;">
+        <div id="msgs" class="synbot-msgs" style="overflow-y:auto;padding:14px 14px 50px;display:flex;flex-direction:column;gap:10px;flex:1;scrollbar-width:none;"></div>
+        <div id="chips" style="padding:0 14px 8px;display:flex;gap:5px;flex-wrap:wrap;">
+          <div class="synbot-chip" >What can Synbot do</div>
+          <div class="synbot-chip">Pricing</div>
+          <div class="synbot-chip">Setup</div>
+        </div>
+      </div>
+      <div id="input-area" style="padding:14px 12px 28px;display:flex;align-items:center;gap:6px;flex-shrink:0;border-radius:0 0 8px 8px;position:relative;">
+        <div id="inp-wrap" style="position:relative;z-index:1;flex:1;min-width:0;">
+          <textarea id="inp"
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();}"
+            oninput="autoResize(this)"
+            onfocus="this.blur()"
+            placeholder="Message..."
+            maxlength="1000"
+            readonly
+            rows="1"
+            style="width:100%;font-size:13px;color:#fff;font-family:var(--font);font-weight:200;background:none;border:none;outline:none;padding-left:10px;letter-spacing:0.01em;resize:none;overflow:hidden;line-height:20px;height:20px;display:block;vertical-align:middle;"></textarea>
+        </div>
+        <button class="emoji-btn" id="emoji-btn" onclick="toggleEmoji(event)" title="Emoji">
+          <img src="https://6a23254466b5d7d9ebc86143.imgix.net/icon_emoji.avif" alt="emoji" />
+        </button>
+        <button class="synbot-send" style="position:relative;z-index:1;margin-right:4px;pointer-events:none;opacity:0.3;">
+          <svg width="10" height="10" viewBox="0 0 10 16" fill="none"><polyline points="2,1 9,8 2,15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div id="emoji-popup" class="emoji-picker-popup" style="display:none;">
+          <span>&#128522;</span><span>&#128514;</span><span>&#128077;</span><span>&#10084;&#65039;</span><span>&#127881;</span><span>&#128293;</span>
+          <span>&#128526;</span><span>&#129300;</span><span>&#128075;</span><span>&#9989;</span><span>&#128161;</span><span>&#128640;</span>
+          <span>&#128546;</span><span>&#128525;</span><span>&#128591;</span><span>&#128170;</span><span>&#11088;</span><span>&#127919;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO PANEL -->
+    <div id="info-panel" style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;border-radius:8px;overflow:hidden;background:var(--main);">
+      <div style="height:46px;flex-shrink:0;background:var(--main);"></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 16px;">
+        <div class="synbot-iitem" tabindex="0" onclick="if(_activeBtn){_activeBtn.classList.remove('synbot-active');_activeBtn=null;}downloadConversation()">
+          <span class="synbot-iitem-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12l7 7 7-7"/></svg></span>
+          <span class="synbot-iitem-label">Download conversation</span>
+        </div>
+        <div class="synbot-iitem" tabindex="0" onclick="window.open('https://synabs.fi/privacy','_blank')">
+          <span class="synbot-iitem-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5.25-3.5 9.74-8 11-4.5-1.26-8-5.75-8-11V6l8-4z"/></svg></span>
+          <span class="synbot-iitem-label">Privacy policy</span>
+        </div>
+        <button onclick="showChat()" class="synbot-back-btn">Back</button>
+      </div>
+      <div style="height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding-bottom:10px;position:relative;z-index:1;">
+        <a href="https://synabs.fi" target="_blank" id="logo-link" style="text-decoration:none;opacity:0.7;transition:opacity 0.15s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+          <div style="display:inline-flex;flex-direction:column;align-items:center;gap:2px;">
+            <span style="font-size:9px;font-weight:300;color:#fff;letter-spacing:0.08em;font-family:var(--font);">Powered by</span>
+            <img src="https://6a23254466b5d7d9ebc86143.imgix.net/logo-synabs.avif" alt="Synabs" style="height:28px;display:block;margin-top:-2px;">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+const win = document.getElementById('win');
+const msgs = document.getElementById('msgs');
+const inp = document.getElementById('inp');
+let _activeBtn = null;
+let _onInfo = false;
+
+// ---- header buttons ----
+function _activateBtn(btn) {
+  if (_activeBtn && _activeBtn !== btn) _activeBtn.classList.remove('synbot-active');
+  _activeBtn = btn; btn.classList.add('synbot-active');
+}
+function _togglePanel() {
+  if (!_onInfo) { _onInfo = true; showInfo(); } else { _onInfo = false; showChat(); }
+}
+document.addEventListener('mousedown', function(e) {
+  if (!e.target.closest('.synbot-hbtn')) {
+    if (_activeBtn && _activeBtn.id === 'hbtn-dots' && _onInfo) return;
+    if (_activeBtn) { _activeBtn.classList.remove('synbot-active'); _activeBtn = null; }
+  }
+});
+
+// ---- emoji ----
+document.addEventListener('click', function(e) {
+  const popup = document.getElementById('emoji-popup');
+  const btn = document.getElementById('emoji-btn');
+  if (popup && popup.style.display !== 'none' && !popup.contains(e.target) && !btn.contains(e.target)) {
+    popup.style.display = 'none';
+  }
+});
+function toggleEmoji(e) {
+  e.stopPropagation();
+  const popup = document.getElementById('emoji-popup');
+  popup.style.display = popup.style.display === 'none' ? 'grid' : 'none';
+}
+function insertEmoji(emoji) {
+  inp.value += emoji; inp.focus();
+  document.getElementById('emoji-popup').style.display = 'none';
+}
+
+// ---- textarea resize ----
+// Key fix: use scrollHeight properly without layout thrash
+function autoResize(el) {
+  el.style.height = '20px';
+  const sh = el.scrollHeight;
+  el.style.height = (sh > 20 ? sh : 20) + 'px';
+}
+
+// ---- panel switch ----
+function showInfo() {
+  document.getElementById('chat-panel').style.opacity = '0';
+  document.getElementById('chat-panel').style.pointerEvents = 'none';
+  document.getElementById('info-panel').style.opacity = '1';
+  document.getElementById('info-panel').style.pointerEvents = 'all';
+  document.getElementById('header-border').style.opacity = '0';
+}
+function showChat() {
+  document.getElementById('info-panel').style.opacity = '0';
+  document.getElementById('info-panel').style.pointerEvents = 'none';
+  document.getElementById('chat-panel').style.opacity = '1';
+  document.getElementById('chat-panel').style.pointerEvents = 'all';
+  document.getElementById('header-border').style.opacity = '1';
+  _onInfo = false;
+  if (_activeBtn) { _activeBtn.classList.remove('synbot-active'); _activeBtn = null; }
+}
+
+// ---- download ----
+function downloadConversation() {
+  const rows = msgs.querySelectorAll('[data-msg]');
+  let lines = [];
+  rows.forEach(row => {
+    const sender = row.dataset.msg;
+    const bub = row.querySelector('[data-text]');
+    if (!bub) return;
+    const contentEl = bub.querySelector('[data-content]');
+    const text = (contentEl ? contentEl : bub).innerText.trim();
+    if (text) lines.push((sender === 'user' ? 'You' : 'Synbot') + ': ' + text);
+  });
+  const footer = '\n\n____________________________________________________________________\n© 2026 Powered by SYNABS.fi | Evolving AI Agent | Cortex Engine 1.04';
+  const blob = new Blob([lines.join('\n\n') + footer], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const now = new Date();
+  a.download = 'chat_log_' + now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + '.txt';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+
+// ---- window open/close ----
+function openWin() {
+  // chat is always open, no-op
+}
+
+function closeWin() {
+  // chat always stays open in demo mode
+  if (_activeBtn) { _activeBtn.classList.remove('synbot-active'); _activeBtn = null; }
+  _onInfo = false; showChat();
+}
+
+// ---- message helpers ----
+function addBotMsg(htmlContent) {
+  const wrap = document.createElement('div');
+  wrap.setAttribute('data-msg', 'bot');
+  wrap.style.cssText = 'display:flex;gap:8px;flex-direction:row;opacity:0;transform:translateY(40px);transition:opacity 0.45s cubic-bezier(0.22,1,0.36,1),transform 0.45s cubic-bezier(0.22,1,0.36,1);';
+  const bub = document.createElement('div');
+  bub.setAttribute('data-text', '1');
+  bub.style.cssText = 'max-width:260px;padding:8px 12px;font-size:13px;line-height:1.6;font-family:var(--font);font-weight:200;color:#fff;background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:2px 10px 10px 10px;letter-spacing:0.01em;word-break:break-word;';
+  bub.innerHTML = '<div style="font-size:10px;font-weight:300;color:rgba(255,255,255,0.9);margin-bottom:5px;letter-spacing:0.05em;text-transform:uppercase;">Synbot</div><div style="height:1px;"></div><span data-content="1">' + htmlContent + '</span>';
+  wrap.appendChild(bub);
+  msgs.appendChild(wrap);
+  // Trigger animation and smooth scroll together after layout
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      wrap.style.opacity = '1';
+      wrap.style.transform = 'translateY(0) scale(1)';
+      smoothScrollToBottom();
+    });
+  });
+  return wrap;
+}
+
+function addUserMsg(text) {
+  const wrap = document.createElement('div');
+  wrap.setAttribute('data-msg', 'user');
+  wrap.style.cssText = 'display:flex;gap:8px;flex-direction:row-reverse;opacity:0;transform:translateY(40px);transition:opacity 0.45s cubic-bezier(0.22,1,0.36,1),transform 0.45s cubic-bezier(0.22,1,0.36,1);';
+  const bub = document.createElement('div');
+  bub.setAttribute('data-text', '1');
+  bub.style.cssText = 'max-width:200px;padding:8px 12px;font-size:13px;line-height:1.6;font-family:var(--font);font-weight:200;color:#000;background:var(--user-bubble);border-radius:10px 2px 10px 10px;letter-spacing:0.01em;word-break:break-word;';
+  bub.textContent = text;
+  wrap.appendChild(bub);
+  msgs.appendChild(wrap);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      wrap.style.opacity = '1';
+      wrap.style.transform = 'translateX(0) scale(1)';
+      smoothScrollToBottom();
+    });
+  });
+  return wrap;
+}
+
+function addTyping() {
+  const wrap = document.createElement('div');
+  wrap.id = 'typing-ind';
+  wrap.style.cssText = 'display:flex;gap:8px;opacity:0;transform:translateY(6px);transition:opacity 0.2s ease,transform 0.2s ease;';
+  wrap.innerHTML = '<div style="padding:8px 12px;background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:2px 10px 10px 10px;display:flex;align-items:center;gap:4px;"><span class="synbot-dot" style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.5);display:block;animation-delay:0s;"></span><span class="synbot-dot" style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.5);display:block;animation-delay:0.2s;"></span><span class="synbot-dot" style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.5);display:block;animation-delay:0.4s;"></span></div>';
+  msgs.appendChild(wrap);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      wrap.style.opacity = '1';
+      wrap.style.transform = 'translateY(0)';
+      smoothScrollToBottom();
+    });
+  });
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-ind');
+  if (t) t.remove();
+}
+
+// ---- smooth scroll ----
+let _scrollRaf = null;
+function smoothScrollToBottom() {
+  // Cancel any ongoing scroll animation
+  if (_scrollRaf) { cancelAnimationFrame(_scrollRaf); _scrollRaf = null; }
+  const start = msgs.scrollTop;
+  const target = msgs.scrollHeight - msgs.clientHeight;
+  const dist = target - start;
+  if (dist <= 2) return;
+  // Duration scales with distance but stays comfortable: 400–700ms
+  const dur = Math.min(700, Math.max(400, dist * 1.2));
+  let startTime = null;
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    const p = Math.min((ts - startTime) / dur, 1);
+    // Ease out quint – decelerates smoothly
+    const ease = 1 - Math.pow(1 - p, 5);
+    msgs.scrollTop = start + dist * ease;
+    if (p < 1) { _scrollRaf = requestAnimationFrame(step); }
+    else { _scrollRaf = null; }
+  }
+  _scrollRaf = requestAnimationFrame(step);
+}
+
+// ---- typing simulation ----
+function simulateUserType(text, callback) {
+  inp.value = '';
+  inp.style.height = '20px';
+  document.getElementById('input-area').classList.add('ia-focused');
+  let i = 0;
+  // variable speed: faster for common chars, micro-pause after punctuation
+  function tick() {
+    if (i < text.length) {
+      inp.value += text[i];
+      inp.style.height = '20px';
+      inp.style.height = (inp.scrollHeight > 20 ? inp.scrollHeight : 20) + 'px';
+      const ch = text[i];
+      i++;
+      let wait = 12 + Math.random() * 7;
+      if (ch === ',' || ch === '.') wait += 20 + Math.random() * 12;
+      else if (ch === ' ') wait += 4;
+      setTimeout(tick, wait);
+    } else {
+      setTimeout(() => {
+        const typed = inp.value;
+        inp.value = '';
+        inp.style.height = '20px';
+        document.getElementById('input-area').classList.remove('ia-focused');
+        addUserMsg(typed);
+        if (callback) callback();
+      }, 180);
+    }
+  }
+  tick();
+}
+
+// ---- chip click ----
+function sendChip(el, text) {
+  el.style.transition = 'opacity 0.2s, transform 0.2s';
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(4px)';
+  setTimeout(() => el.remove(), 200);
+  addUserMsg(text);
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ---- demo script ----
+async function runDemo() {
+  await delay(500);
+
+  addTyping();
+  await delay(1000);
+  removeTyping();
+  addBotMsg('Hi there. Looking for something specific, or just exploring?');
+  await delay(2600);
+
+  await new Promise(res => simulateUserType('Just looking around. What is this', res));
+  await delay(320);
+  addTyping();
+  await delay(900);
+  removeTyping();
+  addBotMsg('I am Synbot, an AI Agent that works for your business 24/7. I answer questions, capture leads, and help turn visitors into customers.');
+  await delay(2600);
+
+  await new Promise(res => simulateUserType('Like a chatbot?', res));
+  await delay(320);
+  addTyping();
+  await delay(800);
+  removeTyping();
+  addBotMsg('Smarter than that. Most chatbots follow fixed scripts. I learn from every conversation and evolve over time.');
+  await delay(2400);
+
+  await new Promise(res => simulateUserType('You actually learn?', res));
+  await delay(320);
+  addTyping();
+  await delay(850);
+  removeTyping();
+  addBotMsg('Exactly. The more conversations I have, the better I understand what visitors ask, what matters, and what turns into real leads.');
+  await delay(2600);
+
+  await new Promise(res => simulateUserType('So you\'re not manually programmed for every answer?', res));
+  await delay(320);
+  addTyping();
+  await delay(900);
+  removeTyping();
+  addBotMsg('No. We give the agent a strong foundation, but the real value comes from learning through real interactions.');
+  await delay(2400);
+
+  await new Promise(res => simulateUserType('How fast can you actually set this up?', res));
+  await delay(320);
+  addTyping();
+  await delay(850);
+  removeTyping();
+  addBotMsg('Most businesses are live within 48 hours. We handle the setup, you focus on your business.');
+  await delay(2200);
+
+  await new Promise(res => simulateUserType('What do you need from us?', res));
+  await delay(320);
+  addTyping();
+  await delay(900);
+  removeTyping();
+  addBotMsg('Usually your website and a short onboarding session. From there we build the agent around your business.');
+  await delay(2400);
+
+  await new Promise(res => simulateUserType('Can it match our brand?', res));
+  await delay(320);
+  addTyping();
+  await delay(800);
+  removeTyping();
+  addBotMsg('Absolutely. Colors, fonts, tone of voice, the whole experience can be adapted to match your brand.');
+  await delay(2200);
+
+  await new Promise(res => simulateUserType('Can it capture leads?', res));
+  await delay(320);
+  addTyping();
+  await delay(750);
+  removeTyping();
+  addBotMsg('Yes. Names, emails, phone numbers, project details, booking requests and more.');
+  await delay(2000);
+
+  await new Promise(res => simulateUserType('And the price?', res));
+  await delay(320);
+  addTyping();
+  await delay(750);
+  removeTyping();
+  addBotMsg('Most businesses start with our entry package at €249/month. If you reach your message limits, upgrading is simple.');
+  await delay(2800);
+
+  await new Promise(res => simulateUserType('Honestly that sounds too good', res));
+  await delay(320);
+  addTyping();
+  await delay(600);
+  removeTyping();
+  addBotMsg('Fair.');
+  await delay(1600);
+
+  await new Promise(res => simulateUserType('What\'s the catch?', res));
+  await delay(320);
+  addTyping();
+  await delay(850);
+  removeTyping();
+  addBotMsg('Most chat systems stay the same after launch. I do not. I learn from every conversation and evolve over time.');
+  await delay(2400);
+
+  await new Promise(res => simulateUserType('Do I need a long contract?', res));
+  await delay(320);
+  addTyping();
+  await delay(750);
+  removeTyping();
+  addBotMsg('No fixed terms. Stay because it works, not because you\'re locked in.');
+  await delay(2200);
+
+  await new Promise(res => simulateUserType('That\'s quite rare', res));
+  await delay(320);
+  addTyping();
+  await delay(700);
+  removeTyping();
+  addBotMsg('We prefer the product to speak for itself.');
+  await delay(2000);
+
+  await new Promise(res => simulateUserType('Alright. How do I see it in action', res));
+  await delay(320);
+  addTyping();
+  await delay(900);
+  removeTyping();
+
+  const wrap = document.createElement('div');
+  wrap.setAttribute('data-msg', 'bot');
+  wrap.style.cssText = 'display:flex;gap:8px;flex-direction:row;opacity:0;transform:translateY(40px);transition:opacity 0.45s cubic-bezier(0.22,1,0.36,1),transform 0.45s cubic-bezier(0.22,1,0.36,1);';
+  const bub = document.createElement('div');
+  bub.setAttribute('data-text', '1');
+  bub.style.cssText = 'max-width:260px;padding:8px 12px;font-size:13px;line-height:1.6;font-family:var(--font);font-weight:200;color:#fff;background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:2px 10px 10px 10px;letter-spacing:0.01em;word-break:break-word;';
+  bub.innerHTML = '<div style="font-size:10px;font-weight:300;color:rgba(255,255,255,0.9);margin-bottom:5px;letter-spacing:0.05em;text-transform:uppercase;">Synbot</div><div style="height:1px;"></div><span data-content="1">You have two options. You can start a free trial and fill everything yourself, or I can collect your details here and our team will reach out.</span><div class="action-btns"><button class="action-btn action-btn-primary" id="btn-send-details">Send my details</button><button class="action-btn action-btn-secondary" id="btn-start-trial">Start free trial</button></div>';
+  wrap.appendChild(bub);
+  msgs.appendChild(wrap);
+  requestAnimationFrame(() => { requestAnimationFrame(() => { wrap.style.opacity = '1'; wrap.style.transform = 'translateY(0)'; smoothScrollToBottom(); }); });
+
+  await delay(400);
+  document.getElementById('btn-send-details').onclick = () => {};
+  document.getElementById('btn-start-trial').onclick = () => {};
+
+  await delay(2600);
+
+  document.querySelectorAll('.action-btn').forEach(b => { b.style.opacity = '0.4'; b.style.pointerEvents = 'none'; });
+  addUserMsg('Send my details');
+  await delay(320);
+  addTyping();
+  await delay(850);
+  removeTyping();
+
+  await runContactFlow();
+}
+
+async function runContactFlow() {
+  addBotMsg('Perfect. What\'s your name?');
+  await delay(1900);
+
+  await new Promise(res => simulateUserType('Laura Mäkinen', res));
+  await delay(320);
+  addTyping();
+  await delay(750);
+  removeTyping();
+
+  addBotMsg('Nice to meet you, Laura. What company are you with?');
+  await delay(1800);
+
+  await new Promise(res => simulateUserType('Mäkinen Media', res));
+  await delay(320);
+  addTyping();
+  await delay(700);
+  removeTyping();
+
+  addBotMsg('Great. And your website?');
+  await delay(1700);
+
+  await new Promise(res => simulateUserType('makinenmedia.fi', res));
+  await delay(320);
+  addTyping();
+  await delay(1000);
+  removeTyping();
+
+  addBotMsg('Got it. Laura from Mäkinen Media, makinenmedia.fi.\nSomeone from our team will reach out within 24 hours.');
+  await delay(2200);
+
+  addTyping();
+  await delay(900);
+  removeTyping();
+  addBotMsg('Is there anything else I can help you with before you go?');
+  await delay(2400);
+
+  await new Promise(res => simulateUserType('Actually yes. What is your humor level?', res));
+  await delay(320);
+  addTyping();
+  await delay(800);
+  removeTyping();
+
+  addBotMsg('Humor setting is 75 percent. Try me.');
+  await delay(2000);
+
+  await new Promise(res => simulateUserType('Tell me a joke', res));
+  await delay(320);
+  addTyping();
+  await delay(950);
+  removeTyping();
+
+  addBotMsg('I tried taking a day off once. Turns out customers don\'t.');
+  await delay(2200);
+
+  await new Promise(res => simulateUserType('Haha', res));
+  await delay(320);
+  addTyping();
+  await delay(800);
+  removeTyping();
+
+  addBotMsg('Didn\'t laugh? Check back after my next evolution.');
+  await delay(2000);
+
+  await new Promise(res => simulateUserType('Alright, that was funny', res));
+  await delay(320);
+  addTyping();
+  await delay(600);
+  removeTyping();
+
+  addBotMsg('Noted.');
+  await delay(1800);
+
+  await new Promise(res => simulateUserType('Thanks, this was helpful', res));
+  await delay(320);
+  addTyping();
+  await delay(800);
+  removeTyping();
+
+  addBotMsg('Anytime. Looking forward to working with you, Laura.');
+  await delay(800);
+
+  // Auto-reset after 5 seconds
+  setTimeout(resetDemo, 5000);
+}
+
+function resetDemo() {
+  // Fade out all bubbles staggered, then clear and restart
+  const bubbles = Array.from(msgs.children);
+  if (bubbles.length === 0) { _doReset(); return; }
+  bubbles.forEach(el => {
+    el.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(6px)';
+  });
+  setTimeout(_doReset, 1300);
+}
+
+function _doReset() {
+  msgs.innerHTML = '';
+  inp.value = '';
+  inp.style.height = '20px';
+  document.getElementById('input-area').classList.remove('ia-focused');
+  showChat();
+  setTimeout(runDemo, 300);
+}
+
+setTimeout(runDemo, 500);
+</script>
+</body>
+</html>
