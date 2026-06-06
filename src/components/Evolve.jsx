@@ -9,13 +9,14 @@ export default function Evolve() {
           <p className="evolve__lead">
             Synbot learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
           </p>
+          <a href="/about" className="evolve__readmore">Read more</a>
         </div>
         <div className="evolve__image">
           <div className="evolve__placeholder" />
         </div>
       </section>
 
-      <section className="evolve evolve--reverse">
+      <section className="evolve">
         <div className="evolve__image">
           <div className="evolve__placeholder" />
         </div>
@@ -24,6 +25,7 @@ export default function Evolve() {
           <p className="evolve__lead">
             Combining customer support, sales, and strategic intelligence, Synbot handles complex conversations and turns them into results.
           </p>
+          <a href="/about" className="evolve__readmore">Read more</a>
         </div>
       </section>
     </>
