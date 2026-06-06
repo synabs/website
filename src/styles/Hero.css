@@ -85,16 +85,14 @@
   opacity: 0.15;
   z-index: 0;
   mask-image: radial-gradient(
-    ellipse 55% 75% at 50% 50%,
+    ellipse 40% 60% at 50% 50%,
     black 0%,
-    black 40%,
-    transparent 100%
+    transparent 70%
   );
   -webkit-mask-image: radial-gradient(
-    ellipse 55% 75% at 50% 50%,
+    ellipse 40% 60% at 50% 50%,
     black 0%,
-    black 40%,
-    transparent 100%
+    transparent 70%
   );
 }
 
