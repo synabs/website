@@ -1,6 +1,35 @@
+import { useEffect, useRef } from 'react'
 import '../styles/Hero.css'
 
 export default function Hero() {
+  const iframeRef = useRef(null)
+
+  useEffect(() => {
+    let blobUrl = null
+
+    fetch('/api/demo', {
+      headers: {
+        'x-demo-key': import.meta.env.VITE_DEMO_API_KEY,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Unauthorized')
+        return res.text()
+      })
+      .then((html) => {
+        const blob = new Blob([html], { type: 'text/html' })
+        blobUrl = URL.createObjectURL(blob)
+        if (iframeRef.current) {
+          iframeRef.current.src = blobUrl
+        }
+      })
+      .catch((err) => console.error('Demo load failed:', err))
+
+    return () => {
+      if (blobUrl) URL.revokeObjectURL(blobUrl)
+    }
+  }, [])
+
   return (
     <>
       <section className="hero">
@@ -30,12 +59,12 @@ export default function Hero() {
 
       <section className="hero-video">
         <iframe
-          src="/synabs-demo.html"
+          ref={iframeRef}
           title="Synbot Demo"
           scrolling="no"
           style={{
-            width: '380px',
-            height: '580px',
+            width: '320px',
+            height: '540px',
             border: 'none',
             display: 'block',
           }}
