@@ -1,103 +1,75 @@
-/* ============================================================
-   HERO.CSS
-   ============================================================ */
-.hero {
-  position: relative;
-  min-height: var(--hero-min-height);
-  background: var(--hero-bg);
-  display: flex;
-  align-items: center;
-  padding-bottom: var(--space-20);
-  overflow: hidden;
-}
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.hero__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.hero__bg::after {
-  display: none;
-}
-.hero__content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-  padding-top: calc(var(--nav-height) + var(--space-16));
-  margin-left: 0;
-}
-.hero__title {
-  font-size: clamp(4.2rem, 12vw, 10.5rem);
-  line-height: 0.88;
-  letter-spacing: -0.04em;
-  font-weight: var(--font-bold);
-  color: var(--color-white);
-  margin-bottom: var(--space-10);
-  max-width: none;
-  text-align: left;
-}
-.hero__lead {
-  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
-  font-weight: var(--font-light);
-  color: var(--color-white);
-  max-width: 700px;
-  line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-10);
-}
-.hero__buttons {
-  display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-}
-@media (max-width: 768px) {
-  .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
-  .hero__content { padding-inline: var(--space-6); }
-  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
-}
+import { useEffect, useRef } from 'react'
+import '../styles/Hero.css'
 
-/* hero-video — full viewport height, centered */
-.hero-video {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('/demo-bg.avif');
-  background-size: cover;
-  background-position: center;
-}
+export default function Hero() {
+  const iframeRef = useRef(null)
 
-.hero-video::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.78);
-  z-index: 0;
-}
+  useEffect(() => {
+    let blobUrl = null
 
-.hero-video iframe {
-  position: relative;
-  z-index: 1;
-}
+    fetch('/api/demo')
+      .then((res) => {
+        if (!res.ok) throw new Error('Unauthorized')
+        return res.text()
+      })
+      .then((html) => {
+        const blob = new Blob([html], { type: 'text/html' })
+        blobUrl = URL.createObjectURL(blob)
+        if (iframeRef.current) {
+          iframeRef.current.src = blobUrl
+        }
+      })
+      .catch((err) => console.error('Demo load failed:', err))
 
-.hero-video video {
-  width: 60%;
-  max-width: 900px;
-  border-radius: 12px;
-  display: block;
-}
+    return () => {
+      if (blobUrl) URL.revokeObjectURL(blobUrl)
+    }
+  }, [])
 
-@media (max-width: 768px) {
-  .hero-video video {
-    width: 90%;
-  }
+  return (
+    <>
+      <section className="hero">
+        <div className="hero__bg" aria-hidden="true">
+          <img
+            src="/synabs-hero.avif"
+            alt=""
+            loading="eager"
+            fetchPriority="high"
+          />
+        </div>
+        <div className="hero__content">
+          <h1 className="hero__title">
+            EVOLVING<br />
+            AI<br />
+            AGENTS
+          </h1>
+          <p className="hero__lead">
+            We transform organizations and boost leads with next generation self-learning AI agents.
+          </p>
+          <div className="hero__buttons">
+            <a href="/contact" className="btn btn--white">See it live</a>
+            <a href="/join"    className="btn btn--outline">Start free trial</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="hero-video">
+        <iframe
+          ref={iframeRef}
+          title="Synbot Demo"
+          scrolling="no"
+          style={{
+            width: '320px',
+            height: '540px',
+            border: 'none',
+            display: 'block',
+            borderRadius: '8px',
+            boxShadow: '0 0 0 1px rgba(0,0,0,0.35)',
+            transform: 'scale(1.15)',
+            transformOrigin: 'center center',
+          }}
+        />
+      </section>
+    </>
+  )
 }
