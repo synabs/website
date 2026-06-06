@@ -59,12 +59,14 @@ export default function Hero() {
           title="Synbot Demo"
           scrolling="no"
           style={{
-            width: '640px',
-            height: '1080px',
+            width: '320px',
+            height: '540px',
             border: 'none',
             display: 'block',
             borderRadius: '8px',
             boxShadow: '0 0 0 1px rgba(0,0,0,0.15)',
+            transform: 'scale(1.6)',
+            transformOrigin: 'center center',
           }}
         />
       </section>
