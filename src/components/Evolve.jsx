@@ -12,7 +12,14 @@ export default function Evolve() {
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
         <div className="evolve__image">
-          <img src="/evo-bg.avif" alt="" className="evolve__img" />
+          <video
+            src="/evo-vid.mp4"
+            className="evolve__img"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
         </div>
       </section>
 
