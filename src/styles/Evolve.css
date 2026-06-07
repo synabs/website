@@ -7,7 +7,7 @@
   align-items: center;
   gap: 80px;
   width: 100%;
-  padding: 120px 160px;
+  padding: 160px 160px;
 }
 
 .evolve__content {
@@ -15,7 +15,7 @@
 }
 
 .evolve__title {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: var(--font-bold);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -24,7 +24,7 @@
 }
 
 .evolve__lead {
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
   font-weight: var(--font-light);
   line-height: var(--leading-relaxed);
   color: #000;
