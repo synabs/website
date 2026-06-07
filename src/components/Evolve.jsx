@@ -38,7 +38,7 @@ export default function Evolve() {
 
         <div className="evolve-card">
           <div className="evolve-card__image">
-            <div className="evolve__placeholder" />
+            <img src="/website.avif" alt="" className="evolve__img" />
           </div>
           <h3 className="evolve-card__title">Works any website</h3>
           <p className="evolve-card__text">
