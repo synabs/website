@@ -81,7 +81,7 @@ export default function Navbar() {
           ))}
           <li>
             <a href="/apply" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
-              Apply for Free Testing
+              Let's collaborate
             </a>
           </li>
         </ul>
