@@ -182,8 +182,10 @@
 }
 
 .evolve-costs__sub {
-  font-size: 13px;
-  color: #999;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: var(--font-light);
+  color: #666;
+  line-height: var(--leading-relaxed);
   margin-bottom: 40px;
 }
 
