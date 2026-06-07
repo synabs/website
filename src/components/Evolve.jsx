@@ -37,14 +37,7 @@ export default function EvolveSection() {
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
         <div className="evolve__image evolve__image--large">
-          <video
-            src="/evo-vid.mp4"
-            className="evolve__img"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
+          <img src="/evo-bg.avif" alt="" className="evolve__img" />
         </div>
       </section>
 
