@@ -1,29 +1,6 @@
 import '../styles/Evolve.css'
 import { XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
-const costData = [
-  { month: 'Month 1', without: 2300, with: 249 },
-  { month: 'Month 2', without: 2300, with: 249 },
-  { month: 'Month 3', without: 2300, with: 249 },
-]
-
-const CostTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: 8, padding: '10px 16px', fontSize: 13 }}>
-        <p style={{ fontWeight: 700, marginBottom: 4 }}>{label}</p>
-        {payload.map((p, i) => (
-          <p key={i} style={{ color: p.fill === '#54D6FF' ? '#000' : p.fill, margin: '2px 0' }}>
-            {p.name}: {p.value}€
-          </p>
-        ))}
-        <p style={{ color: '#54D6FF', fontWeight: 700, marginTop: 4 }}>Save: {payload[0]?.value - payload[1]?.value}€</p>
-      </div>
-    )
-  }
-  return null
-}
-
 const data = [
   { week: 'Week 1',  without: 100, with: 108 },
   { week: 'Week 2',  without: 100, with: 110 },
@@ -94,6 +71,35 @@ export default function EvolveSection() {
         </div>
       </section>
 
+      <section className="evolve-costs">
+        <p className="evolve-stats__label">ESTIMATED COST COMPARISON</p>
+        <div className="evolve-speed__inner">
+          <div className="evolve-speed__image">
+            <div className="evolve__placeholder" />
+          </div>
+          <div className="evolve-speed__right">
+            <h2 className="evolve-costs__title">Most businesses spend over 2 000€ a month on what AI agent does for 249€.</h2>
+            <p className="evolve-speed__text">Customer support staff, time spent answering routine inquiries, leads lost outside office hours — it adds up fast. AI agent handles all of it, 24/7, at a fraction of the cost.</p>
+            <div className="evolve-costs__breakdown">
+              <div className="evolve-costs__item">
+                <span className="evolve-costs__dot evolve-costs__dot--black" />
+                <div>
+                  <strong>Without AI Agent ~2 300€/mo</strong>
+                  <p>Customer support staff ~1 500€, your own time answering inquiries ~500€, estimated lost leads outside office hours ~300€</p>
+                </div>
+              </div>
+              <div className="evolve-costs__item">
+                <span className="evolve-costs__dot evolve-costs__dot--blue" />
+                <div>
+                  <strong>With AI Agent 249€/mo</strong>
+                  <p>Full coverage 24/7, no staff needed for routine inquiries, no leads missed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="evolve-stats">
         <p className="evolve-stats__label">EARLY RESULTS</p>
         <h2 className="evolve-stats__title">Early testers saw an average 16% increase in leads within 3 months.</h2>
@@ -137,45 +143,6 @@ export default function EvolveSection() {
           <div className="evolve-stats__number">
             <span className="evolve-stats__value">0</span>
             <span className="evolve-stats__desc">Leads missed</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="evolve-costs">
-        <p className="evolve-stats__label">ESTIMATED COST COMPARISON</p>
-        <h2 className="evolve-costs__title">See what you could save every month.</h2>
-        <p className="evolve-costs__sub">Based on average SMB costs. Estimates vary by business size and industry.</p>
-        <div className="evolve-costs__chart">
-          <ResponsiveContainer width="100%" height={340}>
-            <AreaChart data={costData} margin={{ top: 20, right: 20, left: 60, bottom: 0 }}>
-              <defs>
-                <linearGradient id="savingsGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#54D6FF" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#54D6FF" stopOpacity={0.05} />
-                </linearGradient>
-              </defs>
-              <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
-              <YAxis tickFormatter={v => `${v}€`} tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
-              <Tooltip content={<CostTooltip />} />
-              <Area type="monotone" dataKey="without" stroke="#000" strokeWidth={2.5} fill="none" dot={false} name="Estimated expenses" />
-              <Area type="monotone" dataKey="with" stroke="#54D6FF" strokeWidth={2.5} fill="url(#savingsGradient)" dot={false} name="With AI Agent" />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="evolve-costs__breakdown">
-          <div className="evolve-costs__item">
-            <span className="evolve-costs__dot evolve-costs__dot--black" />
-            <div>
-              <strong>Without AI Agent ~2 300€/mo</strong>
-              <p>Customer support staff ~1 500€, your own time answering inquiries ~500€, estimated lost leads outside office hours ~300€</p>
-            </div>
-          </div>
-          <div className="evolve-costs__item">
-            <span className="evolve-costs__dot evolve-costs__dot--blue" />
-            <div>
-              <strong>With AI Agent 249€/mo</strong>
-              <p>Full coverage 24/7, no staff needed for routine inquiries, no leads missed</p>
-            </div>
           </div>
         </div>
       </section>
