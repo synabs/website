@@ -2,20 +2,20 @@ import '../styles/Evolve.css'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
 const data = [
-  { week: 'Week 1',  without: 100, with: 105 },
-  { week: 'Week 2',  without: 100, with: 108 },
-  { week: 'Week 3',  without: 100, with: 106 },
-  { week: 'Week 4',  without: 100, with: 111 },
-  { week: 'Week 5',  without: 100, with: 115 },
-  { week: 'Week 6',  without: 100, with: 118 },
-  { week: 'Week 7',  without: 100, with: 115 },
-  { week: 'Week 8',  without: 100, with: 121 },
-  { week: 'Week 9',  without: 100, with: 124 },
-  { week: 'Week 10', without: 100, with: 127 },
-  { week: 'Week 11', without: 100, with: 130 },
-  { week: 'Week 12', without: 100, with: 136 },
+  { week: 'Week 1',  without: 100, with: 114 },
+  { week: 'Week 2',  without: 100, with: 116 },
+  { week: 'Week 3',  without: 100, with: 115 },
+  { week: 'Week 4',  without: 100, with: 118 },
+  { week: 'Week 5',  without: 100, with: 120 },
+  { week: 'Week 6',  without: 100, with: 122 },
+  { week: 'Week 7',  without: 100, with: 120 },
+  { week: 'Week 8',  without: 100, with: 115 },
+  { week: 'Week 9',  without: 100, with: 115 },
+  { week: 'Week 10', without: 100, with: 119 },
+  { week: 'Week 11', without: 100, with: 122 },
+  { week: 'Week 12', without: 100, with: 120 },
 ]
-// Average: (5+8+6+11+15+18+15+21+24+27+30+36) / 12 = 216/12 = 18.0% ✓
+// Average: (14+16+15+18+20+22+20+15+15+19+22+20) / 12 = 216/12 = 18.0% ✓
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
