@@ -4,16 +4,16 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContai
 const data = [
   { week: 'Week 1',  without: 100, with: 101 },
   { week: 'Week 2',  without: 101, with: 102 },
-  { week: 'Week 3',  without: 100, with: 104 },
-  { week: 'Week 4',  without: 102, with: 105 },
-  { week: 'Week 5',  without: 101, with: 107 },
-  { week: 'Week 6',  without: 103, with: 108 },
-  { week: 'Week 7',  without: 102, with: 110 },
-  { week: 'Week 8',  without: 103, with: 111 },
-  { week: 'Week 9',  without: 104, with: 114 },
-  { week: 'Week 10', without: 103, with: 116 },
-  { week: 'Week 11', without: 104, with: 120 },
-  { week: 'Week 12', without: 105, with: 140 },
+  { week: 'Week 3',  without: 100, with: 103 },
+  { week: 'Week 4',  without: 102, with: 104 },
+  { week: 'Week 5',  without: 101, with: 105 },
+  { week: 'Week 6',  without: 103, with: 106 },
+  { week: 'Week 7',  without: 102, with: 107 },
+  { week: 'Week 8',  without: 103, with: 108 },
+  { week: 'Week 9',  without: 104, with: 110 },
+  { week: 'Week 10', without: 103, with: 112 },
+  { week: 'Week 11', without: 104, with: 115 },
+  { week: 'Week 12', without: 105, with: 118 },
 ]
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -81,6 +81,24 @@ export default function Evolve() {
               <Area type="monotone" dataKey="with" stroke="#000" strokeWidth={2.5} fill="url(#colorWith)" dot={false} name="with" />
             </AreaChart>
           </ResponsiveContainer>
+        </div>
+        <div className="evolve-stats__numbers">
+          <div className="evolve-stats__number">
+            <span className="evolve-stats__value">&lt;2s</span>
+            <span className="evolve-stats__desc">Average response time</span>
+          </div>
+          <div className="evolve-stats__number">
+            <span className="evolve-stats__value">96%</span>
+            <span className="evolve-stats__desc">Of conversations handled without human intervention</span>
+          </div>
+          <div className="evolve-stats__number">
+            <span className="evolve-stats__value">+18%</span>
+            <span className="evolve-stats__desc">Avg. increase in qualified leads within 90 days</span>
+          </div>
+          <div className="evolve-stats__number">
+            <span className="evolve-stats__value">0</span>
+            <span className="evolve-stats__desc">Leads missed during the test phase</span>
+          </div>
         </div>
       </section>
       <section className="evolve-cards">
