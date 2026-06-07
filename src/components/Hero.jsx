@@ -18,7 +18,7 @@ export default function Hero() {
           AGENTS
         </h1>
         <p className="hero__lead">
-          We transform organizations and boost leads with next generation self-learning AI agents.
+          Highly advanced live AI agents that never take a break on their shift.
         </p>
         <div className="hero__buttons">
           <a href="/contact" className="btn btn--white">See it live</a>
