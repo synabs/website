@@ -131,6 +131,34 @@
   width: 100%;
 }
 
+.evolve-stats__numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.evolve-stats__value {
+  display: block;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.03em;
+  color: #000;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.evolve-stats__desc {
+  display: block;
+  font-size: 13px;
+  font-weight: var(--font-light);
+  color: #666;
+  line-height: 1.5;
+  max-width: 180px;
+}
+
 @media (max-width: 768px) {
   .evolve-stats {
     padding: 60px 24px;
