@@ -1,4 +1,36 @@
 import '../styles/Evolve.css'
+import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
+
+const data = [
+  { week: 'Week 1',  without: 100, with: 101 },
+  { week: 'Week 2',  without: 101, with: 102 },
+  { week: 'Week 3',  without: 100, with: 104 },
+  { week: 'Week 4',  without: 102, with: 105 },
+  { week: 'Week 5',  without: 101, with: 107 },
+  { week: 'Week 6',  without: 103, with: 108 },
+  { week: 'Week 7',  without: 102, with: 110 },
+  { week: 'Week 8',  without: 103, with: 111 },
+  { week: 'Week 9',  without: 104, with: 114 },
+  { week: 'Week 10', without: 103, with: 116 },
+  { week: 'Week 11', without: 104, with: 120 },
+  { week: 'Week 12', without: 105, with: 140 },
+]
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: 8, padding: '10px 16px', fontSize: 13 }}>
+        <p style={{ fontWeight: 700, marginBottom: 4 }}>{label}</p>
+        {payload.map((p, i) => (
+          <p key={i} style={{ color: p.color, margin: '2px 0' }}>
+            {p.name === 'with' ? 'With AI Agent' : 'Without AI Agent'}: {p.value}
+          </p>
+        ))}
+      </div>
+    )
+  }
+  return null
+}
 
 export default function Evolve() {
   return (
@@ -23,6 +55,34 @@ export default function Evolve() {
         </div>
       </section>
 
+      <section className="evolve-stats">
+        <p className="evolve-stats__label">EARLY RESULTS</p>
+        <h2 className="evolve-stats__title">Early testers saw an average 40% increase in leads within 3 months.</h2>
+        <div className="evolve-stats__legend">
+          <span className="evolve-stats__legend-item evolve-stats__legend-item--with">With AI Agent</span>
+          <span className="evolve-stats__legend-item evolve-stats__legend-item--without">Without AI Agent</span>
+        </div>
+        <div className="evolve-stats__chart">
+          <ResponsiveContainer width="100%" height={340}>
+            <AreaChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorWith" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#000" stopOpacity={0.08} />
+                  <stop offset="95%" stopColor="#000" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="week" tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
+              <YAxis hide />
+              <Tooltip content={<CustomTooltip />} />
+              <ReferenceLine x="Week 4" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 1', position: 'top', fontSize: 11, fill: '#bbb' }} />
+              <ReferenceLine x="Week 8" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 2', position: 'top', fontSize: 11, fill: '#bbb' }} />
+              <ReferenceLine x="Week 12" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 3', position: 'top', fontSize: 11, fill: '#bbb' }} />
+              <Area type="monotone" dataKey="without" stroke="#ccc" strokeWidth={2} fill="none" dot={false} name="without" />
+              <Area type="monotone" dataKey="with" stroke="#000" strokeWidth={2.5} fill="url(#colorWith)" dot={false} name="with" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </section>
       <section className="evolve-cards">
         <h2 className="evolve-cards__heading">Human was a prototype</h2>
         <div className="evolve-card">
@@ -35,7 +95,6 @@ export default function Evolve() {
           </p>
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
-
         <div className="evolve-card">
           <div className="evolve-card__image">
             <img src="/website.avif" alt="" className="evolve__img" />
@@ -46,7 +105,6 @@ export default function Evolve() {
           </p>
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
-
         <div className="evolve-card">
           <div className="evolve-card__image">
             <img src="/cortex.avif" alt="" className="evolve__img" />
