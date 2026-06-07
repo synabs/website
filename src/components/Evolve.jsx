@@ -131,13 +131,19 @@ export default function Evolve() {
         <p className="evolve-costs__sub">Based on average SMB costs. Estimates vary by business size and industry.</p>
         <div className="evolve-costs__chart">
           <ResponsiveContainer width="100%" height={340}>
-            <BarChart data={costData} margin={{ top: 20, right: 20, left: 0, bottom: 0 }} barGap={8} barCategoryGap="30%">
+            <AreaChart data={costData} margin={{ top: 20, right: 20, left: 60, bottom: 0 }}>
+              <defs>
+                <linearGradient id="savingsGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#54D6FF" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#54D6FF" stopOpacity={0.05} />
+                </linearGradient>
+              </defs>
               <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
               <YAxis tickFormatter={v => `${v}€`} tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
               <Tooltip content={<CostTooltip />} />
-              <Bar dataKey="without" name="Without AI Agent" fill="#000" radius={[4,4,0,0]} />
-              <Bar dataKey="with" name="With AI Agent" fill="#54D6FF" radius={[4,4,0,0]} />
-            </BarChart>
+              <Area type="monotone" dataKey="without" stroke="#000" strokeWidth={2.5} fill="none" dot={false} name="Estimated expenses" />
+              <Area type="monotone" dataKey="with" stroke="#54D6FF" strokeWidth={2.5} fill="url(#savingsGradient)" dot={false} name="With AI Agent" />
+            </AreaChart>
           </ResponsiveContainer>
         </div>
         <div className="evolve-costs__breakdown">
