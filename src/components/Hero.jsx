@@ -18,7 +18,7 @@ export default function Hero() {
           AGENTS
         </h1>
         <p className="hero__lead">
-          Highly advanced live AI agents that never take a break on their shift.
+          Highly advanced AI agents that never take a break on their shift and and handle every live chat.
         </p>
         <div className="hero__buttons">
           <a href="/contact" className="btn btn--white">See it live</a>
