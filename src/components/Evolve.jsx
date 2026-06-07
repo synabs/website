@@ -51,7 +51,7 @@ export default function Evolve() {
           <div className="evolve-card__image">
             <img src="/cortex.avif" alt="" className="evolve__img" />
           </div>
-          <h3 className="evolve-card__title">Cortex Engine</h3>
+          <h3 className="evolve-card__title">Powered by Cortex Engine</h3>
           <p className="evolve-card__text">
             The brain behind every conversation. Analyzes intent, context, and sentiment in real time.
           </p>
