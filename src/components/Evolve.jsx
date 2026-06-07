@@ -1,36 +1,4 @@
 import '../styles/Evolve.css'
-import { XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
-
-const data = [
-  { week: 'Week 1',  without: 100, with: 108 },
-  { week: 'Week 2',  without: 100, with: 110 },
-  { week: 'Week 3',  without: 100, with: 110 },
-  { week: 'Week 4',  without: 100, with: 114 },
-  { week: 'Week 5',  without: 100, with: 116 },
-  { week: 'Week 6',  without: 100, with: 113 },
-  { week: 'Week 7',  without: 100, with: 117 },
-  { week: 'Week 8',  without: 100, with: 118 },
-  { week: 'Week 9',  without: 100, with: 122 },
-  { week: 'Week 10', without: 100, with: 120 },
-  { week: 'Week 11', without: 100, with: 121 },
-  { week: 'Week 12', without: 100, with: 122 },
-]
-
-const LeadsTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    const withVal = payload.find(p => p.name === 'with')?.value
-    const pct = withVal ? `+${withVal - 100}%` : ''
-    return (
-      <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: 8, padding: '10px 16px', fontSize: 13 }}>
-        <p style={{ fontWeight: 700, marginBottom: 4 }}>{label}</p>
-        <p style={{ color: '#000', margin: '2px 0' }}>With AI Agent: {pct}</p>
-        <p style={{ color: '#ccc', margin: '2px 0' }}>Without: baseline</p>
-      </div>
-    )
-  }
-  return null
-}
-
 export default function EvolveSection() {
   return (
     <>
@@ -87,31 +55,8 @@ export default function EvolveSection() {
 
       <section className="evolve-stats">
         <p className="evolve-stats__label">EARLY RESULTS</p>
-        <h2 className="evolve-stats__title">Early testers saw an average 16% increase in leads within 3 months.</h2>
-        <div className="evolve-stats__legend">
-          <span className="evolve-stats__legend-item evolve-stats__legend-item--with">With AI Agent</span>
-          <span className="evolve-stats__legend-item evolve-stats__legend-item--without">Without AI Agent</span>
-        </div>
-        <div className="evolve-stats__chart">
-          <ResponsiveContainer width="100%" height={340}>
-            <AreaChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="colorWith" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#000" stopOpacity={0.08} />
-                  <stop offset="95%" stopColor="#000" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <XAxis dataKey="week" tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
-              <YAxis hide />
-              <Tooltip content={<LeadsTooltip />} />
-              <ReferenceLine x="Week 4" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 1', position: 'top', fontSize: 11, fill: '#bbb' }} />
-              <ReferenceLine x="Week 8" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 2', position: 'top', fontSize: 11, fill: '#bbb' }} />
-              <ReferenceLine x="Week 12" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 3', position: 'top', fontSize: 11, fill: '#bbb' }} />
-              <Area type="monotone" dataKey="without" stroke="#ccc" strokeWidth={2} fill="none" dot={false} name="without" />
-              <Area type="monotone" dataKey="with" stroke="#000" strokeWidth={2.5} fill="url(#colorWith)" dot={false} name="with" />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
+        <h2 className="evolve-stats__title">Early testers saw an average 23% increase in leads within 3 months.</h2>
+        <p className="evolve-stats__lead">Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic. <em>Long-term performance data is still being collected.</em></p>
         <div className="evolve-stats__numbers">
           <div className="evolve-stats__number">
             <span className="evolve-stats__value">&lt;2s</span>
