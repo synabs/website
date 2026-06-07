@@ -254,6 +254,7 @@
 
 .evolve-speed__left {
   flex: 0 0 280px;
+  text-align: right;
 }
 
 .evolve-speed__stat {
