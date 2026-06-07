@@ -88,9 +88,9 @@
 }
 
 .evolve-stats__title {
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: var(--font-bold);
-  line-height: 1.15;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   color: #000;
   max-width: 640px;
@@ -152,10 +152,10 @@
 
 .evolve-stats__desc {
   display: block;
-  font-size: 13px;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
   font-weight: var(--font-light);
   color: #666;
-  line-height: 1.5;
+  line-height: var(--leading-relaxed);
   max-width: 180px;
 }
 
