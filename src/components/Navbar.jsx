@@ -46,7 +46,7 @@ export default function Navbar() {
                 href="/apply"
                 className="navbar__link navbar__link--cta btn btn--outline"
               >
-                Let's collaborate
+                Apply for tester
               </a>
             </li>
           </ul>
@@ -81,7 +81,7 @@ export default function Navbar() {
           ))}
           <li>
             <a href="/apply" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
-              Let's collaborate
+              Apply for tester
             </a>
           </li>
         </ul>
