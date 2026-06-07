@@ -11,7 +11,6 @@
   height: var(--nav-height);
   background: var(--color-white, #ffffff);
   box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.08));
-  /* ei scroll-efektiä – pysyy aina valkoisena ja paikallaan */
 }
 
 .navbar--menu-open {
@@ -28,7 +27,7 @@
   padding-left: calc(var(--gutter) / 4);
 }
 
-/* Logo – vasemmalle (flex-start automaattisesti) */
+/* Logo */
 .navbar__logo {
   display: flex;
   align-items: center;
@@ -40,7 +39,7 @@
   display: block;
 }
 
-/* Desktop nav – oikealle (margin-left: auto) */
+/* Desktop nav */
 .navbar__nav {
   display: flex;
   align-items: center;
@@ -63,7 +62,7 @@
   color: var(--text-muted, #555);
 }
 
-/* CTA button – musta */
+/* CTA button – black border outline */
 .navbar__link--cta {
   display: inline-flex;
   align-items: center;
@@ -71,13 +70,14 @@
   padding-inline: var(--space-6, 1.25rem) !important;
   font-size: var(--text-sm, 0.875rem) !important;
   font-weight: var(--font-semibold, 600) !important;
-  background: var(--color-black, #111) !important;
-  color: var(--color-white, #fff) !important;
+  background: transparent !important;
+  color: var(--color-black, #111) !important;
+  border: 1.5px solid var(--color-black, #111) !important;
   border-radius: var(--radius-md, 6px);
   transition: background var(--transition-fast, 0.15s ease), color var(--transition-fast, 0.15s ease);
 }
 .navbar__link--cta:hover {
-  background: #333 !important;
+  background: var(--color-black, #111) !important;
   color: var(--color-white, #fff) !important;
 }
 
@@ -140,12 +140,13 @@
 .navbar__mobile-link--cta {
   margin-top: var(--space-4, 1rem);
   border-bottom: none;
+  border: 1.5px solid var(--color-black, #111);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-3, 0.75rem) var(--space-6, 1.25rem);
-  background: var(--color-black, #111);
-  color: var(--color-white, #fff) !important;
+  background: transparent;
+  color: var(--color-black, #111) !important;
   border-radius: var(--radius-md, 6px);
   font-size: var(--text-base, 1rem);
 }
