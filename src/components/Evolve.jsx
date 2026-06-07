@@ -48,12 +48,12 @@ export default function EvolveSection() {
       </section>
 
       <section className="evolve-speed">
-        <p className="evolve-stats__label">RESEARCH</p>
         <div className="evolve-speed__inner">
           <div className="evolve-speed__image">
             <div className="evolve__placeholder" />
           </div>
           <div className="evolve-speed__right">
+            <p className="evolve-stats__label">RESEARCH</p>
             <h2 className="evolve-speed__title">Speed drives conversions</h2>
             <p className="evolve-speed__text">Harvard Business Review found that companies responding within one hour are nearly 7x more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
             <SourcesDropdown />
@@ -76,12 +76,12 @@ export default function EvolveSection() {
       </section>
 
       <section className="evolve-stats">
-        <p className="evolve-stats__label">EARLY RESULTS</p>
         <div className="evolve-speed__inner">
           <div className="evolve-speed__image">
             <div className="evolve__placeholder" />
           </div>
           <div className="evolve-speed__right">
+            <p className="evolve-stats__label">EARLY RESULTS</p>
             <h2 className="evolve-stats__title">Early testers saw an average 23% increase in leads within 3 months</h2>
             <p className="evolve-stats__lead">Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic.</p>
             <a href="https://website-liart-nu-v6q749arlh.vercel.app/#" className="evolve__readmore">Read more</a>
