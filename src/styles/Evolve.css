@@ -72,6 +72,71 @@
   display: block;
 }
 
+/* Stats / Graph section */
+.evolve-stats {
+  padding: 80px 160px 100px 160px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.evolve-stats__label {
+  font-size: 11px;
+  font-weight: var(--font-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 16px;
+}
+
+.evolve-stats__title {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: var(--font-bold);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #000;
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+
+.evolve-stats__legend {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.evolve-stats__legend-item {
+  font-size: 12px;
+  font-weight: var(--font-bold);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.evolve-stats__legend-item::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+}
+
+.evolve-stats__legend-item--with::before {
+  background: #000;
+}
+
+.evolve-stats__legend-item--without::before {
+  background: #ccc;
+}
+
+.evolve-stats__chart {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .evolve-stats {
+    padding: 60px 24px;
+  }
+}
+
 /* Three-column cards */
 .evolve-cards {
   display: grid;
