@@ -2,30 +2,29 @@ import '../styles/Evolve.css'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
 const data = [
-  { week: 'Week 1',  without: 30, with: 30 },
-  { week: 'Week 2',  without: 30, with: 31 },
-  { week: 'Week 3',  without: 29, with: 31 },
-  { week: 'Week 4',  without: 30, with: 32 },
-  { week: 'Week 5',  without: 30, with: 32 },
-  { week: 'Week 6',  without: 31, with: 33 },
-  { week: 'Week 7',  without: 30, with: 33 },
-  { week: 'Week 8',  without: 31, with: 33 },
-  { week: 'Week 9',  without: 31, with: 34 },
-  { week: 'Week 10', without: 30, with: 34 },
-  { week: 'Week 11', without: 31, with: 34 },
-  { week: 'Week 12', without: 31, with: 35 },
+  { week: 'Week 1',  without: 100, with: 100 },
+  { week: 'Week 2',  without: 100, with: 101 },
+  { week: 'Week 3',  without: 100, with: 103 },
+  { week: 'Week 4',  without: 100, with: 102 },
+  { week: 'Week 5',  without: 100, with: 105 },
+  { week: 'Week 6',  without: 100, with: 104 },
+  { week: 'Week 7',  without: 100, with: 107 },
+  { week: 'Week 8',  without: 100, with: 106 },
+  { week: 'Week 9',  without: 100, with: 110 },
+  { week: 'Week 10', without: 100, with: 112 },
+  { week: 'Week 11', without: 100, with: 115 },
+  { week: 'Week 12', without: 100, with: 118 },
 ]
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
+    const withVal = payload.find(p => p.name === 'with')?.value
+    const pct = withVal ? `+${withVal - 100}%` : ''
     return (
       <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: 8, padding: '10px 16px', fontSize: 13 }}>
         <p style={{ fontWeight: 700, marginBottom: 4 }}>{label}</p>
-        {payload.map((p, i) => (
-          <p key={i} style={{ color: p.color, margin: '2px 0' }}>
-            {p.name === 'with' ? 'With AI Agent' : 'Without AI Agent'}: {p.value}
-          </p>
-        ))}
+        <p style={{ color: '#000', margin: '2px 0' }}>With AI Agent: {pct}</p>
+        <p style={{ color: '#ccc', margin: '2px 0' }}>Without: baseline</p>
       </div>
     )
   }
