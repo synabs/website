@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import '../styles/Navbar.css'
 
 const navLinks = [
+  { href: '/about',        label: 'About' },
+  { href: '/pricing',      label: 'Pricing' },
   { href: '/performance',  label: 'Performance' },
   { href: '/integrations', label: 'Integrations' },
   { href: '/technology',   label: 'Technology' },
-  { href: '/about',        label: 'About' },
-  { href: '/pricing',      label: 'Pricing' },
 ]
 
 export default function Navbar() {
@@ -44,7 +44,7 @@ export default function Navbar() {
             <li>
               <a
                 href="/apply"
-                className="navbar__link navbar__link--cta btn btn--black"
+                className="navbar__link navbar__link--cta btn btn--outline"
               >
                 Let's collaborate
               </a>
