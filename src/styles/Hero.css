@@ -20,7 +20,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  /* MUUTOS: poistettu scale ja translateY — kuva täyttää nyt koko alueen */
 }
 .hero__bg::after {
   display: none;
@@ -40,7 +39,7 @@
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
-  color: #000000; /* MUUTOS: valkoinen → musta */
+  color: var(--color-white);
   margin-bottom: var(--space-10);
   max-width: none;
   text-align: left;
@@ -48,7 +47,7 @@
 .hero__lead {
   font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-light);
-  color: #000000; /* MUUTOS: valkoinen → musta */
+  color: var(--color-white);
   max-width: 700px;
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-10);
