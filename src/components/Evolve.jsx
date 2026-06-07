@@ -50,11 +50,11 @@ export default function EvolveSection() {
       <section className="evolve-speed">
         <div className="evolve-speed__inner">
           <div className="evolve-speed__image">
-            <div className="evolve__placeholder" />
+            <img src="/loop.avif" alt="" className="evolve__img" />
           </div>
           <div className="evolve-speed__right">
             <p className="evolve-stats__label">RESEARCH</p>
-            <h2 className="evolve-speed__title">Speed drives conversions</h2>
+            <h2 className="evolve-speed__title">Always in the loop</h2>
             <p className="evolve-speed__text">Harvard Business Review found that companies responding within one hour are nearly 7x more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
             <SourcesDropdown />
           </div>
@@ -70,7 +70,7 @@ export default function EvolveSection() {
             <a href="/contact" className="evolve__cta">Cut your costs</a>
           </div>
           <div className="evolve-speed__image">
-            <div className="evolve__placeholder" />
+            <img src="/money.avif" alt="" className="evolve__img" />
           </div>
         </div>
       </section>
@@ -78,7 +78,7 @@ export default function EvolveSection() {
       <section className="evolve-stats">
         <div className="evolve-speed__inner">
           <div className="evolve-speed__image">
-            <div className="evolve__placeholder" />
+            <img src="/arrow.avif" alt="" className="evolve__img" />
           </div>
           <div className="evolve-speed__right">
             <p className="evolve-stats__label">EARLY RESULTS</p>
