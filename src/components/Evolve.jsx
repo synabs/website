@@ -50,13 +50,13 @@ export default function EvolveSection() {
       <section className="evolve-speed">
         <p className="evolve-stats__label">RESEARCH</p>
         <div className="evolve-speed__inner">
-          <div className="evolve-speed__right">
-            <h2 className="evolve-speed__title">Speed drives conversions</h2>
-            <p className="evolve-speed__text">Harvard Business Review found that companies responding within one hour are nearly 7× more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
-            <SourcesDropdown />
-          </div>
           <div className="evolve-speed__image">
             <div className="evolve__placeholder" />
+          </div>
+          <div className="evolve-speed__right">
+            <h2 className="evolve-speed__title">Speed drives conversions</h2>
+            <p className="evolve-speed__text">Harvard Business Review found that companies responding within one hour are nearly 7x more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
+            <SourcesDropdown />
           </div>
         </div>
       </section>
@@ -64,37 +64,45 @@ export default function EvolveSection() {
       <section className="evolve-costs">
         <p className="evolve-stats__label">ESTIMATED COST COMPARISON</p>
         <div className="evolve-speed__inner">
-          <div className="evolve-speed__image">
-            <div className="evolve__placeholder" />
-          </div>
           <div className="evolve-speed__right">
             <h2 className="evolve-costs__title">Most businesses spend over 2 000€ a month on what AI agent does for 349€</h2>
             <p className="evolve-speed__text">Customer support staff, time spent answering routine inquiries, and leads lost outside office hours all add up fast. AI agent handles all of it, around the clock and at a fraction of the cost.</p>
+            <a href="/contact" className="evolve__cta">Cut your costs</a>
+          </div>
+          <div className="evolve-speed__image">
+            <div className="evolve__placeholder" />
           </div>
         </div>
       </section>
 
       <section className="evolve-stats">
         <p className="evolve-stats__label">EARLY RESULTS</p>
-        <h2 className="evolve-stats__title">Early testers saw an average 23% increase in leads within 3 months</h2>
-        <p className="evolve-stats__lead">Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic.</p>
-        <a href="#" className="evolve__readmore evolve__readmore--underline">Long-term performance data is still being collected.</a>
-        <div className="evolve-stats__numbers">
-          <div className="evolve-stats__number">
-            <span className="evolve-stats__value">&lt;2s</span>
-            <span className="evolve-stats__desc">Average response time</span>
+        <div className="evolve-speed__inner">
+          <div className="evolve-speed__image">
+            <div className="evolve__placeholder" />
           </div>
-          <div className="evolve-stats__number">
-            <span className="evolve-stats__value">96%</span>
-            <span className="evolve-stats__desc">Of conversations handled</span>
-          </div>
-          <div className="evolve-stats__number">
-            <span className="evolve-stats__value">+16%</span>
-            <span className="evolve-stats__desc">Increase in qualified leads</span>
-          </div>
-          <div className="evolve-stats__number">
-            <span className="evolve-stats__value">0</span>
-            <span className="evolve-stats__desc">Leads missed</span>
+          <div className="evolve-speed__right">
+            <h2 className="evolve-stats__title">Early testers saw an average 23% increase in leads within 3 months</h2>
+            <p className="evolve-stats__lead">Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic.</p>
+            <a href="https://website-liart-nu-v6q749arlh.vercel.app/#" className="evolve__readmore">Read more</a>
+            <div className="evolve-stats__numbers">
+              <div className="evolve-stats__number">
+                <span className="evolve-stats__value">&lt;2s</span>
+                <span className="evolve-stats__desc">Average response time</span>
+              </div>
+              <div className="evolve-stats__number">
+                <span className="evolve-stats__value">96%</span>
+                <span className="evolve-stats__desc">Of conversations handled</span>
+              </div>
+              <div className="evolve-stats__number">
+                <span className="evolve-stats__value">+16%</span>
+                <span className="evolve-stats__desc">Increase in qualified leads</span>
+              </div>
+              <div className="evolve-stats__number">
+                <span className="evolve-stats__value">0</span>
+                <span className="evolve-stats__desc">Leads missed</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
