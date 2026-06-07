@@ -1,9 +1,34 @@
+import { useState } from 'react'
 import '../styles/Evolve.css'
+
+function SourcesDropdown() {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="evolve-speed__sources-wrapper">
+      <button className="evolve__readmore evolve__readmore--sources" onClick={() => setOpen(o => !o)}>
+        Sources
+      </button>
+      {open && (
+        <div className="evolve-speed__sources-dropdown">
+          <p className="evolve-speed__source">
+            Oldroyd, J.B., McElheran, K., &amp; Elkington, D. (2011).<br />
+            The Short Life of Online Sales Leads. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=39955" target="_blank" rel="noopener">Harvard Business Review.</a>
+          </p>
+          <p className="evolve-speed__source">
+            HubSpot. <a href="https://www.hubspot.com/reduce-lead-response-time" target="_blank" rel="noopener">Lead Response Time Insights (2025).</a>
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function EvolveSection() {
   return (
     <>
       <section className="evolve">
         <div className="evolve__content">
+          <p className="evolve-stats__label">NEXT GENERATION</p>
           <h2 className="evolve__title">Evolves every week, outplays competitors</h2>
           <p className="evolve__lead">
             AI agent learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
@@ -26,12 +51,9 @@ export default function EvolveSection() {
         <p className="evolve-stats__label">RESEARCH</p>
         <div className="evolve-speed__inner">
           <div className="evolve-speed__right">
-            <h2 className="evolve-speed__title">Speed drives conversions.</h2>
+            <h2 className="evolve-speed__title">Speed drives conversions</h2>
             <p className="evolve-speed__text">Harvard Business Review found that companies responding within one hour are nearly 7× more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
-            <div className="evolve-speed__sources">
-              <p className="evolve-speed__source">Oldroyd, J.B., McElheran, K., & Elkington, D. (2011). The Short Life of Online Sales Leads. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=39955" target="_blank" rel="noopener">Harvard Business Review.</a></p>
-              <p className="evolve-speed__source">HubSpot. <a href="https://www.hubspot.com/reduce-lead-response-time" target="_blank" rel="noopener">Lead Response Time Insights (2025).</a></p>
-            </div>
+            <SourcesDropdown />
           </div>
           <div className="evolve-speed__image">
             <div className="evolve__placeholder" />
@@ -46,17 +68,17 @@ export default function EvolveSection() {
             <div className="evolve__placeholder" />
           </div>
           <div className="evolve-speed__right">
-            <h2 className="evolve-costs__title">Most businesses spend over 2 000€ a month on what AI agent does for 249€.</h2>
-            <p className="evolve-speed__text">Customer support staff, time spent answering routine inquiries, leads lost outside office hours — it adds up fast. AI agent handles all of it, 24/7, at a fraction of the cost.</p>
-
+            <h2 className="evolve-costs__title">Most businesses spend over 2 000€ a month on what AI agent does for 349€</h2>
+            <p className="evolve-speed__text">Customer support staff, time spent answering routine inquiries, and leads lost outside office hours all add up fast. AI agent handles all of it, around the clock and at a fraction of the cost.</p>
           </div>
         </div>
       </section>
 
       <section className="evolve-stats">
         <p className="evolve-stats__label">EARLY RESULTS</p>
-        <h2 className="evolve-stats__title">Early testers saw an average 23% increase in leads within 3 months.</h2>
-        <p className="evolve-stats__lead">Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic. <em>Long-term performance data is still being collected.</em></p>
+        <h2 className="evolve-stats__title">Early testers saw an average 23% increase in leads within 3 months</h2>
+        <p className="evolve-stats__lead">Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic.</p>
+        <a href="#" className="evolve__readmore evolve__readmore--underline">Long-term performance data is still being collected.</a>
         <div className="evolve-stats__numbers">
           <div className="evolve-stats__number">
             <span className="evolve-stats__value">&lt;2s</span>
