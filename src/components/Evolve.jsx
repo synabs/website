@@ -2,18 +2,18 @@ import '../styles/Evolve.css'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
 const data = [
-  { week: 'Week 1',  without: 100, with: 101 },
-  { week: 'Week 2',  without: 101, with: 102 },
-  { week: 'Week 3',  without: 100, with: 103 },
-  { week: 'Week 4',  without: 102, with: 104 },
-  { week: 'Week 5',  without: 101, with: 105 },
-  { week: 'Week 6',  without: 103, with: 106 },
-  { week: 'Week 7',  without: 102, with: 107 },
-  { week: 'Week 8',  without: 103, with: 108 },
-  { week: 'Week 9',  without: 104, with: 110 },
-  { week: 'Week 10', without: 103, with: 112 },
-  { week: 'Week 11', without: 104, with: 115 },
-  { week: 'Week 12', without: 105, with: 118 },
+  { week: 'Week 1',  without: 30, with: 30 },
+  { week: 'Week 2',  without: 30, with: 31 },
+  { week: 'Week 3',  without: 29, with: 31 },
+  { week: 'Week 4',  without: 30, with: 32 },
+  { week: 'Week 5',  without: 30, with: 32 },
+  { week: 'Week 6',  without: 31, with: 33 },
+  { week: 'Week 7',  without: 30, with: 33 },
+  { week: 'Week 8',  without: 31, with: 33 },
+  { week: 'Week 9',  without: 31, with: 34 },
+  { week: 'Week 10', without: 30, with: 34 },
+  { week: 'Week 11', without: 31, with: 34 },
+  { week: 'Week 12', without: 31, with: 35 },
 ]
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -57,7 +57,7 @@ export default function Evolve() {
 
       <section className="evolve-stats">
         <p className="evolve-stats__label">EARLY RESULTS</p>
-        <h2 className="evolve-stats__title">Early testers saw an average 40% increase in leads within 3 months.</h2>
+        <h2 className="evolve-stats__title">Early testers saw an average 18% increase in leads within 3 months.</h2>
         <div className="evolve-stats__legend">
           <span className="evolve-stats__legend-item evolve-stats__legend-item--with">With AI Agent</span>
           <span className="evolve-stats__legend-item evolve-stats__legend-item--without">Without AI Agent</span>
@@ -89,15 +89,15 @@ export default function Evolve() {
           </div>
           <div className="evolve-stats__number">
             <span className="evolve-stats__value">96%</span>
-            <span className="evolve-stats__desc">Of conversations handled without human intervention</span>
+            <span className="evolve-stats__desc">Of conversations handled</span>
           </div>
           <div className="evolve-stats__number">
             <span className="evolve-stats__value">+18%</span>
-            <span className="evolve-stats__desc">Avg. increase in qualified leads within 90 days</span>
+            <span className="evolve-stats__desc">Increase in qualified leads</span>
           </div>
           <div className="evolve-stats__number">
             <span className="evolve-stats__value">0</span>
-            <span className="evolve-stats__desc">Leads missed during the test phase</span>
+            <span className="evolve-stats__desc">Leads missed</span>
           </div>
         </div>
       </section>
