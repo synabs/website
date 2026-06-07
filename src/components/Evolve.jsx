@@ -1,5 +1,5 @@
 import '../styles/Evolve.css'
-import { XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart, BarChart, Bar } from 'recharts'
+import { XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
 const costData = [
   { month: 'Month 1', without: 2300, with: 249 },
@@ -38,9 +38,8 @@ const data = [
   { week: 'Week 11', without: 100, with: 121 },
   { week: 'Week 12', without: 100, with: 122 },
 ]
-// Average: (8+10+10+14+16+13+17+18+22+20+21+22) / 12 = 191/12 ≈ 15.9% ✓
 
-const CustomTooltip = ({ active, payload, label }) => {
+const LeadsTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     const withVal = payload.find(p => p.name === 'with')?.value
     const pct = withVal ? `+${withVal - 100}%` : ''
@@ -55,7 +54,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null
 }
 
-export default function Evolve() {
+export default function EvolveSection() {
   return (
     <>
       <section className="evolve">
@@ -83,15 +82,14 @@ export default function Evolve() {
         <div className="evolve-speed__inner">
           <div className="evolve-speed__right">
             <h2 className="evolve-speed__title">Speed drives conversions.</h2>
-            <p className="evolve-speed__text">Harvard Business Review found that companies responding to inbound leads within one hour were nearly 7× more likely to qualify a lead than those responding later. AI agents enable instant engagement around the clock, helping businesses capture opportunities when interest is highest.</p>
+            <p className="evolve-speed__text">Harvard Business Review found that companies responding within one hour are nearly 7× more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
             <div className="evolve-speed__sources">
               <p className="evolve-speed__source">Oldroyd, J.B., McElheran, K., & Elkington, D. (2011). The Short Life of Online Sales Leads. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=39955" target="_blank" rel="noopener">Harvard Business Review.</a></p>
               <p className="evolve-speed__source">HubSpot. <a href="https://www.hubspot.com/reduce-lead-response-time" target="_blank" rel="noopener">Lead Response Time Insights (2025).</a></p>
             </div>
           </div>
-          <div className="evolve-speed__left">
-            <h2 className="evolve-speed__stat">7×</h2>
-            <p className="evolve-speed__label">more likely to qualify a lead when responding within one hour</p>
+          <div className="evolve-speed__image">
+            <div className="evolve__placeholder" />
           </div>
         </div>
       </section>
@@ -114,7 +112,7 @@ export default function Evolve() {
               </defs>
               <XAxis dataKey="week" tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
               <YAxis hide />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip content={<LeadsTooltip />} />
               <ReferenceLine x="Week 4" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 1', position: 'top', fontSize: 11, fill: '#bbb' }} />
               <ReferenceLine x="Week 8" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 2', position: 'top', fontSize: 11, fill: '#bbb' }} />
               <ReferenceLine x="Week 12" stroke="#e5e5e5" strokeDasharray="4 4" label={{ value: 'Month 3', position: 'top', fontSize: 11, fill: '#bbb' }} />
