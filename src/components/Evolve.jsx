@@ -32,7 +32,7 @@ export default function EvolveSection() {
           <p className="evolve-stats__label">NEXT GENERATION</p>
           <h2 className="evolve__title">Evolves every week, outplays competitors</h2>
           <p className="evolve__lead">
-            The first AI agents designed to adapt, learn, and perform better over time, helping businesses qualify leads, answer questions, and convert more visitors into customers.
+            AI agent learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
           </p>
           <a href="/about" className="evolve__readmore">Read more</a>
         </div>
