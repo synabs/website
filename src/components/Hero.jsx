@@ -18,7 +18,7 @@ export default function Hero() {
           AGENTS
         </h1>
         <p className="hero__lead">
-          Highly advanced AI agents that never take a break on their shift and handle every live chat.
+          The first AI agents designed to adapt, learn, and perform better over time, helping businesses qualify leads, answer questions, and convert more visitors into customers.
         </p>
         <div className="hero__buttons">
           <a href="/contact" className="btn btn--white">Watch Demo</a>
