@@ -46,7 +46,7 @@ export default function Navbar() {
                 href="/apply"
                 className="navbar__link navbar__link--cta btn btn--black"
               >
-                Apply for Free Testing
+                Let's collaborate
               </a>
             </li>
           </ul>
