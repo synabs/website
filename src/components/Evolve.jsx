@@ -80,22 +80,7 @@ export default function EvolveSection() {
           <div className="evolve-speed__right">
             <h2 className="evolve-costs__title">Most businesses spend over 2 000€ a month on what AI agent does for 249€.</h2>
             <p className="evolve-speed__text">Customer support staff, time spent answering routine inquiries, leads lost outside office hours — it adds up fast. AI agent handles all of it, 24/7, at a fraction of the cost.</p>
-            <div className="evolve-costs__breakdown">
-              <div className="evolve-costs__item">
-                <span className="evolve-costs__dot evolve-costs__dot--black" />
-                <div>
-                  <strong>Without AI Agent ~2 300€/mo</strong>
-                  <p>Customer support staff ~1 500€, your own time answering inquiries ~500€, estimated lost leads outside office hours ~300€</p>
-                </div>
-              </div>
-              <div className="evolve-costs__item">
-                <span className="evolve-costs__dot evolve-costs__dot--blue" />
-                <div>
-                  <strong>With AI Agent 249€/mo</strong>
-                  <p>Full coverage 24/7, no staff needed for routine inquiries, no leads missed</p>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
