@@ -1,21 +1,44 @@
 import '../styles/Evolve.css'
-import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
+import { XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart, BarChart, Bar } from 'recharts'
+
+const costData = [
+  { month: 'Month 1', without: 2300, with: 249 },
+  { month: 'Month 2', without: 2300, with: 249 },
+  { month: 'Month 3', without: 2300, with: 249 },
+]
+
+const CostTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: 8, padding: '10px 16px', fontSize: 13 }}>
+        <p style={{ fontWeight: 700, marginBottom: 4 }}>{label}</p>
+        {payload.map((p, i) => (
+          <p key={i} style={{ color: p.fill === '#54D6FF' ? '#000' : p.fill, margin: '2px 0' }}>
+            {p.name}: {p.value}€
+          </p>
+        ))}
+        <p style={{ color: '#54D6FF', fontWeight: 700, marginTop: 4 }}>Save: {payload[0]?.value - payload[1]?.value}€</p>
+      </div>
+    )
+  }
+  return null
+}
 
 const data = [
-  { week: 'Week 1',  without: 100, with: 114 },
-  { week: 'Week 2',  without: 100, with: 116 },
-  { week: 'Week 3',  without: 100, with: 115 },
-  { week: 'Week 4',  without: 100, with: 118 },
-  { week: 'Week 5',  without: 100, with: 120 },
-  { week: 'Week 6',  without: 100, with: 122 },
-  { week: 'Week 7',  without: 100, with: 120 },
-  { week: 'Week 8',  without: 100, with: 115 },
-  { week: 'Week 9',  without: 100, with: 115 },
-  { week: 'Week 10', without: 100, with: 119 },
-  { week: 'Week 11', without: 100, with: 122 },
-  { week: 'Week 12', without: 100, with: 120 },
+  { week: 'Week 1',  without: 100, with: 108 },
+  { week: 'Week 2',  without: 100, with: 110 },
+  { week: 'Week 3',  without: 100, with: 110 },
+  { week: 'Week 4',  without: 100, with: 114 },
+  { week: 'Week 5',  without: 100, with: 116 },
+  { week: 'Week 6',  without: 100, with: 113 },
+  { week: 'Week 7',  without: 100, with: 117 },
+  { week: 'Week 8',  without: 100, with: 118 },
+  { week: 'Week 9',  without: 100, with: 122 },
+  { week: 'Week 10', without: 100, with: 120 },
+  { week: 'Week 11', without: 100, with: 121 },
+  { week: 'Week 12', without: 100, with: 122 },
 ]
-// Average: (14+16+15+18+20+22+20+15+15+19+22+20) / 12 = 216/12 = 18.0% ✓
+// Average: (8+10+10+14+16+13+17+18+22+20+21+22) / 12 = 191/12 ≈ 15.9% ✓
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -57,7 +80,7 @@ export default function Evolve() {
 
       <section className="evolve-stats">
         <p className="evolve-stats__label">EARLY RESULTS</p>
-        <h2 className="evolve-stats__title">Early testers saw an average 18% increase in leads within 3 months.</h2>
+        <h2 className="evolve-stats__title">Early testers saw an average 16% increase in leads within 3 months.</h2>
         <div className="evolve-stats__legend">
           <span className="evolve-stats__legend-item evolve-stats__legend-item--with">With AI Agent</span>
           <span className="evolve-stats__legend-item evolve-stats__legend-item--without">Without AI Agent</span>
@@ -92,7 +115,7 @@ export default function Evolve() {
             <span className="evolve-stats__desc">Of conversations handled</span>
           </div>
           <div className="evolve-stats__number">
-            <span className="evolve-stats__value">+18%</span>
+            <span className="evolve-stats__value">+16%</span>
             <span className="evolve-stats__desc">Increase in qualified leads</span>
           </div>
           <div className="evolve-stats__number">
@@ -101,6 +124,40 @@ export default function Evolve() {
           </div>
         </div>
       </section>
+
+      <section className="evolve-costs">
+        <p className="evolve-stats__label">ESTIMATED COST COMPARISON</p>
+        <h2 className="evolve-costs__title">See what you could save every month.</h2>
+        <p className="evolve-costs__sub">Based on average SMB costs. Estimates vary by business size and industry.</p>
+        <div className="evolve-costs__chart">
+          <ResponsiveContainer width="100%" height={340}>
+            <BarChart data={costData} margin={{ top: 20, right: 20, left: 0, bottom: 0 }} barGap={8} barCategoryGap="30%">
+              <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
+              <YAxis tickFormatter={v => `${v}€`} tick={{ fontSize: 12, fill: '#999' }} axisLine={false} tickLine={false} />
+              <Tooltip content={<CostTooltip />} />
+              <Bar dataKey="without" name="Without AI Agent" fill="#000" radius={[4,4,0,0]} />
+              <Bar dataKey="with" name="With AI Agent" fill="#54D6FF" radius={[4,4,0,0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="evolve-costs__breakdown">
+          <div className="evolve-costs__item">
+            <span className="evolve-costs__dot evolve-costs__dot--black" />
+            <div>
+              <strong>Without AI Agent ~2 300€/mo</strong>
+              <p>Customer support staff ~1 500€, your own time answering inquiries ~500€, estimated lost leads outside office hours ~300€</p>
+            </div>
+          </div>
+          <div className="evolve-costs__item">
+            <span className="evolve-costs__dot evolve-costs__dot--blue" />
+            <div>
+              <strong>With AI Agent 249€/mo</strong>
+              <p>Full coverage 24/7, no staff needed for routine inquiries, no leads missed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="evolve-cards">
         <h2 className="evolve-cards__heading">Human was a prototype</h2>
         <div className="evolve-card">
