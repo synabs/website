@@ -164,6 +164,24 @@ export default function Evolve() {
         </div>
       </section>
 
+      <section className="evolve-speed">
+        <p className="evolve-stats__label">RESEARCH</p>
+        <div className="evolve-speed__inner">
+          <div className="evolve-speed__left">
+            <h2 className="evolve-speed__stat">7×</h2>
+            <p className="evolve-speed__label">more likely to qualify a lead when responding within one hour</p>
+          </div>
+          <div className="evolve-speed__right">
+            <h2 className="evolve-speed__title">Speed drives conversions.</h2>
+            <p className="evolve-speed__text">Harvard Business Review found that companies responding to inbound leads within one hour were nearly 7× more likely to qualify a lead than those responding later. AI agents enable instant engagement around the clock, helping businesses capture opportunities when interest is highest.</p>
+            <div className="evolve-speed__sources">
+              <p className="evolve-speed__source">Oldroyd, J.B., McElheran, K., & Elkington, D. (2011). The Short Life of Online Sales Leads. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=39955" target="_blank" rel="noopener">Harvard Business Review.</a></p>
+              <p className="evolve-speed__source">HubSpot. <a href="https://www.hubspot.com/reduce-lead-response-time" target="_blank" rel="noopener">Lead Response Time Insights (2025).</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="evolve-cards">
         <h2 className="evolve-cards__heading">Human was a prototype</h2>
         <div className="evolve-card">
