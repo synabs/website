@@ -252,9 +252,8 @@
   margin-top: 24px;
 }
 
-.evolve-speed__left {
-  flex: 0 0 280px;
-  text-align: right;
+.evolve-speed__image {
+  flex: 0 0 45%;
 }
 
 .evolve-speed__stat {
