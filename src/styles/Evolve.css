@@ -97,6 +97,15 @@
   margin-bottom: 32px;
 }
 
+.evolve-stats__lead {
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: var(--font-light);
+  color: #666;
+  line-height: var(--leading-relaxed);
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
 .evolve-stats__legend {
   display: flex;
   gap: 24px;
