@@ -18,7 +18,7 @@ export default function Hero() {
           AGENTS
         </h1>
         <p className="hero__lead">
-          The first AI agents designed to adapt, learn, and perform better over time, helping businesses qualify leads, answer questions, and convert more visitors into customers.
+          The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
         </p>
         <div className="hero__buttons">
           <a href="/contact" className="btn btn--white">Watch Demo</a>
