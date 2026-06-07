@@ -22,7 +22,7 @@ export default function Hero() {
         </p>
         <div className="hero__buttons">
           <a href="/contact" className="btn btn--white">See it live</a>
-          <a href="/join"    className="btn btn--outline">Try free 14 days</a>
+          <a href="/join"    className="btn btn--outline">Try it free 14 days</a>
         </div>
       </div>
     </section>
