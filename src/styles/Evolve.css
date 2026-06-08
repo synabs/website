@@ -153,6 +153,10 @@
   overflow: hidden;
 }
 
+.evolve-costs > .evolve-stats__label {
+  margin-bottom: 20px;
+}
+
 .evolve-costs__split {
   display: flex;
   align-items: center;
