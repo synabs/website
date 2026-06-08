@@ -3,19 +3,23 @@ import '../styles/Features.css'
 const features = [
   {
     number: '01',
-    title: 'Captures Every\nCustomer Interaction',
+    title: 'Captures Every Customer Interaction',
+    offset: 0,
   },
   {
     number: '02',
-    title: 'Detects Patterns in\nSuccessful Conversations',
+    title: 'Detects Patterns in Successful Conversations',
+    offset: 1,
   },
   {
     number: '03',
-    title: 'Optimizes Responses\nAutomatically',
+    title: 'Optimizes Responses Automatically',
+    offset: 2,
   },
   {
     number: '04',
-    title: 'Generates More\nQualified Leads Over Time',
+    title: 'Generates More Qualified Leads Over Time',
+    offset: 3,
   },
 ]
 
@@ -32,29 +36,37 @@ export default function Features() {
 
       <div className="features__arrows">
         {features.map((f, i) => (
-          <div className="features__arrow-wrap" key={f.number}>
-            <div className="features__arrow">
-              <svg
-                className="features__arrow-svg"
-                viewBox="0 0 320 160"
-                preserveAspectRatio="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Last card: no arrow tip, flat right edge */}
-                {i < features.length - 1 ? (
-                  <polygon points="0,0 280,0 320,80 280,160 0,160" />
-                ) : (
-                  <polygon points="0,0 320,0 320,160 0,160" />
-                )}
-              </svg>
-              <div className="features__arrow-content">
-                <span className="features__arrow-number">{f.number}</span>
-                <h3 className="features__arrow-title">
-                  {f.title.split('\n').map((line, j) => (
-                    <span key={j}>{line}<br /></span>
-                  ))}
-                </h3>
-              </div>
+          <div
+            className="features__arrow-wrap"
+            key={f.number}
+            style={{ '--offset': f.offset }}
+          >
+            {/* SVG arrow outline — last card flat right edge */}
+            <svg
+              className="features__arrow-svg"
+              viewBox="0 0 240 56"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              {i < features.length - 1 ? (
+                <polygon
+                  points="0,1 212,1 239,28 212,55 0,55"
+                  fill="transparent"
+                  stroke="rgba(255,255,255,0.55)"
+                  strokeWidth="1.5"
+                />
+              ) : (
+                <polygon
+                  points="0,1 239,1 239,55 0,55"
+                  fill="transparent"
+                  stroke="rgba(255,255,255,0.55)"
+                  strokeWidth="1.5"
+                />
+              )}
+            </svg>
+            <div className="features__arrow-content">
+              <span className="features__arrow-number">{f.number}</span>
+              <h3 className="features__arrow-title">{f.title}</h3>
             </div>
           </div>
         ))}
