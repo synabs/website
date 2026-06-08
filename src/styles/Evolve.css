@@ -63,7 +63,8 @@
 }
 
 .evolve__image--large {
-  flex: 0 0 55%;
+  flex: 0 0 44%;
+  align-self: center;
 }
 
 .evolve__img {
@@ -549,25 +550,4 @@
   .evolve-cards__grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* ---- Descriptor bar ---- */
-.evolve__descriptor {
-  padding: 0 160px 48px 160px;
-}
-
-.evolve__descriptor-text {
-  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
-  font-weight: var(--font-light);
-  line-height: var(--leading-relaxed);
-  color: #000;
-  max-width: 100%;
-}
-
-@media (max-width: 1024px) {
-  .evolve__descriptor { padding: 0 80px 40px 80px; }
-}
-
-@media (max-width: 768px) {
-  .evolve__descriptor { padding: 0 24px 32px 24px; }
 }
