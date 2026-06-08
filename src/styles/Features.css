@@ -54,30 +54,32 @@
   color: var(--color-yellow);
 }
 
-/* ---- Arrow rows: horizontal staggered layout ---- */
+/* ---- Arrow container: horizontal, arrows side by side ---- */
 .features__arrows {
   position: relative;
   z-index: 1;
   max-width: var(--max-width);
   margin-inline: auto;
   display: flex;
+  flex-direction: row;       /* ← rinnakkain */
   align-items: flex-start;
 }
 
 /* ---- Each arrow ---- */
 .features__arrow-wrap {
   flex: 1;
-  margin-right: -22px;
+  min-width: 0;
+  margin-right: -22px;       /* kärki limittäin seuraavan alle */
   position: relative;
 
-  /* Slide-in animation */
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(-120%);
   transition:
     transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     opacity 0.4s ease;
 }
 
+/* Porrastus alaspäin */
 .features__arrow-wrap--1 { margin-top: 0;      z-index: 4; }
 .features__arrow-wrap--2 { margin-top: 52px;   z-index: 3; }
 .features__arrow-wrap--3 { margin-top: 104px;  z-index: 2; }
@@ -93,14 +95,14 @@
   transition: stroke 0.2s ease;
 }
 
-/* SVG — tight height, scales to flex item width */
+/* SVG skaalautuu flexi-itemin leveyteen, korkeus proporsionaalisesti */
 .features__arrow-svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-/* Content sits inside the arrow shape */
+/* Teksti nuolen sisällä */
 .features__arrow-content {
   position: absolute;
   inset: 0;
@@ -108,7 +110,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 4px;
-  padding: 0.5rem 2.2rem 0.5rem 1.25rem;
+  padding: 0.5rem 2.4rem 0.5rem 1.25rem;
 }
 
 .features__arrow-number {
@@ -120,33 +122,33 @@
 }
 
 .features__arrow-title {
-  font-size: clamp(0.7rem, 0.9vw, 0.95rem);
+  font-size: clamp(0.65rem, 0.85vw, 0.9rem);
   font-weight: var(--font-bold);
   line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--color-white);
 }
 
-/* ---- Responsive ---- */
+/* ---- Mobiili: pinottuna viistosti ---- */
 @media (max-width: 768px) {
   .features__arrows {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
   }
 
   .features__arrow-wrap {
+    width: 72%;
     margin-right: 0 !important;
     margin-top: 0 !important;
     margin-bottom: -14px;
-    width: 70%;
   }
 
-  .features__arrow-wrap--1 { align-self: flex-start; }
-  .features__arrow-wrap--2 { align-self: flex-start; margin-left: 4%; }
-  .features__arrow-wrap--3 { align-self: flex-start; margin-left: 8%; }
-  .features__arrow-wrap--4 { align-self: flex-start; margin-left: 12%; margin-bottom: 0; }
+  .features__arrow-wrap--1 { margin-left: 0; }
+  .features__arrow-wrap--2 { margin-left: 4%; }
+  .features__arrow-wrap--3 { margin-left: 8%; }
+  .features__arrow-wrap--4 { margin-left: 12%; margin-bottom: 0; }
 
   .features__arrow-content {
-    padding: 0.5rem 2rem 0.5rem 1.25rem;
+    padding: 0.5rem 2rem 0.5rem 1rem;
   }
 }
