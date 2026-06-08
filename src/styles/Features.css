@@ -54,47 +54,52 @@
   color: var(--color-yellow);
 }
 
-/* ---- Arrow grid ---- */
+/* ---- Arrow row ---- */
 .features__arrows {
   position: relative;
   z-index: 1;
   max-width: var(--max-width);
   margin-inline: auto;
-  /* stagger step: each arrow shifts down by this amount */
-  --step: 56px;
-  /* total height: tallest offset (3 * step) + arrow height (56px) + padding */
-  min-height: calc(3 * var(--step) + 56px + 2rem);
+  display: flex;
+  align-items: flex-start;
+  gap: -1px; /* arrows butt up, tip overlaps handled by negative margin on wrap */
 }
 
 /* ---- Each arrow ---- */
 .features__arrow-wrap {
-  position: absolute;
-  /* horizontal: divide width evenly but allow slight overlap */
-  width: calc(27% + 20px); /* a bit wider so tip overlaps next arrow */
-  left: calc(var(--offset) * 24%);
-  top: calc(var(--offset) * var(--step));
-  transition: opacity 0.2s ease;
+  flex: 1;
+  margin-right: -22px; /* pull next arrow under the tip */
+  position: relative;
+  z-index: 4;
 }
 
-.features__arrow-wrap:hover {
-  opacity: 0.75;
+.features__arrow-wrap:nth-child(1) { margin-top: 0;    z-index: 4; }
+.features__arrow-wrap:nth-child(2) { margin-top: 52px; z-index: 3; }
+.features__arrow-wrap:nth-child(3) { margin-top: 104px; z-index: 2; }
+.features__arrow-wrap:nth-child(4) { margin-top: 156px; z-index: 1; margin-right: 0; }
+
+.features__arrow-wrap:hover .features__arrow-svg polygon {
+  stroke: rgba(255,255,255,0.9);
 }
 
+/* SVG scales to full width of flex item */
 .features__arrow-svg {
   display: block;
   width: 100%;
   height: auto;
+  overflow: visible;
 }
 
-/* Content absolutely centered inside the arrow */
+/* Content absolutely centered inside arrow bounds */
 .features__arrow-content {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
-  padding: 0.5rem 2rem 0.5rem 1.25rem;
+  gap: 4px;
+  /* left padding normal, right padding accounts for the arrow tip */
+  padding: 0.6rem 2.2rem 0.6rem 1.25rem;
 }
 
 .features__arrow-number {
@@ -106,7 +111,7 @@
 }
 
 .features__arrow-title {
-  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-size: clamp(0.7rem, 0.9vw, 0.95rem);
   font-weight: var(--font-bold);
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -114,26 +119,26 @@
 }
 
 /* ---- Responsive ---- */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .features__arrows {
-    --step: 72px;
-    min-height: calc(3 * var(--step) + 56px + 4rem);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
   }
 
   .features__arrow-wrap {
-    width: calc(60% + 20px);
-    left: calc(var(--offset) * 8%);
-  }
-}
-
-@media (max-width: 560px) {
-  .features__arrows {
-    --step: 68px;
-    min-height: calc(3 * var(--step) + 56px + 2rem);
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: -14px;
+    width: 70%;
   }
 
-  .features__arrow-wrap {
-    width: 85%;
-    left: calc(var(--offset) * 4%);
+  .features__arrow-wrap:nth-child(1) { align-self: flex-start; }
+  .features__arrow-wrap:nth-child(2) { align-self: flex-start; margin-left: 4%; }
+  .features__arrow-wrap:nth-child(3) { align-self: flex-start; margin-left: 8%; }
+  .features__arrow-wrap:nth-child(4) { align-self: flex-start; margin-left: 12%; margin-bottom: 0; }
+
+  .features__arrow-content {
+    padding: 0.6rem 2rem 0.6rem 1.25rem;
   }
 }
