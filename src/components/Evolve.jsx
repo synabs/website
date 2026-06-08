@@ -41,6 +41,11 @@ export default function EvolveSection() {
         </div>
       </section>
 
+      {/* Descriptor bar — below hero */}
+      <div className="evolve__descriptor">
+        <p className="evolve__descriptor-text">Injects 200+ optimized prompts per 50 conversations, diagnoses failures in real time, and deploys fixes against prerecorded benchmarks. Analyzes 75+ quality signals to map customer behavior over time, reporting everything back to our team for continuous improvement and Cortex engine development.</p>
+      </div>
+
       {/* Speed — full-bleed image, text overlay bottom-left */}
       <section className="evolve-speed">
         <div className="evolve-speed__fullbleed">
