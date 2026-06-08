@@ -65,8 +65,10 @@ export default function Features() {
                 />
               </svg>
               <div className="features__arrow-content">
+                <div className="features__arrow-text">
+                  <h3 className="features__arrow-title">{f.title}</h3>
+                </div>
                 <span className="features__arrow-number">{f.number}</span>
-                <h3 className="features__arrow-title">{f.title}</h3>
               </div>
             </div>
           )
