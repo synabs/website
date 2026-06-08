@@ -160,7 +160,7 @@
 }
 
 .features__terminal-prompt {
-  color: #95141c;
+  color: var(--color-white);
   font-size: 1.1em;
   user-select: none;
 }
