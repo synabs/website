@@ -10,7 +10,7 @@ export default function About() {
         </div>
         <div className="about__mission">
           <p className="about__mission-text">
-            Evolving AI has been a core interest of mine for years — the idea that a system doesn't just respond, but learns, adapts, and gets sharper over time. TIA is that idea in production. A real AI agent that improves every week, automatically, with no input required from you.
+            Evolving AI has always been at the core of what we do. Through continuous research, experimentation, and optimization, we're building AI agents that do more than respond. They learn, adapt, and improve over time, becoming more capable every week through automatic updates.
           </p>
         </div>
         <div className="about__team">
