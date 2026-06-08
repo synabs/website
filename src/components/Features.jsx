@@ -36,8 +36,8 @@ export default function Features() {
       <div className="features__header">
         <span className="features__eyebrow">How it works</span>
         <h2 className="features__heading">
-          Agents that get<br />
-          <em>smarter every day</em>
+          AI agents get smarter<br />
+          <em>with every conversation</em>
         </h2>
       </div>
 
@@ -56,13 +56,21 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
               >
+                {/* Black cover strip to hide previous arrow's right-edge stroke */}
+                {i > 0 && (
+                  <rect x="0" y="0" width="4" height="64" fill="var(--color-black)" />
+                )}
                 <polygon
                   points="0,1 238,1 259,32 238,63 0,63"
                   fill="var(--color-black)"
-                  stroke="rgba(255,255,255,0.45)"
+                  stroke="rgba(255,255,255,0.85)"
                   strokeWidth="1.5"
                   strokeLinejoin="miter"
                 />
+                {/* Cover left edge stroke so arrows look seamlessly joined */}
+                {i > 0 && (
+                  <rect x="0" y="2" width="2" height="60" fill="var(--color-black)" />
+                )}
               </svg>
               <div className="features__arrow-content">
                 <div className="features__arrow-text">
