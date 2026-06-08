@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Demo from './components/Demo'
 import Evolve from './components/Evolve'
+import Pricing from './components/Pricing'
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Hero />
       <Demo />
       <Evolve />
+      <Pricing />
     </>
   )
 }
