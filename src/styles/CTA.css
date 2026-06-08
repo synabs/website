@@ -28,13 +28,15 @@
   );
   display: flex;
   align-items: center;
-  padding-inline: 160px;
+  padding-inline: var(--gutter);
+  padding-top: calc(var(--nav-height) + var(--space-16));
 }
 .cta__content {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
-  max-width: 640px;
+  max-width: 900px;
+  margin-left: 0;
 }
 .cta__title {
   font-size: clamp(4.2rem, 12vw, 10.5rem);
@@ -42,6 +44,11 @@
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
   color: var(--color-white);
+}
+.cta__glitch {
+  display: inline-block;
+  color: var(--color-yellow);
+  transition: color 60ms ease;
 }
 .cta__buttons {
   display: flex;
@@ -51,16 +58,9 @@
 .cta__quote {
   font-size: var(--text-base);
   font-weight: var(--font-light);
-  color: rgba(255,255,255,0.55);
+  color: var(--color-white);
   letter-spacing: 0.01em;
 }
- .cta__glitch {
-  display: inline-block;
-  color: var(--color-yellow);
-  transition: color 60ms ease;
-  font-style: normal;
-}
-
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -76,6 +76,7 @@
   .cta__overlay {
     padding: 32px 24px;
     align-items: flex-end;
+    padding-top: 32px;
     background: linear-gradient(
       to top,
       rgba(0,0,0,0.85) 0%,
