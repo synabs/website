@@ -51,7 +51,7 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
 }
-.about__photo-placeholder {
+.about__photo {
   width: 80px;
   height: 80px;
   border-radius: var(--radius-full);
