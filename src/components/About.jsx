@@ -20,7 +20,7 @@ export default function About() {
               <p className="about__member-name">Jani Karkulahti</p>
               <p className="about__member-role">Founder & AI Engineer</p>
               <p className="about__member-bio">
-                Full-stack AI engineer with a background in building automated systems, data pipelines, and cloud infrastructure. Designed and deployed TIA end-to-end — from the Cortex Engine to the frontend.
+                The nerd of the team. Passionate about engineering, technology, and all things IT. Always eager to learn, build, and try something new.
               </p>
             </div>
           </div>
@@ -30,7 +30,7 @@ export default function About() {
               <p className="about__member-name">Santeri Koskinen</p>
               <p className="about__member-role">Co-Founder & Head of Business</p>
               <p className="about__member-bio">
-                Placeholder — add Santeri's bio here.
+                The startup strategist of the team. Passionate about business development, partnerships, and growth. Always eager to identify opportunities and help bring ideas to market.
               </p>
             </div>
           </div>
