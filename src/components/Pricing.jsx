@@ -4,9 +4,9 @@ export default function Pricing() {
   return (
     <section className="pricing">
       <div className="pricing__inner">
-        <h2 className="pricing__title">The AI agent that evolves</h2>
+        <h2 className="pricing__title">Get the AI agent that evolves<br />with every customer chat</h2>
 
-        <div className="pricing__guarantee">
+        <div className="pricing__guarantee" style={{marginLeft: '-1px'}}>
           <span className="pricing__guarantee-check">✓</span>
           <span className="pricing__guarantee-text" style={{color: '#fff'}}>CANCEL ANYTIME</span>
           <a href="/terms" className="pricing__guarantee-link" aria-label="Learn more">
@@ -20,8 +20,8 @@ export default function Pricing() {
           {/* Card 1 */}
           <div className="pricing__card">
             <div className="pricing__card-top">
-              <h3 className="pricing__card-title">AI Agent with your<br />current setup</h3>
-              <p className="pricing__card-desc" style={{color: '#555'}}>AI Agent works seamlessly with your existing tools, website, and workflows.</p>
+              <h3 className="pricing__card-title">Evolving AI agent</h3>
+              <p className="pricing__card-desc" style={{color: '#555'}}>Powered by Cortex Engine, built to improve over time.</p>
             </div>
             <div className="pricing__card-price">
               <span className="pricing__amount">349€</span>
@@ -36,8 +36,8 @@ export default function Pricing() {
           {/* Card 2 */}
           <div className="pricing__card">
             <div className="pricing__card-top">
-              <h3 className="pricing__card-title">AI Agent and<br />Full Suite</h3>
-              <p className="pricing__card-desc" style={{color: '#555'}}>Includes AI Agent and the full platform working together.</p>
+              <h3 className="pricing__card-title">Evolving AI agent</h3>
+              <p className="pricing__card-desc" style={{color: '#555'}}>Powered by Cortex Engine, built to improve over time.</p>
             </div>
             <div className="pricing__card-price">
               <span className="pricing__from">From</span>
@@ -46,7 +46,7 @@ export default function Pricing() {
             </div>
             <div className="pricing__price-plus">
               <span className="pricing__plus-sign">+</span>
-              <span className="pricing__amount pricing__amount--secondary">Placeholder</span>
+              <span className="pricing__amount pricing__amount--secondary">Synabs Intelligence</span>
               <span className="pricing__per">ADD-ON<br /><a href="/plans" className="pricing__plans-link">SEE ALL PLANS</a></span>
             </div>
             <div className="pricing__card-actions">
