@@ -35,8 +35,8 @@ export default function Pricing() {
                 <li>✓ Lead capture</li>
                 <li>✓ Lead qualification</li>
                 <li>✓ Calendly booking</li>
-                <li>✓ AI insights</li>
-                <li>✓ Language detection</li>
+                <li>✓ Monthly Performance Reports</li>
+                <li>✓ Automatic language detection</li>
                 <li>✓ Powered by Cortex Engine</li>
               </ul>
             </div>
