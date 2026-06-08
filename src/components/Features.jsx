@@ -34,7 +34,6 @@ export default function Features() {
   return (
     <section className="features" ref={sectionRef}>
       <div className="features__header">
-        <span className="features__eyebrow">How it works</span>
         <h2 className="features__heading">
           Agents get smarter<br />
           <em>with every conversation</em>
