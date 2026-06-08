@@ -553,23 +553,21 @@
 
 /* ---- Descriptor bar ---- */
 .evolve__descriptor {
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
-  padding: 48px 160px;
+  padding: 0 160px 48px 160px;
 }
 
 .evolve__descriptor-text {
   font-size: clamp(1.05rem, 1.6vw, 1.4rem);
   font-weight: var(--font-light);
   line-height: var(--leading-relaxed);
-  color: #555;
+  color: #000;
   max-width: 100%;
 }
 
 @media (max-width: 1024px) {
-  .evolve__descriptor { padding: 40px 80px; }
+  .evolve__descriptor { padding: 0 80px 40px 80px; }
 }
 
 @media (max-width: 768px) {
-  .evolve__descriptor { padding: 32px 24px; }
+  .evolve__descriptor { padding: 0 24px 32px 24px; }
 }
