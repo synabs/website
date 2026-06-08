@@ -47,8 +47,8 @@ export default function EvolveSection() {
           <img src="/loop.avif" alt="" className="evolve-speed__bg" />
           <div className="evolve-speed__overlay">
             <p className="evolve-stats__label evolve-stats__label--light">RESEARCH</p>
-            <h2 className="evolve-speed__title">Always in the loop</h2>
-            <p className="evolve-speed__text">Harvard Business Review found that companies responding within one hour are nearly 7x more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
+            <h2 className="evolve-speed__title">Speed drives conversions</h2>
+            <p className="evolve-speed__text" style={{color: '#fff'}}>Harvard Business Review found that companies responding within one hour are nearly 7x more likely to qualify a lead. AI agent captures and qualifies leads from your website chat, instantly, around the clock.</p>
             <SourcesDropdown />
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function EvolveSection() {
         <div className="evolve-costs__split">
           <div className="evolve-costs__left">
             <h2 className="evolve-costs__title">Most businesses spend over 2 000€ a month on what AI agent does for 349€</h2>
-            <p className="evolve-speed__text">Customer support staff, time spent answering routine inquiries, and leads lost outside office hours all add up fast. AI agent handles all of it, around the clock and at a fraction of the cost.</p>
+            <p className="evolve-speed__text" style={{color: '#000'}}>Customer support staff, time spent answering routine inquiries, and leads lost outside office hours all add up fast. AI agent handles all of it, around the clock and at a fraction of the cost.</p>
             <a href="/contact" className="evolve__cta">Cut your costs</a>
           </div>
           <div className="evolve-costs__right">
@@ -76,7 +76,7 @@ export default function EvolveSection() {
           <div className="evolve-stats__hero-text">
             <p className="evolve-stats__label evolve-stats__label--light">EARLY RESULTS</p>
             <h2 className="evolve-stats__title">Early testers saw an average 23% increase in leads within 3 months</h2>
-            <p className="evolve-stats__lead">Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic.</p>
+            <p className="evolve-stats__lead" style={{color: '#fff'}}>Based on data from early testers, leads increased by 13%–32% during the first three months after implementation, with results varying depending on company size, industry, and website traffic.</p>
             <a href="https://website-liart-nu-v6q749arlh.vercel.app/#" className="evolve__readmore evolve__readmore--light">Read more</a>
           </div>
         </div>
