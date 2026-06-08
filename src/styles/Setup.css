@@ -1,25 +1,21 @@
 /* ============================================================
    SETUP.CSS
    ============================================================ */
-
 .setup {
   border-top: 1px solid #f0f0f0;
 }
-
 .setup__fullbleed {
   position: relative;
   width: 100%;
   aspect-ratio: 16/7;
   overflow: hidden;
 }
-
 .setup__bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
 .setup__overlay {
   position: absolute;
   inset: 0;
@@ -35,7 +31,6 @@
   padding: 64px 160px;
   max-width: 800px;
 }
-
 .setup__title {
   font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: var(--font-bold);
@@ -44,7 +39,6 @@
   color: #fff;
   margin-bottom: 20px;
 }
-
 .setup__text {
   font-size: clamp(1.05rem, 1.6vw, 1.4rem);
   font-weight: var(--font-light);
@@ -53,22 +47,23 @@
   margin-bottom: 32px;
   max-width: 520px;
 }
-
+.setup .btn--outline {
+  height: var(--btn-height);
+  padding-inline: var(--btn-padding-x);
+  font-size: var(--btn-font-size);
+}
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-
 @media (max-width: 1024px) {
   .setup__overlay {
     padding: 48px 80px;
   }
 }
-
 @media (max-width: 768px) {
   .setup__fullbleed {
     aspect-ratio: 4/5;
   }
-
   .setup__overlay {
     padding: 32px 24px;
     max-width: 100%;
