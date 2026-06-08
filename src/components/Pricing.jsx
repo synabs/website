@@ -1,11 +1,9 @@
 import '../styles/Pricing.css'
-
 export default function Pricing() {
   return (
     <section className="pricing">
       <div className="pricing__inner">
         <h2 className="pricing__title">Get the AI agent that evolves<br />with every customer chat</h2>
-
         <div className="pricing__guarantee" style={{marginLeft: '-1px'}}>
           <span className="pricing__guarantee-check">✓</span>
           <span className="pricing__guarantee-text" style={{color: '#fff'}}>CANCEL ANYTIME</span>
@@ -15,19 +13,21 @@ export default function Pricing() {
             </svg>
           </a>
         </div>
-
         <div className="pricing__grid">
           {/* Card 1 */}
           <div className="pricing__card">
             <div className="pricing__card-top">
               <h3 className="pricing__card-title">Evolving AI agent</h3>
-              <p className="pricing__card-desc" style={{color: '#555'}}>Powered by Cortex Engine, built to improve over time.</p>
+              {/* Muutettu teksti, väri valkoinen */}
+              <p className="pricing__card-desc" style={{color: '#fff'}}>Set up in minutes on any website</p>
             </div>
+            {/* Lisätty Monthly AI insights, siirretty oikealle */}
             <ul className="pricing__features">
               <li>✓ Understands your business</li>
               <li>✓ Lead capture</li>
               <li>✓ Lead qualification</li>
               <li>✓ Calendly booking</li>
+              <li>✓ Monthly AI insights</li>
               <li>✓ Powered by Cortex Engine</li>
             </ul>
             <div className="pricing__card-price">
@@ -40,20 +40,11 @@ export default function Pricing() {
               <a href="/demo" className="pricing__link">Get a demo</a>
             </div>
           </div>
-
-          {/* Card 2 */}
+          {/* Card 2 — ei checklistaa, ei Cortex Engine -tekstiä */}
           <div className="pricing__card">
             <div className="pricing__card-top">
               <h3 className="pricing__card-title">Evolving AI agent</h3>
-              <p className="pricing__card-desc" style={{color: '#555'}}>Powered by Cortex Engine, built to improve over time.</p>
             </div>
-            <ul className="pricing__features">
-              <li>✓ Understands your business</li>
-              <li>✓ Lead capture</li>
-              <li>✓ Lead qualification</li>
-              <li>✓ Calendly booking</li>
-              <li>✓ Powered by Cortex Engine</li>
-            </ul>
             <div className="pricing__card-price">
               <span className="pricing__from">From</span>
               <span className="pricing__amount">349€</span>
@@ -61,10 +52,9 @@ export default function Pricing() {
             </div>
             <div className="pricing__price-plus">
               <span className="pricing__plus-sign">+</span>
-              <span className="pricing__amount pricing__amount--secondary">Synabs Intelligence</span>
+              <span className="pricing__amount pricing__amount--secondary">xxx€ Synabs Intelligence</span>
               <span className="pricing__per">ADD-ON<br /><a href="/plans" className="pricing__plans-link">SEE ALL PLANS</a></span>
             </div>
-            <p className="pricing__messages">max 5,000 messages / month<br />+€0.06 / message overage</p>
             <div className="pricing__card-actions">
               <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
               <a href="/demo" className="pricing__link">Get a demo</a>
