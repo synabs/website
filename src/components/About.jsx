@@ -18,7 +18,7 @@ export default function About() {
             <img src="/jani.avif" alt="Jani Karkulahti" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Jani Karkulahti</p>
-              <p className="about__member-role">AI Engineer & Founder</p>
+              <p className="about__member-role">Founder & AI Engineer</p>
               <p className="about__member-bio">
                 Full-stack AI engineer with a background in building automated systems, data pipelines, and cloud infrastructure. Designed and deployed TIA end-to-end — from the Cortex Engine to the frontend.
               </p>
@@ -28,7 +28,7 @@ export default function About() {
             <img src="/santeri.avif" alt="Santeri Koskinen" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Santeri Koskinen</p>
-              <p className="about__member-role">Head of Business</p>
+              <p className="about__member-role">Co-Founder & Head of Business</p>
               <p className="about__member-bio">
                 Placeholder — add Santeri's bio here.
               </p>
