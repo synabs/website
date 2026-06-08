@@ -1,3 +1,5 @@
+import '../styles/Pricing.css'
+
 export default function PricingSection() {
   return (
     <section className="pricing">
