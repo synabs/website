@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import '../styles/Features.css'
 
 const features = [
@@ -8,8 +9,30 @@ const features = [
 ]
 
 export default function Features() {
+  const sectionRef = useRef(null)
+  const [visibleRows, setVisibleRows] = useState([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          features.forEach((_, i) => {
+            setTimeout(() => {
+              setVisibleRows(prev => [...prev, i])
+            }, i * 600)
+          })
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15 }
+    )
+
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section className="features">
+    <section className="features" ref={sectionRef}>
       <div className="features__header">
         <span className="features__eyebrow">How it works</span>
         <h2 className="features__heading">
@@ -21,23 +44,27 @@ export default function Features() {
       <div className="features__arrows">
         {features.map((f, i) => {
           const isLast = i === features.length - 1
-          // viewBox: 260 wide, 64 tall. Tip at x=238.
-          const points = isLast
-            ? '0,1 259,1 259,63 0,63'
-            : '0,1 238,1 259,32 238,63 0,63'
+          const isVisible = visibleRows.includes(i)
 
           return (
-            <div className="features__arrow-wrap" key={f.number}>
+            <div
+              className={`features__arrow-wrap${isVisible ? ' features__arrow-wrap--visible' : ''}`}
+              key={f.number}
+            >
               <svg
                 className="features__arrow-svg"
-                viewBox="0 0 260 64"
+                viewBox="0 0 1000 100"
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
               >
                 <polygon
-                  points={points}
+                  points={
+                    isLast
+                      ? '0,1 999,1 999,99 0,99'
+                      : '0,1 940,1 990,50 940,99 0,99'
+                  }
                   fill="transparent"
-                  stroke="rgba(255,255,255,0.5)"
+                  stroke="rgba(255,255,255,0.45)"
                   strokeWidth="1.5"
                   strokeLinejoin="miter"
                 />
