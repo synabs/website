@@ -47,7 +47,6 @@
 }
 .cta__glitch {
   display: inline-block;
-  color: var(--color-yellow);
   transition: color 60ms ease;
 }
 .cta__buttons {
