@@ -42,26 +42,24 @@ export default function Pricing() {
             </div>
             <div className="pricing__card-actions">
               <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
-              <a href="/demo" className="pricing__link">Get a demo</a>
+              <a href="/demo" className="pricing__link">Watch demo</a>
             </div>
           </div>
           {/* Card 2 — ei checklistaa, ei Cortex Engine -tekstiä */}
           <div className="pricing__card">
             <div className="pricing__card-top">
-              <h3 className="pricing__card-title">AI agent</h3>
-            </div>
-            <div className="pricing__card-price">
+              <h3 className="pricing__card-title">AI agent + CRM integration</h3>
               <span className="pricing__from">From</span>
               <span className="pricing__amount">349€</span>
             </div>
             <div className="pricing__price-plus">
               <span className="pricing__plus-sign">+</span>
-              <span className="pricing__amount pricing__amount--secondary">CRM Integration <img src="https://cdn.brandfetch.io/idNMs_nMA0/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1668081098963" alt="Zapier" style={{height: '0.7em', verticalAlign: 'middle', display: 'inline'}} /></span>
+              <span className="pricing__amount pricing__amount--secondary">CRM Integration (via <img src="https://cdn.brandfetch.io/idNMs_nMA0/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1668081098963" alt="Zapier" style={{height: '0.7em', verticalAlign: 'middle', display: 'inline'}} />)</span>
               <span className="pricing__per">ADD-ON<br />PER MONTH<br /><a href="/plans" className="pricing__plans-link">See details</a></span>
             </div>
             <div className="pricing__card-actions">
               <a href="/contact" className="btn btn--outline">Let's talk</a>
-              <a href="/integrations" className="pricing__link">See integrations</a>
+              <a href="/integrations" className="pricing__link">See options</a>
             </div>
           </div>
         </div>
