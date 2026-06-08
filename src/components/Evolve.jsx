@@ -35,7 +35,7 @@ export default function EvolveSection() {
             AI agent learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
           </p>
           <p className="evolve__lead">
-            Injects 200+ optimized prompts per 50 conversations, diagnoses failures in real time, and deploys fixes against prerecorded benchmarks. Analyzes 75+ quality signals to map customer behavior over time, reporting everything back to our team for continuous improvement and Cortex engine development.
+            The AI reviews conversations, identifies what leads to conversions, and improves future responses automatically.
           </p>
         </div>
         <div className="evolve__image evolve__image--large">
