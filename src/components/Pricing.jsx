@@ -1,14 +1,14 @@
-import '../styles/Pricing.css'
+import './styles/Pricing.css'
 
 export default function Pricing() {
   return (
     <section className="pricing">
       <div className="pricing__inner">
-        <h2 className="pricing__title">Placeholder otsikko<br />teille tähän</h2>
+        <h2 className="pricing__title">The AI agent that evolves</h2>
 
         <div className="pricing__guarantee">
           <span className="pricing__guarantee-check">✓</span>
-          <span className="pricing__guarantee-text">CANCEL ANYTIME</span>
+          <span className="pricing__guarantee-text" style={{color: '#fff'}}>CANCEL ANYTIME</span>
           <a href="/terms" className="pricing__guarantee-link" aria-label="Learn more">
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -21,7 +21,7 @@ export default function Pricing() {
           <div className="pricing__card">
             <div className="pricing__card-top">
               <h3 className="pricing__card-title">AI Agent with your<br />current setup</h3>
-              <p className="pricing__card-desc">AI Agent works seamlessly with your existing tools, website, and workflows.</p>
+              <p className="pricing__card-desc" style={{color: '#555'}}>AI Agent works seamlessly with your existing tools, website, and workflows.</p>
             </div>
             <div className="pricing__card-price">
               <span className="pricing__amount">349€</span>
@@ -37,7 +37,7 @@ export default function Pricing() {
           <div className="pricing__card">
             <div className="pricing__card-top">
               <h3 className="pricing__card-title">AI Agent and<br />Full Suite</h3>
-              <p className="pricing__card-desc">Includes AI Agent and the full platform working together.</p>
+              <p className="pricing__card-desc" style={{color: '#555'}}>Includes AI Agent and the full platform working together.</p>
             </div>
             <div className="pricing__card-price">
               <span className="pricing__from">From</span>
