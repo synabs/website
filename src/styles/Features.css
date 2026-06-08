@@ -29,6 +29,7 @@
   max-width: var(--max-width);
   margin-inline: auto;
   margin-bottom: clamp(3rem, 6vw, 5rem);
+  padding-left: clamp(2rem, 8vw, 12rem);
 }
 
 .features__eyebrow {
