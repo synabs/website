@@ -1,6 +1,6 @@
 import '../styles/Pricing.css'
 
-export default function PricingSection() {
+export default function Pricing() {
   return (
     <section className="pricing">
       <div className="pricing__inner">
