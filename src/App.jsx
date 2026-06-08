@@ -11,6 +11,7 @@ export default function App() {
     <>
       <Navbar />
       <Hero />
+      <Features />
       <Demo />
       <Evolve />
       <Pricing />
