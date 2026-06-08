@@ -59,7 +59,7 @@ export default function EvolveSection() {
         <p className="evolve-stats__label">ESTIMATED COST COMPARISON</p>
         <div className="evolve-costs__split">
           <div className="evolve-costs__left">
-            <h2 className="evolve-costs__title">Most businesses spend over 2 000€ a month on what AI agent does for 349€</h2>
+            <h2 className="evolve-costs__title">Most businesses spend over <br />2 000€ a month on what <br />AI agent does for 349€</h2>
             <p className="evolve-speed__text" style={{color: '#000'}}>Customer support staff, time spent answering routine inquiries, and leads lost outside office hours all add up fast. AI agent handles all of it, around the clock and at a fraction of the cost.</p>
             <a href="/contact" className="evolve__cta">Cut your costs</a>
           </div>
