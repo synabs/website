@@ -1,186 +1,76 @@
-/* ============================================================
-   FEATURES.CSS
-   ============================================================ */
+import '../styles/Features.css'
 
-.features {
-  position: relative;
-  background: var(--color-black);
-  padding-block: var(--section-padding);
-  padding-inline: var(--gutter);
-  overflow: hidden;
-}
+const features = [
+  {
+    number: '01',
+    title: 'Captures Every Customer Interaction',
+    offset: 0,
+  },
+  {
+    number: '02',
+    title: 'Detects Patterns in Successful Conversations',
+    offset: 1,
+  },
+  {
+    number: '03',
+    title: 'Optimizes Responses Automatically',
+    offset: 2,
+  },
+  {
+    number: '04',
+    title: 'Generates More Qualified Leads Over Time',
+    offset: 3,
+  },
+]
 
-.features::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-  z-index: 0;
-}
+export default function Features() {
+  return (
+    <section className="features">
+      <div className="features__header">
+        <span className="features__eyebrow">How it works</span>
+        <h2 className="features__heading">
+          Agents that get<br />
+          <em>smarter every day</em>
+        </h2>
+      </div>
 
-/* ---- Header ---- */
-.features__header {
-  position: relative;
-  z-index: 1;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
-}
-
-.features__eyebrow {
-  display: inline-block;
-  font-size: var(--text-xs);
-  font-weight: var(--font-bold);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-yellow);
-  margin-bottom: var(--space-4);
-}
-
-.features__heading {
-  font-size: clamp(2.8rem, 6vw, 6rem);
-  font-weight: var(--font-bold);
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-  color: var(--color-white);
-}
-
-.features__heading em {
-  font-style: normal;
-  color: var(--color-yellow);
-}
-
-/* ---- Arrow row ---- */
-.features__arrows {
-  position: relative;
-  z-index: 1;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  /* negative margin so arrows overlap each other */
-  gap: 0;
-}
-
-.features__arrow-wrap {
-  /* each wrap overlaps the next by the arrow tip width */
-  margin-right: -2.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.features__arrow-wrap:hover {
-  z-index: 2;
-}
-
-.features__arrow-wrap:last-child {
-  margin-right: 0;
-}
-
-/* Give each subsequent arrow a slightly darker shade so they read as layered */
-.features__arrow-wrap:nth-child(1) .features__arrow-svg polygon { fill: #1a1a1a; }
-.features__arrow-wrap:nth-child(2) .features__arrow-svg polygon { fill: #141414; }
-.features__arrow-wrap:nth-child(3) .features__arrow-svg polygon { fill: #0e0e0e; }
-.features__arrow-wrap:nth-child(4) .features__arrow-svg polygon { fill: #080808; }
-
-.features__arrow-wrap:hover .features__arrow-svg polygon {
-  fill: #222;
-  transition: fill 0.25s ease;
-}
-
-/* border stroke on each polygon */
-.features__arrow-svg polygon {
-  stroke: rgba(255,255,255,0.1);
-  stroke-width: 1;
-  transition: fill 0.25s ease;
-}
-
-/* ---- Arrow shape container ---- */
-.features__arrow {
-  position: relative;
-  width: 100%;
-}
-
-.features__arrow-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 320 / 160;
-}
-
-/* Content sits absolutely centered inside the arrow shape */
-.features__arrow-content {
-  position: absolute;
-  inset: 0;
-  /* pull content left so it doesn't overlap the tip area */
-  padding: 1.5rem 3.5rem 1.5rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.features__arrow-number {
-  font-size: var(--text-xs);
-  font-weight: var(--font-bold);
-  letter-spacing: 0.16em;
-  color: var(--color-yellow);
-}
-
-.features__arrow-title {
-  font-size: clamp(1rem, 1.4vw, 1.35rem);
-  font-weight: var(--font-bold);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--color-white);
-}
-
-/* ---- Responsive ---- */
-@media (max-width: 900px) {
-  .features__arrows {
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-
-  .features__arrow-wrap {
-    margin-right: 0;
-    margin-bottom: -1.5rem;
-  }
-
-  /* On 2-col layout arrows point right still, so reset overlap */
-  .features__arrow-wrap:nth-child(odd) {
-    margin-right: -2rem;
-    margin-bottom: 0;
-  }
-}
-
-@media (max-width: 560px) {
-  .features__arrows {
-    grid-template-columns: 1fr;
-  }
-
-  .features__arrow-wrap {
-    margin-right: 0 !important;
-    margin-bottom: -1.2rem;
-  }
-
-  .features__arrow-wrap:last-child {
-    margin-bottom: 0;
-  }
-
-  /* vertical arrows on mobile: rotate the tip to point down */
-  .features__arrow-svg {
-    aspect-ratio: 320 / 120;
-  }
-
-  .features__arrow-content {
-    padding: 1.25rem 1.5rem;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-  }
+      <div className="features__arrows">
+        {features.map((f, i) => (
+          <div
+            className="features__arrow-wrap"
+            key={f.number}
+            style={{ '--offset': f.offset }}
+          >
+            {/* SVG arrow outline — last card flat right edge */}
+            <svg
+              className="features__arrow-svg"
+              viewBox="0 0 240 56"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              {i < features.length - 1 ? (
+                <polygon
+                  points="0,1 212,1 239,28 212,55 0,55"
+                  fill="transparent"
+                  stroke="rgba(255,255,255,0.55)"
+                  strokeWidth="1.5"
+                />
+              ) : (
+                <polygon
+                  points="0,1 239,1 239,55 0,55"
+                  fill="transparent"
+                  stroke="rgba(255,255,255,0.55)"
+                  strokeWidth="1.5"
+                />
+              )}
+            </svg>
+            <div className="features__arrow-content">
+              <span className="features__arrow-number">{f.number}</span>
+              <h3 className="features__arrow-title">{f.title}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
 }
