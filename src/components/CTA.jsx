@@ -1,6 +1,26 @@
+import { useEffect, useRef } from 'react'
 import '../styles/CTA.css'
 
 export default function CTA() {
+  const glitchRef = useRef(null)
+
+  useEffect(() => {
+    const letters = ['E', 'R', 'E', 'R', 'E', 'E', 'R']
+    let timeout
+
+    const glitch = () => {
+      const el = glitchRef.current
+      if (!el) return
+      const random = letters[Math.floor(Math.random() * letters.length)]
+      el.textContent = random
+      const next = Math.random() * 2000 + 400
+      timeout = setTimeout(glitch, next)
+    }
+
+    timeout = setTimeout(glitch, 1200)
+    return () => clearTimeout(timeout)
+  }, [])
+
   return (
     <section className="cta">
       <div className="cta__bg" aria-hidden="true">
@@ -8,7 +28,9 @@ export default function CTA() {
       </div>
       <div className="cta__overlay">
         <div className="cta__content">
-          <h2 className="cta__title">Start evolution</h2>
+          <h2 className="cta__title">
+            START TH<span className="cta__glitch" ref={glitchRef}>E</span> EVOLUTION
+          </h2>
           <div className="cta__buttons">
             <a href="/contact" className="btn btn--white">Watch Demo</a>
             <a href="/join" className="btn btn--outline">Try it free 14 days</a>
