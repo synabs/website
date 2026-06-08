@@ -7,6 +7,7 @@ import Setup from './components/Setup'
 import Evolve from './components/Evolve'
 import Prototype from './components/Prototype'
 import Pricing from './components/Pricing'
+import About from './components/Pricing'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
       <Evolve />
       <Prototype />
       <Pricing />
+      <About />
     </>
   )
 }
