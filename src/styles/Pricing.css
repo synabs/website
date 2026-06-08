@@ -217,3 +217,26 @@
     border-bottom: none;
   }
 }
+
+/* Features list */
+.pricing__features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+
+.pricing__features li {
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+  font-weight: var(--font-regular);
+  color: rgba(255,255,255,0.75);
+  line-height: 1.4;
+}
+
+/* Messages */
+.pricing__messages {
+  font-size: clamp(0.8rem, 1vw, 0.875rem);
+  font-weight: var(--font-regular);
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+}
