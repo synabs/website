@@ -11,7 +11,7 @@ export default function Setup() {
           <p className="setup__text">
             One line of code. Add it yourself or we'll do it together. Your AI agent goes live instantly.
           </p>
-          <a href="/join" className="evolve__cta">Try free 14 days</a>
+          <a href="/join" className="btn btn--outline">Try free 14 days</a>
         </div>
       </div>
     </section>
