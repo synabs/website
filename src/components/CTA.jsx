@@ -13,7 +13,7 @@ export default function CTA() {
             <a href="/contact" className="btn btn--white">Watch Demo</a>
             <a href="/join" className="btn btn--outline">Try it free 14 days</a>
           </div>
-          <p className="cta__quote"><em>Too good to be true? Test yourself</em></p>
+          <p className="cta__quote"><em>The last AI agent you'll ever need to upgrade</em></p>
         </div>
       </div>
     </section>
