@@ -20,23 +20,19 @@
 .cta__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.82) 0%,
-    rgba(0,0,0,0.5) 55%,
-    rgba(0,0,0,0.0) 100%
-  );
+  background: rgba(0,0,0,0.55);
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-inline: var(--gutter);
-  padding-top: calc(var(--nav-height) + var(--space-16));
 }
 .cta__content {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: var(--space-8);
   max-width: none;
-  margin-left: 0;
 }
 .cta__title {
   font-size: clamp(4.2rem, 12vw, 10.5rem);
@@ -53,6 +49,7 @@
   display: flex;
   gap: var(--space-4);
   flex-wrap: wrap;
+  justify-content: center;
 }
 .cta__quote {
   font-size: var(--text-base);
@@ -74,13 +71,7 @@
   }
   .cta__overlay {
     padding: 32px 24px;
-    align-items: flex-end;
-    padding-top: 32px;
-    background: linear-gradient(
-      to top,
-      rgba(0,0,0,0.85) 0%,
-      rgba(0,0,0,0.3) 70%,
-      rgba(0,0,0,0.0) 100%
-    );
+    align-items: center;
+    background: rgba(0,0,0,0.6);
   }
 }
