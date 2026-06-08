@@ -46,7 +46,7 @@ export default function Navbar() {
                 href="/apply"
                 className="navbar__link navbar__link--cta btn btn--outline"
               >
-                Apply for tester
+                Become Partner
               </a>
             </li>
           </ul>
