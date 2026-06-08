@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import '../styles/Features.css'
 
 const features = [
-  { number: '01', title: 'Captures Every Customer Interaction' },
-  { number: '02', title: 'Detects Patterns in Successful Conversations' },
-  { number: '03', title: 'Optimizes Responses Automatically' },
-  { number: '04', title: 'Generates More Qualified Leads Over Time' },
+  { number: '01', title: 'Captures every customer live chat' },
+  { number: '02', title: 'Detects patterns in every conversation' },
+  { number: '03', title: 'Studies patterns and optimizes responses' },
+  { number: '04', title: 'Predicts conversation flow to maximize value' },
 ]
 
 export default function Features() {
