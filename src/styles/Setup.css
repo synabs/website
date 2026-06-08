@@ -4,6 +4,9 @@
 .setup {
   border-top: 1px solid #f0f0f0;
 }
+.setup__cta {
+  align-self: flex-start;
+}
 .setup__fullbleed {
   position: relative;
   width: 100%;
