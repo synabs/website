@@ -29,7 +29,7 @@ export default function CTA() {
       <div className="cta__overlay">
         <div className="cta__content">
           <h2 className="cta__title">
-            START THE </br><span className="cta__glitch" ref={glitchRef}>E</span>VOLUTION
+            START THE <br /><span className="cta__glitch" ref={glitchRef}>E</span>VOLUTION
           </h2>
           <div className="cta__buttons">
             <a href="/contact" className="btn btn--white">Watch Demo</a>
