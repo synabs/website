@@ -56,20 +56,25 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
               >
-                {/* Black cover strip to hide previous arrow's right-edge stroke */}
-                {i > 0 && (
-                  <rect x="0" y="0" width="4" height="64" fill="var(--color-black)" />
-                )}
+                {/* Fill shape first */}
                 <polygon
-                  points="0,1 238,1 259,32 238,63 0,63"
+                  points="0,0 238,0 260,32 238,64 0,64"
                   fill="var(--color-black)"
-                  stroke="rgba(255,255,255,0.85)"
+                  stroke="none"
+                />
+                {/* Top edge + right tip + bottom edge only — no left edge */}
+                <polyline
+                  points="0,1 238,1 259,32 238,63 0,63"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.9)"
                   strokeWidth="1.5"
                   strokeLinejoin="miter"
+                  strokeLinecap="square"
                 />
-                {/* Cover left edge stroke so arrows look seamlessly joined */}
-                {i > 0 && (
-                  <rect x="0" y="2" width="2" height="60" fill="var(--color-black)" />
+                {/* Left edge only on first arrow */}
+                {i === 0 && (
+                  <line x1="0" y1="1" x2="0" y2="63"
+                    stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
                 )}
               </svg>
               <div className="features__arrow-content">
