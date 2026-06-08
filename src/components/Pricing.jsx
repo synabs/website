@@ -21,20 +21,23 @@ export default function Pricing() {
               {/* Muutettu teksti, väri valkoinen */}
               <p className="pricing__card-desc" style={{color: '#fff'}}>Set up in minutes on any website</p>
             </div>
-            {/* Lisätty Monthly AI insights, siirretty oikealle */}
-            <ul className="pricing__features">
-              <li>✓ Understands your business</li>
-              <li>✓ Lead capture</li>
-              <li>✓ Lead qualification</li>
-              <li>✓ Calendly booking</li>
-              <li>✓ Monthly AI insights</li>
-              <li>✓ Powered by Cortex Engine</li>
-            </ul>
-            <div className="pricing__card-price">
-              <span className="pricing__amount">349€</span>
-              <span className="pricing__per">PER<br />MONTH</span>
+            <div className="pricing__price-features-row">
+              <div>
+                <div className="pricing__card-price">
+                  <span className="pricing__amount">349€</span>
+                  <span className="pricing__per">PER<br />MONTH</span>
+                </div>
+                <p className="pricing__messages">Max 5,000 messages / month<br /><span>+€0.06 / message overage</span></p>
+              </div>
+              <ul className="pricing__features">
+                <li>✓ Understands your business</li>
+                <li>✓ Lead capture</li>
+                <li>✓ Lead qualification</li>
+                <li>✓ Calendly booking</li>
+                <li>✓ Monthly AI insights</li>
+                <li>✓ Powered by Cortex Engine</li>
+              </ul>
             </div>
-            <p className="pricing__messages">Max 5,000 messages / month<br /><span>+€0.06 / message overage</span></p>
             <div className="pricing__card-actions">
               <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
               <a href="/demo" className="pricing__link">Get a demo</a>
