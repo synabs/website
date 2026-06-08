@@ -1,0 +1,116 @@
+/* ============================================================
+   PROTOTYPE.CSS
+   ============================================================ */
+
+.evolve-cards {
+  padding: 100px 160px 120px 160px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.evolve-cards__heading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--font-bold);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #000;
+  margin-bottom: 48px;
+}
+
+.evolve-cards__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.evolve-cards__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.evolve-card {
+  display: flex;
+  flex-direction: column;
+  background: #f7f7f7;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.evolve-card__image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.evolve-card--featured .evolve-card__image {
+  aspect-ratio: 4/3;
+}
+
+.evolve-card--small .evolve-card__image {
+  aspect-ratio: 16/9;
+}
+
+.evolve-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.evolve-card:hover .evolve-card__img {
+  transform: scale(1.03);
+}
+
+.evolve-card__body {
+  padding: 28px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.evolve-card__title {
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  font-weight: var(--font-bold);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.evolve-card--small .evolve-card__title {
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+}
+
+.evolve-card__text {
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  font-weight: var(--font-light);
+  line-height: var(--leading-relaxed);
+  color: #555;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.evolve-card .evolve__readmore {
+  align-self: flex-start;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .evolve-cards {
+    padding: 80px 80px 100px 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .evolve-cards {
+    padding: 60px 24px;
+  }
+
+  .evolve-cards__grid {
+    grid-template-columns: 1fr;
+  }
+}
