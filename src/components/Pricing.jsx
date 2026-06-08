@@ -19,7 +19,7 @@ export default function Pricing() {
             <div className="pricing__card-top">
               <h3 className="pricing__card-title">AI agent</h3>
               {/* Muutettu teksti, väri valkoinen */}
-              <p className="pricing__card-desc" style={{color: '#fff'}}>Set up in minutes on any website</p>
+              <p className="pricing__card-desc" style={{color: '#fff'}}>Set up in minutes on any website.</p>
             </div>
             <div className="pricing__price-features-row">
               <div>
@@ -27,7 +27,7 @@ export default function Pricing() {
                   <span className="pricing__amount">349€</span>
                   <span className="pricing__per">PER<br />MONTH</span>
                 </div>
-                <p className="pricing__messages">Max 5,000 messages / month<br /><span>+€0.06 / message overage</span></p>
+                <p className="pricing__messages">5,000 messages / month<br /><span>+€0.06 / message overage</span></p>
               </div>
               <ul className="pricing__features">
                 <li>✓ Evolving AI</li>
@@ -56,12 +56,12 @@ export default function Pricing() {
             </div>
             <div className="pricing__price-plus">
               <span className="pricing__plus-sign">+</span>
-              <span className="pricing__amount pricing__amount--secondary">CRM Integration (via Zapier)</span>
+              <span className="pricing__amount pricing__amount--secondary">CRM Integration <img src="https://cdn.brandfetch.io/idNMs_nMA0/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1668081098963" alt="Zapier" style={{height: '0.7em', verticalAlign: 'middle', display: 'inline'}} /></span>
               <span className="pricing__per">ADD-ON<br />PER MONTH<br /><a href="/plans" className="pricing__plans-link">See details</a></span>
             </div>
             <div className="pricing__card-actions">
               <a href="/contact" className="btn btn--outline">Let's talk</a>
-              <a href="/demo" className="pricing__link">Get a demo</a>
+              <a href="/integrations" className="pricing__link">See integrations</a>
             </div>
           </div>
         </div>
