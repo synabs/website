@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import '../styles/Features.css'
 
 const features = [
-  { number: '01', title: 'Captures every customer live chat.' },
-  { number: '02', title: 'Detects patterns in every conversation.' },
-  { number: '03', title: 'Studies patterns and optimizes responses.' },
-  { number: '04', title: 'Predicts conversation flow to maximize value.' },
+  { number: '1', title: 'Captures every customer live chat.' },
+  { number: '2', title: 'Detects patterns in every conversation.' },
+  { number: '3', title: 'Studies patterns and optimizes responses.' },
+  { number: '4', title: 'Predicts conversation flow to maximize value.' },
 ]
 
 export default function Features() {
@@ -36,7 +36,7 @@ export default function Features() {
       <div className="features__header">
         <span className="features__eyebrow">How it works</span>
         <h2 className="features__heading">
-          AI agents get smarter<br />
+          Agents get smarter<br />
           <em>with every conversation</em>
         </h2>
       </div>
