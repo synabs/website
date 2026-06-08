@@ -4,22 +4,18 @@ const features = [
   {
     number: '01',
     title: 'Captures Every\nCustomer Interaction',
-    body: 'Every message, click, and hesitation is recorded — building a complete picture of how customers engage with your agents.',
   },
   {
     number: '02',
     title: 'Detects Patterns in\nSuccessful Conversations',
-    body: 'AI surfaces what makes conversations convert: tone, timing, phrasing. Nothing that works is left unnoticed.',
   },
   {
     number: '03',
     title: 'Optimizes Responses\nAutomatically',
-    body: 'No manual tuning. Agents rewrite themselves based on what actually drives results — continuously, in the background.',
   },
   {
     number: '04',
     title: 'Generates More\nQualified Leads Over Time',
-    body: 'The longer your agents run, the sharper they get. Every interaction makes the next one more effective.',
   },
 ]
 
@@ -34,19 +30,33 @@ export default function Features() {
         </h2>
       </div>
 
-      <div className="features__grid">
-        {features.map((f) => (
-          <article className="features__card" key={f.number}>
-            <span className="features__card-number">{f.number}</span>
-            <div className="features__card-bar" aria-hidden="true" />
-            <h3 className="features__card-title">
-              {f.title.split('\n').map((line, i) => (
-                <span key={i}>{line}<br /></span>
-              ))}
-            </h3>
-            <p className="features__card-body">{f.body}</p>
-            <div className="features__card-glow" aria-hidden="true" />
-          </article>
+      <div className="features__arrows">
+        {features.map((f, i) => (
+          <div className="features__arrow-wrap" key={f.number}>
+            <div className="features__arrow">
+              <svg
+                className="features__arrow-svg"
+                viewBox="0 0 320 160"
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Last card: no arrow tip, flat right edge */}
+                {i < features.length - 1 ? (
+                  <polygon points="0,0 280,0 320,80 280,160 0,160" />
+                ) : (
+                  <polygon points="0,0 320,0 320,160 0,160" />
+                )}
+              </svg>
+              <div className="features__arrow-content">
+                <span className="features__arrow-number">{f.number}</span>
+                <h3 className="features__arrow-title">
+                  {f.title.split('\n').map((line, j) => (
+                    <span key={j}>{line}<br /></span>
+                  ))}
+                </h3>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>
