@@ -1,19 +1,82 @@
-import '../styles/Setup.css'
+/* ============================================================
+   SETUP.CSS
+   ============================================================ */
 
-export default function Setup() {
-  return (
-    <section className="setup">
-      <div className="setup__fullbleed">
-        <img src="/setup.avif" alt="" className="setup__bg" />
-        <div className="setup__overlay">
-          <p className="evolve-stats__label evolve-stats__label--light">SETUP</p>
-          <h2 className="setup__title">2 minute install</h2>
-          <p className="setup__text">
-            We give you a single line of code. Add it to your website yourself, or we do it together. AI agent starts running instantly and you never have to touch it again.
-          </p>
-          <a href="/join" className="evolve__cta">Try free 14 days</a>
-        </div>
-      </div>
-    </section>
-  )
+.setup {
+  border-top: 1px solid #f0f0f0;
+}
+
+.setup__fullbleed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/7;
+  overflow: hidden;
+}
+
+.setup__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.setup__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.78) 0%,
+    rgba(0,0,0,0.45) 55%,
+    rgba(0,0,0,0.0) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 64px 160px;
+  max-width: 800px;
+}
+
+.setup__title {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: var(--font-bold);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.setup__text {
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  font-weight: var(--font-light);
+  line-height: var(--leading-relaxed);
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .setup__overlay {
+    padding: 48px 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .setup__fullbleed {
+    aspect-ratio: 4/5;
+  }
+
+  .setup__overlay {
+    padding: 32px 24px;
+    max-width: 100%;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.82) 0%,
+      rgba(0,0,0,0.3) 70%,
+      rgba(0,0,0,0.0) 100%
+    );
+  }
 }
