@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
-  max-width: 900px;
+  max-width: none;
   margin-left: 0;
 }
 .cta__title {
