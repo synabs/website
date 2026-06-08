@@ -17,7 +17,7 @@ export default function Pricing() {
           {/* Card 1 */}
           <div className="pricing__card">
             <div className="pricing__card-top">
-              <h3 className="pricing__card-title">Evolving AI agent</h3>
+              <h3 className="pricing__card-title">AI agent</h3>
               {/* Muutettu teksti, väri valkoinen */}
               <p className="pricing__card-desc" style={{color: '#fff'}}>Set up in minutes on any website</p>
             </div>
@@ -46,17 +46,16 @@ export default function Pricing() {
           {/* Card 2 — ei checklistaa, ei Cortex Engine -tekstiä */}
           <div className="pricing__card">
             <div className="pricing__card-top">
-              <h3 className="pricing__card-title">Evolving AI agent</h3>
+              <h3 className="pricing__card-title">AI agent</h3>
             </div>
             <div className="pricing__card-price">
               <span className="pricing__from">From</span>
               <span className="pricing__amount">349€</span>
-              <span className="pricing__per">PER<br />MONTH</span>
             </div>
             <div className="pricing__price-plus">
               <span className="pricing__plus-sign">+</span>
               <span className="pricing__amount pricing__amount--secondary">xxx€ Synabs Intelligence</span>
-              <span className="pricing__per">ADD-ON<br /><a href="/plans" className="pricing__plans-link">SEE ALL PLANS</a></span>
+              <span className="pricing__per">ADD-ON<br />PER MONTH<br /><a href="/plans" className="pricing__plans-link">See details</a></span>
             </div>
             <div className="pricing__card-actions">
               <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
