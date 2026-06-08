@@ -47,10 +47,27 @@
   margin-bottom: 32px;
   max-width: 520px;
 }
-.setup .btn--outline {
+.setup__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: var(--btn-height);
   padding-inline: var(--btn-padding-x);
+  border-radius: var(--btn-radius);
   font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  letter-spacing: var(--btn-letter-spacing);
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.6);
+  background: transparent;
+  color: var(--color-white);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+.setup__cta:hover {
+  background: var(--color-white);
+  color: var(--color-black);
 }
 /* ============================================================
    RESPONSIVE
