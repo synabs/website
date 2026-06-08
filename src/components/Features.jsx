@@ -30,7 +30,7 @@ function TerminalLine({ trigger }) {
 
   return (
     <div className="features__terminal">
-      <span className="features__terminal-prompt">$</span>
+      <span className="features__terminal-prompt">~$</span>
       <span className="features__terminal-text">{displayed}</span>
       <span className={`features__terminal-cursor${done ? ' features__terminal-cursor--blink' : ''}`}>_</span>
     </div>
