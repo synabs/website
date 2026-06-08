@@ -52,7 +52,7 @@
 
 .features__heading em {
   font-style: normal;
-  color: #95141c;
+  color: var(--color-white);
 }
 
 /* ---- Arrow container: horizontal, arrows side by side ---- */
@@ -130,7 +130,7 @@
   line-height: 1;
   flex-shrink: 0;
   order: 1;
-  margin-left: 1.2rem;
+  margin-left: 2.4rem;
   margin-right: 0.6rem;
 }
 
