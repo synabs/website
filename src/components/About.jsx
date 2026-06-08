@@ -4,22 +4,18 @@ export default function About() {
   return (
     <section className="about">
       <div className="about__inner">
-
         <div className="about__header">
           <p className="evolve-stats__label">ABOUT</p>
           <h2 className="about__title">Built by people who believe AI should earn its keep</h2>
         </div>
-
         <div className="about__mission">
           <p className="about__mission-text">
             Evolving AI has been a core interest of mine for years — the idea that a system doesn't just respond, but learns, adapts, and gets sharper over time. TIA is that idea in production. A real AI agent that improves every week, automatically, with no input required from you.
           </p>
         </div>
-
         <div className="about__team">
-
           <div className="about__member">
-            <div className="about__photo-placeholder" />
+            <img src="/jani.avif" alt="Jani Karkulahti" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Jani Karkulahti</p>
               <p className="about__member-role">AI Engineer & Founder</p>
@@ -28,9 +24,8 @@ export default function About() {
               </p>
             </div>
           </div>
-
           <div className="about__member">
-            <div className="about__photo-placeholder" />
+            <img src="/santeri.avif" alt="Santeri Koskinen" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Santeri Koskinen</p>
               <p className="about__member-role">Head of Business</p>
@@ -39,7 +34,6 @@ export default function About() {
               </p>
             </div>
           </div>
-
         </div>
       </div>
     </section>
