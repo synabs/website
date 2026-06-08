@@ -43,26 +43,21 @@ export default function Features() {
 
       <div className="features__arrows">
         {features.map((f, i) => {
-          const isLast = i === features.length - 1
           const isVisible = visibleRows.includes(i)
 
           return (
             <div
-              className={`features__arrow-wrap${isVisible ? ' features__arrow-wrap--visible' : ''}`}
+              className={`features__arrow-wrap features__arrow-wrap--${i + 1}${isVisible ? ' features__arrow-wrap--visible' : ''}`}
               key={f.number}
             >
               <svg
                 className="features__arrow-svg"
-                viewBox="0 0 1000 100"
+                viewBox="0 0 260 64"
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
               >
                 <polygon
-                  points={
-                    isLast
-                      ? '0,1 999,1 999,99 0,99'
-                      : '0,1 940,1 990,50 940,99 0,99'
-                  }
+                  points="0,1 238,1 259,32 238,63 0,63"
                   fill="transparent"
                   stroke="rgba(255,255,255,0.45)"
                   strokeWidth="1.5"
