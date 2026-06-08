@@ -7,7 +7,7 @@ import Setup from './components/Setup'
 import Evolve from './components/Evolve'
 import Prototype from './components/Prototype'
 import Pricing from './components/Pricing'
-import About from './components/Pricing'
+import About from './components/About'
 
 export default function App() {
   return (
