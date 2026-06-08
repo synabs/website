@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Features from './components/Features'
 import Demo from './components/Demo'
 import Evolve from './components/Evolve'
+import Prototype from './components/Prototype'
 import Pricing from './components/Pricing'
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
       <Features />
       <Demo />
       <Evolve />
+      <Prototype />
       <Pricing />
     </>
   )
