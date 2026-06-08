@@ -34,7 +34,6 @@ export default function EvolveSection() {
           <p className="evolve__lead">
             AI agent learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
           </p>
-          <a href="/about" className="evolve__readmore">Read more</a>
         </div>
         <div className="evolve__image evolve__image--large">
           <img src="/evo-bg.avif" alt="" className="evolve__img" />
@@ -118,7 +117,6 @@ export default function EvolveSection() {
               <p className="evolve-card__text">
                 Combining customer support, sales, and strategic intelligence, AI agent handles it all.
               </p>
-              <a href="/about" className="evolve__readmore">Read more</a>
             </div>
           </div>
           <div className="evolve-cards__stack">
@@ -131,7 +129,6 @@ export default function EvolveSection() {
                 <p className="evolve-card__text">
                   Compatible with WordPress, Shopify and custom websites. Works with a single line of code.
                 </p>
-                <a href="/about" className="evolve__readmore">Read more</a>
               </div>
             </div>
             <div className="evolve-card evolve-card--small">
@@ -143,7 +140,6 @@ export default function EvolveSection() {
                 <p className="evolve-card__text">
                   The brain behind every conversation. Analyzes intent, context, and sentiment in real time.
                 </p>
-                <a href="/about" className="evolve__readmore">Read more</a>
               </div>
             </div>
           </div>
