@@ -241,7 +241,7 @@
 .pricing__features li {
   font-size: clamp(0.85rem, 1.1vw, 0.95rem);
   font-weight: var(--font-regular);
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,1);
   line-height: 1.4;
 }
 
