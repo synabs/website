@@ -23,10 +23,18 @@ export default function Pricing() {
               <h3 className="pricing__card-title">Evolving AI agent</h3>
               <p className="pricing__card-desc" style={{color: '#555'}}>Powered by Cortex Engine, built to improve over time.</p>
             </div>
+            <ul className="pricing__features">
+              <li>✓ Understands your business</li>
+              <li>✓ Lead capture</li>
+              <li>✓ Lead qualification</li>
+              <li>✓ Calendly booking</li>
+              <li>✓ Powered by Cortex Engine</li>
+            </ul>
             <div className="pricing__card-price">
               <span className="pricing__amount">349€</span>
               <span className="pricing__per">PER<br />MONTH</span>
             </div>
+            <p className="pricing__messages">Max 5,000 messages / month<br /><span>+€0.06 / message overage</span></p>
             <div className="pricing__card-actions">
               <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
               <a href="/demo" className="pricing__link">Get a demo</a>
@@ -39,6 +47,13 @@ export default function Pricing() {
               <h3 className="pricing__card-title">Evolving AI agent</h3>
               <p className="pricing__card-desc" style={{color: '#555'}}>Powered by Cortex Engine, built to improve over time.</p>
             </div>
+            <ul className="pricing__features">
+              <li>✓ Understands your business</li>
+              <li>✓ Lead capture</li>
+              <li>✓ Lead qualification</li>
+              <li>✓ Calendly booking</li>
+              <li>✓ Powered by Cortex Engine</li>
+            </ul>
             <div className="pricing__card-price">
               <span className="pricing__from">From</span>
               <span className="pricing__amount">349€</span>
@@ -49,6 +64,7 @@ export default function Pricing() {
               <span className="pricing__amount pricing__amount--secondary">Synabs Intelligence</span>
               <span className="pricing__per">ADD-ON<br /><a href="/plans" className="pricing__plans-link">SEE ALL PLANS</a></span>
             </div>
+            <p className="pricing__messages">max 5,000 messages / month<br />+€0.06 / message overage</p>
             <div className="pricing__card-actions">
               <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
               <a href="/demo" className="pricing__link">Get a demo</a>
