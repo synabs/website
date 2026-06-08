@@ -30,11 +30,13 @@ export default function Pricing() {
                 <p className="pricing__messages">Max 5,000 messages / month<br /><span>+€0.06 / message overage</span></p>
               </div>
               <ul className="pricing__features">
-                <li>✓ Understands your business</li>
+                <li>✓ Evolving AI</li>
+                <li>✓ Trained on your business</li>
                 <li>✓ Lead capture</li>
                 <li>✓ Lead qualification</li>
                 <li>✓ Calendly booking</li>
-                <li>✓ Monthly AI insights</li>
+                <li>✓ AI insights</li>
+                <li>✓ Language detection</li>
                 <li>✓ Powered by Cortex Engine</li>
               </ul>
             </div>
@@ -54,11 +56,11 @@ export default function Pricing() {
             </div>
             <div className="pricing__price-plus">
               <span className="pricing__plus-sign">+</span>
-              <span className="pricing__amount pricing__amount--secondary">xxx€ Synabs Intelligence</span>
+              <span className="pricing__amount pricing__amount--secondary">CRM Integration (via Zapier)</span>
               <span className="pricing__per">ADD-ON<br />PER MONTH<br /><a href="/plans" className="pricing__plans-link">See details</a></span>
             </div>
             <div className="pricing__card-actions">
-              <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
+              <a href="/contact" className="btn btn--outline">Let's talk</a>
               <a href="/demo" className="pricing__link">Get a demo</a>
             </div>
           </div>
