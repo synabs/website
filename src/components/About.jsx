@@ -20,7 +20,7 @@ export default function About() {
               <p className="about__member-name">Jani Karkulahti</p>
               <p className="about__member-role">Founder & AI Engineer</p>
               <p className="about__member-bio">
-                The nerd of the team. Passionate about engineering, technology, and all things IT. Always eager to learn, build, and try something new.
+                Jani is an AI expert specializing in AI-powered products, automation, and system architecture, with a proven track record in building technology platforms.
               </p>
             </div>
           </div>
@@ -30,7 +30,7 @@ export default function About() {
               <p className="about__member-name">Santeri Koskinen</p>
               <p className="about__member-role">Co-Founder & Head of Business</p>
               <p className="about__member-bio">
-                The startup strategist of the team. Passionate about business development, partnerships, and growth. Always eager to identify opportunities and help bring ideas to market.
+                Santeri is a serial entrepreneur with a proven history of building successful startup and leading the strategic vision behind the business.
               </p>
             </div>
           </div>
