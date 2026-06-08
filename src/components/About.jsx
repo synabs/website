@@ -10,7 +10,7 @@ export default function About() {
         </div>
         <div className="about__mission">
           <p className="about__mission-text">
-            Evolving AI has always been at the core of what we do. Through continuous research, experimentation, and optimization, we're building AI agents that do more than respond. They learn, adapt, and improve over time, becoming more capable every week through automatic updates.
+            Many businesses miss valuable revenue opportunities by failing to engage with visitors and leads outside business hours, leaving significant potential untapped. Our mission is to help businesses capture these opportunities with AI. By building adaptive AI agents that continuously learn and improve, we transform customer data into smarter engagement, better targeting, and measurable growth. Over time, these systems become increasingly effective at personalizing interactions, identifying opportunities, and driving results around the clock.
           </p>
         </div>
         <div className="about__team">
