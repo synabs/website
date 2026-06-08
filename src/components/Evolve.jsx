@@ -34,16 +34,14 @@ export default function EvolveSection() {
           <p className="evolve__lead">
             AI agent learns from every interaction, predicts customer intent, and continuously optimizes your funnel for higher conversions.
           </p>
+          <p className="evolve__lead">
+            Injects 200+ optimized prompts per 50 conversations, diagnoses failures in real time, and deploys fixes against prerecorded benchmarks. Analyzes 75+ quality signals to map customer behavior over time, reporting everything back to our team for continuous improvement and Cortex engine development.
+          </p>
         </div>
         <div className="evolve__image evolve__image--large">
           <img src="/evo-bg.avif" alt="" className="evolve__img" />
         </div>
       </section>
-
-      {/* Descriptor bar — below hero */}
-      <div className="evolve__descriptor">
-        <p className="evolve__descriptor-text">Injects 200+ optimized prompts per 50 conversations, diagnoses failures in real time, and deploys fixes against prerecorded benchmarks. Analyzes 75+ quality signals to map customer behavior over time, reporting everything back to our team for continuous improvement and Cortex engine development.</p>
-      </div>
 
       {/* Speed — full-bleed image, text overlay bottom-left */}
       <section className="evolve-speed">
