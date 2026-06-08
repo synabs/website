@@ -8,9 +8,39 @@ const features = [
   { number: '4', title: 'Predicts conversation flow to maximize value.' },
 ]
 
+const TERMINAL_TEXT = 'Fully autonomous, requires no user input'
+
+function TerminalLine({ trigger }) {
+  const [displayed, setDisplayed] = useState('')
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    if (!trigger) return
+    let i = 0
+    const interval = setInterval(() => {
+      setDisplayed(TERMINAL_TEXT.slice(0, i + 1))
+      i++
+      if (i >= TERMINAL_TEXT.length) {
+        clearInterval(interval)
+        setDone(true)
+      }
+    }, 38)
+    return () => clearInterval(interval)
+  }, [trigger])
+
+  return (
+    <div className="features__terminal">
+      <span className="features__terminal-prompt">$</span>
+      <span className="features__terminal-text">{displayed}</span>
+      <span className={`features__terminal-cursor${done ? ' features__terminal-cursor--blink' : ''}`}>_</span>
+    </div>
+  )
+}
+
 export default function Features() {
   const sectionRef = useRef(null)
   const [visibleRows, setVisibleRows] = useState([])
+  const [terminalTrigger, setTerminalTrigger] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,6 +51,8 @@ export default function Features() {
               setVisibleRows(prev => [...prev, i])
             }, i * 600)
           })
+          // trigger terminal after all arrows have animated in
+          setTimeout(() => setTerminalTrigger(true), features.length * 600 + 200)
           observer.disconnect()
         }
       },
@@ -55,13 +87,11 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
               >
-                {/* Fill shape first */}
                 <polygon
                   points="0,0 238,0 260,32 238,64 0,64"
                   fill="var(--color-black)"
                   stroke="none"
                 />
-                {/* Top edge + right tip + bottom edge only — no left edge */}
                 <polyline
                   points="0,1 238,1 259,32 238,63 0,63"
                   fill="none"
@@ -70,7 +100,6 @@ export default function Features() {
                   strokeLinejoin="miter"
                   strokeLinecap="square"
                 />
-                {/* Left edge only on first arrow */}
                 {i === 0 && (
                   <line x1="0" y1="1" x2="0" y2="63"
                     stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
@@ -86,6 +115,8 @@ export default function Features() {
           )
         })}
       </div>
+
+      <TerminalLine trigger={terminalTrigger} />
     </section>
   )
 }
