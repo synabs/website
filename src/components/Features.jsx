@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import '../styles/Features.css'
 
 const features = [
-  { number: '01', title: 'Captures every customer live chat' },
-  { number: '02', title: 'Detects patterns in every conversation' },
-  { number: '03', title: 'Studies patterns and optimizes responses' },
-  { number: '04', title: 'Predicts conversation flow to maximize value' },
+  { number: '01', title: 'Captures every customer live chat.' },
+  { number: '02', title: 'Detects patterns in every conversation.' },
+  { number: '03', title: 'Studies patterns and optimizes responses.' },
+  { number: '04', title: 'Predicts conversation flow to maximize value.' },
 ]
 
 export default function Features() {
@@ -58,7 +58,7 @@ export default function Features() {
               >
                 <polygon
                   points="0,1 238,1 259,32 238,63 0,63"
-                  fill="transparent"
+                  fill="var(--color-black)"
                   stroke="rgba(255,255,255,0.45)"
                   strokeWidth="1.5"
                   strokeLinejoin="miter"
