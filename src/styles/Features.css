@@ -142,6 +142,48 @@
   color: var(--color-white);
 }
 
+/* ---- Terminal line ---- */
+.features__terminal {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  margin-top: clamp(1.8rem, 3vw, 2.8rem);
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  font-weight: 600;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+}
+
+.features__terminal-prompt {
+  color: #95141c;
+  font-size: 1.1em;
+  user-select: none;
+}
+
+.features__terminal-text {
+  color: var(--color-white);
+}
+
+.features__terminal-cursor {
+  color: var(--color-white);
+  opacity: 0;
+}
+
+.features__terminal-cursor--blink {
+  opacity: 1;
+  animation: termCursorBlink 0.8s step-start infinite;
+}
+
+@keyframes termCursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 /* ---- Mobiili: pinottuna viistosti ---- */
 @media (max-width: 768px) {
   .features__arrows {
