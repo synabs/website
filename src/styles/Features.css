@@ -19,7 +19,7 @@
   max-width: var(--max-width);
   margin-inline: auto;
   margin-bottom: clamp(3rem, 6vw, 5rem);
-  text-align: center;
+  text-align: left;
 }
 
 .features__heading {
