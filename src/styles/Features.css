@@ -1,9 +1,8 @@
 /* ============================================================
-   FEATURESRESULTS.CSS
+   FEATURES.CSS
    ============================================================ */
 
-/* ---- Shared section base ---- */
-.fr-section {
+.features {
   position: relative;
   background: var(--color-black);
   padding-block: var(--section-padding);
@@ -11,7 +10,7 @@
   overflow: hidden;
 }
 
-.fr-section::before {
+.features::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -23,204 +22,147 @@
   z-index: 0;
 }
 
-/* ---- Inner wrapper ---- */
-.fr-inner {
+/* ---- Header ---- */
+.features__header {
   position: relative;
   z-index: 1;
   max-width: var(--max-width);
   margin-inline: auto;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  padding-left: clamp(2rem, 8vw, 12rem);
 }
 
-/* ---- Section label ---- */
-.fr-label {
+.features__eyebrow {
   display: inline-block;
   font-size: var(--text-xs);
   font-weight: var(--font-bold);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-white);
-  opacity: 0.35;
+  color: var(--color-yellow);
   margin-bottom: var(--space-4);
 }
 
-/* ---- Heading ---- */
-.fr-heading {
+.features__heading {
   font-size: clamp(2.8rem, 6vw, 6rem);
   font-weight: var(--font-bold);
   line-height: 0.92;
   letter-spacing: -0.03em;
   color: var(--color-white);
-  margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
-/* outline style for italic part */
-.fr-heading em {
+.features__heading em {
   font-style: normal;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.75);
-  text-stroke: 1.5px rgba(255, 255, 255, 0.75);
+  color: #95141c;
 }
 
-/* ============================================================
-   CAPABILITIES GRID — drop-in animation
-   ============================================================ */
-.fr-feat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-left: 1px solid rgba(255,255,255,0.1);
-}
-
-@keyframes fr-drop-in {
-  from {
-    opacity: 0;
-    transform: translateY(-28px) scaleY(0.88);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-  }
-}
-
-.fr-feat-cell {
-  padding: 2.5rem 2rem;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: background 0.15s ease;
-
-  opacity: 0;
-  animation: fr-drop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.fr-feat-cell:hover {
-  background: rgba(255,255,255,0.03);
-}
-
-.fr-feat-icon {
-  font-size: 1.4rem;
-  color: var(--color-white);
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.fr-feat-title {
-  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
-  font-weight: var(--font-bold);
-  color: var(--color-white);
-  letter-spacing: -0.01em;
-  margin: 0 0 0.5rem;
-}
-
-.fr-feat-desc {
-  font-size: clamp(0.8rem, 0.95vw, 0.95rem);
-  color: var(--color-white);
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* ============================================================
-   RESULTS — STATS
-   ============================================================ */
-.fr-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-left: 1px solid rgba(255,255,255,0.1);
-  margin-bottom: 1px;
-}
-
-.fr-stat-cell {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  padding: 3rem 2rem;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.fr-stat-cell--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fr-stat-val {
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  font-weight: var(--font-bold);
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  color: var(--color-white);
-  margin: 0 0 0.75rem;
-}
-
-.fr-stat-lbl {
-  font-size: clamp(0.8rem, 0.95vw, 0.95rem);
-  color: var(--color-white);
-  opacity: 0.45;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* ============================================================
-   HARVARD QUOTE
-   ============================================================ */
-.fr-harvard {
+/* ---- Arrow container: horizontal, arrows side by side ---- */
+.features__arrows {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin-inline: auto;
   display: flex;
+  flex-direction: row;       /* ← rinnakkain */
   align-items: flex-start;
-  gap: 1.5rem;
-  padding: 2rem;
-  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.fr-harvard-bar {
-  width: 2px;
-  background: var(--color-white);
-  opacity: 0.25;
-  flex-shrink: 0;
-  align-self: stretch;
-  min-height: 2rem;
+/* ---- Each arrow ---- */
+.features__arrow-wrap {
+  flex: 1;
+  min-width: 0;
+  margin-right: -44px;       /* kärki limittäin seuraavan alle */
+  position: relative;
+
+  opacity: 0;
+  transform: translateX(-120%);
+  transition:
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.4s ease;
 }
 
-.fr-harvard-quote {
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
-  color: var(--color-white);
-  opacity: 0.6;
-  line-height: 1.65;
-  margin: 0 0 0.5rem;
+/* Porrastus alaspäin */
+.features__arrow-wrap--1 { margin-top: 0; z-index: 4; }
+.features__arrow-wrap--2 { margin-top: 0; z-index: 3; }
+.features__arrow-wrap--3 { margin-top: 0; z-index: 2; }
+.features__arrow-wrap--4 { margin-top: 0; z-index: 1; margin-right: 0; }
+
+.features__arrow-wrap--visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.fr-harvard-quote strong {
+.features__arrow-wrap:hover .features__arrow-svg polyline {
+  stroke: rgba(255, 255, 255, 1);
+  transition: stroke 0.2s ease;
+}
+
+/* SVG skaalautuu flexi-itemin leveyteen, korkeus proporsionaalisesti */
+.features__arrow-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Teksti nuolen sisällä */
+.features__arrow-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 3.2rem 0.5rem 0.8rem;
+  gap: 0.5rem;
+}
+
+.features__arrow-text {
+  flex: 1;
+  padding-left: 0.5rem;
+  order: 2;
+}
+
+.features__arrow-number {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.03em;
   color: var(--color-white);
   opacity: 1;
+  line-height: 1;
+  flex-shrink: 0;
+  order: 1;
+  margin-left: 1.2rem;
+  margin-right: 0.6rem;
+}
+
+.features__arrow-title {
+  font-size: clamp(0.85rem, 1.1vw, 1.15rem);
   font-weight: var(--font-bold);
-}
-
-.fr-harvard-source {
-  font-size: var(--text-xs);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   color: var(--color-white);
-  opacity: 0.25;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin: 0;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* ---- Mobiili: pinottuna viistosti ---- */
 @media (max-width: 768px) {
-  .fr-feat-grid {
-    grid-template-columns: 1fr;
+  .features__arrows {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .fr-stats-grid {
-    grid-template-columns: 1fr;
-  }
-  .fr-heading {
-    font-size: clamp(2.2rem, 10vw, 3.5rem);
-  }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .fr-feat-cell {
-    animation: none;
-    opacity: 1;
+  .features__arrow-wrap {
+    width: 72%;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: -14px;
+  }
+
+  .features__arrow-wrap--1 { margin-left: 0; }
+  .features__arrow-wrap--2 { margin-left: 4%; }
+  .features__arrow-wrap--3 { margin-left: 8%; }
+  .features__arrow-wrap--4 { margin-left: 12%; margin-bottom: 0; }
+
+  .features__arrow-content {
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    gap: 10px;
   }
 }
