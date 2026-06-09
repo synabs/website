@@ -23,7 +23,7 @@ const stats = [
   { val: "+23%", lbl: "Average increase in qualified leads across early testers" },
 ];
 
-export default function FeaturesResults() {
+export default function Features() {
   const arrowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
