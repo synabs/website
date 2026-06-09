@@ -106,7 +106,7 @@
 }
 
 .features__arrow-number {
-  font-size: clamp(3rem, 5vw, 5rem);
+  font-size: clamp(4.5rem, 8vw, 8rem);
   font-weight: var(--font-bold);
   letter-spacing: -0.04em;
   color: var(--color-white);
@@ -119,7 +119,7 @@
 }
 
 .features__arrow-title {
-  font-size: clamp(1rem, 1.6vw, 1.5rem);
+  font-size: clamp(1.6rem, 2.8vw, 3rem);
   font-weight: var(--font-bold);
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -147,6 +147,6 @@
   }
 
   .features__arrow-number {
-    font-size: clamp(2rem, 7vw, 3rem);
+    font-size: clamp(3rem, 10vw, 5rem);
   }
 }
