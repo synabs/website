@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./Features.css";
+import "./Featuresresults.css";
 
 const features = [
   { num: "01", icon: "ti-brain", title: "Evolves every week", desc: "Reviews every conversation, detects what drives conversions, and improves responses automatically." },
@@ -23,7 +23,7 @@ const stats = [
   { val: "+23%", lbl: "Average increase in qualified leads across early testers" },
 ];
 
-export default function Features() {
+export default function FeaturesResults() {
   const arrowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
