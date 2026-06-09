@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: var(--color-black);
   overflow: hidden;
 }
 
@@ -20,18 +20,9 @@
   background-image: url('/demo-bg.avif');
   background-size: cover;
   background-position: center;
-  opacity: 1;
+  opacity: 0.35;
   z-index: 0;
-  mask-image: radial-gradient(
-    ellipse 60% 75% at 50% 50%,
-    black 0%,
-    transparent 70%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 60% 75% at 50% 50%,
-    black 0%,
-    transparent 70%
-  );
+  filter: invert(1);
 }
 
 .demo iframe {
