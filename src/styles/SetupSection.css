@@ -70,114 +70,12 @@
   max-width: 38ch;
 }
 
-/* ---- Terminal ---- */
-.ss-terminal-wrap {
+/* ---- Demo wrap ---- */
+.ss-demo-wrap {
   width: 100%;
-}
-
-.ss-terminal {
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.03);
-  overflow: hidden;
-}
-
-/* title bar */
-.ss-terminal__bar {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 6px;
-  padding: 0.75rem 1.2rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.04);
-}
-
-.ss-terminal__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: transparent;
-}
-
-.ss-terminal__title {
-  margin-left: auto;
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  color: var(--color-white);
-  opacity: 0.2;
-  letter-spacing: 0.1em;
-}
-
-/* code body */
-.ss-terminal__body {
-  padding: 1.8rem 2rem;
-  font-family: 'Courier New', monospace;
-  font-size: clamp(12px, 1.1vw, 14px);
-  line-height: 2;
-  min-height: 180px;
-}
-
-.ss-line {
-  display: block;
-  opacity: 0;
-  transform: translateY(6px);
-  animation: ss-line-in 0.25s ease forwards;
-}
-
-@keyframes ss-line-in {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.ss-c { color: rgba(255,255,255,0.2); }   /* comment */
-.ss-t { color: rgba(255,255,255,0.9); }   /* tag */
-.ss-a { color: rgba(255,255,255,0.55); }  /* attr */
-.ss-v { color: rgba(255,255,255,0.85); }  /* value */
-
-/* blinking cursor */
-.ss-cursor {
-  display: inline-block;
-  width: 8px;
-  height: 1em;
-  background: var(--color-white);
-  opacity: 0.7;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: ss-blink 0.8s step-end infinite;
-}
-
-@keyframes ss-blink {
-  0%, 100% { opacity: 0.7; }
-  50%       { opacity: 0; }
-}
-
-/* success */
-.ss-success {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 0.5rem;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-white);
-  opacity: 0;
-  animation: ss-line-in 0.4s ease 0.1s forwards;
-}
-
-.ss-success__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-white);
-  box-shadow: 0 0 10px rgba(255,255,255,0.6);
-  flex-shrink: 0;
-  animation: ss-pulse 2s ease-in-out infinite;
-}
-
-@keyframes ss-pulse {
-  0%, 100% { box-shadow: 0 0 6px rgba(255,255,255,0.5); }
-  50%       { box-shadow: 0 0 16px rgba(255,255,255,0.9); }
 }
 
 /* ---- Responsive ---- */
