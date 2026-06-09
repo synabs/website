@@ -4,21 +4,30 @@
 
 .pricing {
   background: var(--color-black);
-  padding: 160px 160px;
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
   color: var(--color-white);
 }
 
 .pricing__inner {
-  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
 }
 
 .pricing__title {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.8rem, 6vw, 6rem);
   font-weight: var(--font-bold);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
   color: var(--color-white);
   margin-bottom: 32px;
+}
+
+.pricing__title em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.75);
+  text-stroke: 1.5px rgba(255,255,255,0.75);
 }
 
 /* Guarantee row */
@@ -61,7 +70,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 1px solid rgba(255,255,255,0.15);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -192,44 +201,6 @@
   opacity: 0.55;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-@media (max-width: 1024px) {
-  .pricing {
-    padding: 80px 80px;
-  }
-
-  .pricing__card {
-    padding: 36px;
-  }
-}
-
-@media (max-width: 768px) {
-  .pricing {
-    padding: 60px 24px;
-  }
-
-  .pricing__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pricing__card {
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-  }
-
-  .pricing__card:last-child {
-    border-bottom: none;
-  }
-
-  .pricing__price-features-row {
-    flex-direction: column;
-    gap: 24px;
-  }
-}
-
 /* Features list */
 .pricing__features {
   display: flex;
@@ -251,4 +222,34 @@
   font-weight: var(--font-regular);
   color: rgba(255,255,255,0.35);
   line-height: 1.6;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .pricing__card {
+    padding: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing__card {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .pricing__card:last-child {
+    border-bottom: none;
+  }
+
+  .pricing__price-features-row {
+    flex-direction: column;
+    gap: 24px;
+  }
 }
