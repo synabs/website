@@ -1,140 +1,143 @@
-import { useEffect, useRef, useState } from 'react'
-import '../styles/Features.css'
+/* ============================================================
+   FEATURES.CSS
+   ============================================================ */
 
-const features = [
-  { number: '1', title: 'Captures every customer live chat.' },
-  { number: '2', title: 'Detects patterns in every conversation.' },
-  { number: '3', title: 'Studies patterns and optimizes responses.' },
-  { number: '4', title: 'Predicts conversation flow to maximize value.' },
-]
-
-const TERMINAL_TEXT = 'Fully autonomous, requires no user input'
-
-function TerminalLine({ trigger }) {
-  const [displayed, setDisplayed] = useState('')
-  const [done, setDone] = useState(false)
-
-  useEffect(() => {
-    if (!trigger) return
-    let i = 0
-    const interval = setInterval(() => {
-      setDisplayed(TERMINAL_TEXT.slice(0, i + 1))
-      i++
-      if (i >= TERMINAL_TEXT.length) {
-        clearInterval(interval)
-        setDone(true)
-      }
-    }, 38)
-    return () => clearInterval(interval)
-  }, [trigger])
-
-  return (
-    <div className="features__terminal">
-      <span className="features__terminal-prompt">~$</span>
-      <span className="features__terminal-text">{displayed}</span>
-      <span className={`features__terminal-cursor${done ? ' features__terminal-cursor--blink' : ''}`}>_</span>
-    </div>
-  )
+.features {
+  position: relative;
+  background: var(--color-black);
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
+  overflow: hidden;
 }
 
-export default function Features() {
-  const sectionRef = useRef(null)
-  const [visibleRows, setVisibleRows] = useState([])
-  const [terminalTrigger, setTerminalTrigger] = useState(false)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          features.forEach((_, i) => {
-            setTimeout(() => {
-              setVisibleRows(prev => [...prev, i])
-            }, i * 600)
-          })
-          setTimeout(() => setTerminalTrigger(true), features.length * 600 + 200)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
 
-  // Arrow shape: left vertical edge + top + point + bottom
-  // viewBox 0 0 260 80 — taller arrows, no overlap
-  const ARROW_POINTS = "0,0 238,0 260,40 238,80 0,80"
-  const STROKE_POINTS = "0,1 238,1 259,40 238,79 0,79"
+/* ---- Header ---- */
+.features__header {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  text-align: left;
+}
 
-  return (
-    <section className="features" ref={sectionRef}>
-      <div className="features__header">
-        <p className="fr-label">Features</p>
-        <h2 className="fr-heading">
-          Agents get smarter<br />
-          <em>with every conversation</em>
-        </h2>
-      </div>
+.features__heading {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: var(--font-bold);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+}
 
-      <div className="features__arrows">
-        {features.map((f, i) => {
-          const isVisible = visibleRows.includes(i)
-          const clipId = `arrow-clip-${i}`
-          return (
-            <div
-              className={`features__arrow-wrap features__arrow-wrap--${i + 1}${isVisible ? ' features__arrow-wrap--visible' : ''}`}
-              key={f.number}
-            >
-              <svg
-                className="features__arrow-svg"
-                viewBox="0 0 260 80"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  <clipPath id={clipId}>
-                    <polygon points={ARROW_POINTS} />
-                  </clipPath>
-                </defs>
+.features__heading em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #ffffff;
+  text-stroke: 1.5px #ffffff;
+}
 
-                {/* Background fill */}
-                <polygon
-                  points={ARROW_POINTS}
-                  fill="var(--color-black)"
-                />
+/* ---- Arrow container ---- */
+.features__arrows {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
 
-                {/* Background image clipped to arrow shape */}
-                <image
-                  href={`/${i + 1}.avif`}
-                  x="0" y="0"
-                  width="260" height="80"
-                  preserveAspectRatio="xMidYMid slice"
-                  clipPath={`url(#${clipId})`}
-                  opacity="0.25"
-                />
+/* ---- Each arrow ---- */
+.features__arrow-wrap {
+  width: 72%;
+  position: relative;
 
-                {/* Border — all 4 sides including left vertical */}
-                <polygon
-                  points={ARROW_POINTS}
-                  fill="none"
-                  stroke="rgba(255,255,255,0.9)"
-                  strokeWidth="1.5"
-                  strokeLinejoin="miter"
-                />
-              </svg>
+  opacity: 0;
+  transform: translateX(-120%);
+  transition:
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.4s ease;
+}
 
-              <div className="features__arrow-content">
-                <span className="features__arrow-number">{f.number}</span>
-                <div className="features__arrow-text">
-                  <h3 className="features__arrow-title">{f.title}</h3>
-                </div>
-              </div>
-            </div>
-          )
-        })}
-      </div>
+.features__arrow-wrap--1 { margin-left: 0;   z-index: 4; }
+.features__arrow-wrap--2 { margin-left: 12%;  z-index: 3; }
+.features__arrow-wrap--3 { margin-left: 24%;  z-index: 2; }
+.features__arrow-wrap--4 { margin-left: 36%;  z-index: 1; }
 
-      <TerminalLine trigger={terminalTrigger} />
-    </section>
-  )
+.features__arrow-wrap--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.features__arrow-wrap:hover .features__arrow-svg polygon:last-of-type {
+  stroke: rgba(255, 255, 255, 1);
+  transition: stroke 0.2s ease;
+}
+
+.features__arrow-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- Text overlay inside arrow ---- */
+.features__arrow-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* leave room so text doesn't enter the pointed tip */
+  padding: 0 4rem 0 1rem;
+  gap: 1rem;
+  z-index: 1;
+}
+
+.features__arrow-number {
+  font-size: clamp(4.5rem, 8vw, 8rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.04em;
+  color: var(--color-white);
+  line-height: 1;
+  flex-shrink: 0;
+  padding-inline: 1.5rem;
+}
+
+.features__arrow-text {
+  flex: 1;
+}
+
+.features__arrow-title {
+  font-size: clamp(1.6rem, 2.8vw, 3rem);
+  font-weight: var(--font-bold);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .features__arrows {
+    gap: 4px;
+  }
+
+  .features__arrow-wrap {
+    width: 88%;
+  }
+
+  .features__arrow-wrap--1 { margin-left: 0; }
+  .features__arrow-wrap--2 { margin-left: 4%; }
+  .features__arrow-wrap--3 { margin-left: 8%; }
+  .features__arrow-wrap--4 { margin-left: 12%; }
+
+  .features__arrow-content {
+    padding: 0 2.5rem 0 0.75rem;
+    gap: 0.6rem;
+  }
+
+  .features__arrow-number {
+    font-size: clamp(3rem, 10vw, 5rem);
+  }
 }
