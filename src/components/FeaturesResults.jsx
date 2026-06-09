@@ -103,20 +103,22 @@ function StatCell({ cfg, visible, delay }) {
 
 export default function FeaturesResults() {
   const statsRef = useRef(null);
+  const featRef = useRef(null);
   const [statsVisible, setStatsVisible] = useState(false);
+  const [featVisible, setFeatVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStatsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (statsRef.current) observer.observe(statsRef.current);
-    return () => observer.disconnect();
+    const makeObserver = (setter, ref) => {
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) { setter(true); obs.disconnect(); } },
+        { threshold: 0.1 }
+      );
+      if (ref.current) obs.observe(ref.current);
+      return obs;
+    };
+    const o1 = makeObserver(setStatsVisible, statsRef);
+    const o2 = makeObserver(setFeatVisible, featRef);
+    return () => { o1.disconnect(); o2.disconnect(); };
   }, []);
 
   return (
@@ -130,12 +132,12 @@ export default function FeaturesResults() {
             <em>team does. 24/7.</em>
           </h2>
 
-          <div className="fr-feat-grid">
+          <div className="fr-feat-grid" ref={featRef}>
             {features.map((f, i) => (
               <div
-                className="fr-feat-cell"
+                className={`fr-feat-cell${featVisible ? " fr-feat-cell--visible" : ""}`}
                 key={f.title}
-                style={{ animationDelay: `${i * 100}ms` }}
+                style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <i className={`ti ${f.icon} fr-feat-icon`} aria-hidden="true" />
                 <p className="fr-feat-title">{f.title}</p>
