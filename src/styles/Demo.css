@@ -25,7 +25,88 @@
   filter: invert(1);
 }
 
+/* ============================================================
+   DEVICE FRAME
+   ============================================================ */
+
+.device-frame {
+  position: relative;
+  z-index: 1;
+  width: 420px;
+  height: 780px;
+  background: #0a0a0a;
+  border-radius: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 40px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar — camera notch */
+.device-frame__topbar {
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+}
+
+.device-frame__camera {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Screen — iframe fills this */
+.device-frame__screen {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
 .demo iframe {
   position: relative;
   z-index: 2;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Bottom bar — home pill */
+.device-frame__bottombar {
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+}
+
+.device-frame__pill {
+  width: 100px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 480px) {
+  .device-frame {
+    width: 100%;
+    height: 100svh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
 }
