@@ -1,250 +1,211 @@
-/* ── Shared ── */
+/* ============================================================
+   FEATURESRESULTS.CSS
+   ============================================================ */
+
+/* ---- Shared section base ---- */
 .fr-section {
-  background: #0a0a0b;
-  color: #f4f4f5;
-  padding: 80px 48px;
-  font-family: 'Inter', 'DM Sans', sans-serif;
+  position: relative;
+  background: var(--color-black);
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
+  overflow: hidden;
 }
 
+/* subtle grid texture — mirrors Features.css */
+.fr-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Inner wrapper ---- */
+.fr-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+/* ---- Section label ---- */
 .fr-label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #71717a;
-  margin: 0 0 12px;
+  color: var(--color-white);
+  opacity: 0.35;
+  margin-bottom: var(--space-4);
 }
 
+/* ---- Heading ---- */
 .fr-heading {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.1;
-  color: #fafafa;
-  max-width: 560px;
-  margin: 0 0 16px;
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: var(--font-bold);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
-.fr-sub {
-  font-size: 16px;
-  color: #71717a;
-  max-width: 480px;
-  line-height: 1.6;
-  margin: 0 0 56px;
+.fr-heading em {
+  font-style: normal;
+  color: var(--color-white);
+  opacity: 0.45;
 }
 
-/* ── Features grid ── */
+/* ============================================================
+   CAPABILITIES GRID
+   ============================================================ */
 .fr-feat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: #27272a;
-  border: 1px solid #27272a;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
 }
 
 .fr-feat-cell {
-  background: #0a0a0b;
-  padding: 32px 28px;
+  padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   transition: background 0.15s ease;
 }
 
 .fr-feat-cell:hover {
-  background: #111113;
+  background: rgba(255,255,255,0.03);
 }
 
 .fr-feat-num {
-  font-size: 11px;
-  color: #3f3f46;
-  letter-spacing: 0.08em;
-  font-family: monospace;
-  margin: 0 0 24px;
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  font-family: 'Courier New', monospace;
+  color: var(--color-white);
+  opacity: 0.2;
+  margin: 0 0 1.4rem;
 }
 
 .fr-feat-icon {
-  font-size: 22px;
-  color: #e4e4e7;
+  font-size: 1.4rem;
+  color: var(--color-white);
+  opacity: 0.7;
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .fr-feat-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #fafafa;
-  margin: 0 0 8px;
+  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+  font-weight: var(--font-bold);
+  color: var(--color-white);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
 }
 
 .fr-feat-desc {
-  font-size: 13px;
-  color: #71717a;
+  font-size: clamp(0.8rem, 0.95vw, 0.95rem);
+  color: var(--color-white);
+  opacity: 0.45;
   line-height: 1.6;
   margin: 0;
 }
 
-/* ── Arrow row ── */
-.fr-arrow-row {
-  display: flex;
-  align-items: stretch;
-  margin-bottom: 56px;
-}
-
-.fr-arrow-item {
-  display: flex;
-  align-items: center;
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fr-arrow-item.fr-arrow-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.fr-arrow-box {
-  background: #18181b;
-  border-top: 1px solid #27272a;
-  border-bottom: 1px solid #27272a;
-  border-left: 1px solid #27272a;
-  padding: 20px 28px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 180px;
-}
-
-.fr-arrow-box--last {
-  border-right: 1px solid #27272a;
-}
-
-.fr-arrow-num {
-  font-size: 22px;
-  font-weight: 700;
-  color: #ef4444;
-  line-height: 1;
-  min-width: 28px;
-}
-
-.fr-arrow-text {
-  font-size: 13px;
-  color: #a1a1aa;
-  line-height: 1.4;
-}
-
-.fr-arrow-chevron {
-  width: 0;
-  height: 0;
-  border-top: 31px solid transparent;
-  border-bottom: 31px solid transparent;
-  border-left: 20px solid #27272a;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.fr-arrow-chevron::after {
-  content: '';
-  position: absolute;
-  top: -29px;
-  left: -22px;
-  width: 0;
-  height: 0;
-  border-top: 29px solid transparent;
-  border-bottom: 29px solid transparent;
-  border-left: 18px solid #18181b;
-}
-
-/* ── Stats grid ── */
+/* ============================================================
+   RESULTS — STATS
+   ============================================================ */
 .fr-stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: #27272a;
-  border: 1px solid #27272a;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 1px;
 }
 
 .fr-stat-cell {
-  background: #0a0a0b;
-  padding: 36px 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  padding: 3rem 2rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .fr-stat-val {
-  font-size: 44px;
-  font-weight: 700;
-  color: #ef4444;
-  line-height: 1;
-  margin: 0 0 10px;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--color-white);
+  margin: 0 0 0.75rem;
 }
 
 .fr-stat-lbl {
-  font-size: 13px;
-  color: #71717a;
+  font-size: clamp(0.8rem, 0.95vw, 0.95rem);
+  color: var(--color-white);
+  opacity: 0.45;
   line-height: 1.5;
   margin: 0;
 }
 
-/* ── Harvard quote ── */
+/* ============================================================
+   HARVARD QUOTE
+   ============================================================ */
 .fr-harvard {
-  margin-top: 1px;
-  background: #0a0a0b;
-  border: 1px solid #27272a;
-  padding: 24px 28px;
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  gap: 1.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .fr-harvard-bar {
-  width: 3px;
-  background: #ef4444;
+  width: 2px;
+  background: var(--color-white);
+  opacity: 0.25;
   flex-shrink: 0;
   align-self: stretch;
-  min-height: 40px;
+  min-height: 2rem;
 }
 
 .fr-harvard-quote {
-  font-size: 14px;
-  color: #a1a1aa;
-  line-height: 1.6;
-  margin: 0 0 6px;
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  color: var(--color-white);
+  opacity: 0.6;
+  line-height: 1.65;
+  margin: 0 0 0.5rem;
 }
 
 .fr-harvard-quote strong {
-  color: #fafafa;
+  color: var(--color-white);
+  opacity: 1;
+  font-weight: var(--font-bold);
 }
 
 .fr-harvard-source {
-  font-size: 11px;
-  color: #52525b;
-  letter-spacing: 0.08em;
+  font-size: var(--text-xs);
+  color: var(--color-white);
+  opacity: 0.25;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin: 0;
 }
 
-/* ── Responsive ── */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
-  .fr-section {
-    padding: 56px 24px;
-  }
-  .fr-heading {
-    font-size: 28px;
-  }
   .fr-feat-grid {
     grid-template-columns: 1fr;
-  }
-  .fr-arrow-row {
-    flex-direction: column;
-    gap: 1px;
-    background: #27272a;
-  }
-  .fr-arrow-item {
-    width: 100%;
-  }
-  .fr-arrow-box {
-    border-right: 1px solid #27272a;
-    width: 100%;
-  }
-  .fr-arrow-chevron {
-    display: none;
   }
   .fr-stats-grid {
     grid-template-columns: 1fr;
   }
+  .fr-heading {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
 }
+.fr-stat-cell--visible { opacity: 1; transform: translateY(0); }
