@@ -1,97 +1,191 @@
-export default function SetupSection() {
-  const ref = useRef(null);
-  const [lineCount, setLineCount] = useState(0);
-  const [showSuccess, setShowSuccess] = useState(false);
+/* ============================================================
+   SETUPSECTION.CSS
+   ============================================================ */
 
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          obs.disconnect();
-          let i = 0;
-          const tick = () => {
-            i++;
-            setLineCount(i);
-            if (i < CODE_LINES.length) setTimeout(tick, 340);
-            else setTimeout(() => setShowSuccess(true), 400);
-          };
-          setTimeout(tick, 200);
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
+.ss-section {
+  position: relative;
+  background: var(--color-black);
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
+  overflow: hidden;
+}
 
-  return (
-    <section className="ss-section">
-      {/* grid texture */}
-      <div className="ss-section__bg" aria-hidden="true" />
+.ss-section__bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-      <div className="ss-inner">
-        {/* LEFT */}
-        <div className="ss-left">
-          <p className="ss-label">Setup</p>
-          <h2 className="ss-heading">
-            2 minute<br /><em>install.</em>
-          </h2>
-          <p className="ss-body">
-            One line of code. Add it yourself or we'll do it together.
-            Your AI agent goes live instantly — no configuration,
-            no onboarding call, no waiting.
-          </p>
-          <BtnPrimary href="#">Try it free 14 days</BtnPrimary>
-        </div>
+/* ---- Layout ---- */
+.ss-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
 
-        {/* RIGHT — terminal */}
-        <div className="ss-terminal-wrap" ref={ref}>
-          <div className="ss-terminal">
-            {/* title bar */}
-            <div className="ss-terminal__bar">
-              <span className="ss-terminal__dot" />
-              <span className="ss-terminal__dot" />
-              <span className="ss-terminal__dot" />
-              <span className="ss-terminal__title">embed.sh</span>
-            </div>
+/* ---- Left ---- */
+.ss-label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  opacity: 0.35;
+  margin-bottom: var(--space-4);
+}
 
-            {/* code */}
-            <div className="ss-terminal__body">
-              {CODE_LINES.slice(0, lineCount).map((line, i) => (
-                <div
-                  className={`ss-line ss-line--${line.type} ss-line--in`}
-                  key={i}
-                >
-                  {line.type === 'comment' && (
-                    <span className="ss-c">{line.text}</span>
-                  )}
-                  {line.type === 'tag' && (
-                    <span className="ss-t">{line.text}</span>
-                  )}
-                  {line.type === 'attr' && (
-                    <>
-                      <span className="ss-a">{line.text}</span>
-                      <span className="ss-v">{line.val}</span>
-                    </>
-                  )}
-                  {/* blinking cursor on last visible line */}
-                  {i === lineCount - 1 && lineCount < CODE_LINES.length && (
-                    <span className="ss-cursor" aria-hidden="true" />
-                  )}
-                </div>
-              ))}
+.ss-heading {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: var(--font-bold);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
 
-              {/* success */}
-              {showSuccess && (
-                <div className="ss-success">
-                  <span className="ss-success__dot" />
-                  Agent live. Learning started.
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+.ss-heading em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.75);
+  text-stroke: 1.5px rgba(255,255,255,0.75);
+}
+
+.ss-body {
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  color: var(--color-white);
+  opacity: 0.5;
+  line-height: 1.7;
+  margin-bottom: clamp(2rem, 3vw, 2.5rem);
+  max-width: 38ch;
+}
+
+/* ---- Terminal ---- */
+.ss-terminal-wrap {
+  width: 100%;
+}
+
+.ss-terminal {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+}
+
+/* title bar */
+.ss-terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.75rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+}
+
+.ss-terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+}
+
+.ss-terminal__title {
+  margin-left: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--color-white);
+  opacity: 0.2;
+  letter-spacing: 0.1em;
+}
+
+/* code body */
+.ss-terminal__body {
+  padding: 1.8rem 2rem;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(12px, 1.1vw, 14px);
+  line-height: 2;
+  min-height: 180px;
+}
+
+.ss-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: ss-line-in 0.25s ease forwards;
+}
+
+@keyframes ss-line-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ss-c { color: rgba(255,255,255,0.2); }   /* comment */
+.ss-t { color: rgba(255,255,255,0.9); }   /* tag */
+.ss-a { color: rgba(255,255,255,0.55); }  /* attr */
+.ss-v { color: rgba(255,255,255,0.85); }  /* value */
+
+/* blinking cursor */
+.ss-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--color-white);
+  opacity: 0.7;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: ss-blink 0.8s step-end infinite;
+}
+
+@keyframes ss-blink {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 0; }
+}
+
+/* success */
+.ss-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  opacity: 0;
+  animation: ss-line-in 0.4s ease 0.1s forwards;
+}
+
+.ss-success__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-white);
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+  flex-shrink: 0;
+  animation: ss-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ss-pulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(255,255,255,0.5); }
+  50%       { box-shadow: 0 0 16px rgba(255,255,255,0.9); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .ss-inner {
+    grid-template-columns: 1fr;
+  }
+  .ss-body {
+    max-width: 100%;
+  }
 }
