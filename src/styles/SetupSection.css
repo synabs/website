@@ -10,29 +10,18 @@
   overflow: visible; /* allow image to bleed upward */
 }
 
-.ss-section__bg {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* ---- Background image — bleeds upward out of the section ---- */
 .ss-bg-image {
   position: absolute;
   bottom: 0;
   right: 0;
   width: 55%;
-  height: calc(100% + 12rem); /* extends up into the section above */
+  height: calc(100% + 12rem);
   object-fit: cover;
   object-position: top center;
   z-index: 0;
   pointer-events: none;
-  /* fade the top edge so it dissolves into the section above */
+  opacity: 0.75;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
 }
