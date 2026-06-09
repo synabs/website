@@ -28,17 +28,32 @@ export default function Demo() {
 
   return (
     <section className="demo">
-      <iframe
-        ref={iframeRef}
-        title="Synbot Demo"
-        scrolling="no"
-        style={{
-          width: '320px',
-          height: '540px',
-          border: 'none',
-          display: 'block',
-        }}
-      />
+      <div className="device-frame">
+        {/* Notch / top bar */}
+        <div className="device-frame__topbar">
+          <div className="device-frame__camera" />
+        </div>
+
+        {/* Screen */}
+        <div className="device-frame__screen">
+          <iframe
+            ref={iframeRef}
+            title="Synbot Demo"
+            scrolling="no"
+            style={{
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              display: 'block',
+            }}
+          />
+        </div>
+
+        {/* Bottom bar */}
+        <div className="device-frame__bottombar">
+          <div className="device-frame__pill" />
+        </div>
+      </div>
     </section>
   )
 }
