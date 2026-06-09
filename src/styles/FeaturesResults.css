@@ -228,19 +228,25 @@
 /* ── Results section — full-bleed background image ── */
 .fr-section--results {
   background-image: url('/arrow.avif');
-  background-size: cover;
-  background-position: center;
+  background-size: 70%;
+  background-position: right center;
   background-repeat: no-repeat;
-}
-
-.fr-section--results::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 0;
 }
 
 .fr-section--results .fr-inner {
   z-index: 2;
+}
+
+/* stat cells — solid black so bg doesn't bleed through */
+.fr-section--results .fr-stat-cell {
+  background: var(--color-black);
+}
+
+/* stat text fully white */
+.fr-section--results .fr-stat-val {
+  opacity: 1;
+}
+
+.fr-section--results .fr-stat-lbl {
+  opacity: 0.5;
 }
