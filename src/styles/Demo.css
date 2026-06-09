@@ -3,38 +3,8 @@
    ============================================================ */
 
 .demo {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
-  overflow: hidden;
-}
-
-.demo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/demo-bg.avif');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.15;
-  z-index: 0;
-  mask-image: radial-gradient(
-    ellipse 60% 75% at 50% 50%,
-    black 0%,
-    transparent 70%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 60% 75% at 50% 50%,
-    black 0%,
-    transparent 70%
-  );
-}
-
-.demo iframe {
-  position: relative;
-  z-index: 2;
+  background: transparent;
 }
