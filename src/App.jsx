@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Features from './components/Features'
 import FeaturesResults from './components/FeaturesResults'
+import SetupSection from './components/SetupSection'
 import Demo from './components/Demo'
 import Setup from './components/Setup'
 import Evolve from './components/Evolve'
@@ -18,6 +19,7 @@ export default function App() {
       <Hero />
       <Features />
       <FeaturesResults />
+      <SetupSection />
       <About />
       <Pricing />
       <CTA />
