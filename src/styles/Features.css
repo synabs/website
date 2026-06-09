@@ -29,7 +29,7 @@
   max-width: var(--max-width);
   margin-inline: auto;
   margin-bottom: clamp(3rem, 6vw, 5rem);
-  padding-left: clamp(2rem, 8vw, 12rem);
+  text-align: center;
 }
 
 .features__eyebrow {
@@ -55,22 +55,22 @@
   color: #95141c;
 }
 
-/* ---- Arrow container: horizontal, arrows side by side ---- */
+/* ---- Arrow container ---- */
 .features__arrows {
   position: relative;
   z-index: 1;
   max-width: var(--max-width);
   margin-inline: auto;
   display: flex;
-  flex-direction: row;       /* ← rinnakkain */
+  flex-direction: column;
   align-items: flex-start;
+  gap: 0;
 }
 
 /* ---- Each arrow ---- */
 .features__arrow-wrap {
-  flex: 1;
-  min-width: 0;
-  margin-right: -44px;       /* kärki limittäin seuraavan alle */
+  width: 72%;
+  margin-bottom: -14px;
   position: relative;
 
   opacity: 0;
@@ -80,11 +80,11 @@
     opacity 0.4s ease;
 }
 
-/* Porrastus alaspäin */
-.features__arrow-wrap--1 { margin-top: 0; z-index: 4; }
-.features__arrow-wrap--2 { margin-top: 0; z-index: 3; }
-.features__arrow-wrap--3 { margin-top: 0; z-index: 2; }
-.features__arrow-wrap--4 { margin-top: 0; z-index: 1; margin-right: 0; }
+/* Porrastus oikealle */
+.features__arrow-wrap--1 { margin-left: 0;   z-index: 4; }
+.features__arrow-wrap--2 { margin-left: 12%;  z-index: 3; }
+.features__arrow-wrap--3 { margin-left: 24%;  z-index: 2; }
+.features__arrow-wrap--4 { margin-left: 36%;  z-index: 1; margin-bottom: 0; }
 
 .features__arrow-wrap--visible {
   opacity: 1;
@@ -96,7 +96,6 @@
   transition: stroke 0.2s ease;
 }
 
-/* SVG skaalautuu flexi-itemin leveyteen, korkeus proporsionaalisesti */
 .features__arrow-svg {
   display: block;
   width: 100%;
@@ -142,17 +141,14 @@
   color: var(--color-white);
 }
 
-/* ---- Mobiili: pinottuna viistosti ---- */
+/* ---- Mobiili ---- */
 @media (max-width: 768px) {
   .features__arrows {
-    flex-direction: column;
     align-items: flex-start;
   }
 
   .features__arrow-wrap {
-    width: 72%;
-    margin-right: 0 !important;
-    margin-top: 0 !important;
+    width: 80%;
     margin-bottom: -14px;
   }
 
