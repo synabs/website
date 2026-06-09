@@ -69,7 +69,8 @@ export default function Features() {
   return (
     <section className="features" ref={sectionRef}>
       <div className="features__header">
-        <h2 className="features__heading">
+        <p className="fr-label">Features</p>
+        <h2 className="fr-heading">
           Agents get smarter<br />
           <em>with every conversation</em>
         </h2>
