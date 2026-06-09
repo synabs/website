@@ -10,18 +10,6 @@
   overflow: hidden;
 }
 
-.features::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* ---- Header ---- */
 .features__header {
   position: relative;
@@ -63,7 +51,6 @@
 .features__arrow-wrap {
   width: 72%;
   position: relative;
-
   opacity: 0;
   transform: translateX(-120%);
   transition:
@@ -86,11 +73,10 @@
   transition: stroke 0.2s ease;
 }
 
-/* Narrow the arrow by constraining its rendered height */
 .features__arrow-svg {
   display: block;
   width: 100%;
-  height: 52px; /* was auto ~80px, now narrower */
+  height: 90px;
 }
 
 /* ---- Text overlay inside arrow ---- */
@@ -100,13 +86,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 4rem 0 1rem;
-  gap: 1.2rem;
+  padding: 0 5rem 0 1.5rem;
+  gap: 1.5rem;
   z-index: 1;
 }
 
 .features__arrow-number {
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-size: clamp(2.8rem, 4.5vw, 4.5rem);
   font-weight: var(--font-bold);
   letter-spacing: -0.04em;
   color: var(--color-white);
@@ -126,42 +112,6 @@
   color: var(--color-white);
 }
 
-/* ---- Terminal ---- */
-.features__terminal {
-  position: relative;
-  z-index: 1;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: monospace;
-  font-size: clamp(0.8rem, 1vw, 0.95rem);
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.features__terminal-prompt {
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.features__terminal-text {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.features__terminal-cursor {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.features__terminal-cursor--blink {
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
 /* ---- Mobile ---- */
 @media (max-width: 768px) {
   .features__arrows {
@@ -178,16 +128,16 @@
   .features__arrow-wrap--4 { margin-left: 12%; }
 
   .features__arrow-svg {
-    height: 44px;
+    height: 70px;
   }
 
   .features__arrow-content {
-    padding: 0 2.5rem 0 0.75rem;
-    gap: 0.6rem;
+    padding: 0 3rem 0 0.75rem;
+    gap: 0.8rem;
   }
 
   .features__arrow-number {
-    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    font-size: clamp(2rem, 7vw, 3rem);
   }
 
   .features__arrow-title {
