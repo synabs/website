@@ -51,7 +51,6 @@ export default function Features() {
               setVisibleRows(prev => [...prev, i])
             }, i * 600)
           })
-          // trigger terminal after all arrows have animated in
           setTimeout(() => setTerminalTrigger(true), features.length * 600 + 200)
           observer.disconnect()
         }
@@ -66,6 +65,7 @@ export default function Features() {
   return (
     <section className="features" ref={sectionRef}>
       <div className="features__header">
+        <p className="fr-label">Next generation</p>
         <h2 className="features__heading">
           Agents get smarter<br />
           <em>with every conversation</em>
