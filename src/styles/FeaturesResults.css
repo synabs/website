@@ -62,13 +62,14 @@
 }
 
 /* ============================================================
-   CAPABILITIES GRID — slide-in from left (matches Features arrows)
+   CAPABILITIES GRID — metallic z-drop (pum pum pum)
    ============================================================ */
 .fr-feat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border-top: 1px solid rgba(255,255,255,0.1);
   border-left: 1px solid rgba(255,255,255,0.1);
+  perspective: 900px;
 }
 
 .fr-feat-cell {
@@ -77,15 +78,17 @@
   border-bottom: 1px solid rgba(255,255,255,0.1);
   transition:
     background 0.15s ease,
-    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    opacity 0.4s ease;
+    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.35s ease;
   opacity: 0;
-  transform: translateX(-120%);
+  transform: translateZ(160px) translateY(-40px) scale(1.04);
+  transform-origin: top center;
+  will-change: transform, opacity;
 }
 
 .fr-feat-cell--visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateZ(0) translateY(0) scale(1);
 }
 
 .fr-feat-cell:hover {
