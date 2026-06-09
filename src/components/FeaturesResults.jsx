@@ -34,7 +34,6 @@ const features = [
   },
 ];
 
-// target, start, suffix, duration
 const statsConfig = [
   {
     target: 2,
@@ -58,6 +57,24 @@ const statsConfig = [
     suffix: "%",
     lbl: "Average increase in qualified leads across early testers",
     countDown: false,
+  },
+];
+
+const stages = [
+  {
+    num: "Stage 01",
+    title: "Trained on your business from day one",
+    desc: "Upload your website, docs, and FAQs. The agent learns your products, tone, and objections before the first chat.",
+  },
+  {
+    num: "Stage 02",
+    title: "Detects patterns that lead to conversions",
+    desc: "Every question it can't answer becomes a training signal. Patterns that convert get reinforced automatically.",
+  },
+  {
+    num: "Stage 03",
+    title: "Predicts intent and acts before you ask",
+    desc: "After weeks of data, the agent anticipates what visitors need — and guides them toward a decision.",
   },
 ];
 
@@ -104,8 +121,13 @@ function StatCell({ cfg, visible, delay }) {
 export default function FeaturesResults() {
   const statsRef = useRef(null);
   const featRef = useRef(null);
+  const ngRef = useRef(null);
+  const progressRef = useRef(null);
+
   const [statsVisible, setStatsVisible] = useState(false);
   const [featCount, setFeatCount] = useState(0);
+  const [stageCount, setStageCount] = useState(0);
+  const [progressActive, setProgressActive] = useState(false);
 
   useEffect(() => {
     // stats observer
@@ -115,7 +137,7 @@ export default function FeaturesResults() {
     );
     if (statsRef.current) o1.observe(statsRef.current);
 
-    // feat observer — reveals cells one by one at arrow-like pace (700ms each)
+    // feat observer — reveals cells one by one
     const o2 = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -133,7 +155,26 @@ export default function FeaturesResults() {
     );
     if (featRef.current) o2.observe(featRef.current);
 
-    return () => { o1.disconnect(); o2.disconnect(); };
+    // next gen stages observer — reveals rows one by one
+    const o3 = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          o3.disconnect();
+          let i = 0;
+          const tick = () => {
+            i++;
+            setStageCount(i);
+            if (i < stages.length) setTimeout(tick, 180);
+            else setTimeout(() => setProgressActive(true), 200);
+          };
+          setTimeout(tick, 100);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ngRef.current) o3.observe(ngRef.current);
+
+    return () => { o1.disconnect(); o2.disconnect(); o3.disconnect(); };
   }, []);
 
   return (
@@ -189,6 +230,55 @@ export default function FeaturesResults() {
                 Harvard Business Review · Speed-to-lead study
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Next Generation ── */}
+      <section className="fr-section fr-section--nextgen">
+        <div className="fr-inner">
+          <p className="fr-label">Next generation</p>
+          <h2 className="fr-heading">
+            Evolves every week.<br />
+            <em>Outplays competitors.</em>
+          </h2>
+
+          <div className="fr-ng-intro">
+            <div className="fr-ng-intro-label-cell">
+              <p className="fr-ng-tagline">
+                <strong>Self-improving AI</strong>
+                The agent reviews every conversation, identifies what leads to
+                conversions, and improves future responses automatically.
+              </p>
+            </div>
+            <div className="fr-ng-intro-body-cell">
+              <p className="fr-ng-body">
+                No manual tuning required. The more it talks, the better it
+                gets — building a compounding advantage over competitors using
+                static chatbots.
+              </p>
+            </div>
+          </div>
+
+          <div className="fr-ng-stages" ref={ngRef}>
+            {stages.map((s, i) => (
+              <div
+                key={s.num}
+                className={`fr-ng-stage${i < stageCount ? " fr-ng-stage--visible" : ""}`}
+              >
+                <span className="fr-ng-stage-num">{s.num}</span>
+                <div className="fr-ng-stage-title-col">
+                  <h3 className="fr-ng-stage-title">{s.title}</h3>
+                </div>
+                <div className="fr-ng-stage-desc-col">
+                  <p className="fr-ng-stage-desc">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="fr-ng-progress" ref={progressRef}>
+            <div className={`fr-ng-progress-fill${progressActive ? " fr-ng-progress-fill--active" : ""}`} />
           </div>
         </div>
       </section>
