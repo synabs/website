@@ -19,7 +19,6 @@ export default function App() {
       <Hero />
       <FeaturesResults />
       <SetupSection />
-      <Demo />
       <About />
       <Features />
       <Pricing />
