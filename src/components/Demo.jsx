@@ -37,10 +37,6 @@ export default function Demo() {
           height: '540px',
           border: 'none',
           display: 'block',
-          borderRadius: '8px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,0.35)',
-          transform: 'scale(1.15)',
-          transformOrigin: 'center center',
         }}
       />
     </section>
