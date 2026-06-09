@@ -109,7 +109,7 @@ export default function Features() {
                   width="260" height="80"
                   preserveAspectRatio="xMidYMid slice"
                   clipPath={`url(#${clipId})`}
-                  opacity="0.15"
+                  opacity="0.25"
                 />
 
                 {/* Border — all 4 sides including left vertical */}
