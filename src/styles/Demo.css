@@ -33,7 +33,60 @@
   );
 }
 
-.demo iframe {
+/* ---- Device frame ---- */
+.device-frame {
   position: relative;
   z-index: 2;
+  width: 360px;
+  background: #0d0d0f;
+  border-radius: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 32px 80px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 14px 10px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Top bar with camera dot */
+.device-frame__topbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+}
+
+.device-frame__camera {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Screen area */
+.device-frame__screen {
+  width: 100%;
+  height: 540px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Bottom bar with pill */
+.device-frame__bottombar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 14px;
+}
+
+.device-frame__pill {
+  width: 100px;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.15);
 }
