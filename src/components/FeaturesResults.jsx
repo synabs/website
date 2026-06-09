@@ -10,18 +10,18 @@ const features = [
   },
   {
     icon: "ti-clock-24",
-    title: "Zero leads missed",
-    desc: "Responds in under 2 seconds — 2 AM or 2 PM. Every visitor gets an answer before they leave.",
+    title: "Never misses a lead",
+    desc: "Responds in under 2 seconds, day or night. Every visitor gets an answer before they leave.",
   },
   {
     icon: "ti-filter",
     title: "Lead qualification",
-    desc: "Asks the right questions, captures contact details, and scores leads — without a human in the loop.",
+    desc: "Asks the right questions, captures contact details, and scores leads without a human in the loop.",
   },
   {
     icon: "ti-calendar-check",
     title: "Calendly booking",
-    desc: "Books meetings directly into your calendar. Lead captured, qualified, and booked — one conversation.",
+    desc: "Books meetings directly into your calendar. Lead captured, qualified, and booked in one conversation.",
   },
   {
     icon: "ti-world",
@@ -31,7 +31,7 @@ const features = [
   {
     icon: "ti-chart-bar",
     title: "Monthly reports",
-    desc: "Clear monthly summary of conversations, leads captured, and what the agent learned — so you see ROI.",
+    desc: "Clear monthly summaries of conversations, captured leads, and agent insights, so you can track ROI with confidence.",
   },
 ];
 
@@ -41,7 +41,7 @@ const statsConfig = [
     start: 10,
     prefix: "<",
     suffix: "s",
-    lbl: "Average response time — every conversation, every time",
+    lbl: "Average response time for every conversation",
     countDown: true,
   },
   {
@@ -65,7 +65,7 @@ const stages = [
   {
     num: "Stage 01",
     title: "Trained on your business from day one",
-    desc: "Upload your website, docs, and FAQs. The agent learns your products, tone, and objections before the first chat.",
+    desc: "Share your website, documents, and FAQs with us. We upload everything and configure the agent to understand your products, brand voice, and customer questions.",
   },
   {
     num: "Stage 02",
@@ -75,7 +75,7 @@ const stages = [
   {
     num: "Stage 03",
     title: "Predicts intent and acts before you ask",
-    desc: "After weeks of data, the agent anticipates what visitors need — and guides them toward a decision.",
+    desc: "After months of data, the agent learns visitor behavior, predicts their needs, and identifies the best opportunities to present your services and guide them toward a decision.",
   },
 ];
 
@@ -197,8 +197,8 @@ export default function FeaturesResults() {
             <div>
               <p className="fr-harvard-quote">
                 Companies that respond to leads within one hour are nearly{" "}
-                <strong>7× more likely</strong> to qualify them — compared to
-                those who wait just two hours.
+                <strong>7× more likely</strong> to qualify them compared to
+                those that wait just two hours.
               </p>
               <p className="fr-harvard-source">
                 Harvard Business Review · Speed-to-lead study
