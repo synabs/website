@@ -1,7 +1,6 @@
 /* ============================================================
    SETUPSECTION.CSS
    ============================================================ */
-
 .ss-section {
   position: relative;
   background: var(--color-black);
@@ -9,7 +8,6 @@
   padding-inline: var(--gutter);
   overflow: visible; /* allow image to bleed upward */
 }
-
 /* ---- Background image — bleeds upward out of the section ---- */
 .ss-bg-image {
   position: absolute;
@@ -25,7 +23,6 @@
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
 }
-
 /* ---- Layout ---- */
 .ss-inner {
   position: relative;
@@ -35,7 +32,6 @@
   display: grid;
   grid-template-columns: 1fr;
 }
-
 /* ---- Left ---- */
 .ss-label {
   display: inline-block;
@@ -47,7 +43,6 @@
   opacity: 0.35;
   margin-bottom: var(--space-4);
 }
-
 .ss-heading {
   font-size: clamp(2.8rem, 6vw, 6rem);
   font-weight: var(--font-bold);
@@ -56,23 +51,20 @@
   color: var(--color-white);
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
-
 .ss-heading em {
   font-style: normal;
   color: transparent;
   -webkit-text-stroke: 1.5px rgba(255,255,255,0.75);
   text-stroke: 1.5px rgba(255,255,255,0.75);
 }
-
 .ss-body {
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   color: var(--color-white);
   opacity: 0.5;
   line-height: 1.7;
   margin-bottom: clamp(2rem, 3vw, 2.5rem);
   max-width: 38ch;
 }
-
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
   .ss-bg-image {
@@ -83,8 +75,12 @@
     -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
     mask-image: linear-gradient(to top, black 40%, transparent 100%);
   }
-
   .ss-body {
     max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .ss-body {
+    font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
   }
 }
