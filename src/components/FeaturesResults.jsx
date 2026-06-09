@@ -24,7 +24,7 @@ const features = [
     desc: "Books meetings directly into your calendar. Lead captured, qualified, and booked — one conversation.",
   },
   {
-    icon: "ti-language",
+    icon: "ti-world",
     title: "Language detection",
     desc: "Detects the visitor's language and switches instantly. No config needed. Works across every market.",
   },
@@ -131,14 +131,12 @@ export default function FeaturesResults() {
   const [progressActive, setProgressActive] = useState(false);
 
   useEffect(() => {
-    // stats observer
     const o1 = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setStatsVisible(true); o1.disconnect(); } },
       { threshold: 0.1 }
     );
     if (statsRef.current) o1.observe(statsRef.current);
 
-    // feat observer — reveals cells one by one
     const o2 = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -156,7 +154,6 @@ export default function FeaturesResults() {
     );
     if (featRef.current) o2.observe(featRef.current);
 
-    // next gen stages observer — reveals rows one by one
     const o3 = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -251,7 +248,7 @@ export default function FeaturesResults() {
         <div className="fr-inner">
           <p className="fr-label">Capabilities</p>
           <h2 className="fr-heading">
-            Convert more visitors, <br />
+            Convert more visitors,<br />
             <em>automatically</em>
           </h2>
 
