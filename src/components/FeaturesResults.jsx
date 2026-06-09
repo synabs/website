@@ -24,7 +24,7 @@ const stats = [
 ];
 
 export default function FeaturesResults() {
-  const arrowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const arrowRefs = useRef([]);
 
   useEffect(() => {
     arrowRefs.current.forEach((el, i) => {
