@@ -2,6 +2,7 @@ import './styles/globals.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Features from './components/Features'
+import FeaturesResults from "./FeaturesResults";
 import Demo from './components/Demo'
 import Setup from './components/Setup'
 import Evolve from './components/Evolve'
