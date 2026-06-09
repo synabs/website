@@ -3,8 +3,37 @@
    ============================================================ */
 
 .demo {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent;
+  overflow: hidden;
+}
+
+.demo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/demo-bg.avif');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.28;
+  z-index: 0;
+  filter: invert(1);
+  mask-image: radial-gradient(
+    ellipse 80% 75% at 20% 50%,
+    black 0%,
+    transparent 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 75% at 20% 50%,
+    black 0%,
+    transparent 70%
+  );
+}
+
+.demo iframe {
+  position: relative;
+  z-index: 2;
 }
