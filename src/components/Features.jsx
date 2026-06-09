@@ -61,6 +61,11 @@ export default function Features() {
     return () => observer.disconnect()
   }, [])
 
+  // Arrow shape: left vertical edge + top + point + bottom
+  // viewBox 0 0 260 80 — taller arrows, no overlap
+  const ARROW_POINTS = "0,0 238,0 260,40 238,80 0,80"
+  const STROKE_POINTS = "0,1 238,1 259,40 238,79 0,79"
+
   return (
     <section className="features" ref={sectionRef}>
       <div className="features__header">
@@ -73,45 +78,55 @@ export default function Features() {
       <div className="features__arrows">
         {features.map((f, i) => {
           const isVisible = visibleRows.includes(i)
+          const clipId = `arrow-clip-${i}`
           return (
             <div
               className={`features__arrow-wrap features__arrow-wrap--${i + 1}${isVisible ? ' features__arrow-wrap--visible' : ''}`}
               key={f.number}
             >
-              <img
-                className="features__arrow-icon"
-                src={`/${i + 1}.avif`}
-                alt=""
-              />
               <svg
                 className="features__arrow-svg"
-                viewBox="0 0 260 64"
+                viewBox="0 0 260 80"
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
               >
+                <defs>
+                  <clipPath id={clipId}>
+                    <polygon points={ARROW_POINTS} />
+                  </clipPath>
+                </defs>
+
+                {/* Background fill */}
                 <polygon
-                  points="0,0 238,0 260,32 238,64 0,64"
+                  points={ARROW_POINTS}
                   fill="var(--color-black)"
-                  stroke="none"
                 />
-                <polyline
-                  points="0,1 238,1 259,32 238,63 0,63"
+
+                {/* Background image clipped to arrow shape */}
+                <image
+                  href={`/${i + 1}.avif`}
+                  x="0" y="0"
+                  width="260" height="80"
+                  preserveAspectRatio="xMidYMid slice"
+                  clipPath={`url(#${clipId})`}
+                  opacity="0.15"
+                />
+
+                {/* Border — all 4 sides including left vertical */}
+                <polygon
+                  points={ARROW_POINTS}
                   fill="none"
                   stroke="rgba(255,255,255,0.9)"
                   strokeWidth="1.5"
                   strokeLinejoin="miter"
-                  strokeLinecap="square"
                 />
-                {i === 0 && (
-                  <line x1="0" y1="1" x2="0" y2="63"
-                    stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
-                )}
               </svg>
+
               <div className="features__arrow-content">
+                <span className="features__arrow-number">{f.number}</span>
                 <div className="features__arrow-text">
                   <h3 className="features__arrow-title">{f.title}</h3>
                 </div>
-                <span className="features__arrow-number">{f.number}</span>
               </div>
             </div>
           )
