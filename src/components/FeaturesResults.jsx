@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/FeaturesResults.css";
+import Demo from "./Demo";
 
 const features = [
   {
@@ -179,30 +180,6 @@ export default function FeaturesResults() {
 
   return (
     <>
-      {/* ── Capabilities ── */}
-      <section className="fr-section">
-        <div className="fr-inner">
-          <p className="fr-label">Capabilities</p>
-          <h2 className="fr-heading">
-            Everything your sales<br />
-            <em>team does. 24/7.</em>
-          </h2>
-
-          <div className="fr-feat-grid" ref={featRef}>
-            {features.map((f, i) => (
-              <div
-                className={`fr-feat-cell${i < featCount ? " fr-feat-cell--visible" : ""}`}
-                key={f.title}
-              >
-                <i className={`ti ${f.icon} fr-feat-icon`} aria-hidden="true" />
-                <p className="fr-feat-title">{f.title}</p>
-                <p className="fr-feat-desc">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Results ── */}
       <section className="fr-section fr-section--results" ref={statsRef}>
         <div className="fr-inner">
@@ -234,6 +211,9 @@ export default function FeaturesResults() {
         </div>
       </section>
 
+      {/* ── Demo ── */}
+      <Demo />
+
       {/* ── Next Generation ── */}
       <section className="fr-section fr-section--nextgen">
         <div className="fr-inner">
@@ -262,6 +242,30 @@ export default function FeaturesResults() {
 
           <div className="fr-ng-progress" ref={progressRef}>
             <div className={`fr-ng-progress-fill${progressActive ? " fr-ng-progress-fill--active" : ""}`} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Capabilities ── */}
+      <section className="fr-section">
+        <div className="fr-inner">
+          <p className="fr-label">Capabilities</p>
+          <h2 className="fr-heading">
+            Everything your sales<br />
+            <em>team does. 24/7.</em>
+          </h2>
+
+          <div className="fr-feat-grid" ref={featRef}>
+            {features.map((f, i) => (
+              <div
+                className={`fr-feat-cell${i < featCount ? " fr-feat-cell--visible" : ""}`}
+                key={f.title}
+              >
+                <i className={`ti ${f.icon} fr-feat-icon`} aria-hidden="true" />
+                <p className="fr-feat-title">{f.title}</p>
+                <p className="fr-feat-desc">{f.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
