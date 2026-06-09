@@ -11,18 +11,6 @@
   overflow: hidden;
 }
 
-.fr-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* ---- Inner wrapper ---- */
 .fr-inner {
   position: relative;
@@ -53,7 +41,6 @@
   margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
-/* outline style for italic part */
 .fr-heading em {
   font-style: normal;
   color: transparent;
@@ -62,14 +49,13 @@
 }
 
 /* ============================================================
-   CAPABILITIES GRID — metallic z-drop (pum pum pum)
+   CAPABILITIES GRID
    ============================================================ */
 .fr-feat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border-top: 1px solid rgba(255,255,255,0.1);
   border-left: 1px solid rgba(255,255,255,0.1);
-  perspective: 900px;
 }
 
 .fr-feat-cell {
@@ -113,6 +99,7 @@
 .fr-feat-desc {
   font-size: clamp(0.8rem, 0.95vw, 0.95rem);
   color: var(--color-white);
+  opacity: 0.45;
   line-height: 1.6;
   margin: 0;
 }
@@ -226,11 +213,7 @@
   }
 }
 
-/* ── Results section — full-bleed background image ── */
-.fr-section--results {
-  background-image: none;
-}
-
+/* ── Results section — background image ── */
 .fr-section--results::after {
   content: '';
   position: absolute;
@@ -248,12 +231,10 @@
   z-index: 3;
 }
 
-/* stat cells — solid black so bg doesn't bleed through */
 .fr-section--results .fr-stat-cell {
   background: var(--color-black);
 }
 
-/* stat text fully white */
 .fr-section--results .fr-stat-val {
   opacity: 1;
 }
@@ -263,7 +244,6 @@
   color: var(--color-white);
 }
 
-/* harvard quote white */
 .fr-section--results .fr-harvard-quote {
   opacity: 1;
   color: var(--color-white);
@@ -276,7 +256,6 @@
   border-top: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Stages list */
 .fr-ng-stages {
   display: flex;
   flex-direction: column;
@@ -348,12 +327,12 @@
 .fr-ng-stage-desc {
   font-size: clamp(0.82rem, 0.95vw, 0.95rem);
   color: var(--color-white);
-  opacity: 0.45;
+  opacity: 1;
   line-height: 1.65;
   margin: 0;
 }
 
-/* Progress bar across the bottom */
+/* Progress bar */
 .fr-ng-progress {
   height: 1px;
   background: rgba(255,255,255,0.08);
