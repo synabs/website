@@ -105,19 +105,34 @@ export default function FeaturesResults() {
   const statsRef = useRef(null);
   const featRef = useRef(null);
   const [statsVisible, setStatsVisible] = useState(false);
-  const [featVisible, setFeatVisible] = useState(false);
+  const [featCount, setFeatCount] = useState(0);
 
   useEffect(() => {
-    const makeObserver = (setter, ref) => {
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) { setter(true); obs.disconnect(); } },
-        { threshold: 0.1 }
-      );
-      if (ref.current) obs.observe(ref.current);
-      return obs;
-    };
-    const o1 = makeObserver(setStatsVisible, statsRef);
-    const o2 = makeObserver(setFeatVisible, featRef);
+    // stats observer
+    const o1 = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStatsVisible(true); o1.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    if (statsRef.current) o1.observe(statsRef.current);
+
+    // feat observer — reveals cells one by one at arrow-like pace (700ms each)
+    const o2 = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          o2.disconnect();
+          let i = 0;
+          const tick = () => {
+            i++;
+            setFeatCount(i);
+            if (i < features.length) setTimeout(tick, 700);
+          };
+          setTimeout(tick, 100);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (featRef.current) o2.observe(featRef.current);
+
     return () => { o1.disconnect(); o2.disconnect(); };
   }, []);
 
@@ -135,9 +150,8 @@ export default function FeaturesResults() {
           <div className="fr-feat-grid" ref={featRef}>
             {features.map((f, i) => (
               <div
-                className={`fr-feat-cell${featVisible ? " fr-feat-cell--visible" : ""}`}
+                className={`fr-feat-cell${i < featCount ? " fr-feat-cell--visible" : ""}`}
                 key={f.title}
-                style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <i className={`ti ${f.icon} fr-feat-icon`} aria-hidden="true" />
                 <p className="fr-feat-title">{f.title}</p>
