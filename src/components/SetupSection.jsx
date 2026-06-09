@@ -1,15 +1,12 @@
-'use client';
-
 import { useRef, useState, useEffect } from 'react';
-import './SetupSection.css';
-import BtnPrimary from '@/components/ui/BtnPrimary';
+import '../styles/SetupSection.css';
 
 const CODE_LINES = [
   { type: 'comment', text: '<!-- Paste before </body> -->' },
   { type: 'tag',     text: '<script' },
-  { type: 'attr',    text: '  src=',  val: '"https://cdn.tia.ai/embed.js"' },
+  { type: 'attr',    text: '  src=',     val: '"https://cdn.tia.ai/embed.js"' },
   { type: 'attr',    text: '  data-id=', val: '"YOUR_BOT_ID"' },
-  { type: 'attr',    text: '  defer', val: '' },
+  { type: 'attr',    text: '  defer',    val: '' },
   { type: 'tag',     text: '></script>' },
 ];
 
@@ -55,7 +52,7 @@ export default function SetupSection() {
             Your AI agent goes live instantly — no configuration,
             no onboarding call, no waiting.
           </p>
-          <BtnPrimary href="#">Try it free 14 days</BtnPrimary>
+          <a href="#" className="btn btn--white">Try it free 14 days</a>
         </div>
 
         {/* RIGHT — terminal */}
@@ -71,7 +68,7 @@ export default function SetupSection() {
             <div className="ss-terminal__body">
               {CODE_LINES.slice(0, lineCount).map((line, i) => (
                 <div
-                  className={`ss-line ss-line--${line.type} ss-line--in`}
+                  className={`ss-line ss-line--${line.type}`}
                   key={i}
                 >
                   {line.type === 'comment' && (
