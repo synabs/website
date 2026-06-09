@@ -168,6 +168,7 @@
   gap: 1.5rem;
   padding: 2rem;
   border: 1px solid rgba(255,255,255,0.1);
+  background: var(--color-black);
 }
 
 .fr-harvard-bar {
@@ -228,7 +229,7 @@
 /* ── Results section — full-bleed background image ── */
 .fr-section--results {
   background-image: url('/arrow.avif');
-  background-size: 70%;
+  background-size: 90%;
   background-position: right center;
   background-repeat: no-repeat;
 }
