@@ -89,7 +89,7 @@
 }
 
 .fr-feat-title {
-  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-bold);
   color: var(--color-white);
   letter-spacing: -0.01em;
@@ -97,9 +97,9 @@
 }
 
 .fr-feat-desc {
-  font-size: clamp(0.8rem, 0.95vw, 0.95rem);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   color: var(--color-white);
-  opacity: 0.45;
+  opacity: 1;
   line-height: 1.6;
   margin: 0;
 }
@@ -138,7 +138,7 @@
 }
 
 .fr-stat-lbl {
-  font-size: clamp(0.8rem, 0.95vw, 0.95rem);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   color: var(--color-white);
   opacity: 0.45;
   line-height: 1.5;
@@ -168,7 +168,7 @@
 }
 
 .fr-harvard-quote {
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   color: var(--color-white);
   opacity: 0.6;
   line-height: 1.65;
@@ -202,6 +202,14 @@
   }
   .fr-heading {
     font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+  .fr-stat-lbl,
+  .fr-harvard-quote,
+  .fr-ng-stage-title,
+  .fr-ng-stage-desc,
+  .fr-feat-title,
+  .fr-feat-desc {
+    font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
   }
 }
 
@@ -284,6 +292,10 @@
 .fr-ng-stage:nth-child(2) { transition-delay: 0.12s; }
 .fr-ng-stage:nth-child(3) { transition-delay: 0.24s; }
 
+.fr-ng-stage:last-child {
+  border-bottom: none;
+}
+
 .fr-ng-stage:hover {
   background: rgba(255,255,255,0.02);
 }
@@ -310,7 +322,7 @@
 }
 
 .fr-ng-stage-title {
-  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-bold);
   color: var(--color-white);
   letter-spacing: -0.02em;
@@ -325,7 +337,7 @@
 }
 
 .fr-ng-stage-desc {
-  font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   color: var(--color-white);
   opacity: 1;
   line-height: 1.65;
