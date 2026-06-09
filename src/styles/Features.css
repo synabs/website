@@ -114,6 +114,23 @@
   gap: 0.5rem;
 }
 
+/* ---- Icon image inside arrow ---- */
+.features__arrow-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+  /* Fade: fully visible on the right, fades out leftward between 55%–30% */
+  -webkit-mask-image: linear-gradient(to left, black 0%, black 30%, transparent 55%);
+  mask-image: linear-gradient(to left, black 0%, black 30%, transparent 55%);
+}
+
 .features__arrow-text {
   flex: 1;
   padding-left: 0.5rem;
