@@ -230,7 +230,7 @@
 .fr-section--results {
   background-image: url('/arrow.avif');
   background-size: 90%;
-  background-position: right center;
+  background-position: 60% center;
   background-repeat: no-repeat;
 }
 
@@ -249,5 +249,12 @@
 }
 
 .fr-section--results .fr-stat-lbl {
-  opacity: 0.5;
+  opacity: 1;
+  color: var(--color-white);
+}
+
+/* harvard quote white */
+.fr-section--results .fr-harvard-quote {
+  opacity: 1;
+  color: var(--color-white);
 }
