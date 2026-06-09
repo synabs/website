@@ -62,7 +62,7 @@
 }
 
 /* ============================================================
-   CAPABILITIES GRID — drop-in animation
+   CAPABILITIES GRID — slide-in from left (matches Features arrows)
    ============================================================ */
 .fr-feat-grid {
   display: grid;
@@ -71,25 +71,21 @@
   border-left: 1px solid rgba(255,255,255,0.1);
 }
 
-@keyframes fr-drop-in {
-  from {
-    opacity: 0;
-    transform: translateY(-28px) scaleY(0.88);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-  }
-}
-
 .fr-feat-cell {
   padding: 2.5rem 2rem;
   border-right: 1px solid rgba(255,255,255,0.1);
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: background 0.15s ease;
-
+  transition:
+    background 0.15s ease,
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.4s ease;
   opacity: 0;
-  animation: fr-drop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateX(-120%);
+}
+
+.fr-feat-cell--visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .fr-feat-cell:hover {
@@ -220,7 +216,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .fr-feat-cell {
-    animation: none;
+    transition: none;
     opacity: 1;
+    transform: none;
   }
 }
