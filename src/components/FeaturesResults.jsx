@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./FeaturesResults.css";
+import "../styles/FeaturesResults.css";
 
 const features = [
   { num: "01", icon: "ti-brain", title: "Evolves every week", desc: "Reviews every conversation, detects what drives conversions, and improves responses automatically." },
