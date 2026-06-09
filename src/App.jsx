@@ -16,7 +16,6 @@ export default function App() {
       <Navbar />
       <Hero />
       <Features />
-      <Setup />
       <About />
       <Pricing />
       <CTA />
