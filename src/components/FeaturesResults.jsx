@@ -163,7 +163,7 @@ export default function FeaturesResults() {
       </section>
 
       {/* ── Results ── */}
-      <section className="fr-section" ref={statsRef}>
+      <section className="fr-section fr-section--results" ref={statsRef}>
         <div className="fr-inner">
           <p className="fr-label">Early results</p>
           <h2 className="fr-heading">
