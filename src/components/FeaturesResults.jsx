@@ -243,23 +243,6 @@ export default function FeaturesResults() {
             <em>Outplays competitors.</em>
           </h2>
 
-          <div className="fr-ng-intro">
-            <div className="fr-ng-intro-label-cell">
-              <p className="fr-ng-tagline">
-                <strong>Self-improving AI</strong>
-                The agent reviews every conversation, identifies what leads to
-                conversions, and improves future responses automatically.
-              </p>
-            </div>
-            <div className="fr-ng-intro-body-cell">
-              <p className="fr-ng-body">
-                No manual tuning required. The more it talks, the better it
-                gets — building a compounding advantage over competitors using
-                static chatbots.
-              </p>
-            </div>
-          </div>
-
           <div className="fr-ng-stages" ref={ngRef}>
             {stages.map((s, i) => (
               <div
