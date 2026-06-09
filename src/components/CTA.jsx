@@ -5,7 +5,7 @@ export default function CTA() {
   const glitchRef = useRef(null)
 
   useEffect(() => {
-    const letters = [' ', 'R', ' ', 'R', ' ', ' ', 'R']
+    const letters = ['ㅤ', 'R', 'ㅤ', 'R', 'ㅤ', 'ㅤ', 'R']
     let timeout
 
     const glitch = () => {
