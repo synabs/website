@@ -57,7 +57,6 @@ export default function Features() {
       },
       { threshold: 0.15 }
     )
-
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
@@ -65,7 +64,6 @@ export default function Features() {
   return (
     <section className="features" ref={sectionRef}>
       <div className="features__header">
-        <p className="fr-label">Next generation</p>
         <h2 className="features__heading">
           Agents get smarter<br />
           <em>with every conversation</em>
@@ -75,12 +73,16 @@ export default function Features() {
       <div className="features__arrows">
         {features.map((f, i) => {
           const isVisible = visibleRows.includes(i)
-
           return (
             <div
               className={`features__arrow-wrap features__arrow-wrap--${i + 1}${isVisible ? ' features__arrow-wrap--visible' : ''}`}
               key={f.number}
             >
+              <img
+                className="features__arrow-icon"
+                src={`/public/${i + 1}.avif`}
+                alt=""
+              />
               <svg
                 className="features__arrow-svg"
                 viewBox="0 0 260 64"
