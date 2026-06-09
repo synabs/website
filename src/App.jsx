@@ -17,11 +17,11 @@ export default function App() {
     <>
       <Navbar />
       <Hero />
-      <Features />
       <FeaturesResults />
       <SetupSection />
       <Demo />
       <About />
+      <Features />
       <Pricing />
       <CTA />
     </>
