@@ -228,14 +228,24 @@
 
 /* ── Results section — full-bleed background image ── */
 .fr-section--results {
+  background-image: none;
+}
+
+.fr-section--results::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image: url('/arrow.avif');
-  background-size: 90%;
+  background-size: 75%;
   background-position: 60% center;
   background-repeat: no-repeat;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .fr-section--results .fr-inner {
-  z-index: 2;
+  z-index: 3;
 }
 
 /* stat cells — solid black so bg doesn't bleed through */
