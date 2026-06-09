@@ -80,7 +80,7 @@ export default function Features() {
             >
               <img
                 className="features__arrow-icon"
-                src={`/public/${i + 1}.avif`}
+                src={`/${i + 1}.avif`}
                 alt=""
               />
               <svg
