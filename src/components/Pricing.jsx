@@ -1,69 +1,255 @@
-import '../styles/Pricing.css'
-export default function Pricing() {
-  return (
-    <section className="pricing">
-      <div className="pricing__inner">
-        <h2 className="pricing__title">Get the AI agent that evolves<br />with every customer chat</h2>
-        <div className="pricing__guarantee" style={{marginLeft: '-1px'}}>
-          <span className="pricing__guarantee-check">✓</span>
-          <span className="pricing__guarantee-text" style={{color: '#fff'}}>CANCEL ANYTIME</span>
-          <a href="/terms" className="pricing__guarantee-link" aria-label="Learn more">
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
-        </div>
-        <div className="pricing__grid">
-          {/* Card 1 */}
-          <div className="pricing__card">
-            <div className="pricing__card-top">
-              <h3 className="pricing__card-title">AI agent</h3>
-              {/* Muutettu teksti, väri valkoinen */}
-              <p className="pricing__card-desc" style={{color: '#fff'}}>Set up in minutes on any website.</p>
-            </div>
-            <div className="pricing__price-features-row">
-              <div>
-                <div className="pricing__card-price">
-                  <span className="pricing__amount">349€</span>
-                  <span className="pricing__per">PER<br />MONTH</span>
-                </div>
-                <p className="pricing__messages">5,000 messages / month<br /><span>+€0.06 / message overage</span></p>
-              </div>
-              <ul className="pricing__features">
-                <li>✓ Evolving AI</li>
-                <li>✓ Trained on your business</li>
-                <li>✓ Lead capture</li>
-                <li>✓ Lead qualification</li>
-                <li>✓ Calendly booking</li>
-                <li>✓ Monthly Performance Reports</li>
-                <li>✓ Automatic language detection</li>
-                <li>✓ Powered by Cortex Engine</li>
-              </ul>
-            </div>
-            <div className="pricing__card-actions">
-              <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
-              <a href="/demo" className="pricing__link">Watch demo</a>
-            </div>
-          </div>
-          {/* Card 2 — ei checklistaa, ei Cortex Engine -tekstiä */}
-          <div className="pricing__card">
-            <div className="pricing__card-top">
-              <h3 className="pricing__card-title">AI agent + CRM integration</h3>
-              <span className="pricing__from">From</span>
-              <span className="pricing__amount">349€</span>
-            </div>
-            <div className="pricing__price-plus">
-              <span className="pricing__plus-sign">+</span>
-              <span className="pricing__amount pricing__amount--secondary">CRM Integration (via <img src="https://cdn.brandfetch.io/idNMs_nMA0/theme/light/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1668081098963" alt="Zapier" style={{height: '0.7em', verticalAlign: 'middle', display: 'inline'}} />)</span>
-              <span className="pricing__per">ADD-ON<br />PER MONTH<br /><a href="/plans" className="pricing__plans-link">See details</a></span>
-            </div>
-            <div className="pricing__card-actions">
-              <a href="/contact" className="btn btn--outline">Let's talk</a>
-              <a href="/integrations" className="pricing__link">See options</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+/* ============================================================
+   PRICING.CSS
+   ============================================================ */
+
+.pricing {
+  background: var(--color-black);
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
+  color: var(--color-white);
+}
+
+.pricing__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+.pricing__title {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: var(--font-bold);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: 32px;
+}
+
+.pricing__title em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.75);
+  text-stroke: 1.5px rgba(255,255,255,0.75);
+}
+
+/* Guarantee row */
+.pricing__guarantee {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0 16px 24px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 48px;
+}
+
+.pricing__guarantee-check {
+  font-size: var(--text-sm);
+  color: var(--color-white);
+}
+
+.pricing__guarantee-text {
+  font-size: 11px;
+  font-weight: var(--font-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+
+.pricing__guarantee-link {
+  display: flex;
+  align-items: center;
+  color: rgba(255,255,255,0.4);
+  transition: color var(--transition-fast);
+}
+
+.pricing__guarantee-link:hover {
+  color: var(--color-white);
+}
+
+/* Grid */
+.pricing__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Card */
+.pricing__card {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+.pricing__card:last-child {
+  border-right: none;
+}
+
+.pricing__card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pricing__card-title {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: var(--font-bold);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+
+.pricing__card-desc {
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-weight: var(--font-light);
+  color: rgba(255,255,255,0.45);
+  line-height: var(--leading-relaxed);
+  max-width: 340px;
+}
+
+/* Price + features side by side */
+.pricing__price-features-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Price */
+.pricing__card-price {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.pricing__from {
+  font-size: var(--text-sm);
+  font-weight: var(--font-light);
+  color: rgba(255,255,255,0.45);
+  margin-top: 14px;
+}
+
+.pricing__amount {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.04em;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.pricing__amount--secondary {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+}
+
+.pricing__per {
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.pricing__price-plus {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.pricing__plus-sign {
+  font-size: var(--text-xl);
+  color: rgba(255,255,255,0.35);
+  margin-top: 6px;
+}
+
+.pricing__plans-link {
+  display: block;
+  color: rgba(255,255,255,0.45);
+  text-decoration: underline;
+  letter-spacing: 0.1em;
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+}
+
+.pricing__plans-link:hover {
+  color: var(--color-white);
+}
+
+/* Actions */
+.pricing__card-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: auto;
+}
+
+.pricing__link {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  padding-bottom: 2px;
+  transition: opacity var(--transition-fast);
+}
+
+.pricing__link:hover {
+  opacity: 0.55;
+}
+
+/* Features list */
+.pricing__features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+
+.pricing__features li {
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+  font-weight: var(--font-regular);
+  color: rgba(255,255,255,1);
+  line-height: 1.4;
+}
+
+/* Messages */
+.pricing__messages {
+  font-size: clamp(0.8rem, 1vw, 0.875rem);
+  font-weight: var(--font-regular);
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .pricing__card {
+    padding: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing__card {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .pricing__card:last-child {
+    border-bottom: none;
+  }
+
+  .pricing__price-features-row {
+    flex-direction: column;
+    gap: 24px;
+  }
 }
