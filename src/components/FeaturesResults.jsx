@@ -3,57 +3,103 @@ import "../styles/FeaturesResults.css";
 
 const features = [
   {
-    num: "01",
     icon: "ti-brain",
     title: "Evolves every week",
     desc: "Reviews every conversation, finds what drives conversions, and updates its own responses. No manual tuning.",
   },
   {
-    num: "02",
     icon: "ti-clock-24",
     title: "Zero leads missed",
     desc: "Responds in under 2 seconds — 2 AM or 2 PM. Every visitor gets an answer before they leave.",
   },
   {
-    num: "03",
     icon: "ti-filter",
     title: "Lead qualification",
     desc: "Asks the right questions, captures contact details, and scores leads — without a human in the loop.",
   },
   {
-    num: "04",
     icon: "ti-calendar-check",
     title: "Calendly booking",
     desc: "Books meetings directly into your calendar. Lead captured, qualified, and booked — one conversation.",
   },
   {
-    num: "05",
     icon: "ti-language",
     title: "Language detection",
     desc: "Detects the visitor's language and switches instantly. No config needed. Works across every market.",
   },
   {
-    num: "06",
     icon: "ti-chart-bar",
     title: "Monthly reports",
     desc: "Clear monthly summary of conversations, leads captured, and what the agent learned — so you see ROI.",
   },
 ];
 
-const stats = [
+// target, start, suffix, duration
+const statsConfig = [
   {
-    val: "<2s",
+    target: 2,
+    start: 10,
+    prefix: "<",
+    suffix: "s",
     lbl: "Average response time — every conversation, every time",
+    countDown: true,
   },
   {
-    val: "96%",
+    target: 96,
+    start: 0,
+    suffix: "%",
     lbl: "Of conversations handled without human escalation",
+    countDown: false,
   },
   {
-    val: "+23%",
+    target: 23,
+    start: 0,
+    prefix: "+",
+    suffix: "%",
     lbl: "Average increase in qualified leads across early testers",
+    countDown: false,
   },
 ];
+
+function useCountUp({ target, start, duration = 1800, active, countDown }) {
+  const [val, setVal] = useState(start);
+  useEffect(() => {
+    if (!active) return;
+    let startTime = null;
+    const step = (ts) => {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = countDown
+        ? Math.round(start - eased * (start - target))
+        : Math.round(start + eased * (target - start));
+      setVal(current);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [active]);
+  return val;
+}
+
+function StatCell({ cfg, visible, delay }) {
+  const val = useCountUp({
+    target: cfg.target,
+    start: cfg.start,
+    active: visible,
+    countDown: cfg.countDown,
+  });
+  return (
+    <div
+      className={`fr-stat-cell${visible ? " fr-stat-cell--visible" : ""}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <p className="fr-stat-val">
+        {cfg.prefix || ""}{val}{cfg.suffix}
+      </p>
+      <p className="fr-stat-lbl">{cfg.lbl}</p>
+    </div>
+  );
+}
 
 export default function FeaturesResults() {
   const statsRef = useRef(null);
@@ -85,9 +131,12 @@ export default function FeaturesResults() {
           </h2>
 
           <div className="fr-feat-grid">
-            {features.map((f) => (
-              <div className="fr-feat-cell" key={f.num}>
-                <p className="fr-feat-num">{f.num}</p>
+            {features.map((f, i) => (
+              <div
+                className="fr-feat-cell"
+                key={f.title}
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
                 <i className={`ti ${f.icon} fr-feat-icon`} aria-hidden="true" />
                 <p className="fr-feat-title">{f.title}</p>
                 <p className="fr-feat-desc">{f.desc}</p>
@@ -107,15 +156,8 @@ export default function FeaturesResults() {
           </h2>
 
           <div className="fr-stats-grid">
-            {stats.map((s, i) => (
-              <div
-                className={`fr-stat-cell${statsVisible ? " fr-stat-cell--visible" : ""}`}
-                style={{ transitionDelay: `${i * 120}ms` }}
-                key={s.val}
-              >
-                <p className="fr-stat-val">{s.val}</p>
-                <p className="fr-stat-lbl">{s.lbl}</p>
-              </div>
+            {statsConfig.map((s, i) => (
+              <StatCell key={s.lbl} cfg={s} visible={statsVisible} delay={i * 120} />
             ))}
           </div>
 
