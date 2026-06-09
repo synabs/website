@@ -219,8 +219,8 @@ export default function FeaturesResults() {
         <div className="fr-inner">
           <p className="fr-label">Next generation</p>
           <h2 className="fr-heading">
-            Evolves every week.<br />
-            <em>Outplays competitors.</em>
+            Evolves every week,<br />
+            <em>outplays competitors</em>
           </h2>
 
           <div className="fr-ng-stages" ref={ngRef}>
@@ -251,8 +251,8 @@ export default function FeaturesResults() {
         <div className="fr-inner">
           <p className="fr-label">Capabilities</p>
           <h2 className="fr-heading">
-            Everything your sales<br />
-            <em>team does. 24/7.</em>
+            Convert more visitors, <br />
+            <em>automatically</em>
           </h2>
 
           <div className="fr-feat-grid" ref={featRef}>
