@@ -5,12 +5,12 @@ export default function About() {
     <section className="about">
       <div className="about__inner">
         <div className="about__header">
-          <p className="evolve-stats__label">ABOUT</p>
-          <h2 className="about__title">Built by people who believe AI should earn its keep</h2>
+          <p className="about__label">ABOUT</p>
+          <h2 className="about__title">Built by people who believe <br />AI unlocks support's untapped potential</h2>
         </div>
         <div className="about__mission">
           <p className="about__mission-text">
-            Many businesses lose revenue by failing to engage with customers and leads outside business hours. We help capture these opportunities with adaptive AI agents that learn continuously, turning customer data into smarter engagement, better targeting, and measurable growth. Over time, these systems become increasingly effective at personalizing interactions, identifying opportunities, and driving results around the clock.
+            Traditional chatbots rely on predefined responses and fixed workflows. Our evolving AI agents act more like employees, continuously learning about your customers, understanding their intent, and finding better ways to grow your business with every interaction.
           </p>
         </div>
         <div className="about__team">
@@ -18,9 +18,9 @@ export default function About() {
             <img src="/jani.avif" alt="Jani Karkulahti" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Jani Karkulahti</p>
-              <p className="about__member-role">Founder & AI Engineer</p>
+              <p className="about__member-role">FOUNDER & AI Engineer</p>
               <p className="about__member-bio">
-                Jani is an AI expert specializing in AI-powered products, automation, and system architecture, with a proven track record in building technology platforms.
+                Jani is an AI engineer specializing in automation, workflows, and system architecture, with a proven track record of building scalable technology platforms.
               </p>
             </div>
           </div>
@@ -28,9 +28,9 @@ export default function About() {
             <img src="/santeri.avif" alt="Santeri Koskinen" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Santeri Koskinen</p>
-              <p className="about__member-role">Co-Founder & Head of Business</p>
+              <p className="about__member-role">CO-FOUNDER & Head of Business</p>
               <p className="about__member-bio">
-                Santeri is a serial entrepreneur with a proven history of building successful startup and leading the strategic vision behind the business.
+                Santeri is a serial entrepreneur with a proven track record of building successful startups and leading the strategic vision behind growing businesses.
               </p>
             </div>
           </div>
