@@ -11,7 +11,6 @@
   overflow: hidden;
 }
 
-/* subtle grid texture — mirrors Features.css */
 .fr-section::before {
   content: '';
   position: absolute;
@@ -54,14 +53,16 @@
   margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
+/* outline style for italic part */
 .fr-heading em {
   font-style: normal;
-  color: var(--color-white);
-  opacity: 0.45;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.75);
+  text-stroke: 1.5px rgba(255, 255, 255, 0.75);
 }
 
 /* ============================================================
-   CAPABILITIES GRID
+   CAPABILITIES GRID — drop-in animation
    ============================================================ */
 .fr-feat-grid {
   display: grid;
@@ -70,30 +71,34 @@
   border-left: 1px solid rgba(255,255,255,0.1);
 }
 
+@keyframes fr-drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-28px) scaleY(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
 .fr-feat-cell {
   padding: 2.5rem 2rem;
   border-right: 1px solid rgba(255,255,255,0.1);
   border-bottom: 1px solid rgba(255,255,255,0.1);
   transition: background 0.15s ease;
+
+  opacity: 0;
+  animation: fr-drop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .fr-feat-cell:hover {
   background: rgba(255,255,255,0.03);
 }
 
-.fr-feat-num {
-  font-size: var(--text-xs);
-  letter-spacing: 0.15em;
-  font-family: 'Courier New', monospace;
-  color: var(--color-white);
-  opacity: 0.2;
-  margin: 0 0 1.4rem;
-}
-
 .fr-feat-icon {
   font-size: 1.4rem;
   color: var(--color-white);
-  opacity: 0.7;
   display: block;
   margin-bottom: 1rem;
 }
@@ -109,7 +114,6 @@
 .fr-feat-desc {
   font-size: clamp(0.8rem, 0.95vw, 0.95rem);
   color: var(--color-white);
-  opacity: 0.45;
   line-height: 1.6;
   margin: 0;
 }
@@ -132,6 +136,11 @@
   padding: 3rem 2rem;
   border-right: 1px solid rgba(255,255,255,0.1);
   border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.fr-stat-cell--visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .fr-stat-val {
@@ -208,4 +217,10 @@
     font-size: clamp(2.2rem, 10vw, 3.5rem);
   }
 }
-.fr-stat-cell--visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fr-feat-cell {
+    animation: none;
+    opacity: 1;
+  }
+}
