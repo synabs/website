@@ -1,3 +1,18 @@
+'use client';
+
+import { useRef, useState, useEffect } from 'react';
+import './SetupSection.css';
+import BtnPrimary from '@/components/ui/BtnPrimary';
+
+const CODE_LINES = [
+  { type: 'comment', text: '<!-- Paste before </body> -->' },
+  { type: 'tag',     text: '<script' },
+  { type: 'attr',    text: '  src=',  val: '"https://cdn.tia.ai/embed.js"' },
+  { type: 'attr',    text: '  data-id=', val: '"YOUR_BOT_ID"' },
+  { type: 'attr',    text: '  defer', val: '' },
+  { type: 'tag',     text: '></script>' },
+];
+
 export default function SetupSection() {
   const ref = useRef(null);
   const [lineCount, setLineCount] = useState(0);
@@ -26,7 +41,6 @@ export default function SetupSection() {
 
   return (
     <section className="ss-section">
-      {/* grid texture */}
       <div className="ss-section__bg" aria-hidden="true" />
 
       <div className="ss-inner">
@@ -47,7 +61,6 @@ export default function SetupSection() {
         {/* RIGHT — terminal */}
         <div className="ss-terminal-wrap" ref={ref}>
           <div className="ss-terminal">
-            {/* title bar */}
             <div className="ss-terminal__bar">
               <span className="ss-terminal__dot" />
               <span className="ss-terminal__dot" />
@@ -55,7 +68,6 @@ export default function SetupSection() {
               <span className="ss-terminal__title">embed.sh</span>
             </div>
 
-            {/* code */}
             <div className="ss-terminal__body">
               {CODE_LINES.slice(0, lineCount).map((line, i) => (
                 <div
@@ -74,14 +86,12 @@ export default function SetupSection() {
                       <span className="ss-v">{line.val}</span>
                     </>
                   )}
-                  {/* blinking cursor on last visible line */}
                   {i === lineCount - 1 && lineCount < CODE_LINES.length && (
                     <span className="ss-cursor" aria-hidden="true" />
                   )}
                 </div>
               ))}
 
-              {/* success */}
               {showSuccess && (
                 <div className="ss-success">
                   <span className="ss-success__dot" />
