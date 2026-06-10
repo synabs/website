@@ -5,12 +5,12 @@ export default function About() {
     <section className="about">
       <div className="about__inner">
         <div className="about__header">
-          <p className="about__label">ABOUT</p>
-          <h2 className="about__title">Built by people who believe <br />AI unlocks support's untapped potential</h2>
+          <p className="evolve-stats__label">ABOUT</p>
+          <h2 className="about__title">Evolving AI is the next step beyond traditional chatbots.</h2>
         </div>
         <div className="about__mission">
           <p className="about__mission-text">
-            Traditional chatbots rely on predefined responses and fixed workflows. Our evolving AI agents act more like employees, continuously learning about your customers, understanding their intent, and finding better ways to grow your business with every interaction.
+            We believe every customer conversation is an opportunity. Our evolving AI agents learn from every interaction, constantly improving and unlocking new ways to support customers, capture leads, and grow your business.
           </p>
         </div>
         <div className="about__team">
