@@ -10,7 +10,7 @@ export default function About() {
         </div>
         <div className="about__mission">
           <p className="about__mission-text">
-            We believe every customer conversation is an opportunity. Our evolving AI agents learn from every interaction, constantly improving and unlocking new ways to support customers, capture leads, and grow your business.
+            We believe customer conversations are one of the most overlooked growth opportunities. That's why we built evolving AI agents that continuously uncover new ways to support customers, capture leads, and drive business growth in ways never seen before.
           </p>
         </div>
         <div className="about__team">
@@ -18,7 +18,7 @@ export default function About() {
             <img src="/jani.avif" alt="Jani Karkulahti" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Jani Karkulahti</p>
-              <p className="about__member-role">FOUNDER & AI Engineer</p>
+              <p className="about__member-role">FOUNDER</p>
               <p className="about__member-bio">
                 Jani is an AI engineer specializing in automation, workflows, and system architecture, with a proven track record of building scalable technology platforms.
               </p>
@@ -28,7 +28,7 @@ export default function About() {
             <img src="/santeri.avif" alt="Santeri Koskinen" className="about__photo" />
             <div className="about__member-info">
               <p className="about__member-name">Santeri Koskinen</p>
-              <p className="about__member-role">CO-FOUNDER & Head of Business</p>
+              <p className="about__member-role">CO-FOUNDER</p>
               <p className="about__member-bio">
                 Santeri is a serial entrepreneur with a proven track record of building successful startups and leading the strategic vision behind growing businesses.
               </p>
