@@ -20,7 +20,6 @@ export default function App() {
       <FeaturesResults />
       <SetupSection />
       <About />
-      <Features />
       <Pricing />
       <CTA />
     </>
