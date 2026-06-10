@@ -70,7 +70,7 @@ const stages = [
   {
     num: "Stage 02",
     title: "Detects patterns that lead to conversions",
-    desc: "Every question it can't answer becomes a training signal. Patterns that convert get reinforced automatically.",
+    desc: "Analyzes conversation history to identify common buying signals and recommend higher-converting responses.",
   },
   {
     num: "Stage 03",
