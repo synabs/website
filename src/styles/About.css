@@ -20,16 +20,6 @@
   gap: var(--space-4);
   max-width: 720px;
 }
-.about__label {
-  display: inline-block;
-  font-size: var(--text-xs);
-  font-weight: var(--font-bold);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-black);
-  opacity: 0.35;
-  margin-bottom: var(--space-4);
-}
 .about__title {
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: var(--font-bold);
