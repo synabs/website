@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import '../styles/Navbar.css'
 
 const navLinks = [
-  { href: '/about',        label: 'About' },
-  { href: '/pricing',      label: 'Pricing' },
-  { href: '/performance',  label: 'Performance' },
-  { href: '/integrations', label: 'Integrations' },
-  { href: '/technology',   label: 'Technology' },
+  { href: '/about',      label: 'About' },
+  { href: '/pricing',    label: 'Pricing' },
+  { href: '/technology', label: 'Technology' },
+  { href: '/partner',    label: 'Become a Partner' },
 ]
 
 export default function Navbar() {
@@ -43,10 +42,18 @@ export default function Navbar() {
             ))}
             <li>
               <a
-                href="/apply"
+                href="/trial"
+                className="navbar__link navbar__link--cta-outline"
+              >
+                Start free trial
+              </a>
+            </li>
+            <li>
+              <a
+                href="/demo"
                 className="navbar__link navbar__link--cta btn btn--outline"
               >
-                Become a Partner
+                View demo
               </a>
             </li>
           </ul>
@@ -80,8 +87,13 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="/apply" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
-              Apply for tester
+            <a href="/trial" className="navbar__mobile-link navbar__mobile-link--cta-outline" onClick={closeMenu}>
+              Start free trial
+            </a>
+          </li>
+          <li>
+            <a href="/demo" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
+              View demo
             </a>
           </li>
         </ul>
