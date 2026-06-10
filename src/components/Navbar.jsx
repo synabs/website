@@ -5,7 +5,7 @@ const navLinks = [
   { href: '/about',      label: 'About' },
   { href: '/pricing',    label: 'Pricing' },
   { href: '/technology', label: 'Technology' },
-  { href: '/partner',    label: 'Become a Partner' },
+  { href: '/partner',    label: 'Become a partner' },
 ]
 
 export default function Navbar() {
