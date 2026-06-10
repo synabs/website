@@ -6,7 +6,7 @@ export default function About() {
       <div className="about__inner">
         <div className="about__header">
           <p className="evolve-stats__label">ABOUT</p>
-          <h2 className="about__title">Beyond chatbots</h2>
+          <h2 className="about__title">Agents get smarter with every conversation</h2>
         </div>
         <div className="about__mission">
           <p className="about__mission-text">
