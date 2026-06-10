@@ -21,9 +21,9 @@
   max-width: 720px;
 }
 .about__title {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2.8rem, 6vw, 6rem);
   font-weight: var(--font-bold);
-  line-height: 1.05;
+  line-height: 0.92;
   letter-spacing: -0.03em;
   color: var(--color-black);
 }
@@ -64,20 +64,20 @@
   gap: var(--space-2);
 }
 .about__member-name {
-  font-size: var(--text-xl);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-bold);
   color: var(--color-black);
   letter-spacing: -0.01em;
 }
 .about__member-role {
-  font-size: var(--text-sm);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-medium);
   color: var(--color-grey-400);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 .about__member-bio {
-  font-size: var(--text-base);
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-light);
   line-height: var(--leading-relaxed);
   color: var(--color-grey-700);
@@ -90,7 +90,10 @@
   .about__team {
     grid-template-columns: 1fr;
   }
-  .about__mission-text {
+  .about__mission-text,
+  .about__member-name,
+  .about__member-role,
+  .about__member-bio {
     font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
   }
 }
