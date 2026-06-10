@@ -10,7 +10,7 @@ export default function About() {
         </div>
         <div className="about__mission">
           <p className="about__mission-text">
-            We believe customer conversations are one of the most overlooked growth opportunities. That's why we built evolving AI agents that continuously uncover new ways to support customers, capture leads, and drive business growth in ways never seen before.
+            We believe customer conversations are one of the most overlooked growth opportunities. That's why we built evolving AI agents that learn, adapt, and actually understand what customers need instead of just responding to them.
           </p>
         </div>
         <div className="about__team">
