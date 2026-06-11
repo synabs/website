@@ -5,7 +5,6 @@ const navLinks = [
   { href: '/about',      label: 'About' },
   { href: '/pricing',    label: 'Pricing' },
   { href: '/technology', label: 'Technology' },
-  { href: '/partner',    label: 'Become a partner' },
 ]
 
 export default function Navbar() {
@@ -32,7 +31,7 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Desktop nav – aivan oikealle */}
+        {/* Desktop nav – keskitetty */}
         <nav className="navbar__nav" aria-label="Päävalikko">
           <ul className="navbar__list">
             {navLinks.map(({ href, label }) => (
