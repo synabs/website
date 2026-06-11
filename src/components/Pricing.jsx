@@ -10,6 +10,9 @@ export default function Pricing() {
         </h2>
         <div className="pricing__guarantee">
           <a href="/terms" className="pricing__guarantee-link">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{color: '#fff', flexShrink: 0}}>
+              <path d="M2 7L5.5 10.5L12 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             <span className="pricing__guarantee-text" style={{color: '#fff'}}>CANCEL ANYTIME</span>
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{color: '#fff', flexShrink: 0}}>
               <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
