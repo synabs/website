@@ -1,0 +1,118 @@
+/* ============================================================
+   CORTEX.CSS
+   ============================================================ */
+
+.cortex {
+  position: relative;
+  background: var(--color-black);
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.cortex__inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+/* ---- Heading ---- */
+.cortex__heading {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: var(--font-bold);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+/* ---- Body ---- */
+.cortex__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+.cortex__text-cell {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.cortex__text {
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  font-weight: var(--font-regular);
+  color: rgba(255,255,255,0.6);
+  line-height: 1.75;
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* ---- Stats cell ---- */
+.cortex__stats-cell {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.cortex__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.cortex__stat:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cortex__stat-number {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--color-white);
+}
+
+.cortex__stat-label {
+  font-size: clamp(0.8rem, 1vw, 0.9rem);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .cortex__body {
+    grid-template-columns: 1fr;
+  }
+
+  .cortex__stats-cell {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .cortex__stat {
+    flex: 1;
+    padding-bottom: 0;
+    padding-right: 1.5rem;
+    border-bottom: none;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .cortex__stat:last-child {
+    border-right: none;
+    padding-right: 0;
+    padding-left: 1.5rem;
+  }
+}
