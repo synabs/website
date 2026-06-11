@@ -8,6 +8,7 @@ const stats = [
 export default function Cortex() {
   return (
     <section className="cortex">
+      <img src="/cortex.avif" alt="" className="cortex__image" />
       <div className="cortex__inner">
         <h2 className="cortex__heading">The Cortex Engine</h2>
 
@@ -21,10 +22,6 @@ export default function Cortex() {
               model's evolution, enabling our team to refine the Cortex engine and continuously
               enhance system intelligence.
             </p>
-          </div>
-
-          <div className="cortex__image-cell">
-            <img src="/cortex.avif" alt="Cortex Engine" className="cortex__image" />
           </div>
         </div>
 
