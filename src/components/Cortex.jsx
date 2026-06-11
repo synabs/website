@@ -15,7 +15,7 @@ export default function Cortex() {
         <div className="cortex__top">
           <div className="cortex__text-cell">
             <p className="cortex__text">
-              The brain behind every conversation. The advanced AI Cortex engine analyzes intent,
+              The brain behind every conversation. The advanced AI Cortex Engine analyzes intent,
               context, sentiment, customer behavior, and quality signals in real time. It continuously
               optimizes performance by identifying failures, benchmarking results, deploying
               improvements, and injecting targeted prompts. Every interaction contributes to the
