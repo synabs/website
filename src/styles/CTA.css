@@ -43,7 +43,7 @@
 }
 .cta__glitch {
   display: inline-block;
-  width: 0.35em;
+  width: 0.6em;
   transition: color 60ms ease;
 }
 .cta__quote {
