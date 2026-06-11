@@ -5,7 +5,7 @@ export default function CTA() {
   const glitchRef = useRef(null)
 
   useEffect(() => {
-    const letters = ['ㅤ', 'R', 'ㅤ', 'R', 'ㅤ', 'ㅤ', 'R']
+    const letters = [' ', 'R', ' ', 'R', ' ', ' ', 'R']
     let timeout
 
     const glitch = () => {
@@ -30,10 +30,7 @@ export default function CTA() {
         <div className="cta__content">
           <h2 className="cta__title">
             START THE<br />
-            <span className="cta__revolution-wrap">
-              <span className="cta__glitch" ref={glitchRef} aria-hidden="true">R</span>
-              EVOLUTION
-            </span>
+            <span className="cta__glitch" ref={glitchRef}>R</span>EVOLUTION
           </h2>
           <p className="cta__quote"><em>The last AI agent you'll ever need to upgrade</em></p>
           <div className="cta__buttons">
