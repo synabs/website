@@ -42,7 +42,7 @@
   opacity: 1;
   transform: translateZ(0) translateY(0) scale(1);
   /* After landing, fade down to 0.25 over 1s */
-  animation: cortexImageFade 1s ease 0.4s forwards;
+  animation: cortexImageFade 0.5s ease 0.4s forwards;
 }
 
 @keyframes cortexImageFade {
