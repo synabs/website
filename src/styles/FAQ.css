@@ -24,7 +24,6 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-white);
-  opacity: 0.35;
   margin-bottom: var(--space-4);
 }
 
@@ -81,16 +80,10 @@
 .faq__icon {
   flex-shrink: 0;
   color: var(--color-white);
-  font-size: 1.6rem;
-  font-weight: 300;
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
+  font-weight: var(--font-bold);
   line-height: 1;
-  opacity: 0.6;
   user-select: none;
-  transition: opacity 0.2s ease;
-}
-
-.faq__item--open .faq__icon {
-  opacity: 1;
 }
 
 /* ---- Answer: clip-height approach for reliable expand ---- */
@@ -107,7 +100,6 @@
 .faq__answer p {
   font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   color: var(--color-white);
-  opacity: 0.6;
   line-height: 1.7;
   margin: 0;
   padding-bottom: 2rem;
