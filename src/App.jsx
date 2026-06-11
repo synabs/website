@@ -25,8 +25,8 @@ export default function App() {
       <Abilities />
       <SetupSection />
       <About />
-      <FAQ />
       <Pricing />
+      <FAQ />
       <CTA />
     </>
   )
