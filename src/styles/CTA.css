@@ -45,7 +45,7 @@
   display: inline-block;
   width: 0.6em;
   position: relative;
-  left: -8px;
+  left: -20px;
   transition: color 60ms ease;
 }
 .cta__quote {
