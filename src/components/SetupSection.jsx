@@ -13,7 +13,7 @@ export default function SetupSection() {
         <div className="ss-left">
           <p className="ss-label">Setup</p>
           <h2 className="ss-heading">
-            2 minute<br /><em>setup</em>
+            2 minute setup
           </h2>
           <p className="ss-body">
             One line of code. Your AI agent goes live instantly,
