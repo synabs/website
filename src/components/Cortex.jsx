@@ -10,7 +10,7 @@ export default function Cortex() {
     <section className="cortex">
       <img src="/cortex.avif" alt="" className="cortex__image" />
       <div className="cortex__inner">
-        <h2 className="cortex__heading">The Cortex Engine</h2>
+        <h2 className="cortex__heading">The Cortex Engine™</h2>
 
         <div className="cortex__top">
           <div className="cortex__text-cell">
