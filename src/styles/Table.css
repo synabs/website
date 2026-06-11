@@ -59,7 +59,7 @@
 .comptable__th {
   padding: 1rem 1.5rem;
   text-align: left;
-  font-size: clamp(var(--text-base), 1.4vw, var(--text-lg));
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-bold);
   color: var(--color-white);
   border-bottom: 1px solid rgba(255,255,255,0.15);
@@ -104,7 +104,7 @@
 /* ---- Cells ---- */
 .comptable__td {
   padding: 1.4rem 1.5rem;
-  font-size: clamp(var(--text-base), 1.4vw, var(--text-lg));
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   line-height: 1.5;
   vertical-align: top;
   color: var(--color-white);
@@ -133,7 +133,7 @@
   .comptable__td,
   .comptable__th {
     padding: 1rem;
-    font-size: var(--text-sm);
+    font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
   }
 }
 
