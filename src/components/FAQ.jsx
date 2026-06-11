@@ -4,7 +4,7 @@ import '../styles/FAQ.css'
 const faqs = [
   {
     q: 'What exactly does "evolving" mean?',
-    a: 'The AI continuously learns from your conversations, customer behavior, and performance signals. The Cortex Engine reviews outcomes, identifies successful patterns, detects failures, and deploys improvements — making the agent more effective at qualifying leads and driving conversions over time.',
+    a: 'The AI continuously learns from your conversations, customer behavior, and performance signals. The Cortex Engine reviews outcomes, identifies successful patterns, detects failures, and deploys improvements making the agent more effective at qualifying leads and driving conversions over time.',
   },
   {
     q: 'How is Synabs different from a regular chatbot?',
@@ -16,23 +16,23 @@ const faqs = [
   },
   {
     q: 'How long does it take to get started?',
-    a: 'From your first demo to a live, trained agent: one day. We onboard your business data — website content, documents, FAQs — and the agent is ready. Installation on your site takes just a few minutes.',
+    a: 'From your first demo to a live, trained agent: one day. We onboard your business data website content, documents, FAQs and the agent is ready. Installation on your site takes just a few minutes.',
   },
   {
     q: 'Can I see how the AI is performing?',
-    a: 'Yes. Monthly performance reports give you full visibility into conversations, captured leads, qualification activity, and the improvements the AI has made — so you can clearly track ROI.',
+    a: 'Yes. Monthly performance reports give you full visibility into conversations, captured leads, qualification activity, and the improvements the AI has made so you can clearly track ROI.',
   },
   {
     q: 'What happens if the AI gives incorrect information?',
-    a: 'The AI is trained on your specific business data to stay accurate. When it encounters a question outside its knowledge, it guides the visitor to the next best step — gathering lead info or directing them to your team — rather than guessing.',
+    a: 'The AI is trained on your specific business data to stay accurate. When it encounters a question outside its knowledge, it guides the visitor to the next best step gathering lead info or directing them to your team rather than guessing.',
   },
   {
     q: 'What CRM integrations are available?',
-    a: 'We currently support HubSpot natively and connect to thousands of other tools via Zapier. If you use a different CRM, reach out — we\'ll work with you to make it happen.',
+    a: 'We currently support HubSpot natively and connect to thousands of other tools via Zapier. If you use a different CRM, reach out we\'ll work with you to make it happen.',
   },
   {
     q: 'What happens after 5,000 messages?',
-    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 each, so your agent keeps running without interruption. Need higher volume? Additional packages are available — just contact us.',
+    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 each, so your agent keeps running without interruption. Need higher volume? Additional packages are available just contact us.',
   },
   {
     q: 'Is my data shared with other customers?',
@@ -40,7 +40,7 @@ const faqs = [
   },
   {
     q: 'Is Synabs GDPR compliant?',
-    a: 'Yes. Synabs is built with data protection as a foundation — all data is encrypted at rest and in transit, stored in compliant cloud infrastructure, and can be deleted on request. We follow industry-standard security practices at all times.',
+    a: 'Yes. Synabs is built with data protection as a foundation all data is encrypted at rest and in transit, stored in compliant cloud infrastructure, and can be deleted on request. We follow industry-standard security practices at all times.',
   },
 ]
 
