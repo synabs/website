@@ -28,11 +28,11 @@ const faqs = [
   },
   {
     q: 'What CRM integrations are available?',
-    a: 'We connect to thousands of tools via Zapier. HubSpot is the first CRM we have fully integrated, and we are open to working with you on any other platform you use.',
+    a: 'We connect to thousands of tools through Zapier. HubSpot is the first CRM we\'ve successfully integrated via Zapier, and we\'re open to supporting any other CRM platform you use.',
   },
   {
     q: 'What happens after 5,000 messages?',
-    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 each, so your agent keeps running without interruption. If you consistently need more, we sell additional message packages and are happy to discuss a volume that fits your usage.',
+    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 each, so your agent keeps running without interruption. We also sell additional message packages and are happy to discuss a volume that fits your usage.',
   },
   {
     q: 'Is my data shared with other customers?',
