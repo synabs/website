@@ -18,7 +18,7 @@
   margin-inline: auto;
 }
 
-/* Background image */
+/* ---- Background image: pops in like a card, then fades to 0.25 ---- */
 .cortex__image {
   position: absolute;
   inset: 0;
@@ -28,7 +28,26 @@
   display: block;
   pointer-events: none;
   z-index: 0;
-  transition: opacity 0.1s linear;
+
+  opacity: 0;
+  transform: translateZ(160px) translateY(-40px) scale(1.04);
+  transform-origin: top center;
+  transition:
+    opacity 0.35s ease,
+    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Step 1: image snaps in at full opacity */
+.cortex__image--visible {
+  opacity: 1;
+  transform: translateZ(0) translateY(0) scale(1);
+  /* After landing, fade down to 0.25 over 1s */
+  animation: cortexImageFade 1s ease 0.4s forwards;
+}
+
+@keyframes cortexImageFade {
+  from { opacity: 1; }
+  to   { opacity: 0.25; }
 }
 
 /* ---- Content wrapper ---- */
@@ -54,22 +73,14 @@
     transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* ---- Visible state — triggered by .cortex__content--visible ---- */
-.cortex__content--visible .cortex__slide-left {
+.cortex__slide--visible {
   opacity: 1;
   transform: translateX(0);
 }
 
-.cortex__content--visible .cortex__slide-right {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Staggered delays */
+/* Stagger delays for heading and text */
 .cortex__heading-row { transition-delay: 0s; }
 .cortex__text-cell   { transition-delay: 0.15s; }
-.cortex__stats .cortex__stat:nth-child(1) { transition-delay: 0.3s; }
-.cortex__stats .cortex__stat:nth-child(2) { transition-delay: 0.45s; }
 
 /* ---- Heading ---- */
 .cortex__heading-row {
@@ -146,19 +157,16 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .cortex__slide-left {
-    transform: translateX(-24px);
-  }
-
-  .cortex__slide-right {
-    transform: translateX(24px);
-  }
+  .cortex__slide-left  { transform: translateX(-24px); }
+  .cortex__slide-right { transform: translateX(24px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cortex__image,
   .cortex__slide-left,
   .cortex__slide-right {
     transition: none;
+    animation: none;
     opacity: 1;
     transform: none;
   }
