@@ -24,6 +24,7 @@
   width: 100%;
   padding-right: var(--gutter);
   padding-left: calc(var(--gutter) / 4);
+  position: relative;
 }
 
 /* Logo */
@@ -40,8 +41,16 @@
 
 /* Desktop nav */
 .navbar__nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
+}
+.navbar__ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
   margin-left: auto;
 }
 .navbar__list {
