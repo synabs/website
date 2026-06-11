@@ -19,7 +19,7 @@ export default function Cortex() {
           // Image pops in
           setImageVisible(true)
           // After image has faded down to 0.65 opacity (~1.4s), show content
-          setTimeout(() => setContentVisible(true), 1400)
+          setTimeout(() => setContentVisible(true), 900)
         }
       },
       { threshold: 0.2 }
