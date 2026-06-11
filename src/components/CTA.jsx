@@ -32,7 +32,7 @@ export default function CTA() {
             START THE<br />
             <span className="cta__glitch" ref={glitchRef}>R</span>EVOLUTION
           </h2>
-          <p className="cta__quote"><em>The last AI agent you'll ever need to upgrade</em></p>
+          <p className="cta__quote"><em>Stop managing chatbots, start growing with AI.</em></p>
           <div className="cta__buttons">
             <a href="/contact" className="btn btn--white">Watch Demo</a>
             <a href="/join" className="btn btn--outline">Try it free 14 days</a>
