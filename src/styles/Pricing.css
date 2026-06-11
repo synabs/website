@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 16px 0 16px 24px;
+  padding: 16px 0 16px 8px;
   border-top: 1px solid rgba(255,255,255,0.12);
   border-bottom: 1px solid rgba(255,255,255,0.12);
   margin-bottom: 48px;
@@ -139,7 +139,8 @@
 }
 
 .pricing__amount--secondary {
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  white-space: nowrap;
 }
 
 .pricing__per {
