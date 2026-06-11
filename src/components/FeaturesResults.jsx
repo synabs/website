@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/FeaturesResults.css";
 import Demo from "./Demo";
-import Abilities from "./Abilities";
 
 const statsConfig = [
   {
@@ -244,9 +243,6 @@ export default function FeaturesResults() {
           </div>
         </div>
       </section>
-
-      {/* ── Capabilities ── */}
-      <Abilities />
 
       {showSources && <SourcesModal onClose={() => setShowSources(false)} />}
     </>
