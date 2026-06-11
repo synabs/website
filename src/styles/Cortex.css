@@ -31,7 +31,7 @@
 /* ---- Top: text + image side by side ---- */
 .cortex__top {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   border-top: 1px solid rgba(255,255,255,0.1);
   border-left: 1px solid rgba(255,255,255,0.1);
 }
@@ -51,18 +51,19 @@
 }
 
 .cortex__image-cell {
-  border-right: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  overflow: hidden;
-  min-height: 300px;
+  display: none;
 }
 
 .cortex__image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 0.85;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ---- Bottom: stats row ---- */
@@ -101,10 +102,6 @@
 @media (max-width: 768px) {
   .cortex__top {
     grid-template-columns: 1fr;
-  }
-
-  .cortex__image-cell {
-    min-height: 220px;
   }
 
   .cortex__stats {
