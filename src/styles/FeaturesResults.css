@@ -49,64 +49,6 @@
 }
 
 /* ============================================================
-   CAPABILITIES GRID
-   ============================================================ */
-.fr-feat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.fr-feat-cell {
-  padding: 2.5rem 2rem;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  border-left: 1px solid transparent;
-  transition:
-    background 0.15s ease,
-    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    opacity 0.35s ease,
-    border-left-color 0.35s ease;
-  opacity: 0;
-  transform: translateZ(160px) translateY(-40px) scale(1.04);
-  transform-origin: top center;
-  will-change: transform, opacity;
-}
-
-.fr-feat-cell--visible {
-  opacity: 1;
-  transform: translateZ(0) translateY(0) scale(1);
-  border-left-color: rgba(255,255,255,0.1);
-}
-
-.fr-feat-cell:hover {
-  background: rgba(255,255,255,0.03);
-}
-
-.fr-feat-icon {
-  font-size: 1.4rem;
-  color: var(--color-white);
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.fr-feat-title {
-  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
-  font-weight: var(--font-bold);
-  color: var(--color-white);
-  letter-spacing: -0.01em;
-  margin: 0 0 0.5rem;
-}
-
-.fr-feat-desc {
-  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
-  color: var(--color-white);
-  opacity: 1;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* ============================================================
    RESULTS — STATS
    ============================================================ */
 .fr-stats-grid {
@@ -196,9 +138,6 @@
    RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
-  .fr-feat-grid {
-    grid-template-columns: 1fr;
-  }
   .fr-stats-grid {
     grid-template-columns: 1fr;
   }
@@ -208,18 +147,8 @@
   .fr-stat-lbl,
   .fr-harvard-quote,
   .fr-ng-stage-title,
-  .fr-ng-stage-desc,
-  .fr-feat-title,
-  .fr-feat-desc {
+  .fr-ng-stage-desc {
     font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fr-feat-cell {
-    transition: none;
-    opacity: 1;
-    transform: none;
   }
 }
 
