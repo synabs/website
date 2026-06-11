@@ -3,62 +3,61 @@ import '../styles/FAQ.css'
 
 const faqs = [
   {
-    q: 'How does the AI get smarter over time?',
-    a: 'Every conversation helps improve the Cortex Engine. The system analyzes conversation outcomes, buying signals, customer behavior, and quality signals to identify what drives better results. These insights are used to continuously optimize how the AI qualifies leads, answers questions, and guides visitors toward conversion.',
+    q: 'How long does it take to get started?',
+    a: 'Most customers are live in just a few minutes. Add one line of code to your website, share your business information, and we handle the rest.',
   },
   {
-    q: 'What makes Synabs different from traditional AI chatbots?',
-    a: 'Traditional chatbots follow fixed rules and scripts. Synabs is built around a continuously evolving Cortex Engine that reviews conversation performance, identifies opportunities for improvement, and adapts its behavior over time. The result is an AI agent that becomes more effective as it learns from real customer interactions.',
+    q: 'How is an AI Agent different from a regular chatbot?',
+    a: 'Traditional chatbots follow predefined rules and scripted flows. Synabs AI Agents use the Cortex Engine to analyze conversations, identify patterns that drive conversions, and continuously improve over time. Instead of following static scripts, the agent adapts based on real customer interactions.',
+  },
+  {
+    q: 'What exactly does "evolving" mean?',
+    a: 'The AI continuously learns from conversation data, customer behavior, and performance signals. The Cortex Engine reviews outcomes, identifies successful patterns, detects failures, and deploys improvements designed to increase lead quality and conversion rates over time.',
   },
   {
     q: 'How does the Cortex Engine work?',
     a: 'The Cortex Engine analyzes intent, context, sentiment, customer behavior, and quality signals in real time. It reviews conversation outcomes, benchmarks performance, identifies failures, deploys improvements, and injects targeted prompts designed to increase lead quality and conversions.',
   },
   {
-    q: 'Is my data shared with other customers?',
-    a: 'No. Your conversations, customer information, and business data remain private to your organization. Each customer has their own dedicated data environment. Synabs may use anonymized and aggregated learning signals to improve the Cortex Engine, but your business data is never exposed to other customers.',
+    q: 'What makes Synabs different from traditional AI chatbots?',
+    a: 'Synabs is built around a continuously evolving Cortex Engine that reviews conversation performance, identifies opportunities for improvement, and adapts its behavior over time. The result is an AI agent that becomes more effective as it learns from real customer interactions.',
   },
   {
-    q: "Does the AI learn from my company's conversations?",
+    q: 'Does the AI learn from my company\'s conversations?',
     a: 'Yes. The AI learns from interactions on your website to better understand your customers, products, services, and buying patterns. This helps the agent improve performance for your specific business while also contributing anonymized insights that help improve the Cortex Engine overall.',
   },
   {
-    q: "What happens if the AI doesn't know the answer?",
-    a: 'The AI is trained on your website, documents, and business information to answer questions accurately. If it encounters a question outside its knowledge, it can gather lead information, guide the visitor to the appropriate next step, or help connect them with your team.',
+    q: 'How does the AI get smarter over time?',
+    a: 'Every conversation helps improve the Cortex Engine. The system analyzes conversation outcomes, buying signals, customer behavior, and quality signals to identify what drives better results. These insights continuously optimize how the AI qualifies leads, answers questions, and guides visitors toward conversion.',
   },
   {
     q: 'Can I see how the AI is performing?',
     a: 'Yes. Monthly performance reports provide visibility into conversations, captured leads, qualification activity, and insights discovered by the AI, helping you understand performance and track ROI.',
   },
   {
-    q: 'How long does it take to get started?',
-    a: 'Most customers can get their AI agent live in just a few minutes. Simply add one line of code to your website and provide your business information. We handle the setup and training process for you.',
-  },
-  {
-    q: 'How is AI Agent different from a regular chatbot?',
-    a: 'Traditional chatbots follow predefined rules and scripted flows. Synabs AI Agents use the Cortex Engine to analyze conversations, identify patterns that drive conversions, and continuously improve their performance over time. Instead of following static scripts, the agent adapts based on real customer interactions.',
-  },
-  {
-    q: 'What exactly does "evolving" mean?',
-    a: '"Evolving" means the AI continuously learns from conversation data, customer behavior, and performance signals. The Cortex Engine reviews outcomes, identifies successful patterns, detects failures, and deploys improvements designed to increase lead quality and conversion rates over time.',
-  },
-  {
-    q: 'What CRM integrations are available?',
-    a: 'Synabs supports CRM integrations through Zapier, allowing you to connect with thousands of popular tools and platforms. This enables automatic lead syncing, workflow automation, and customer data management across your existing systems. HubSpot is fully supported today — and we are happy to work with you on any other integration you need.',
-  },
-  {
     q: 'What happens if the AI gives incorrect information?',
-    a: 'The AI is trained on your website, documents, FAQs, and business information to provide accurate responses. If it encounters a question outside its knowledge, it will attempt to guide the visitor appropriately, gather lead information, or direct them to the next best step.',
+    a: 'The AI is trained on your website, documents, FAQs, and business information to provide accurate responses. If it encounters a question outside its knowledge, it will guide the visitor appropriately, gather lead information, or direct them to the next best step.',
   },
   {
     q: 'What happens after 5,000 messages?',
-    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 per message, ensuring your AI Agent continues operating without interruption as your traffic grows. Need more volume? You can purchase additional message packages at any time by contacting us.',
+    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 per message, ensuring your AI Agent continues operating without interruption. Need more volume? Additional message packages are available — just contact us.',
+  },
+  {
+    q: 'What CRM integrations are available?',
+    a: 'We currently support HubSpot and connect to thousands of other tools through Zapier. We are at an early stage and have focused on HubSpot first, but we welcome any new integration opportunity. If you use a different CRM or platform, reach out and we will work with you to make it happen.',
+  },
+  {
+    q: 'Is my data shared with other customers?',
+    a: 'No. Your conversations, customer information, and business data remain private to your organization. Each customer has a dedicated data environment. Synabs may use anonymized and aggregated signals to improve the Cortex Engine, but your business data is never exposed to other customers.',
+  },
+  {
+    q: 'Is Synabs secure and GDPR compliant?',
+    a: 'Yes. Synabs is GDPR-ready and built with data protection as a foundation. All data is stored in encrypted cloud storage, encrypted in transit, and can be deleted on request. We follow industry-standard security practices to keep your data and your customers\' data safe at all times.',
   },
 ]
 
 export default function FAQ() {
   const [open, setOpen] = useState(null)
-
   const toggle = (i) => setOpen(open === i ? null : i)
 
   return (
@@ -93,8 +92,10 @@ export default function FAQ() {
                   <path d="M3 6L8 11L13 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <div className="faq__answer">
-                <p>{item.a}</p>
+              <div className="faq__answer-wrapper">
+                <div className="faq__answer">
+                  <p>{item.a}</p>
+                </div>
               </div>
             </div>
           ))}
