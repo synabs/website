@@ -1,0 +1,135 @@
+/* ============================================================
+   TABLE.CSS
+   ============================================================ */
+
+.comptable {
+  position: relative;
+  background: var(--color-black);
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.comptable__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+.comptable__label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: var(--space-4);
+}
+
+.comptable__heading {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: var(--font-bold);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+
+.comptable__heading em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.75);
+  text-stroke: 1.5px rgba(255,255,255,0.75);
+}
+
+/* ---- Scroll wrapper for mobile ---- */
+.comptable__wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---- Table ---- */
+.comptable__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ---- Header ---- */
+.comptable__th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  white-space: nowrap;
+}
+
+.comptable__th--situation {
+  width: 22%;
+  color: var(--color-white);
+}
+
+.comptable__th--chatbot {
+  width: 39%;
+  color: var(--color-white);
+}
+
+.comptable__th--synabs {
+  width: 39%;
+  color: var(--color-white);
+}
+
+/* ---- Rows ---- */
+.comptable__row {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.15s ease;
+}
+
+.comptable__row:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+/* ---- Cells ---- */
+.comptable__td {
+  padding: 1.4rem 1.5rem;
+  font-size: clamp(var(--text-base), 1.4vw, var(--text-lg));
+  line-height: 1.5;
+  vertical-align: top;
+  color: var(--color-white);
+}
+
+.comptable__td--situation {
+  font-weight: var(--font-bold);
+  white-space: nowrap;
+}
+
+.comptable__td--chatbot {
+  opacity: 0.5;
+}
+
+.comptable__td--synabs {
+  font-weight: var(--font-bold);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .comptable__table {
+    table-layout: auto;
+    min-width: 560px;
+  }
+
+  .comptable__td,
+  .comptable__th {
+    padding: 1rem;
+    font-size: var(--text-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comptable__row {
+    transition: none;
+  }
+}
