@@ -41,14 +41,16 @@
   font-weight: var(--font-bold);
   color: var(--color-white);
 }
-.cta__revolution {
-  display: inline-block;
+.cta__revolution-wrap {
+  display: block;
   position: relative;
+  text-align: center;
 }
 .cta__glitch {
-  display: inline-block;
-  width: 0.58em;
-  position: relative;
+  position: absolute;
+  right: 100%;
+  margin-right: 0.08em;
+  top: 0;
 }
 .cta__quote {
   font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
