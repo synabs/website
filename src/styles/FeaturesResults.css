@@ -296,6 +296,7 @@
   border-bottom: none;
 }
 
+
 .fr-ng-stage:hover {
   background: rgba(255,255,255,0.02);
 }
@@ -350,7 +351,6 @@
   background: rgba(255,255,255,0.08);
   position: relative;
   overflow: hidden;
-  margin-top: -1px;
 }
 
 .fr-ng-progress-fill {
@@ -358,7 +358,7 @@
   inset-block: 0;
   left: 0;
   width: 0%;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
   transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
