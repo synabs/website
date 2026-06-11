@@ -119,6 +119,56 @@ function StatCell({ cfg, visible, delay }) {
   );
 }
 
+
+const sources = [
+  {
+    citation: 'Oldroyd, J.B., McElheran, K., & Elkington, D. (2011). The Short Life of Online Sales Leads.',
+    label: 'Harvard Business Review',
+    url: 'https://www.hbs.edu/faculty/Pages/item.aspx?num=39955',
+  },
+  {
+    citation: 'Lead Response Time Insights (2025).',
+    label: 'HubSpot',
+    url: 'https://www.hubspot.com/reduce-lead-response-time',
+  },
+];
+
+function SourcesModal({ onClose }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose]);
+
+  return (
+    <div className="fr-sources-overlay" onClick={onClose}>
+      <div className="fr-sources-box" onClick={e => e.stopPropagation()}>
+        <div className="fr-sources-header">
+          <span className="fr-sources-title">Sources</span>
+          <button className="fr-sources-close" onClick={onClose} aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <ol className="fr-sources-list">
+          {sources.map((s, i) => (
+            <li key={i} className="fr-sources-item">
+              <span className="fr-sources-citation">{s.citation}</span>{' '}
+              <a href={s.url} target="_blank" rel="noopener noreferrer" className="fr-sources-link">
+                {s.label}
+                <svg width="11" height="11" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  );
+}
+
 export default function FeaturesResults() {
   const statsRef = useRef(null);
   const featRef = useRef(null);
@@ -129,6 +179,7 @@ export default function FeaturesResults() {
   const [featCount, setFeatCount] = useState(0);
   const [stageCount, setStageCount] = useState(0);
   const [progressActive, setProgressActive] = useState(false);
+  const [showSources, setShowSources] = useState(false);
 
   useEffect(() => {
     const o1 = new IntersectionObserver(
@@ -200,9 +251,12 @@ export default function FeaturesResults() {
                 <strong>7× more likely</strong> to qualify them compared to
                 those that wait just two hours.
               </p>
-              <p className="fr-harvard-source">
+              <button className="fr-harvard-source fr-harvard-source--btn" onClick={() => setShowSources(true)}>
                 Harvard Business Review · Speed-to-lead study
-              </p>
+                <svg width="11" height="11" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -266,6 +320,7 @@ export default function FeaturesResults() {
           </div>
         </div>
       </section>
+      {showSources && <SourcesModal onClose={() => setShowSources(false)} />}
     </>
   );
 }
