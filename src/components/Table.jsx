@@ -19,7 +19,7 @@ const rows = [
   {
     situation: 'Follow-up',
     chatbot: 'No memory between conversations',
-    synabs: 'Uses conversation history to improve over time',
+    synabs: 'Learns from data and improves',
   },
   {
     situation: 'Booking',
@@ -39,8 +39,8 @@ export default function Table() {
       <div className="comptable__inner">
         <p className="comptable__label">Comparison</p>
         <h2 className="comptable__heading">
-          Not just a chatbot.<br />
-          <em>An agent that works.</em>
+          The next generation of<br />
+          <em>customer engagement</em>
         </h2>
 
         <div className="comptable__wrap">
