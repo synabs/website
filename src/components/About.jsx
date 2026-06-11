@@ -30,7 +30,7 @@ export default function About() {
               <p className="about__member-name">Santeri Koskinen</p>
               <p className="about__member-role">CO-FOUNDER</p>
               <p className="about__member-bio">
-                Santeri is a serial entrepreneur with a proven track record of building successful startups and leading the strategic vision behind growing businesses.
+                Santeri is a serial entrepreneur with a proven track record of building successful startup and leading the strategic vision behind growing businesses.
               </p>
             </div>
           </div>
