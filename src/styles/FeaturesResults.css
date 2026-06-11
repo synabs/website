@@ -396,3 +396,114 @@
     transition: none;
   }
 }
+
+/* ============================================================
+   SOURCES MODAL
+   ============================================================ */
+.fr-harvard-source--btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  color: var(--color-white);
+  opacity: 0.25;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.fr-harvard-source--btn:hover {
+  opacity: 0.6;
+}
+
+.fr-sources-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.fr-sources-box {
+  background: var(--color-black);
+  border: 1px solid rgba(255,255,255,0.15);
+  max-width: 560px;
+  width: 100%;
+  padding: 36px 40px;
+}
+
+.fr-sources-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.fr-sources-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.fr-sources-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.fr-sources-close:hover {
+  color: var(--color-white);
+}
+
+.fr-sources-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.fr-sources-item {
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+  font-weight: var(--font-regular);
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 20px 0;
+}
+
+.fr-sources-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.fr-sources-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-white);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 1px;
+  transition: opacity 0.2s ease;
+}
+
+.fr-sources-link:hover {
+  opacity: 0.6;
+}
