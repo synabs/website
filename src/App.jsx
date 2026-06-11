@@ -12,6 +12,7 @@ import Prototype from './components/Prototype'
 import About from './components/About'
 import Cortex from './components/Cortex'
 import Pricing from './components/Pricing'
+import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
       <Abilities />
       <SetupSection />
       <About />
+      <FAQ />
       <Pricing />
       <CTA />
     </>
