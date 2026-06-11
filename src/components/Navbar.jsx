@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav className={navClass} id="navbar">
       <div className="navbar__inner">
 
-        {/* Logo – aivan vasemmalle */}
+        {/* Logo – vasemmalle */}
         <a href="/" className="navbar__logo" aria-label="Home">
           <img
             src="/synabs-black.avif"
@@ -31,7 +31,7 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Desktop nav – keskitetty */}
+        {/* Linkit – absoluuttisesti keskelle */}
         <nav className="navbar__nav" aria-label="Päävalikko">
           <ul className="navbar__list">
             {navLinks.map(({ href, label }) => (
@@ -39,24 +39,18 @@ export default function Navbar() {
                 <a href={href} className="navbar__link">{label}</a>
               </li>
             ))}
-            <li>
-              <a
-                href="/trial"
-                className="navbar__link navbar__link--cta-outline"
-              >
-                Start free trial
-              </a>
-            </li>
-            <li>
-              <a
-                href="/demo"
-                className="navbar__link navbar__link--cta btn btn--outline"
-              >
-                Get demo
-              </a>
-            </li>
           </ul>
         </nav>
+
+        {/* CTA-napit – oikealle */}
+        <div className="navbar__ctas">
+          <a href="/trial" className="navbar__link navbar__link--cta-outline">
+            Start free trial
+          </a>
+          <a href="/demo" className="navbar__link navbar__link--cta btn btn--outline">
+            Get demo
+          </a>
+        </div>
 
         {/* Hamburger */}
         <button
