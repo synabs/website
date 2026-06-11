@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: 'Can I see how the AI is performing?',
-    a: 'Yes. Monthly performance reports give you full visibility into conversations, captured leads, qualification activity, and the improvements the AI has made so you can clearly track ROI.',
+    a: 'Yes. Monthly performance reports give you visibility of key stats and the improvements the AI has made, so you can track ROI over time.',
   },
   {
     q: 'What happens if the AI gives incorrect information?',
@@ -28,11 +28,11 @@ const faqs = [
   },
   {
     q: 'What CRM integrations are available?',
-    a: 'We currently support HubSpot natively and connect to thousands of other tools via Zapier. If you use a different CRM, reach out we\'ll work with you to make it happen.',
+    a: 'We connect to thousands of tools via Zapier. HubSpot is the first CRM we have fully integrated, and we are open to working with you on any other platform you use.',
   },
   {
     q: 'What happens after 5,000 messages?',
-    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 each, so your agent keeps running without interruption. Need higher volume? Additional packages are available just contact us.',
+    a: 'Your subscription includes 5,000 messages per month. Additional messages are billed at €0.06 each, so your agent keeps running without interruption. If you consistently need more, we sell additional message packages and are happy to discuss a volume that fits your usage.',
   },
   {
     q: 'Is my data shared with other customers?',
