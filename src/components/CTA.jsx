@@ -1,88 +1,47 @@
-/* ============================================================
-   CTA.CSS
-   ============================================================ */
-.cta {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/7;
-  overflow: hidden;
-}
-.cta__bg {
-  position: absolute;
-  inset: 0;
-}
-.cta__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.cta__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-inline: var(--gutter);
-}
-.cta__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-10);
-  max-width: none;
-}
-.cta__title {
-  font-size: clamp(4.2rem, 12vw, 10.5rem);
-  line-height: 0.88;
-  letter-spacing: -0.04em;
-  font-weight: var(--font-bold);
-  color: var(--color-white);
-}
-.cta__revolution {
-  display: inline-block;
-  position: relative;
-}
-.cta__glitch {
-  display: inline-block;
-  width: 0.58em;
-  position: relative;
-}
-.cta__quote {
-  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
-  font-weight: var(--font-light);
-  color: var(--color-white);
-  letter-spacing: 0.01em;
-  line-height: var(--leading-relaxed);
-  max-width: 700px;
-  margin: 0;
-}
-.cta__buttons {
-  display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 1024px) {
-  .cta__overlay {
-    padding-inline: 80px;
-  }
-}
-@media (max-width: 768px) {
-  .cta {
-    aspect-ratio: 4/5;
-  }
-  .cta__overlay {
-    padding: 32px 24px;
-    align-items: center;
-    background: rgba(0,0,0,0.6);
-  }
-  .cta__quote {
-    font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
-  }
+import { useEffect, useRef } from 'react'
+import '../styles/CTA.css'
+
+export default function CTA() {
+  const glitchRef = useRef(null)
+
+  useEffect(() => {
+    const letters = ['ㅤ', 'R', 'ㅤ', 'R', 'ㅤ', 'ㅤ', 'R']
+    let timeout
+
+    const glitch = () => {
+      const el = glitchRef.current
+      if (!el) return
+      const random = letters[Math.floor(Math.random() * letters.length)]
+      el.textContent = random
+      const next = Math.random() * 2000 + 400
+      timeout = setTimeout(glitch, next)
+    }
+
+    timeout = setTimeout(glitch, 1200)
+    return () => clearTimeout(timeout)
+  }, [])
+
+  return (
+    <section className="cta">
+      <div className="cta__bg" aria-hidden="true">
+        <img src="/cta.avif" alt="" />
+      </div>
+      <div className="cta__overlay">
+        <div className="cta__content">
+          <h2 className="cta__title">
+            START THE<br />
+            <span className="cta__revolution-wrap">
+              <span className="cta__glitch" ref={glitchRef} aria-hidden="true">R</span>
+              EVOLUTION
+            </span>
+          </h2>
+          <p className="cta__quote"><em>The last AI agent you'll ever need to upgrade</em></p>
+          <div className="cta__buttons">
+            <a href="/contact" className="btn btn--white">Watch Demo</a>
+            <a href="/join" className="btn btn--outline">Try it free 14 days</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }
