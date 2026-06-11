@@ -43,8 +43,8 @@
 }
 .cta__glitch {
   display: inline-block;
+  width: 0.6em;
   transition: color 60ms ease;
-  margin-right: 0.04em;
 }
 .cta__quote {
   font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
