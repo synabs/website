@@ -2,6 +2,7 @@ import './styles/globals.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Features from './components/Features'
+import Abilities from './components/Abilities'
 import FeaturesResults from './components/FeaturesResults'
 import SetupSection from './components/SetupSection'
 import Demo from './components/Demo'
@@ -19,6 +20,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <FeaturesResults />
+      <Abilities />
       <SetupSection />
       <About />
       <Cortex />
