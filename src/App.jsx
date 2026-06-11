@@ -11,6 +11,7 @@ import Evolve from './components/Evolve'
 import Prototype from './components/Prototype'
 import About from './components/About'
 import Cortex from './components/Cortex'
+import Table from './components/Table'
 import Pricing from './components/Pricing'
 import FAQ from './components/FAQ'
 import CTA from './components/CTA'
@@ -25,6 +26,7 @@ export default function App() {
       <Abilities />
       <SetupSection />
       <About />
+      <Table />
       <Pricing />
       <FAQ />
       <CTA />
