@@ -42,7 +42,7 @@ const stages = [
   {
     num: "S3",
     title: "Predicts intent and acts before you ask",
-    desc: "After months of data, the agent learns visitor behavior, predicts their needs, and identifies the best opportunities to present your services and guide them toward a decision.",
+    desc: "Over time, the agent learns visitor behavior, predicts their needs, and identifies the best opportunities to present your services and guide them toward a decision.",
   },
 ];
 
