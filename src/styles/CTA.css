@@ -44,6 +44,7 @@
 .cta__glitch {
   display: inline-block;
   width: 0.6em;
+  margin-right: 8px;
   transition: color 60ms ease;
 }
 .cta__quote {
