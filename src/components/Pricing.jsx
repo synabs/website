@@ -4,8 +4,8 @@ export default function Pricing() {
     <section className="pricing">
       <div className="pricing__inner">
         <h2 className="pricing__title">
-          Get the AI agent your<br />
-          <em>customers can rely on</em>
+          Get the AI agent that<br />
+          <em>learns what converts</em>
         </h2>
         <div className="pricing__guarantee">
           <span className="pricing__guarantee-check">✓</span>
@@ -21,7 +21,7 @@ export default function Pricing() {
           <div className="pricing__card">
             <div className="pricing__card-top">
               <h3 className="pricing__card-title">AI agent</h3>
-              <p className="pricing__card-desc" style={{color: '#fff'}}>Set up in minutes on any website.</p>
+              <p className="pricing__card-desc" style={{color: '#fff'}}>Compatible with any website (WordPress, Shopify, custom).</p>
             </div>
             <div className="pricing__price-features-row">
               <div>
@@ -34,10 +34,9 @@ export default function Pricing() {
               <ul className="pricing__features">
                 <li>✓ Evolving AI</li>
                 <li>✓ Trained on your business</li>
-                <li>✓ Lead capture</li>
-                <li>✓ Lead qualification</li>
+                <li>✓ Lead capture & qualification</li>
                 <li>✓ Calendly booking</li>
-                <li>✓ Monthly Performance Reports</li>
+                <li>✓ Monthly performance reports</li>
                 <li>✓ Automatic language detection</li>
                 <li>✓ Powered by Cortex Engine</li>
               </ul>
