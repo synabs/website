@@ -1,39 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/FeaturesResults.css";
 import Demo from "./Demo";
-
-const features = [
-  {
-    icon: "ti-brain",
-    title: "Evolves every week",
-    desc: "Reviews every conversation, finds what drives conversions, and updates its own responses. No manual tuning.",
-  },
-  {
-    icon: "ti-clock-24",
-    title: "Never misses a lead",
-    desc: "Responds in under 2 seconds, day or night. Every visitor gets an answer before they leave.",
-  },
-  {
-    icon: "ti-filter",
-    title: "Lead qualification",
-    desc: "Asks the right questions, captures contact details, and scores leads without a human in the loop.",
-  },
-  {
-    icon: "ti-calendar-check",
-    title: "Calendly booking",
-    desc: "Books meetings directly into your calendar. Lead captured, qualified, and booked in one conversation.",
-  },
-  {
-    icon: "ti-world",
-    title: "Language detection",
-    desc: "Detects the visitor's language and switches instantly. No config needed. Works across every market.",
-  },
-  {
-    icon: "ti-chart-bar",
-    title: "Monthly reports",
-    desc: "Clear monthly summaries of conversations, captured leads, and agent insights, so you can track ROI with confidence.",
-  },
-];
+import Abilities from "./Abilities";
 
 const statsConfig = [
   {
@@ -119,7 +87,6 @@ function StatCell({ cfg, visible, delay }) {
   );
 }
 
-
 const sources = [
   {
     citation: 'Oldroyd, J.B., McElheran, K., & Elkington, D. (2011). The Short Life of Online Sales Leads.',
@@ -171,12 +138,10 @@ function SourcesModal({ onClose }) {
 
 export default function FeaturesResults() {
   const statsRef = useRef(null);
-  const featRef = useRef(null);
   const ngRef = useRef(null);
   const progressRef = useRef(null);
 
   const [statsVisible, setStatsVisible] = useState(false);
-  const [featCount, setFeatCount] = useState(0);
   const [stageCount, setStageCount] = useState(0);
   const [progressActive, setProgressActive] = useState(false);
   const [showSources, setShowSources] = useState(false);
@@ -187,23 +152,6 @@ export default function FeaturesResults() {
       { threshold: 0.1 }
     );
     if (statsRef.current) o1.observe(statsRef.current);
-
-    const o2 = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          o2.disconnect();
-          let i = 0;
-          const tick = () => {
-            i++;
-            setFeatCount(i);
-            if (i < features.length) setTimeout(tick, 700);
-          };
-          setTimeout(tick, 100);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (featRef.current) o2.observe(featRef.current);
 
     const o3 = new IntersectionObserver(
       ([entry]) => {
@@ -223,7 +171,7 @@ export default function FeaturesResults() {
     );
     if (ngRef.current) o3.observe(ngRef.current);
 
-    return () => { o1.disconnect(); o2.disconnect(); o3.disconnect(); };
+    return () => { o1.disconnect(); o3.disconnect(); };
   }, []);
 
   return (
@@ -298,28 +246,8 @@ export default function FeaturesResults() {
       </section>
 
       {/* ── Capabilities ── */}
-      <section className="fr-section">
-        <div className="fr-inner">
-          <p className="fr-label">Capabilities</p>
-          <h2 className="fr-heading">
-            Convert more visitors,<br />
-            <em>automatically</em>
-          </h2>
+      <Abilities />
 
-          <div className="fr-feat-grid" ref={featRef}>
-            {features.map((f, i) => (
-              <div
-                className={`fr-feat-cell${i < featCount ? " fr-feat-cell--visible" : ""}`}
-                key={f.title}
-              >
-                <i className={`ti ${f.icon} fr-feat-icon`} aria-hidden="true" />
-                <p className="fr-feat-title">{f.title}</p>
-                <p className="fr-feat-desc">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
       {showSources && <SourcesModal onClose={() => setShowSources(false)} />}
     </>
   );
