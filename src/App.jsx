@@ -9,6 +9,7 @@ import Setup from './components/Setup'
 import Evolve from './components/Evolve'
 import Prototype from './components/Prototype'
 import About from './components/About'
+import Cortex from './components/Cortex'
 import Pricing from './components/Pricing'
 import CTA from './components/CTA'
 
@@ -20,6 +21,7 @@ export default function App() {
       <FeaturesResults />
       <SetupSection />
       <About />
+      <Cortex />
       <Pricing />
       <CTA />
     </>
