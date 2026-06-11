@@ -1,69 +1,145 @@
-import '../styles/Table.css'
+/* ============================================================
+   TABLE.CSS
+   ============================================================ */
 
-const rows = [
-  {
-    situation: 'First response',
-    chatbot: 'Answers the question',
-    synabs: 'Answers and guides the visitor forward',
-  },
-  {
-    situation: 'Lead capture',
-    chatbot: 'None, or a separate form',
-    synabs: 'Asks and collects details naturally in conversation',
-  },
-  {
-    situation: 'Sales intent',
-    chatbot: 'Does not recognise buying signals',
-    synabs: 'Identifies purchase intent and acts on it',
-  },
-  {
-    situation: 'Follow-up',
-    chatbot: 'No memory between conversations',
-    synabs: 'Learns from data and improves',
-  },
-  {
-    situation: 'Booking',
-    chatbot: 'Not supported',
-    synabs: 'Books meetings directly via calendar integration',
-  },
-  {
-    situation: 'Optimisation',
-    chatbot: 'Manual updates only',
-    synabs: 'Improves automatically based on real data',
-  },
-]
+.comptable {
+  position: relative;
+  background: var(--color-black);
+  padding-block: var(--section-padding);
+  padding-inline: var(--gutter);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
 
-export default function Table() {
-  return (
-    <section className="comptable">
-      <div className="comptable__inner">
-        <p className="comptable__label">Comparison</p>
-        <h2 className="comptable__heading">
-          The next generation of<br />
-          <em>customer engagement</em>
-        </h2>
+.comptable__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
 
-        <div className="comptable__wrap">
-          <table className="comptable__table">
-            <thead>
-              <tr>
-                <th className="comptable__th comptable__th--situation">Situation</th>
-                <th className="comptable__th comptable__th--chatbot">Regular chatbot</th>
-                <th className="comptable__th comptable__th--synabs">Synabs AI agent</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, i) => (
-                <tr key={i} className="comptable__row">
-                  <td className="comptable__td comptable__td--situation">{row.situation}</td>
-                  <td className="comptable__td comptable__td--chatbot">{row.chatbot}</td>
-                  <td className="comptable__td comptable__td--synabs">{row.synabs}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  )
+.comptable__label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: var(--space-4);
+}
+
+.comptable__heading {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: var(--font-bold);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+
+.comptable__heading em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.75);
+  text-stroke: 1.5px rgba(255,255,255,0.75);
+}
+
+/* ---- Scroll wrapper for mobile ---- */
+.comptable__wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---- Table ---- */
+.comptable__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ---- Header ---- */
+.comptable__th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: clamp(var(--text-base), 1.4vw, var(--text-lg));
+  font-weight: var(--font-bold);
+  color: var(--color-white);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  white-space: nowrap;
+}
+
+.comptable__th--situation {
+  width: 22%;
+  color: var(--color-white);
+}
+
+.comptable__th--chatbot {
+  width: 39%;
+  color: var(--color-white);
+}
+
+.comptable__th--synabs {
+  width: 39%;
+  color: var(--color-white);
+}
+
+/* ---- Rows ---- */
+.comptable__row {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition:
+    background 0.15s ease,
+    opacity 0.65s ease,
+    transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+.comptable__row--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.comptable__row:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+/* ---- Cells ---- */
+.comptable__td {
+  padding: 1.4rem 1.5rem;
+  font-size: clamp(var(--text-base), 1.4vw, var(--text-lg));
+  line-height: 1.5;
+  vertical-align: top;
+  color: var(--color-white);
+}
+
+.comptable__td--situation {
+  font-weight: var(--font-bold);
+  white-space: nowrap;
+}
+
+.comptable__td--chatbot {
+  opacity: 0.5;
+}
+
+.comptable__td--synabs {
+  font-weight: var(--font-bold);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .comptable__table {
+    table-layout: auto;
+    min-width: 560px;
+  }
+
+  .comptable__td,
+  .comptable__th {
+    padding: 1rem;
+    font-size: var(--text-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comptable__row {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
