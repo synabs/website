@@ -29,13 +29,16 @@ export default function CTA() {
       <div className="cta__overlay">
         <div className="cta__content">
           <h2 className="cta__title">
-            START THE <br /><span className="cta__glitch" ref={glitchRef}>R</span>EVOLUTION
+            START THE<br />
+            <span className="cta__revolution">
+              <span className="cta__glitch" ref={glitchRef}>R</span>EVOLUTION
+            </span>
           </h2>
+          <p className="cta__quote"><em>The last AI agent you'll ever need to upgrade</em></p>
           <div className="cta__buttons">
             <a href="/contact" className="btn btn--white">Watch Demo</a>
             <a href="/join" className="btn btn--outline">Try it free 14 days</a>
           </div>
-          <p className="cta__quote"><em>The last AI agent you'll ever need to upgrade</em></p>
         </div>
       </div>
     </section>
