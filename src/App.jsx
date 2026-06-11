@@ -20,10 +20,10 @@ export default function App() {
       <Navbar />
       <Hero />
       <FeaturesResults />
+      <Cortex />
       <Abilities />
       <SetupSection />
       <About />
-      <Cortex />
       <Pricing />
       <CTA />
     </>
