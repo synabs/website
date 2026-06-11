@@ -63,17 +63,17 @@ const statsConfig = [
 
 const stages = [
   {
-    num: "Stage 01",
+    num: "S1",
     title: "Trained on your business from day one",
     desc: "Share your website, documents, and FAQs with us. We upload everything and configure the agent to understand your products, brand voice, and customer questions.",
   },
   {
-    num: "Stage 02",
+    num: "S2",
     title: "Detects patterns that lead to conversions",
     desc: "Analyzes conversation history to identify common buying signals and recommend higher-converting responses.",
   },
   {
-    num: "Stage 03",
+    num: "S3",
     title: "Predicts intent and acts before you ask",
     desc: "After months of data, the agent learns visitor behavior, predicts their needs, and identifies the best opportunities to present your services and guide them toward a decision.",
   },
