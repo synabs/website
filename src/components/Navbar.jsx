@@ -53,7 +53,7 @@ export default function Navbar() {
                 href="/demo"
                 className="navbar__link navbar__link--cta btn btn--outline"
               >
-                View demo
+                Get demo
               </a>
             </li>
           </ul>
