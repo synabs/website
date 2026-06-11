@@ -31,7 +31,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--space-8);
+  gap: var(--space-10);
   max-width: none;
 }
 .cta__title {
@@ -41,21 +41,29 @@
   font-weight: var(--font-bold);
   color: var(--color-white);
 }
+.cta__revolution {
+  display: inline-block;
+  position: relative;
+}
 .cta__glitch {
   display: inline-block;
-  transition: color 60ms ease;
+  width: 0.58em;
+  position: relative;
+}
+.cta__quote {
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
+  font-weight: var(--font-light);
+  color: var(--color-white);
+  letter-spacing: 0.01em;
+  line-height: var(--leading-relaxed);
+  max-width: 700px;
+  margin: 0;
 }
 .cta__buttons {
   display: flex;
   gap: var(--space-4);
   flex-wrap: wrap;
   justify-content: center;
-}
-.cta__quote {
-  font-size: var(--text-base);
-  font-weight: var(--font-light);
-  color: var(--color-white);
-  letter-spacing: 0.01em;
 }
 /* ============================================================
    RESPONSIVE
@@ -73,5 +81,8 @@
     padding: 32px 24px;
     align-items: center;
     background: rgba(0,0,0,0.6);
+  }
+  .cta__quote {
+    font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
   }
 }
