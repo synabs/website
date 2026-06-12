@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../styles/Navbar.css'
 
 const navLinks = [
-  { href: '/about',      label: 'About' },
-  { href: '/pricing',    label: 'Pricing' },
-  { href: '/technology', label: 'Technology' },
+  { href: '#about',      label: 'About' },
+  { href: '#pricing',    label: 'Pricing' },
+  { href: '#technology', label: 'Technology' },
 ]
 
 export default function Navbar() {
@@ -31,25 +31,26 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Linkit – absoluuttisesti keskelle */}
-        <nav className="navbar__nav" aria-label="Päävalikko">
-          <ul className="navbar__list">
-            {navLinks.map(({ href, label }) => (
-              <li key={href}>
-                <a href={href} className="navbar__link">{label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        {/* Linkit + CTA-napit – oikealle */}
+        <div className="navbar__right">
+          <nav className="navbar__nav" aria-label="Päävalikko">
+            <ul className="navbar__list">
+              {navLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <a href={href} className="navbar__link">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        {/* CTA-napit – oikealle */}
-        <div className="navbar__ctas">
-          <a href="/trial" className="navbar__link navbar__link--cta-outline">
-            Start free trial
-          </a>
-          <a href="/demo" className="navbar__link navbar__link--cta btn btn--outline">
-            Get demo
-          </a>
+          <div className="navbar__ctas">
+            <a href="/trial" className="navbar__link navbar__link--cta-outline">
+              Start free trial
+            </a>
+            <a href="/demo" className="navbar__link navbar__link--cta">
+              Get demo
+            </a>
+          </div>
         </div>
 
         {/* Hamburger */}
