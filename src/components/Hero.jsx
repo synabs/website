@@ -21,7 +21,7 @@ export default function Hero() {
           The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
         </p>
         <div className="hero__buttons">
-          <a href="/contact" className="btn btn--white">Get Demo</a>
+          <a href="/contact" className="btn btn--white">Get a demo</a>
           <a href="/join"    className="btn btn--outline">Try it free 14 days</a>
         </div>
       </div>
