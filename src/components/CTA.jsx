@@ -34,7 +34,7 @@ export default function CTA() {
           </h2>
           <p className="cta__quote">Stop managing chatbots, start growing with AI.</p>
           <div className="cta__buttons">
-            <a href="/contact" className="btn btn--white">Get Demo</a>
+            <a href="/contact" className="btn btn--white">Get a demo</a>
             <a href="/join" className="btn btn--outline">Try it free 14 days</a>
           </div>
         </div>
