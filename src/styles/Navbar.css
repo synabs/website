@@ -103,7 +103,7 @@
   font-size: var(--btn-font-size, 0.875rem) !important;
   font-weight: var(--btn-font-weight, 500) !important;
   letter-spacing: var(--btn-letter-spacing, 0.04em) !important;
-  text-transform: uppercase;
+  text-transform: none;
   background: transparent !important;
   color: var(--color-black, #111) !important;
   border: 1px solid var(--color-black, #111) !important;
