@@ -27,7 +27,7 @@ export default function Demo() {
   }, [])
 
   return (
-    <section className="demo">
+    <section className="demo" id="demo">
       <div className="device-frame">
         {/* Notch / top bar */}
         <div className="device-frame__topbar">
