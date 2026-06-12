@@ -1,7 +1,7 @@
 import '../styles/Pricing.css'
 export default function Pricing() {
   return (
-    <section className="pricing">
+    <section className="pricing" id="pricing">
       <div className="pricing__inner">
         <p className="pricing__label">Pricing</p>
         <h2 className="pricing__title">
