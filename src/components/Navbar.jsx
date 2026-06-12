@@ -48,7 +48,7 @@ export default function Navbar() {
               Start free trial
             </a>
             <a href="/demo" className="navbar__link navbar__link--cta">
-              Get demo
+              Get a demo
             </a>
           </div>
         </div>
