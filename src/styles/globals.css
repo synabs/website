@@ -149,7 +149,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   justify-content: center;
   height: var(--btn-height);
   padding-inline: var(--btn-padding-x);
-  border-radius: var(--btn-radius);
+  border-radius: var(--radius-md);
   font-size: var(--btn-font-size);
   font-weight: var(--btn-font-weight);
   letter-spacing: var(--btn-letter-spacing);
