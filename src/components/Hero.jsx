@@ -8,9 +8,9 @@ export default function Hero() {
     const canvas = hexCanvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.18
-    const FADE_SPEED = 0.012, APPEAR_SPEED = 0.025
-    let hexes = [], targetOpacity = 0, scrollTimer = null, animFrame = null
+    const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.08
+    const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
+    let hexes = [], targetOpacity = 1, scrollTimer = null, animFrame = null
     let t = 0, elapsed = 0, lastTime = 0
 
     function hexPoint(cx, cy, size, i) {
@@ -52,7 +52,7 @@ export default function Hero() {
       hexes.forEach(h => {
         const op = h.op * MAX_OPACITY
         if (op < 0.005) return
-        const floatY = h.baseY + Math.sin(t * 0.8 + h.floatOffset) * 3.5
+        const floatY = h.baseY + Math.sin(t * 0.25 + h.floatOffset) * 3.5
         ctx.save()
         ctx.globalAlpha = op
         ctx.strokeStyle = '#ffffff'
@@ -84,8 +84,6 @@ export default function Hero() {
     function onScroll() {
       targetOpacity = 1
       elapsed = 0
-      clearTimeout(scrollTimer)
-      scrollTimer = setTimeout(() => { targetOpacity = 0 }, 1500)
     }
 
     resize()
@@ -95,7 +93,6 @@ export default function Hero() {
 
     return () => {
       cancelAnimationFrame(animFrame)
-      clearTimeout(scrollTimer)
       window.removeEventListener('resize', resize)
       window.removeEventListener('scroll', onScroll)
     }
