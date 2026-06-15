@@ -46,7 +46,7 @@ export default function Pricing() {
             </div>
             <div className="pricing__card-actions">
               <a href="/trial" className="btn btn--outline">Free 14 day trial</a>
-              <a href="/demo" className="pricing__link">Get demo</a>
+              <a href="/demo" className="pricing__link">Get a demo</a>
             </div>
           </div>
           {/* Card 2 */}
@@ -63,7 +63,7 @@ export default function Pricing() {
             </div>
             <div className="pricing__card-actions">
               <a href="/contact" className="btn btn--outline">Let's talk</a>
-              <a href="/demo" className="pricing__link">Get demo</a>
+              <a href="/demo" className="pricing__link">Get a demo</a>
             </div>
           </div>
         </div>
