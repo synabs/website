@@ -38,7 +38,7 @@
   display: block;
 }
 
-/* Right-side wrapper: nav links + CTAs */
+/* Right side */
 .navbar__right {
   display: flex;
   align-items: center;
@@ -46,98 +46,44 @@
   margin-left: auto;
 }
 
-/* Desktop nav */
-.navbar__nav {
-  display: flex;
-  align-items: center;
-}
-.navbar__ctas {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-}
-.navbar__list {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-}
-.navbar__link {
-  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
-  font-weight: var(--font-bold, 700);
+/* Start free trial – pelkkä linkkiteksti */
+.navbar__trial-link {
+  font-size: clamp(var(--text-sm, 0.875rem), 1.2vw, var(--text-base, 1rem));
+  font-weight: var(--font-medium, 500);
   letter-spacing: 0.02em;
   color: var(--color-black, #111);
-  transition: color var(--transition-fast, 0.15s ease);
+  text-decoration: none;
   white-space: nowrap;
+  transition: color var(--transition-fast, 0.15s ease);
 }
-.navbar__link:hover {
+.navbar__trial-link:hover {
   color: var(--text-muted, #555);
 }
 
-/* CTA button */
-.navbar__link--cta {
-  display: inline-flex;
-  align-items: center;
-  height: var(--btn-height, 48px) !important;
-  padding-inline: var(--btn-padding-x, 2rem) !important;
-  font-size: var(--btn-font-size, 0.875rem) !important;
-  font-weight: var(--btn-font-weight, 500) !important;
-  letter-spacing: var(--btn-letter-spacing, 0.04em) !important;
-  text-transform: none;
-  background: var(--color-black, #111) !important;
-  color: var(--color-white, #fff) !important;
-  border: 1px solid var(--color-black, #111) !important;
-  border-radius: var(--btn-radius, 9999px) !important;
-  transition: background var(--transition-fast, 0.15s ease), color var(--transition-fast, 0.15s ease);
-}
-.navbar__link--cta:hover {
-  background: #333 !important;
-  color: var(--color-white, #fff) !important;
-}
-
-/* Outline CTA button */
-.navbar__link--cta-outline {
-  display: inline-flex;
-  align-items: center;
-  height: var(--btn-height, 48px) !important;
-  padding-inline: var(--btn-padding-x, 2rem) !important;
-  font-size: var(--btn-font-size, 0.875rem) !important;
-  font-weight: var(--btn-font-weight, 500) !important;
-  letter-spacing: var(--btn-letter-spacing, 0.04em) !important;
-  text-transform: none;
-  background: transparent !important;
-  color: var(--color-black, #111) !important;
-  border: 1px solid var(--color-black, #111) !important;
-  border-radius: var(--btn-radius, 9999px) !important;
-  transition: background var(--transition-fast, 0.15s ease), color var(--transition-fast, 0.15s ease);
-}
-.navbar__link--cta-outline:hover {
-  background: var(--color-black, #111) !important;
-  color: var(--color-white, #fff) !important;
-}
-
-/* Hamburger */
+/* Hamburger – SVG-pohjainen, aina näkyvissä */
 .navbar__hamburger {
-  display: none;
-  flex-direction: column;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  margin-left: auto;
+  color: var(--color-black, #111);
+  background: none;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
 }
-.navbar__hamburger span {
-  display: block;
-  height: 1.5px;
-  background: var(--color-black, #111);
-  transition: transform var(--transition-normal, 0.25s ease), opacity var(--transition-normal, 0.25s ease);
-  transform-origin: center;
+.navbar__hamburger svg {
+  width: 28px;
+  height: 20px;
+  transition: opacity var(--transition-fast, 0.15s ease);
 }
-.navbar__hamburger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.navbar__hamburger--open span:nth-child(2) { opacity: 0; }
-.navbar__hamburger--open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.navbar__hamburger--open svg {
+  opacity: 0.5;
+}
 
-/* Mobile menu */
+/* Dropdown menu */
 .navbar__mobile-menu {
   position: absolute;
   top: var(--nav-height);
@@ -169,8 +115,10 @@
   border-bottom: 1px solid var(--border-color, #eee);
   padding-bottom: var(--space-4, 1rem);
   transition: color var(--transition-fast, 0.15s ease);
+  text-decoration: none;
 }
 .navbar__mobile-link:hover { color: var(--text-muted, #555); }
+
 .navbar__mobile-link--cta {
   margin-top: var(--space-4, 1rem);
   border-bottom: none;
@@ -183,22 +131,10 @@
   color: var(--color-black, #111) !important;
   border-radius: var(--radius-md, 6px);
   font-size: var(--text-base, 1rem);
+  font-weight: var(--font-medium, 500);
+  text-decoration: none;
 }
-.navbar__mobile-link--cta-outline {
-  margin-top: var(--space-4, 1rem);
-  border-bottom: none;
-  border: 1.5px solid var(--color-black, #111);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-3, 0.75rem) var(--space-6, 1.25rem);
-  background: transparent;
-  color: var(--color-black, #111) !important;
-  border-radius: var(--radius-md, 6px);
-  font-size: var(--text-base, 1rem);
-}
-
-@media (max-width: 1024px) {
-  .navbar__right { display: none; }
-  .navbar__hamburger { display: flex; }
+.navbar__mobile-link--cta:hover {
+  background: var(--color-black, #111);
+  color: var(--color-white, #fff) !important;
 }
