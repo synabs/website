@@ -161,8 +161,19 @@ export default function Hero() {
               </div>
             </div>
             <div className="hero__cta">
-              <p className="hero__cta-text">Start free, cancel anytime</p>
-              <a href="/join" className="hero__cta-button">Get started</a>
+              <div className="hero__quote-stars" aria-hidden="true" style={{ visibility: 'hidden' }}>
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+              <p className="hero__cta-text">
+                Start free and cancel anytime — no credit card required to begin building your first AI agent today.
+              </p>
+              <div className="hero__cta-row">
+                <a href="/join" className="hero__cta-button">Get started</a>
+              </div>
             </div>
           </div>
         </div>
