@@ -125,17 +125,42 @@ export default function Hero() {
         }}
       />
       <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
-        <h1 className="hero__title">
-          EVOLVING<br />
-          AI<br />
-          AGENTS
-        </h1>
-        <p className="hero__lead">
-          The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
-        </p>
-        <div className="hero__buttons">
-          <a href="/contact" className="btn btn--white">Get a demo</a>
-          <a href="/join"    className="btn btn--outline">Try it free 14 days</a>
+        <div className="hero__inner">
+          <div className="hero__left">
+            <h1 className="hero__title">
+              EVOLVING<br />
+              AI<br />
+              AGENTS
+            </h1>
+            <p className="hero__lead">
+              The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
+            </p>
+            <div className="hero__buttons">
+              <a href="/contact" className="btn btn--white">Get a demo</a>
+              <a href="/join"    className="btn btn--outline">Try it free 14 days</a>
+            </div>
+          </div>
+          <div className="hero__right">
+            <div className="hero__quote">
+              <div className="hero__quote-stars" aria-label="5 tähteä">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+              <blockquote className="hero__quote-text">
+                "We were honored to be early testers. The value was so good it felt almost illegal to use for free."
+              </blockquote>
+              <div className="hero__quote-author">
+                <div className="hero__quote-avatar" aria-hidden="true">MA</div>
+                <div>
+                  <p className="hero__quote-name">Mirko Asell</p>
+                  <p className="hero__quote-role">CEO at Somesankarit Oy</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
