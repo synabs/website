@@ -81,7 +81,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-right: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * (100vw - var(--max-width)) / 2 - var(--gutter));
 }
 
 /* ── Quote card ── */
@@ -97,7 +97,7 @@
   border-radius: 16px 0 0 16px;
   padding: 28px 28px 24px;
   width: 320px;
-  animation: quoteSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  animation: quoteSlideIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 .hero__quote-stars {
   display: flex;
