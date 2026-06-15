@@ -31,7 +31,7 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Oikealle: Start free trial -linkki + hamburger */}
+        {/* Oikealle: Start free trial -nappi + hamburger */}
         <div className="navbar__right">
           <a href="/trial" className="navbar__trial-link">
             Start free trial
@@ -44,13 +44,25 @@ export default function Navbar() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
-            <svg viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Ylin viiva – kapea (suipuva) */}
-              <line x1="7" y1="2" x2="21" y2="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              {/* Keskiviiva – leveä */}
-              <line x1="2" y1="10" x2="26" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              {/* Alaviiva – sama kuin ylin */}
-              <line x1="7" y1="18" x2="21" y2="18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            <svg
+              className="navbar__hamburger-svg"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Kolme viivaa – hamburger */}
+              <line className="navbar__hb-line navbar__hb-line--top"    x1="7" y1="6"  x2="21" y2="6"  stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <line className="navbar__hb-line navbar__hb-line--mid"    x1="2" y1="14" x2="26" y2="14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <line className="navbar__hb-line navbar__hb-line--bottom" x1="7" y1="22" x2="21" y2="22" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              {/* Kuusiokulma – open-tilassa */}
+              <polygon
+                className="navbar__hb-hex"
+                points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinejoin="round"
+                fill="none"
+              />
             </svg>
           </button>
         </div>
@@ -69,11 +81,6 @@ export default function Navbar() {
               <a href={href} className="navbar__mobile-link" onClick={closeMenu}>{label}</a>
             </li>
           ))}
-          <li>
-            <a href="/demo" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
-              Get a demo
-            </a>
-          </li>
         </ul>
       </div>
     </nav>
