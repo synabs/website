@@ -65,6 +65,7 @@
 
 /* ── Hero two-column layout ── */
 .hero__inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -80,7 +81,7 @@
 .hero__right {
   position: absolute;
   top: 50%;
-  right: 0;
+  right: calc(-1 * var(--gutter));
   transform: translateY(-50%);
   z-index: 2;
 }
