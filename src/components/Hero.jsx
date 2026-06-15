@@ -34,6 +34,7 @@ export default function Hero() {
             x, y, baseY: y, op: 0,
             delay: row * 0.08 + col * 0.02 + Math.random() * 0.06,
             floatOffset: Math.random() * Math.PI * 2,
+            fadeStart: 0.55 + Math.random() * 0.3,
           })
         }
       }
@@ -50,7 +51,9 @@ export default function Hero() {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       t += 0.016
       hexes.forEach(h => {
-        const op = h.op * MAX_OPACITY
+        const yRatio = h.baseY / canvas.height
+        const edgeFade = yRatio < h.fadeStart ? 1 : Math.max(0, 1 - (yRatio - h.fadeStart) / (1 - h.fadeStart))
+        const op = h.op * MAX_OPACITY * edgeFade
         if (op < 0.005) return
         const floatY = h.baseY + Math.sin(t * 0.25 + h.floatOffset) * 3.5
         ctx.save()
