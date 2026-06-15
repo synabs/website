@@ -160,6 +160,10 @@ export default function Hero() {
                 </div>
               </div>
             </div>
+            <div className="hero__cta">
+              <p className="hero__cta-text">Start free, cancel anytime</p>
+              <a href="/join" className="hero__cta-button">Get started</a>
+            </div>
           </div>
         </div>
       </div>
