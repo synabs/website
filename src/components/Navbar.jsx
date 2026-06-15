@@ -31,48 +31,37 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Linkit + CTA-napit – oikealle */}
+        {/* Oikealle: Start free trial -linkki + hamburger */}
         <div className="navbar__right">
-          <nav className="navbar__nav" aria-label="Päävalikko">
-            <ul className="navbar__list">
-              {navLinks.map(({ href, label }) => (
-                <li key={href}>
-                  <a href={href} className="navbar__link">{label}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <a href="/trial" className="navbar__trial-link">
+            Start free trial
+          </a>
 
-          <div className="navbar__ctas">
-            <a href="/trial" className="navbar__link navbar__link--cta-outline">
-              Start free trial
-            </a>
-            <a href="/demo" className="navbar__link navbar__link--cta">
-              Get a demo
-            </a>
-          </div>
+          <button
+            className={`navbar__hamburger${menuOpen ? ' navbar__hamburger--open' : ''}`}
+            onClick={toggleMenu}
+            aria-label="Avaa valikko"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+          >
+            <svg viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Ylin viiva – kapea (suipuva) */}
+              <line x1="7" y1="2" x2="21" y2="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              {/* Keskiviiva – leveä */}
+              <line x1="2" y1="10" x2="26" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              {/* Alaviiva – sama kuin ylin */}
+              <line x1="7" y1="18" x2="21" y2="18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
         </div>
-
-        {/* Hamburger */}
-        <button
-          className={`navbar__hamburger${menuOpen ? ' navbar__hamburger--open' : ''}`}
-          onClick={toggleMenu}
-          aria-label="Avaa valikko"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Dropdown menu – sekä mobile että desktop */}
       <div
         className={`navbar__mobile-menu${menuOpen ? ' navbar__mobile-menu--open' : ''}`}
         id="mobile-menu"
         role="dialog"
-        aria-label="Mobiilinavigaatio"
+        aria-label="Navigaatio"
       >
         <ul className="navbar__mobile-list">
           {navLinks.map(({ href, label }) => (
@@ -81,13 +70,8 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="/trial" className="navbar__mobile-link navbar__mobile-link--cta-outline" onClick={closeMenu}>
-              Start free trial
-            </a>
-          </li>
-          <li>
             <a href="/demo" className="navbar__mobile-link navbar__mobile-link--cta" onClick={closeMenu}>
-              View demo
+              Get a demo
             </a>
           </li>
         </ul>
