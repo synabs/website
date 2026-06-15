@@ -173,7 +173,7 @@
   margin: 0;
 }
 
-/* ── CTA card (pure CSS clone, no extra HTML needed) ── */
+/* ── CTA card (sibling element next to quote card) ── */
 @keyframes ctaSlideIn {
   from { transform: translateX(110%); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
@@ -183,25 +183,64 @@
   60%  { transform: scaleX(1); }
   100% { transform: scaleX(1); }
 }
-.hero__quote::after {
-  content: "Start free, cancel anytime";
-  position: absolute;
-  top: 0;
-  left: calc(100% + var(--space-4));
-  width: 320px;
-  height: 100%;
+@keyframes ctaContentReveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.hero__cta {
+  position: relative;
   background: #000000;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  padding: 28px;
+  width: 320px;
+  flex-shrink: 0;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
   text-align: center;
-  padding: 28px;
-  box-sizing: border-box;
+  animation: ctaSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both;
+}
+.hero__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000000;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: ctaBarSweep 0.5s cubic-bezier(0.65, 0, 0.35, 1) 1.6s forwards;
+  z-index: 1;
+}
+.hero__cta > * {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: ctaContentReveal 0.3s linear 1.85s forwards;
+}
+.hero__cta-text {
   font-size: 0.95rem;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.88);
-  animation: ctaSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both;
+  line-height: 1.65;
+  margin: 0;
+}
+.hero__cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  color: #000000;
+  border: none;
+  border-radius: 0;
+  padding: 12px 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 @media (max-width: 900px) {
@@ -218,8 +257,5 @@
   .hero__quote,
   .hero__cta {
     max-width: 100%;
-  }
-  .hero__quote::after {
-    display: none;
   }
 }
