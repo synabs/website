@@ -59,7 +59,7 @@ export default function Abilities() {
   }, []);
 
   return (
-    <section className="ab-section">
+    <section className="ab-section" id="abilities">
       <div className="ab-inner">
         <p className="ab-label">Capabilities</p>
         <h2 className="ab-heading">
