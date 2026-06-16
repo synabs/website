@@ -139,14 +139,16 @@ export default function ScrollProgress() {
       const magneticFill = applyMagnet(rawFill, checkpointsRef.current)
       setDisplayFill(magneticFill)
 
-      // Hexagonien täyttö: käytetään RAW filliä (ei magneettieta), jotta
-      // hexagoni täyttyy juuri kun se sektion kohdalle scrollataan
+      // Hexagonien täyttö: käytetään MAGNEETTISTA filliä (ei raakaa),
+      // jotta hexagon täyttyy juuri kun bar visuaalisesti saavuttaa sen
+      // (estää tilanteen jossa bar on jo hexagonin kohdalla/ohi mutta
+      // hexagon näyttää vielä tyhjältä)
       let changed = false
       const nextFilled = { ...filledRef.current }
 
       checkpointsRef.current.forEach(({ id, railPct }) => {
         // Hero (railPct===0) on aina täynnä heti
-        const isPast = railPct === 0 ? true : rawFill >= railPct
+        const isPast = railPct === 0 ? true : magneticFill >= railPct - 0.01
         const wasFilled = !!filledRef.current[id]
 
         if (isPast && !wasFilled) {
