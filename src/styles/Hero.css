@@ -171,7 +171,6 @@
   color: rgba(255, 255, 255, 0.88);
   line-height: 1.65;
   margin: 0 0 20px;
-  font-style: italic;
 }
 .hero__quote-author {
   display: flex;
@@ -212,7 +211,6 @@
   color: rgba(255, 255, 255, 0.88);
   line-height: 1.35;
   margin: 0 0 20px;
-  font-style: italic;
 }
 .hero__cta-row {
   display: flex;
