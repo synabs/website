@@ -1,6 +1,8 @@
 /* ============================================
    SCROLL-PROGRESS.CSS
    Kiinnitetty navbarin alareunaan, koko leveys.
+   Kehystetty palkki: musta tausta, valkoinen
+   reunaviiva, kontrastiset hexagon-checkpointit.
    ============================================ */
 
 .scroll-progress {
@@ -9,16 +11,25 @@
   left: 0;
   right: 0;
   z-index: var(--z-nav);
-  height: 4px;
-  background: var(--color-black, #000000);
   pointer-events: none;
 }
 
-/* ── Täyttöpalkki ── */
+.scroll-progress__frame {
+  position: relative;
+  height: 32px;
+  background: var(--color-black, #000000);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* ── Täyttöpalkki (ohut viiva kehyksen sisällä) ── */
 .scroll-progress__track {
   position: absolute;
-  inset: 0;
-  background: var(--color-black, #000000);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
   overflow: hidden;
 }
 .scroll-progress__fill {
@@ -33,11 +44,12 @@
 /* ── Hexagon-pisteet, tasavälein ── */
 .scroll-progress__points {
   position: absolute;
-  top: 50%;
+  top: 3px;
+  bottom: 0;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-inline: var(--gutter);
 }
@@ -46,19 +58,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
 }
 
 .scroll-progress__hex {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   overflow: visible;
-  color: var(--color-grey-400, #999999);
 }
 
 .scroll-progress__hex-outline {
-  color: var(--color-white, #ffffff);
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.25s ease;
 }
 
 .scroll-progress__hex-fill {
@@ -69,6 +81,9 @@
   color: var(--color-white, #ffffff);
 }
 
+.scroll-progress__point--filled .scroll-progress__hex-outline {
+  color: var(--color-white, #ffffff);
+}
 .scroll-progress__point--filled .scroll-progress__hex-fill {
   opacity: 1;
   transform: scale(1);
@@ -77,8 +92,8 @@
 /* ── Pop-animaatio kun checkpoint täyttyy ── */
 @keyframes hexPop {
   0%   { transform: scale(1); }
-  35%  { transform: scale(1.6); }
-  60%  { transform: scale(0.85); }
+  35%  { transform: scale(1.55); }
+  60%  { transform: scale(0.88); }
   100% { transform: scale(1); }
 }
 .scroll-progress__point--pop .scroll-progress__hex {
@@ -86,15 +101,18 @@
 }
 
 @media (max-width: 768px) {
+  .scroll-progress__frame {
+    height: 24px;
+  }
   .scroll-progress__points {
     padding-inline: var(--space-6);
   }
   .scroll-progress__point {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
   }
   .scroll-progress__hex {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
   }
 }
