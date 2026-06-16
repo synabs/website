@@ -135,10 +135,7 @@ export default function Hero() {
             <p className="hero__lead">
               The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
-            <div className="hero__buttons">
-              <a href="/contact" className="btn btn--white">Get a demo</a>
-              <a href="/join"    className="btn btn--outline">Try it free 14 days</a>
-            </div>
+
           </div>
           <div className="hero__right">
             <div className="hero__quote">
@@ -169,7 +166,7 @@ export default function Hero() {
                 ))}
               </div>
               <p className="hero__cta-text">
-                Start free and cancel anytime — no credit card required to begin building your first AI agent today.
+                Start free and cancel anytime
               </p>
               <div className="hero__cta-row">
                 <a href="/join" className="hero__cta-button">Get started</a>
