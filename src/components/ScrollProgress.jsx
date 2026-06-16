@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import '../styles/ScrollProgress.css'
 
 const sectionIds = [
-  'navbar',
   'hero',
   'features-results',
   'cortex',
+  'technology',
   'abilities',
   'setup-section',
   'about',
@@ -37,9 +37,13 @@ export default function ScrollProgress() {
         .map((id) => {
           const el = document.getElementById(id)
           if (!el) return null
-          const rect = el.getBoundingClientRect()
-          const currentScroll = doc.scrollTop || document.body.scrollTop
-          const elTop = rect.top + currentScroll
+          // offsetTop-ketju antaa absoluuttisen sijainnin riippumatta scroll-positiosta
+          let elTop = 0
+          let node = el
+          while (node) {
+            elTop += node.offsetTop || 0
+            node = node.offsetParent
+          }
           const pct = Math.min(100, Math.max(0, (elTop / scrollHeight) * 100))
           return { id, pct }
         })
