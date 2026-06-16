@@ -101,10 +101,10 @@
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 14px;
-  width: 380px;
+  width: 320px;
   padding: 28px 30px;
   box-sizing: border-box;
-  animation: cardSlideIn 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroFloat 5s ease-in-out infinite;
 }
 
 .hero__quote > * {
@@ -200,6 +200,28 @@
 
 /* ── CTA card content removed ── */
 
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.hero__demo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero__demo-wrap .demo {
+  min-height: unset;
+  width: auto;
+  background: none;
+}
+
+.hero__demo-wrap .demo::before {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .hero__inner {
     flex-direction: column;
@@ -208,12 +230,14 @@
   .hero__right {
     flex: none;
     width: 100%;
-    flex-wrap: wrap;
-    justify-content: flex-start;
     margin-right: 0;
+  }
+  .hero__demo-wrap {
+    flex-direction: column;
   }
   .hero__quote {
     max-width: 100%;
     width: 100%;
+    animation: none;
   }
 }
