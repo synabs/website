@@ -49,7 +49,7 @@ export default function FAQ() {
   const toggle = (i) => setOpen(open === i ? null : i)
 
   return (
-    <section className="faq">
+    <section className="faq" id="faq">
       <div className="faq__inner">
         <p className="faq__label">FAQ</p>
         <h2 className="faq__heading">
