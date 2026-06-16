@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import '../styles/ScrollProgress.css'
+import '../styles/Scrollprogress.css'
 
 const sectionIds = [
   'navbar',
