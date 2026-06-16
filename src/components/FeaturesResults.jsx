@@ -209,8 +209,29 @@ export default function FeaturesResults() {
         </div>
       </section>
 
-      {/* ── Demo ── */}
-      <Demo />
+      {/* ── Demo + Quote ── */}
+      <div style={{ position: 'relative' }}>
+        <Demo />
+        <div className="fr-demo-quote">
+          <div className="fr-demo-quote-stars" aria-label="5 tähteä">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#e53e3e" aria-hidden="true">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+          <blockquote className="fr-demo-quote-text">
+            "We were honored to be early testers. The value was so good it felt almost illegal to use for free."
+          </blockquote>
+          <div className="fr-demo-quote-author">
+            <div className="fr-demo-quote-avatar" aria-hidden="true">MA</div>
+            <div>
+              <p className="fr-demo-quote-name">Mirko Asell</p>
+              <p className="fr-demo-quote-role">CEO at Somesankarit Oy</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* ── Next Generation ── */}
       <section className="fr-section fr-section--nextgen">
