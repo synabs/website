@@ -21,9 +21,8 @@ function getAbsoluteTop(el) {
   return rect.top + window.scrollY
 }
 
-// Magneetti: palauttaa "magnetized" fill% jos ollaan lähellä hexagonia
-// zone = osuus raidasta (0..1) joka on magnettivetoa
-const MAGNET_ZONE = 0.25
+// Magneetti: ±15% raidasta hexagonin ympärillä
+const MAGNET_RADIUS = 15 // prosenttiyksikköä
 
 function applyMagnet(rawFill, checkpoints) {
   if (checkpoints.length === 0) return rawFill
@@ -40,30 +39,12 @@ function applyMagnet(rawFill, checkpoints) {
   }
   if (!closest) return rawFill
 
-  // Laske gap seuraavaan/edelliseen hexagoniin (tai oleta 10 jos ei naapuria)
-  const sorted = [...checkpoints].sort((a, b) => a.railPct - b.railPct)
-  const idx = sorted.findIndex((c) => c.id === closest.id)
-  let gap = 10
-  if (idx > 0 && idx < sorted.length - 1) {
-    gap = Math.min(
-      sorted[idx].railPct - sorted[idx - 1].railPct,
-      sorted[idx + 1].railPct - sorted[idx].railPct
-    )
-  } else if (sorted.length > 1) {
-    gap =
-      idx === 0
-        ? sorted[1].railPct - sorted[0].railPct
-        : sorted[idx].railPct - sorted[idx - 1].railPct
-  }
-
-  const magnetRadius = gap * MAGNET_ZONE
   const diff = rawFill - closest.railPct
+  if (Math.abs(diff) > MAGNET_RADIUS) return rawFill
 
-  if (Math.abs(diff) > magnetRadius) return rawFill
-
-  // Sileä snäppäys: cosini-interpolaatio → snäppää hexagoniin kun ollaan lähellä
-  const t = Math.abs(diff) / magnetRadius // 0=center, 1=edge
-  const pull = 1 - t * t                   // parabolinen veto
+  // Parabolinen veto: max keskellä, nolla reunalla
+  const t = Math.abs(diff) / MAGNET_RADIUS // 0=keskellä, 1=reuna
+  const pull = 1 - t * t
   return rawFill - diff * pull * 0.85
 }
 
