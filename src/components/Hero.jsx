@@ -102,7 +102,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="hero">
+    <section className="hero" id="hero">
       <div className="hero__bg" aria-hidden="true">
         <img
           src="/synabs-hero.avif"
