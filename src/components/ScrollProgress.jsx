@@ -15,7 +15,6 @@ const sectionIds = [
   'cta',
 ]
 
-// Laskee elementin absoluuttisen offsetin sivun yläreunasta
 function getAbsoluteTop(el) {
   let top = 0
   let node = el
@@ -28,23 +27,21 @@ function getAbsoluteTop(el) {
 
 export default function ScrollProgress() {
   const [fillPercent, setFillPercent] = useState(0)
-  const [checkpoints, setCheckpoints] = useState([])   // [{ id, railPct }]
+  const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
+  const [debugInfo, setDebugInfo] = useState('')
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
   const filledRef = useRef({})
   const checkpointsRef = useRef([])
-  // Tallennetaan hero:n absoluuttinen top ja viimeisen sektion top
-  // jotta fill ja hexagonit käyttävät täysin samaa koordinaatistoa.
   const rangeRef = useRef({ start: 0, end: 1 })
 
   useEffect(() => {
     function computeCheckpoints() {
       const doc = document.documentElement
       const scrollHeight = doc.scrollHeight - doc.clientHeight
-      if (scrollHeight <= 0) return
 
       const positions = sectionIds
         .map((id) => {
@@ -56,11 +53,9 @@ export default function ScrollProgress() {
 
       if (positions.length === 0) return
 
-      // Hero (ensimmäinen löytynyt) = palkin vasen reuna (0 %)
-      // Viimeinen löytynyt sektio = palkin oikea reuna (100 %)
       const startTop = positions[0].absTop
       const endTop   = positions[positions.length - 1].absTop
-      const span     = endTop - startTop || 1   // vältetään jako nollalla
+      const span     = endTop - startTop || 1
 
       rangeRef.current = { start: startTop, end: endTop }
 
@@ -72,6 +67,12 @@ export default function ScrollProgress() {
 
       checkpointsRef.current = next
       setCheckpoints(next)
+
+      // DEBUG
+      const info = `scrollH=${scrollHeight} heroAbsTop=${startTop} ctaAbsTop=${endTop} span=${span}\n` +
+        next.map(c => `${c.id}: absTop=${c.absTop} railPct=${c.railPct.toFixed(1)}%`).join('\n')
+      setDebugInfo(info)
+      console.log('[ScrollProgress debug]', info)
     }
 
     computeCheckpoints()
@@ -90,8 +91,6 @@ export default function ScrollProgress() {
       const { start, end } = rangeRef.current
       const span = end - start || 1
 
-      // Fill-% käyttää samaa asteikkoa kuin hexagonit:
-      // 0 % = hero-sektion kohdalla, 100 % = viimeisen sektion kohdalla
       const rawFill = ((scrollTop - start) / span) * 100
       const fill = Math.min(100, Math.max(0, rawFill))
       setFillPercent(fill)
@@ -143,53 +142,65 @@ export default function ScrollProgress() {
   }, [])
 
   return (
-    <div className="scroll-progress" aria-hidden="true">
-      <div className="scroll-progress__frame">
-        <div className="scroll-progress__rail-line" />
-        <div className="scroll-progress__track">
-          <div
-            className="scroll-progress__fill"
-            style={{ width: `${fillPercent}%` }}
-          />
-        </div>
-        <div className="scroll-progress__points">
-          {checkpoints.map(({ id, railPct }) => {
-            const isFilled  = !!filledMap[id]
-            const isPopping = poppingId === id
-            return (
-              <div
-                key={id}
-                className={[
-                  'scroll-progress__point',
-                  isFilled  ? 'scroll-progress__point--filled' : '',
-                  isPopping ? 'scroll-progress__point--pop'    : '',
-                ].filter(Boolean).join(' ')}
-                style={{ left: `${railPct}%` }}
-              >
-                <svg
-                  className="scroll-progress__hex"
-                  viewBox="0 0 28 28"
-                  xmlns="http://www.w3.org/2000/svg"
+    <>
+      {/* DEBUG OVERLAY - poista kun toimii */}
+      <pre style={{
+        position: 'fixed', bottom: 8, left: 8, zIndex: 9999,
+        background: 'rgba(0,0,0,0.85)', color: '#0f0', fontSize: 10,
+        padding: '6px 8px', borderRadius: 4, pointerEvents: 'none',
+        whiteSpace: 'pre-wrap', maxWidth: 340,
+      }}>
+        fill: {fillPercent.toFixed(1)}%{'\n'}{debugInfo}
+      </pre>
+
+      <div className="scroll-progress" aria-hidden="true">
+        <div className="scroll-progress__frame">
+          <div className="scroll-progress__rail-line" />
+          <div className="scroll-progress__track">
+            <div
+              className="scroll-progress__fill"
+              style={{ width: `${fillPercent}%` }}
+            />
+          </div>
+          <div className="scroll-progress__points">
+            {checkpoints.map(({ id, railPct }) => {
+              const isFilled  = !!filledMap[id]
+              const isPopping = poppingId === id
+              return (
+                <div
+                  key={id}
+                  className={[
+                    'scroll-progress__point',
+                    isFilled  ? 'scroll-progress__point--filled' : '',
+                    isPopping ? 'scroll-progress__point--pop'    : '',
+                  ].filter(Boolean).join(' ')}
+                  style={{ left: `${railPct}%` }}
                 >
-                  <polygon
-                    className="scroll-progress__hex-outline"
-                    points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-                  <polygon
-                    className="scroll-progress__hex-fill"
-                    points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-            )
-          })}
+                  <svg
+                    className="scroll-progress__hex"
+                    viewBox="0 0 28 28"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <polygon
+                      className="scroll-progress__hex-outline"
+                      points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                      fill="none"
+                    />
+                    <polygon
+                      className="scroll-progress__hex-fill"
+                      points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
