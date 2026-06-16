@@ -1,19 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import '../styles/ScrollProgress.css'
 
-const sectionIds = [
-  'navbar',
-  'hero',
-  'features-results',
-  'cortex',
-  'abilities',
-  'setup-section',
-  'about',
-  'table',
-  'pricing',
-  'faq',
-  'cta',
-]
+const POINT_COUNT = 11
 
 export default function ScrollProgress() {
   const [fillPercent, setFillPercent] = useState(0)
@@ -31,34 +19,28 @@ export default function ScrollProgress() {
       const pct = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0
       setFillPercent(pct)
 
-      const viewportCenter = window.innerHeight / 2
       let changed = false
       const nextFilled = { ...filledRef.current }
 
-      sectionIds.forEach((id) => {
-        const el = document.getElementById(id)
-        if (!el) return
-        const rect = el.getBoundingClientRect()
-        const sectionCenter = rect.top + rect.height / 2
+      for (let i = 0; i < POINT_COUNT; i++) {
+        // Checkpointin sijainti palkilla, sama skaala kuin fillPercent (0–100)
+        const checkpointPct = (i / (POINT_COUNT - 1)) * 100
+        const isPast = pct >= checkpointPct - 0.5 // pieni toleranssi 100%:lle
 
-        // Täyttyy kun sektion keskikohta on ohittanut (yli) viewportin keskikohdan
-        // ja sektio on edelleen ainakin osittain näkyvissä tai ohitettu kokonaan.
-        const isPast = sectionCenter <= viewportCenter
-
-        const wasFilled = !!filledRef.current[id]
+        const wasFilled = !!filledRef.current[i]
         if (isPast && !wasFilled) {
-          nextFilled[id] = true
+          nextFilled[i] = true
           changed = true
-          setPoppingId(id)
+          setPoppingId(i)
           if (popTimeoutRef.current) clearTimeout(popTimeoutRef.current)
           popTimeoutRef.current = window.setTimeout(() => {
-            setPoppingId((cur) => (cur === id ? null : cur))
-          }, 420)
+            setPoppingId((cur) => (cur === i ? null : cur))
+          }, 380)
         } else if (!isPast && wasFilled) {
-          delete nextFilled[id]
+          delete nextFilled[i]
           changed = true
         }
-      })
+      }
 
       if (changed) {
         filledRef.current = nextFilled
@@ -97,12 +79,12 @@ export default function ScrollProgress() {
         </div>
         <div className="scroll-progress__rail-line scroll-progress__rail-line--bottom" />
         <div className="scroll-progress__points">
-          {sectionIds.map((id) => {
-            const isFilled = !!filledMap[id]
-            const isPopping = poppingId === id
+          {Array.from({ length: POINT_COUNT }, (_, i) => i).map((i) => {
+            const isFilled = !!filledMap[i]
+            const isPopping = poppingId === i
             return (
               <div
-                key={id}
+                key={i}
                 className={[
                   'scroll-progress__point',
                   isFilled ? 'scroll-progress__point--filled' : '',
@@ -112,7 +94,6 @@ export default function ScrollProgress() {
                 <svg
                   className="scroll-progress__hex"
                   viewBox="0 0 28 28"
-                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <polygon
