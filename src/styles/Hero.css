@@ -99,36 +99,32 @@
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-.hero__quote,
-.hero__cta {
+.hero__quote {
   position: relative;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--btn-radius, var(--radius-md));
-  width: 320px;
-  height: 248px;
-  padding: 28px;
+  background: rgba(15, 10, 10, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 14px;
+  width: 380px;
+  padding: 28px 30px;
   box-sizing: border-box;
   overflow: hidden;
   animation: cardSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.hero__quote::before,
-.hero__cta::before {
+.hero__quote::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  background: rgba(10, 5, 5, 0.45);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   transform-origin: left center;
   transform: scaleX(0);
   animation: cardBarSweep 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
   z-index: 1;
 }
-.hero__quote > *,
-.hero__cta > * {
+.hero__quote > * {
   position: relative;
   z-index: 2;
   opacity: 0;
@@ -146,29 +142,43 @@
   animation-delay: 1.1s;
 }
 
-/* ── CTA card timing (follows quote card) ── */
-.hero__cta {
-  animation-delay: 1.05s;
+/* ── Watch live button ── */
+.hero__watch-row {
+  margin-top: var(--space-8, 2rem);
+}
+.hero__watch-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding-inline: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--btn-radius, 8px);
+  font-family: inherit;
+  font-size: var(--text-base, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.hero__watch-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+.hero__watch-icon {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.hero__cta::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('/chip.avif');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.3;
-  z-index: 0;
-  pointer-events: none;
-}
-.hero__cta::before {
-  animation-delay: 1.6s;
-}
-.hero__cta > * {
-  animation-delay: 1.85s;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: #e53e3e;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* ── Quote card content ── */
@@ -219,42 +229,7 @@
   margin: 0;
 }
 
-/* ── CTA card content ── */
-.hero__cta-text {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.88);
-  line-height: 1.35;
-  margin: 0 0 20px;
-}
-.hero__cta-row {
-  display: flex;
-  align-items: center;
-  height: var(--btn-height, 48px);
-}
-.hero__cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: var(--btn-height, 48px);
-  background: var(--btn-primary-bg, var(--color-white));
-  color: var(--btn-primary-color, var(--color-black));
-  border: 1px solid var(--btn-primary-border, var(--color-white));
-  border-radius: var(--btn-radius, var(--radius-md));
-  padding-inline: var(--btn-padding-x, var(--space-4));
-  font-family: inherit;
-  font-size: var(--btn-font-size, var(--text-base));
-  font-weight: var(--btn-font-weight, var(--font-medium));
-  letter-spacing: var(--btn-letter-spacing, 0.04em);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
-}
-.hero__cta-button:hover {
-  background: transparent;
-  color: var(--btn-primary-bg, var(--color-white));
-}
+/* ── CTA card content removed ── */
 
 @media (max-width: 900px) {
   .hero__inner {
@@ -268,8 +243,8 @@
     justify-content: flex-start;
     margin-right: 0;
   }
-  .hero__quote,
-  .hero__cta {
+  .hero__quote {
     max-width: 100%;
+    width: 100%;
   }
 }
