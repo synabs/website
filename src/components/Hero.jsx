@@ -166,10 +166,10 @@ export default function Hero() {
                 ))}
               </div>
               <p className="hero__cta-text">
-                Start free and cancel anytime
+                Start free now and cancel anytime.
               </p>
               <div className="hero__cta-row">
-                <a href="https://website-liart-nu-v6q749arlh.vercel.app/join" className="hero__cta-button">Get started</a>
+                <a href="#pricing" className="hero__cta-button">Get started</a>
               </div>
             </div>
           </div>
