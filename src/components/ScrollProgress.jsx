@@ -21,31 +21,52 @@ function getAbsoluteTop(el) {
   return rect.top + window.scrollY
 }
 
-// Magneetti: ±15% raidasta hexagonin ympärillä
-const MAGNET_RADIUS = 15 // prosenttiyksikköä
+// Magneetti: jokainen hexagonien välinen segmentti jaetaan kolmeen osaan:
+//   0–25%   : bar lukittuna segmentin alkuhexagoniin (ei liiku)
+//   25–75%  : bar liikkuu lineaarisesti kohti seuraavaa hexagonia
+//   75–100% : bar lukittuna (imeytyy) seuraavaan hexagoniin
+const LOCK_ZONE = 0.25 // osuus segmentistä molemmissa päissä joka on "lukittu"
 
 function applyMagnet(rawFill, checkpoints) {
   if (checkpoints.length === 0) return rawFill
 
-  // Etsi lähin hexagon
-  let closest = null
-  let closestDist = Infinity
-  for (const cp of checkpoints) {
-    const dist = Math.abs(cp.railPct - rawFill)
-    if (dist < closestDist) {
-      closestDist = dist
-      closest = cp
+  const sorted = [...checkpoints].sort((a, b) => a.railPct - b.railPct)
+
+  // Ennen ensimmäistä hexagonia tai sen jälkeen viimeisestä: ei segmenttiä, lukitaan reunaan
+  if (rawFill <= sorted[0].railPct) return sorted[0].railPct
+  if (rawFill >= sorted[sorted.length - 1].railPct) {
+    return sorted[sorted.length - 1].railPct
+  }
+
+  // Etsi segmentti, jossa rawFill sijaitsee
+  let segStart = sorted[0]
+  let segEnd = sorted[sorted.length - 1]
+  for (let i = 0; i < sorted.length - 1; i++) {
+    if (rawFill >= sorted[i].railPct && rawFill <= sorted[i + 1].railPct) {
+      segStart = sorted[i]
+      segEnd = sorted[i + 1]
+      break
     }
   }
-  if (!closest) return rawFill
 
-  const diff = rawFill - closest.railPct
-  if (Math.abs(diff) > MAGNET_RADIUS) return rawFill
+  const span = segEnd.railPct - segStart.railPct
+  if (span <= 0) return segStart.railPct
 
-  // Parabolinen veto: max keskellä, nolla reunalla
-  const t = Math.abs(diff) / MAGNET_RADIUS // 0=keskellä, 1=reuna
-  const pull = 1 - t * t
-  return rawFill - diff * pull * 0.85
+  // t = 0..1 sijainti segmentin sisällä
+  const t = (rawFill - segStart.railPct) / span
+
+  if (t <= LOCK_ZONE) {
+    // Lukittu alkuhexagoniin
+    return segStart.railPct
+  }
+  if (t >= 1 - LOCK_ZONE) {
+    // Imeytynyt loppuhexagoniin
+    return segEnd.railPct
+  }
+
+  // Vapaa liike: skaalataan 25–75% väli takaisin 0–1, ja sovitetaan segmentin sisälle
+  const travelT = (t - LOCK_ZONE) / (1 - 2 * LOCK_ZONE)
+  return segStart.railPct + travelT * span
 }
 
 export default function ScrollProgress() {
