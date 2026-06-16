@@ -41,10 +41,6 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <a href="/trial" className="navbar__trial-link">
-            Start free trial
-          </a>
-
           <button
             className={`navbar__hamburger${menuOpen ? ' navbar__hamburger--open' : ''}`}
             onClick={toggleMenu}
@@ -73,6 +69,10 @@ export default function Navbar() {
               />
             </svg>
           </button>
+
+          <a href="/trial" className="navbar__trial-link">
+            Start free trial
+          </a>
         </div>
       </div>
 
