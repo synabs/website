@@ -1,180 +1,260 @@
-import { useEffect, useRef } from 'react'
-import '../styles/Hero.css'
+/* ============================================================
+   HERO.CSS
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: var(--hero-min-height);
+  background: var(--hero-bg);
+  display: flex;
+  align-items: center;
+  padding-bottom: var(--space-20);
+  overflow: hidden;
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero__bg::after {
+  display: none;
+}
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-top: calc(var(--nav-height) + var(--space-16));
+  margin-left: 0;
+}
+.hero__title {
+  font-size: clamp(4.2rem, 12vw, 10.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  font-weight: var(--font-bold);
+  color: var(--color-white);
+  margin-bottom: var(--space-10);
+  max-width: none;
+  text-align: left;
+}
+.hero__lead {
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
+  font-weight: var(--font-light);
+  color: var(--color-white);
+  max-width: 700px;
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-10);
+}
+.hero__buttons {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
+  .hero__content { padding-inline: var(--space-6); }
+  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
+}
 
-export default function Hero() {
-  const hexCanvasRef = useRef(null)
+/* ── Hero two-column layout ── */
+.hero__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  max-width: var(--max-width);
+}
+.hero__left {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.hero__right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-4);
+  margin-right: calc(-1 * var(--gutter) - 340px);
+}
 
-  useEffect(() => {
-    const canvas = hexCanvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.13
-    const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
-    let hexes = [], targetOpacity = 1, scrollTimer = null, animFrame = null
-    let t = 0, elapsed = 0, lastTime = 0
+/* ── Card base (shared by quote + CTA) ── */
+@keyframes cardSlideIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes cardBarSweep {
+  0%   { transform: scaleX(0); }
+  60%  { transform: scaleX(1); }
+  100% { transform: scaleX(1); }
+}
+@keyframes cardContentReveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.hero__quote,
+.hero__cta {
+  position: relative;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  width: 320px;
+  height: 248px;
+  padding: 28px;
+  box-sizing: border-box;
+  overflow: hidden;
+  animation: cardSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero__quote::before,
+.hero__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000000;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: cardBarSweep 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  z-index: 1;
+}
+.hero__quote > *,
+.hero__cta > * {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: cardContentReveal 0.3s linear forwards;
+}
 
-    function hexPoint(cx, cy, size, i) {
-      const a = Math.PI / 180 * (60 * i - 30)
-      return [cx + size * Math.cos(a), cy + size * Math.sin(a)]
-    }
+/* ── Quote card timing ── */
+.hero__quote {
+  animation-delay: 0.3s;
+}
+.hero__quote::before {
+  animation-delay: 0.85s;
+}
+.hero__quote > * {
+  animation-delay: 1.1s;
+}
 
-    function buildHexes() {
-      hexes = []
-      const w = canvas.width
-      const h = canvas.height
-      const hx = HEX_SIZE * 2 + HEX_GAP
-      const hy = Math.sqrt(3) * HEX_SIZE + HEX_GAP
-      const cols = Math.ceil(w / hx) + 1
-      const rows = Math.ceil(h / hy) + 1
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const x = HEX_SIZE + col * hx + (row % 2) * (hx / 2)
-          const y = HEX_SIZE + row * hy
-          hexes.push({
-            x, y, baseY: y, op: 0,
-            delay: row * 0.08 + col * 0.02 + Math.random() * 0.06,
-            floatOffset: Math.random() * Math.PI * 2,
-            fadeStart: 0.55 + Math.random() * 0.3,
-          })
-        }
-      }
-    }
+/* ── CTA card timing (follows quote card) ── */
+.hero__cta {
+  animation-delay: 1.05s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hero__cta::before {
+  animation-delay: 1.6s;
+}
+.hero__cta > * {
+  animation-delay: 1.85s;
+}
 
-    function resize() {
-      const parent = canvas.parentElement
-      canvas.width = parent.offsetWidth
-      canvas.height = parent.offsetHeight
-      buildHexes()
-    }
+/* ── Quote card content ── */
+.hero__quote-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+.hero__quote-stars svg {
+  opacity: 0.9;
+}
+.hero__quote-text {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.65;
+  margin: 0 0 20px;
+}
+.hero__quote-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero__quote-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.hero__quote-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 2px;
+}
+.hero__quote-role {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      t += 0.016
-      hexes.forEach(h => {
-        const yRatio = h.baseY / canvas.height
-        const edgeFade = yRatio < h.fadeStart ? 1 : Math.max(0, 1 - (yRatio - h.fadeStart) / (1 - h.fadeStart))
-        const op = h.op * MAX_OPACITY * edgeFade
-        if (op < 0.005) return
-        const floatY = h.baseY + Math.sin(t * 0.25 + h.floatOffset) * 3.5
-        ctx.save()
-        ctx.globalAlpha = op
-        ctx.strokeStyle = '#ffffff'
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        const pts = Array.from({ length: 6 }, (_, i) => hexPoint(h.x, floatY, HEX_SIZE, i))
-        ctx.moveTo(pts[0][0], pts[0][1])
-        pts.slice(1).forEach(p => ctx.lineTo(p[0], p[1]))
-        ctx.closePath()
-        ctx.stroke()
-        ctx.restore()
-      })
-    }
+/* ── CTA card content ── */
+.hero__cta-text {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.35;
+  margin: 0 0 20px;
+}
+.hero__cta-row {
+  display: flex;
+  align-items: center;
+  height: var(--btn-height, 48px);
+}
+.hero__cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--btn-height, 48px);
+  background: var(--btn-primary-bg, var(--color-white));
+  color: var(--btn-primary-color, var(--color-black));
+  border: 1px solid var(--btn-primary-border, var(--color-white));
+  border-radius: var(--btn-radius, var(--radius-md));
+  padding-inline: var(--btn-padding-x, var(--space-4));
+  font-family: inherit;
+  font-size: var(--btn-font-size, var(--text-base));
+  font-weight: var(--btn-font-weight, var(--font-medium));
+  letter-spacing: var(--btn-letter-spacing, 0.04em);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+.hero__cta-button:hover {
+  background: transparent;
+  color: var(--btn-primary-bg, var(--color-white));
+}
 
-    function loop(ts) {
-      const dt = (ts - lastTime) / 1000
-      lastTime = ts
-      if (targetOpacity > 0) elapsed += dt; else elapsed = 0
-      hexes.forEach(h => {
-        if (elapsed < h.delay) return
-        h.op = targetOpacity > 0
-          ? Math.min(1, h.op + APPEAR_SPEED)
-          : Math.max(0, h.op - FADE_SPEED)
-      })
-      draw()
-      animFrame = requestAnimationFrame(loop)
-    }
-
-    function onScroll() {
-      targetOpacity = 1
-      elapsed = 0
-    }
-
-    resize()
-    window.addEventListener('resize', resize)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    animFrame = requestAnimationFrame(ts => { lastTime = ts; loop(ts) })
-
-    return () => {
-      cancelAnimationFrame(animFrame)
-      window.removeEventListener('resize', resize)
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
-
-  return (
-    <section className="hero">
-      <div className="hero__bg" aria-hidden="true">
-        <img
-          src="/synabs-hero.avif"
-          alt=""
-          loading="eager"
-          fetchPriority="high"
-        />
-      </div>
-      <canvas
-        ref={hexCanvasRef}
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-      <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
-        <div className="hero__inner">
-          <div className="hero__left">
-            <h1 className="hero__title">
-              EVOLVING<br />
-              AI<br />
-              AGENTS
-            </h1>
-            <p className="hero__lead">
-              The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
-            </p>
-
-          </div>
-          <div className="hero__right">
-            <div className="hero__quote">
-              <div className="hero__quote-stars" aria-label="5 tähteä">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                ))}
-              </div>
-              <blockquote className="hero__quote-text">
-                "We were honored to be early testers. The value was so good it felt almost illegal to use for free."
-              </blockquote>
-              <div className="hero__quote-author">
-                <div className="hero__quote-avatar" aria-hidden="true">MA</div>
-                <div>
-                  <p className="hero__quote-name">Mirko Asell</p>
-                  <p className="hero__quote-role">CEO at Somesankarit Oy</p>
-                </div>
-              </div>
-            </div>
-            <div className="hero__cta">
-              <div className="hero__quote-stars" aria-hidden="true" style={{ visibility: 'hidden' }}>
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                ))}
-              </div>
-              <p className="hero__cta-text">
-                Start free now and cancel anytime.
-              </p>
-              <div className="hero__cta-row">
-                <a href="#pricing" className="hero__cta-button">Get started</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+@media (max-width: 900px) {
+  .hero__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero__right {
+    flex: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-right: 0;
+  }
+  .hero__quote,
+  .hero__cta {
+    max-width: 100%;
+  }
 }
