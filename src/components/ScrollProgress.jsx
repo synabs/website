@@ -1,15 +1,63 @@
 import { useEffect, useRef, useState } from 'react'
 import '../styles/ScrollProgress.css'
 
-const POINT_COUNT = 11
+const sectionIds = [
+  'navbar',
+  'hero',
+  'features-results',
+  'cortex',
+  'abilities',
+  'setup-section',
+  'about',
+  'table',
+  'pricing',
+  'faq',
+  'cta',
+]
 
 export default function ScrollProgress() {
   const [fillPercent, setFillPercent] = useState(0)
+  const [checkpoints, setCheckpoints] = useState([]) // [{ id, pct }]
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
   const filledRef = useRef({})
+  const checkpointsRef = useRef([])
+
+  // Lasketaan jokaisen sektion todellinen scroll-% sijainti dokumentissa.
+  // Tehdään uudelleen kun ikkuna resaitaan (layout voi muuttua).
+  useEffect(() => {
+    function computeCheckpoints() {
+      const doc = document.documentElement
+      const scrollHeight = doc.scrollHeight - doc.clientHeight
+      if (scrollHeight <= 0) return
+
+      const next = sectionIds
+        .map((id) => {
+          const el = document.getElementById(id)
+          if (!el) return null
+          const rect = el.getBoundingClientRect()
+          const currentScroll = doc.scrollTop || document.body.scrollTop
+          const elTop = rect.top + currentScroll
+          const pct = Math.min(100, Math.max(0, (elTop / scrollHeight) * 100))
+          return { id, pct }
+        })
+        .filter(Boolean)
+
+      checkpointsRef.current = next
+      setCheckpoints(next)
+    }
+
+    computeCheckpoints()
+    window.addEventListener('resize', computeCheckpoints)
+    // Layoutin asettuminen (kuvat, fontit) voi siirtää sektioita; tarkistetaan vielä kerran pian latauksen jälkeen.
+    const settleTimeout = window.setTimeout(computeCheckpoints, 800)
+    return () => {
+      window.removeEventListener('resize', computeCheckpoints)
+      clearTimeout(settleTimeout)
+    }
+  }, [])
 
   useEffect(() => {
     function update() {
@@ -22,25 +70,23 @@ export default function ScrollProgress() {
       let changed = false
       const nextFilled = { ...filledRef.current }
 
-      for (let i = 0; i < POINT_COUNT; i++) {
-        // Checkpointin sijainti palkilla, sama skaala kuin fillPercent (0–100)
-        const checkpointPct = (i / (POINT_COUNT - 1)) * 100
-        const isPast = pct >= checkpointPct - 0.5 // pieni toleranssi 100%:lle
+      checkpointsRef.current.forEach(({ id, pct: checkpointPct }) => {
+        const isPast = pct >= checkpointPct - 0.3
 
-        const wasFilled = !!filledRef.current[i]
+        const wasFilled = !!filledRef.current[id]
         if (isPast && !wasFilled) {
-          nextFilled[i] = true
+          nextFilled[id] = true
           changed = true
-          setPoppingId(i)
+          setPoppingId(id)
           if (popTimeoutRef.current) clearTimeout(popTimeoutRef.current)
           popTimeoutRef.current = window.setTimeout(() => {
-            setPoppingId((cur) => (cur === i ? null : cur))
+            setPoppingId((cur) => (cur === id ? null : cur))
           }, 380)
         } else if (!isPast && wasFilled) {
-          delete nextFilled[i]
+          delete nextFilled[id]
           changed = true
         }
-      }
+      })
 
       if (changed) {
         filledRef.current = nextFilled
@@ -70,26 +116,26 @@ export default function ScrollProgress() {
   return (
     <div className="scroll-progress" aria-hidden="true">
       <div className="scroll-progress__frame">
-        <div className="scroll-progress__rail-line scroll-progress__rail-line--top" />
+        <div className="scroll-progress__rail-line" />
         <div className="scroll-progress__track">
           <div
             className="scroll-progress__fill"
             style={{ width: `${fillPercent}%` }}
           />
         </div>
-        <div className="scroll-progress__rail-line scroll-progress__rail-line--bottom" />
         <div className="scroll-progress__points">
-          {Array.from({ length: POINT_COUNT }, (_, i) => i).map((i) => {
-            const isFilled = !!filledMap[i]
-            const isPopping = poppingId === i
+          {checkpoints.map(({ id, pct }) => {
+            const isFilled = !!filledMap[id]
+            const isPopping = poppingId === id
             return (
               <div
-                key={i}
+                key={id}
                 className={[
                   'scroll-progress__point',
                   isFilled ? 'scroll-progress__point--filled' : '',
                   isPopping ? 'scroll-progress__point--pop' : '',
                 ].filter(Boolean).join(' ')}
+                style={{ left: `${pct}%` }}
               >
                 <svg
                   className="scroll-progress__hex"
