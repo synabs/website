@@ -215,28 +215,30 @@
 .hero__cta-row {
   display: flex;
   align-items: center;
-  height: 38px;
+  height: var(--btn-height, 48px);
 }
 .hero__cta-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  background: var(--color-white);
-  color: var(--color-black, #000000);
-  border: none;
-  border-radius: 0;
-  padding: 12px 24px;
+  height: var(--btn-height, 48px);
+  background: var(--btn-primary-bg, var(--color-white));
+  color: var(--btn-primary-color, var(--color-black));
+  border: 1px solid var(--btn-primary-border, var(--color-white));
+  border-radius: var(--btn-radius, var(--radius-md));
+  padding-inline: var(--btn-padding-x, var(--space-4));
   font-family: inherit;
-  font-size: var(--text-base, 1rem);
-  font-weight: var(--font-medium, 500);
-  letter-spacing: 0.02em;
+  font-size: var(--btn-font-size, var(--text-base));
+  font-weight: var(--btn-font-weight, var(--font-medium));
+  letter-spacing: var(--btn-letter-spacing, 0.04em);
   cursor: pointer;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
 }
 .hero__cta-button:hover {
-  opacity: 0.85;
+  background: transparent;
+  color: var(--btn-primary-bg, var(--color-white));
 }
 
 @media (max-width: 900px) {
