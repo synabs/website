@@ -31,6 +31,15 @@ export default function Navbar() {
           />
         </a>
 
+        {/* Desktop-linkit – keskellä, vain kun menu auki */}
+        <ul className={`navbar__desktop-list${menuOpen ? ' navbar__desktop-list--open' : ''}`}>
+          {navLinks.map(({ href, label }) => (
+            <li key={href}>
+              <a href={href} className="navbar__desktop-link">{label}</a>
+            </li>
+          ))}
+        </ul>
+
         {/* Oikealle: Start free trial -nappi + hamburger */}
         <div className="navbar__right">
           <a href="/trial" className="navbar__trial-link">
