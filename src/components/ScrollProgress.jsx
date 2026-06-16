@@ -30,8 +30,7 @@ export default function ScrollProgress() {
   const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
-  // Hero-hexin pikselioffset trackille (CSS left)
-  const [trackOffsetPx, setTrackOffsetPx] = useState(0)
+  const [heroMinPx, setHeroMinPx] = useState(0)
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
@@ -72,11 +71,11 @@ export default function ScrollProgress() {
       checkpointsRef.current = next
       setCheckpoints(next)
 
-      // Laske hero-hexin pikselipaikka → track alkaa sieltä
       if (pointsRef.current && frameRef.current) {
-        const frameRect  = frameRef.current.getBoundingClientRect()
+        const frameRect = frameRef.current.getBoundingClientRect()
         const pointsRect = pointsRef.current.getBoundingClientRect()
-        setTrackOffsetPx(pointsRect.left - frameRect.left)
+        const px = pointsRect.left - frameRect.left
+        setHeroMinPx(px)
       }
     }
 
@@ -96,7 +95,6 @@ export default function ScrollProgress() {
       const { start, end } = rangeRef.current
       const span = end - start || 1
 
-      // Yksi ainoa prosenttiasteikko — sama fillille ja hexagoneille
       const fill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
       setFillPercent(fill)
 
@@ -152,18 +150,13 @@ export default function ScrollProgress() {
     <div className="scroll-progress" aria-hidden="true">
       <div className="scroll-progress__frame" ref={frameRef}>
         <div className="scroll-progress__rail-line" />
-        {/*
-          Track alkaa hero-hexin kohdalta (left: trackOffsetPx).
-          Fill kasvaa oikealle — sama % kuin hexagonien railPct.
-          Näin fill ja hexagonit ovat aina täydellisessä synkassa.
-        */}
-        <div
-          className="scroll-progress__track"
-          style={{ left: `${trackOffsetPx}px` }}
-        >
+        <div className="scroll-progress__track">
           <div
             className="scroll-progress__fill"
-            style={{ width: `${fillPercent}%` }}
+            style={{
+              width: `${fillPercent}%`,
+              minWidth: `${heroMinPx}px`,
+            }}
           />
         </div>
         <div className="scroll-progress__points" ref={pointsRef}>
