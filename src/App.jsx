@@ -1,5 +1,6 @@
 import './styles/globals.css'
 import Navbar from './components/Navbar'
+import Scrollprogress from './components/Scrollprogress'
 import Hero from './components/Hero'
 import Features from './components/Features'
 import Abilities from './components/Abilities'
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <>
       <Navbar />
+      <Scrollprogress />
       <Hero />
       <FeaturesResults />
       <Cortex />
