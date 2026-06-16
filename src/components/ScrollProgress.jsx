@@ -30,8 +30,8 @@ export default function ScrollProgress() {
   const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
-  // Hero-hexin sijainti prosentteina framen leveydestä
-  const heroOffsetPctRef = useRef(0)
+  // Hero-hexin pikselioffset trackille (CSS left)
+  const [trackOffsetPx, setTrackOffsetPx] = useState(0)
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
@@ -72,12 +72,11 @@ export default function ScrollProgress() {
       checkpointsRef.current = next
       setCheckpoints(next)
 
-      // Laske hero-hexin pikselipaikka prosentteina framen leveydestä
+      // Laske hero-hexin pikselipaikka → track alkaa sieltä
       if (pointsRef.current && frameRef.current) {
-        const frameRect = frameRef.current.getBoundingClientRect()
+        const frameRect  = frameRef.current.getBoundingClientRect()
         const pointsRect = pointsRef.current.getBoundingClientRect()
-        const heroLeftPx = pointsRect.left - frameRect.left
-        heroOffsetPctRef.current = (heroLeftPx / frameRect.width) * 100
+        setTrackOffsetPx(pointsRect.left - frameRect.left)
       }
     }
 
@@ -97,20 +96,15 @@ export default function ScrollProgress() {
       const { start, end } = rangeRef.current
       const span = end - start || 1
 
-      const scrollFill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
-      const heroOff = heroOffsetPctRef.current
-
-      // Fill = hero-offset + scrollin osuus jäljellä olevasta tilasta
-      // Kun scroll=0 → fill=heroOff (ulottuu juuri hero-hexiin)
-      // Kun scroll=max → fill=100%
-      const fill = heroOff + (scrollFill / 100) * (100 - heroOff)
+      // Yksi ainoa prosenttiasteikko — sama fillille ja hexagoneille
+      const fill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
       setFillPercent(fill)
 
       let changed = false
       const nextFilled = { ...filledRef.current }
 
       checkpointsRef.current.forEach(({ id, railPct }) => {
-        const isPast    = railPct === 0 ? true : scrollFill >= railPct - 0.3
+        const isPast    = railPct === 0 ? true : fill >= railPct - 0.3
         const wasFilled = !!filledRef.current[id]
 
         if (isPast && !wasFilled) {
@@ -158,7 +152,15 @@ export default function ScrollProgress() {
     <div className="scroll-progress" aria-hidden="true">
       <div className="scroll-progress__frame" ref={frameRef}>
         <div className="scroll-progress__rail-line" />
-        <div className="scroll-progress__track">
+        {/*
+          Track alkaa hero-hexin kohdalta (left: trackOffsetPx).
+          Fill kasvaa oikealle — sama % kuin hexagonien railPct.
+          Näin fill ja hexagonit ovat aina täydellisessä synkassa.
+        */}
+        <div
+          className="scroll-progress__track"
+          style={{ left: `${trackOffsetPx}px` }}
+        >
           <div
             className="scroll-progress__fill"
             style={{ width: `${fillPercent}%` }}
