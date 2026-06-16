@@ -1,7 +1,7 @@
 import '../styles/SetupSection.css';
 export default function SetupSection() {
   return (
-    <section className="ss-section">
+    <section className="ss-section" id="setup-section">
       <div className="ss-section__bg" aria-hidden="true" />
       <img
         className="ss-bg-image"
