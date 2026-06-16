@@ -101,10 +101,10 @@
 }
 .hero__quote {
   position: relative;
-  background: rgba(15, 10, 10, 0.55);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 14px;
   width: 380px;
   padding: 28px 30px;
@@ -116,9 +116,9 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(10, 5, 5, 0.45);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transform-origin: left center;
   transform: scaleX(0);
   animation: cardBarSweep 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
