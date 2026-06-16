@@ -21,11 +21,10 @@ function getAbsoluteTop(el) {
   return rect.top + window.scrollY
 }
 
-// Magneetti: jokainen hexagonien välinen segmentti jaetaan kolmeen osaan:
-//   0–25%   : bar lukittuna segmentin alkuhexagoniin (ei liiku)
-//   25–75%  : bar liikkuu lineaarisesti kohti seuraavaa hexagonia
-//   75–100% : bar lukittuna (imeytyy) seuraavaan hexagoniin
-const LOCK_ZONE = 0.25 // osuus segmentistä molemmissa päissä joka on "lukittu"
+// Magneetti: jokainen hexagonien välinen segmentti jaetaan kahteen osaan:
+//   0–90%   : bar liikkuu lineaarisesti (ei lukkoa alkuhexagoniin)
+//   90–100% : bar lukittuna (imeytyy) seuraavaan hexagoniin
+const LOCK_ZONE = 0.10 // osuus segmentin lopusta joka on "lukittu" seuraavaan hexagoniin
 
 function applyMagnet(rawFill, checkpoints) {
   if (checkpoints.length === 0) return rawFill
@@ -55,17 +54,13 @@ function applyMagnet(rawFill, checkpoints) {
   // t = 0..1 sijainti segmentin sisällä
   const t = (rawFill - segStart.railPct) / span
 
-  if (t <= LOCK_ZONE) {
-    // Lukittu alkuhexagoniin
-    return segStart.railPct
-  }
   if (t >= 1 - LOCK_ZONE) {
     // Imeytynyt loppuhexagoniin
     return segEnd.railPct
   }
 
-  // Vapaa liike: skaalataan 25–75% väli takaisin 0–1, ja sovitetaan segmentin sisälle
-  const travelT = (t - LOCK_ZONE) / (1 - 2 * LOCK_ZONE)
+  // Vapaa liike: skaalataan 0–90% väli takaisin 0–1, ja sovitetaan segmentin sisälle
+  const travelT = t / (1 - LOCK_ZONE)
   return segStart.railPct + travelT * span
 }
 
