@@ -90,11 +90,6 @@
   from { transform: translateX(110%); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
 }
-@keyframes cardBarSweep {
-  0%   { transform: scaleX(0); }
-  60%  { transform: scaleX(1); }
-  100% { transform: scaleX(1); }
-}
 @keyframes cardContentReveal {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -109,37 +104,11 @@
   width: 380px;
   padding: 28px 30px;
   box-sizing: border-box;
-  overflow: hidden;
-  animation: cardSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.hero__quote::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transform-origin: left center;
-  transform: scaleX(0);
-  animation: cardBarSweep 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-  z-index: 1;
-}
-.hero__quote > * {
-  position: relative;
-  z-index: 2;
-  opacity: 0;
-  animation: cardContentReveal 0.3s linear forwards;
+  animation: cardSlideIn 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ── Quote card timing ── */
-.hero__quote {
-  animation-delay: 0.3s;
-}
-.hero__quote::before {
-  animation-delay: 0.85s;
-}
 .hero__quote > * {
-  animation-delay: 1.1s;
+  opacity: 1;
 }
 
 /* ── Watch live button ── */
