@@ -30,15 +30,14 @@ export default function ScrollProgress() {
   const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
-  // Lasketaan hero-hexin pikselipaikka jotta fill ulottuu sinne asti alusta
-  const [heroOffsetPx, setHeroOffsetPx] = useState(0)
+  const [heroMinPx, setHeroMinPx] = useState(0)
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
   const filledRef = useRef({})
   const checkpointsRef = useRef([])
   const rangeRef = useRef({ start: 0, end: 1 })
-  const frameRef = useRef(null)
+  const pointsRef = useRef(null)
 
   useEffect(() => {
     function computeCheckpoints() {
@@ -71,16 +70,13 @@ export default function ScrollProgress() {
       checkpointsRef.current = next
       setCheckpoints(next)
 
-      // Laske hero-hexin pikselipaikka: gutter + 0% points-containerista
-      // Points-container alkaa frame-elementin vasemmasta reunasta + gutter
-      if (frameRef.current) {
-        const frameW = frameRef.current.offsetWidth
-        // Haetaan --gutter CSS-muuttuja
-        const gutter = parseFloat(
-          getComputedStyle(document.documentElement).getPropertyValue('--gutter') || '0'
-        )
-        // Hero on points-containerin left:0% → pikselipaikkaan = gutter
-        setHeroOffsetPx(gutter)
+      // Mittaa points-containerin vasen reuna suhteessa frameen
+      // → tämä on hero-hexin pikselikoordinaatti fillille
+      if (pointsRef.current) {
+        const containerLeft = pointsRef.current.getBoundingClientRect().left
+        const frameLeft = pointsRef.current.offsetParent?.getBoundingClientRect().left ?? 0
+        const px = containerLeft - frameLeft
+        setHeroMinPx(px)
       }
     }
 
@@ -151,21 +147,20 @@ export default function ScrollProgress() {
     }
   }, [])
 
-  // Fill: alkaa left:0, minWidth ulottuu hero-hexiin, kasvaa scrollin mukaan
   return (
     <div className="scroll-progress" aria-hidden="true">
-      <div className="scroll-progress__frame" ref={frameRef}>
+      <div className="scroll-progress__frame">
         <div className="scroll-progress__rail-line" />
         <div className="scroll-progress__track">
           <div
             className="scroll-progress__fill"
             style={{
               width: `${fillPercent}%`,
-              minWidth: heroOffsetPx > 0 ? `${heroOffsetPx}px` : '0px',
+              minWidth: `${heroMinPx}px`,
             }}
           />
         </div>
-        <div className="scroll-progress__points">
+        <div className="scroll-progress__points" ref={pointsRef}>
           {checkpoints.map(({ id, railPct }) => {
             const isFilled  = !!filledMap[id]
             const isPopping = poppingId === id
