@@ -30,7 +30,6 @@ export default function ScrollProgress() {
   const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
-  const [debugInfo, setDebugInfo] = useState('')
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
@@ -42,6 +41,7 @@ export default function ScrollProgress() {
     function computeCheckpoints() {
       const doc = document.documentElement
       const scrollHeight = doc.scrollHeight - doc.clientHeight
+      if (scrollHeight <= 0) return
 
       const positions = sectionIds
         .map((id) => {
@@ -53,8 +53,8 @@ export default function ScrollProgress() {
 
       if (positions.length === 0) return
 
-      const startTop = positions[0].absTop
-      const endTop   = positions[positions.length - 1].absTop
+      const startTop = positions[0].absTop       // hero
+      const endTop   = positions[positions.length - 1].absTop  // cta
       const span     = endTop - startTop || 1
 
       rangeRef.current = { start: startTop, end: endTop }
@@ -67,12 +67,6 @@ export default function ScrollProgress() {
 
       checkpointsRef.current = next
       setCheckpoints(next)
-
-      // DEBUG
-      const info = `scrollH=${scrollHeight} heroAbsTop=${startTop} ctaAbsTop=${endTop} span=${span}\n` +
-        next.map(c => `${c.id}: absTop=${c.absTop} railPct=${c.railPct.toFixed(1)}%`).join('\n')
-      setDebugInfo(info)
-      console.log('[ScrollProgress debug]', info)
     }
 
     computeCheckpoints()
@@ -91,25 +85,29 @@ export default function ScrollProgress() {
       const { start, end } = rangeRef.current
       const span = end - start || 1
 
-      const rawFill = ((scrollTop - start) / span) * 100
-      const fill = Math.min(100, Math.max(0, rawFill))
+      // fill 0% = hero, 100% = cta
+      const fill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
       setFillPercent(fill)
 
       let changed = false
       const nextFilled = { ...filledRef.current }
 
       checkpointsRef.current.forEach(({ id, railPct }) => {
-        const isPast    = fill >= railPct - 0.3
+        // Hero (railPct=0) on aina täytetty
+        const isPast    = railPct === 0 ? true : fill >= railPct - 0.3
         const wasFilled = !!filledRef.current[id]
 
         if (isPast && !wasFilled) {
           nextFilled[id] = true
           changed = true
-          setPoppingId(id)
-          if (popTimeoutRef.current) clearTimeout(popTimeoutRef.current)
-          popTimeoutRef.current = window.setTimeout(() => {
-            setPoppingId((cur) => (cur === id ? null : cur))
-          }, 380)
+          // Ei pop-animaatiota herolle
+          if (railPct > 0) {
+            setPoppingId(id)
+            if (popTimeoutRef.current) clearTimeout(popTimeoutRef.current)
+            popTimeoutRef.current = window.setTimeout(() => {
+              setPoppingId((cur) => (cur === id ? null : cur))
+            }, 380)
+          }
         } else if (!isPast && wasFilled) {
           delete nextFilled[id]
           changed = true
@@ -141,66 +139,57 @@ export default function ScrollProgress() {
     }
   }, [])
 
+  // Hero on aina railPct=0 → fill-palkki alkaa sieltä.
+  // Visuaalisesti: fill alkaa left:0% ja levenee oikealle,
+  // hero-hex on left:0% ja on aina täynnä → ne ovat aina synkassa.
   return (
-    <>
-      {/* DEBUG OVERLAY - poista kun toimii */}
-      <pre style={{
-        position: 'fixed', bottom: 8, left: 8, zIndex: 9999,
-        background: 'rgba(0,0,0,0.85)', color: '#0f0', fontSize: 10,
-        padding: '6px 8px', borderRadius: 4, pointerEvents: 'none',
-        whiteSpace: 'pre-wrap', maxWidth: 340,
-      }}>
-        fill: {fillPercent.toFixed(1)}%{'\n'}{debugInfo}
-      </pre>
-
-      <div className="scroll-progress" aria-hidden="true">
-        <div className="scroll-progress__frame">
-          <div className="scroll-progress__rail-line" />
-          <div className="scroll-progress__track">
-            <div
-              className="scroll-progress__fill"
-              style={{ width: `${fillPercent}%` }}
-            />
-          </div>
-          <div className="scroll-progress__points">
-            {checkpoints.map(({ id, railPct }) => {
-              const isFilled  = !!filledMap[id]
-              const isPopping = poppingId === id
-              return (
-                <div
-                  key={id}
-                  className={[
-                    'scroll-progress__point',
-                    isFilled  ? 'scroll-progress__point--filled' : '',
-                    isPopping ? 'scroll-progress__point--pop'    : '',
-                  ].filter(Boolean).join(' ')}
-                  style={{ left: `${railPct}%` }}
+    <div className="scroll-progress" aria-hidden="true">
+      <div className="scroll-progress__frame">
+        <div className="scroll-progress__rail-line" />
+        <div className="scroll-progress__track">
+          <div
+            className="scroll-progress__fill"
+            style={{ width: `${fillPercent}%` }}
+          />
+        </div>
+        <div className="scroll-progress__points">
+          {checkpoints.map(({ id, railPct }) => {
+            const isFilled  = !!filledMap[id]
+            const isPopping = poppingId === id
+            return (
+              <div
+                key={id}
+                className={[
+                  'scroll-progress__point',
+                  isFilled  ? 'scroll-progress__point--filled' : '',
+                  isPopping ? 'scroll-progress__point--pop'    : '',
+                ].filter(Boolean).join(' ')}
+                style={{ left: `${railPct}%` }}
+              >
+                <svg
+                  className="scroll-progress__hex"
+                  viewBox="0 0 28 28"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    className="scroll-progress__hex"
-                    viewBox="0 0 28 28"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <polygon
-                      className="scroll-progress__hex-outline"
-                      points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                      fill="none"
-                    />
-                    <polygon
-                      className="scroll-progress__hex-fill"
-                      points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              )
-            })}
-          </div>
+                  <polygon
+                    className="scroll-progress__hex-outline"
+                    points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                  <polygon
+                    className="scroll-progress__hex-fill"
+                    points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+            )
+          })}
         </div>
       </div>
-    </>
+    </div>
   )
 }
