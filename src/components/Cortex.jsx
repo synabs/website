@@ -29,7 +29,7 @@ export default function Cortex() {
   }, [])
 
   return (
-    <section className="cortex" ref={sectionRef}>
+    <section className="cortex" id="cortex" ref={sectionRef}>
       <img
         src="/cortex.avif"
         alt=""
