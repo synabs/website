@@ -8,7 +8,7 @@ export default function Hero() {
     const canvas = hexCanvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.13
+    const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.07
     const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
     let hexes = [], targetOpacity = 1, scrollTimer = null, animFrame = null
     let t = 0, elapsed = 0, lastTime = 0
@@ -142,7 +142,7 @@ export default function Hero() {
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </span>
-                Watch live
+                Watch it live
               </a>
             </div>
 
