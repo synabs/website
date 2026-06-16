@@ -57,7 +57,7 @@ export default function Table() {
   }, [])
 
   return (
-    <section className="comptable">
+    <section className="comptable" id="table">
       <div className="comptable__inner">
         <p className="comptable__label">Comparison</p>
         <h2 className="comptable__heading">
