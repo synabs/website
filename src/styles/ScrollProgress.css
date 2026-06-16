@@ -1,12 +1,9 @@
 /* ============================================
    SCROLL-PROGRESS.CSS
    Ohut lasimainen palkki navbarin alla.
-   Rakenne (ylhäältä alas):
-     1px harmaa line
-     mustaa (lasiblur)
-     1px valkoinen täyttöviiva
-     mustaa (lasiblur)
-     1px harmaa line
+   Hexagonit sijoitettu sektioiden todellisen
+   scroll-sijainnin mukaan (left: %), eivät
+   tasavälein.
    ============================================ */
 
 .scroll-progress {
@@ -30,14 +27,9 @@
   position: absolute;
   left: 0;
   right: 0;
+  top: 0;
   height: 1px;
   background: rgba(255, 255, 255, 0.18);
-}
-.scroll-progress__rail-line--top {
-  top: 0;
-}
-.scroll-progress__rail-line--bottom {
-  bottom: 0;
 }
 
 /* ── Täyttöviiva: thin valkoinen, keskellä kehystä ── */
@@ -61,25 +53,25 @@
   transition: width 0.12s linear;
 }
 
-/* ── Hexagon-pisteet, tasavälein ── */
+/* ── Hexagon-pisteet, sijoitettu sektion oikean scroll-%:n mukaan ── */
 .scroll-progress__points {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: var(--gutter);
+  left: var(--gutter);
+  right: var(--gutter);
 }
 
 .scroll-progress__point {
+  position: absolute;
+  top: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 16px;
   height: 16px;
+  transform: translateX(-50%);
   background: transparent;
 }
 
@@ -126,7 +118,8 @@
     height: 16px;
   }
   .scroll-progress__points {
-    padding-inline: var(--space-6);
+    left: var(--space-6);
+    right: var(--space-6);
   }
   .scroll-progress__point {
     width: 12px;
