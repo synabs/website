@@ -102,9 +102,11 @@
 .hero__quote,
 .hero__cta {
   position: relative;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--btn-radius, var(--radius-md));
   width: 320px;
   height: 248px;
   padding: 28px;
@@ -117,7 +119,9 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #000000;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   transform-origin: left center;
   transform: scaleX(0);
   animation: cardBarSweep 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
@@ -180,7 +184,7 @@
 .hero__quote-avatar {
   width: 38px;
   height: 38px;
-  border-radius: 0;
+  border-radius: var(--btn-radius, var(--radius-md));
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
