@@ -30,12 +30,15 @@ export default function ScrollProgress() {
   const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
+  // Lasketaan hero-hexin pikselipaikka jotta fill ulottuu sinne asti alusta
+  const [heroOffsetPx, setHeroOffsetPx] = useState(0)
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
   const filledRef = useRef({})
   const checkpointsRef = useRef([])
   const rangeRef = useRef({ start: 0, end: 1 })
+  const frameRef = useRef(null)
 
   useEffect(() => {
     function computeCheckpoints() {
@@ -53,8 +56,8 @@ export default function ScrollProgress() {
 
       if (positions.length === 0) return
 
-      const startTop = positions[0].absTop       // hero
-      const endTop   = positions[positions.length - 1].absTop  // cta
+      const startTop = positions[0].absTop
+      const endTop   = positions[positions.length - 1].absTop
       const span     = endTop - startTop || 1
 
       rangeRef.current = { start: startTop, end: endTop }
@@ -67,6 +70,18 @@ export default function ScrollProgress() {
 
       checkpointsRef.current = next
       setCheckpoints(next)
+
+      // Laske hero-hexin pikselipaikka: gutter + 0% points-containerista
+      // Points-container alkaa frame-elementin vasemmasta reunasta + gutter
+      if (frameRef.current) {
+        const frameW = frameRef.current.offsetWidth
+        // Haetaan --gutter CSS-muuttuja
+        const gutter = parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue('--gutter') || '0'
+        )
+        // Hero on points-containerin left:0% → pikselipaikkaan = gutter
+        setHeroOffsetPx(gutter)
+      }
     }
 
     computeCheckpoints()
@@ -85,7 +100,6 @@ export default function ScrollProgress() {
       const { start, end } = rangeRef.current
       const span = end - start || 1
 
-      // fill 0% = hero, 100% = cta
       const fill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
       setFillPercent(fill)
 
@@ -93,14 +107,12 @@ export default function ScrollProgress() {
       const nextFilled = { ...filledRef.current }
 
       checkpointsRef.current.forEach(({ id, railPct }) => {
-        // Hero (railPct=0) on aina täytetty
         const isPast    = railPct === 0 ? true : fill >= railPct - 0.3
         const wasFilled = !!filledRef.current[id]
 
         if (isPast && !wasFilled) {
           nextFilled[id] = true
           changed = true
-          // Ei pop-animaatiota herolle
           if (railPct > 0) {
             setPoppingId(id)
             if (popTimeoutRef.current) clearTimeout(popTimeoutRef.current)
@@ -139,17 +151,18 @@ export default function ScrollProgress() {
     }
   }, [])
 
-  // Hero on aina railPct=0 → fill-palkki alkaa sieltä.
-  // Visuaalisesti: fill alkaa left:0% ja levenee oikealle,
-  // hero-hex on left:0% ja on aina täynnä → ne ovat aina synkassa.
+  // Fill: alkaa left:0, minWidth ulottuu hero-hexiin, kasvaa scrollin mukaan
   return (
     <div className="scroll-progress" aria-hidden="true">
-      <div className="scroll-progress__frame">
+      <div className="scroll-progress__frame" ref={frameRef}>
         <div className="scroll-progress__rail-line" />
         <div className="scroll-progress__track">
           <div
             className="scroll-progress__fill"
-            style={{ width: `${fillPercent}%`, minWidth: "8px" }}
+            style={{
+              width: `${fillPercent}%`,
+              minWidth: heroOffsetPx > 0 ? `${heroOffsetPx}px` : '0px',
+            }}
           />
         </div>
         <div className="scroll-progress__points">
