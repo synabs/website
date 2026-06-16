@@ -15,39 +15,60 @@ const sectionIds = [
   'cta',
 ]
 
+// Laskee elementin absoluuttisen offsetin sivun yläreunasta
+function getAbsoluteTop(el) {
+  let top = 0
+  let node = el
+  while (node) {
+    top += node.offsetTop || 0
+    node = node.offsetParent
+  }
+  return top
+}
+
 export default function ScrollProgress() {
   const [fillPercent, setFillPercent] = useState(0)
-  const [checkpoints, setCheckpoints] = useState([]) // [{ id, pct }]
+  const [checkpoints, setCheckpoints] = useState([])   // [{ id, railPct }]
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
+
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
   const filledRef = useRef({})
   const checkpointsRef = useRef([])
+  // Tallennetaan hero:n absoluuttinen top ja viimeisen sektion top
+  // jotta fill ja hexagonit käyttävät täysin samaa koordinaatistoa.
+  const rangeRef = useRef({ start: 0, end: 1 })
 
-  // Lasketaan jokaisen sektion todellinen scroll-% sijainti dokumentissa.
-  // Tehdään uudelleen kun ikkuna resaitaan (layout voi muuttua).
   useEffect(() => {
     function computeCheckpoints() {
       const doc = document.documentElement
       const scrollHeight = doc.scrollHeight - doc.clientHeight
       if (scrollHeight <= 0) return
 
-      const next = sectionIds
+      const positions = sectionIds
         .map((id) => {
           const el = document.getElementById(id)
           if (!el) return null
-          // offsetTop-ketju antaa absoluuttisen sijainnin riippumatta scroll-positiosta
-          let elTop = 0
-          let node = el
-          while (node) {
-            elTop += node.offsetTop || 0
-            node = node.offsetParent
-          }
-          const pct = Math.min(100, Math.max(0, (elTop / scrollHeight) * 100))
-          return { id, pct }
+          return { id, absTop: getAbsoluteTop(el) }
         })
         .filter(Boolean)
+
+      if (positions.length === 0) return
+
+      // Hero (ensimmäinen löytynyt) = palkin vasen reuna (0 %)
+      // Viimeinen löytynyt sektio = palkin oikea reuna (100 %)
+      const startTop = positions[0].absTop
+      const endTop   = positions[positions.length - 1].absTop
+      const span     = endTop - startTop || 1   // vältetään jako nollalla
+
+      rangeRef.current = { start: startTop, end: endTop }
+
+      const next = positions.map(({ id, absTop }) => ({
+        id,
+        absTop,
+        railPct: Math.min(100, Math.max(0, ((absTop - startTop) / span) * 100)),
+      }))
 
       checkpointsRef.current = next
       setCheckpoints(next)
@@ -55,11 +76,10 @@ export default function ScrollProgress() {
 
     computeCheckpoints()
     window.addEventListener('resize', computeCheckpoints)
-    // Layoutin asettuminen (kuvat, fontit) voi siirtää sektioita; tarkistetaan vielä kerran pian latauksen jälkeen.
-    const settleTimeout = window.setTimeout(computeCheckpoints, 800)
+    const t = window.setTimeout(computeCheckpoints, 800)
     return () => {
       window.removeEventListener('resize', computeCheckpoints)
-      clearTimeout(settleTimeout)
+      clearTimeout(t)
     }
   }, [])
 
@@ -67,17 +87,22 @@ export default function ScrollProgress() {
     function update() {
       const doc = document.documentElement
       const scrollTop = doc.scrollTop || document.body.scrollTop
-      const scrollHeight = doc.scrollHeight - doc.clientHeight
-      const pct = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0
-      setFillPercent(pct)
+      const { start, end } = rangeRef.current
+      const span = end - start || 1
+
+      // Fill-% käyttää samaa asteikkoa kuin hexagonit:
+      // 0 % = hero-sektion kohdalla, 100 % = viimeisen sektion kohdalla
+      const rawFill = ((scrollTop - start) / span) * 100
+      const fill = Math.min(100, Math.max(0, rawFill))
+      setFillPercent(fill)
 
       let changed = false
       const nextFilled = { ...filledRef.current }
 
-      checkpointsRef.current.forEach(({ id, pct: checkpointPct }) => {
-        const isPast = pct >= checkpointPct - 0.3
-
+      checkpointsRef.current.forEach(({ id, railPct }) => {
+        const isPast    = fill >= railPct - 0.3
         const wasFilled = !!filledRef.current[id]
+
         if (isPast && !wasFilled) {
           nextFilled[id] = true
           changed = true
@@ -128,18 +153,18 @@ export default function ScrollProgress() {
           />
         </div>
         <div className="scroll-progress__points">
-          {checkpoints.map(({ id, pct }) => {
-            const isFilled = !!filledMap[id]
+          {checkpoints.map(({ id, railPct }) => {
+            const isFilled  = !!filledMap[id]
             const isPopping = poppingId === id
             return (
               <div
                 key={id}
                 className={[
                   'scroll-progress__point',
-                  isFilled ? 'scroll-progress__point--filled' : '',
-                  isPopping ? 'scroll-progress__point--pop' : '',
+                  isFilled  ? 'scroll-progress__point--filled' : '',
+                  isPopping ? 'scroll-progress__point--pop'    : '',
                 ].filter(Boolean).join(' ')}
-                style={{ left: `${pct}%` }}
+                style={{ left: `${railPct}%` }}
               >
                 <svg
                   className="scroll-progress__hex"
