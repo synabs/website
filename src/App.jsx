@@ -1,6 +1,6 @@
 import './styles/globals.css'
 import Navbar from './components/Navbar'
-import Scrollprogress from './components/ScrollProgress'
+import ScrollProgress from './components/ScrollProgress'
 import Hero from './components/Hero'
 import Features from './components/Features'
 import Abilities from './components/Abilities'
