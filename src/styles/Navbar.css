@@ -59,12 +59,11 @@
     overflow: hidden;
     opacity: 0;
     transition: max-width 0.3s ease, opacity 0.2s ease;
-    margin-right: auto;
-    margin-left: var(--space-8, 2rem);
   }
   .navbar__desktop-list--open {
     max-width: 600px;
     opacity: 1;
+    margin-right: var(--space-6, 1.5rem);
   }
 }
 .navbar__desktop-link {
