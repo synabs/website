@@ -4,7 +4,7 @@
 .cta {
   position: relative;
   width: 100%;
-  min-height: 500px;
+  aspect-ratio: 16/7;
   overflow: hidden;
 }
 .cta__bg {
@@ -18,13 +18,13 @@
   display: block;
 }
 .cta__overlay {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding-inline: var(--gutter);
-  padding-top: clamp(48px, 8vw, 96px);
-  padding-bottom: clamp(48px, 8vw, 96px);
 }
 .cta__content {
   display: flex;
@@ -72,6 +72,9 @@
   }
 }
 @media (max-width: 768px) {
+  .cta {
+    aspect-ratio: 4/5;
+  }
   .cta__overlay {
     padding: 32px 24px;
     align-items: center;
