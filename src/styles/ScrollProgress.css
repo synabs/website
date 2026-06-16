@@ -43,6 +43,7 @@
   background: rgba(255, 255, 255, 0.12);
   overflow: hidden;
 }
+
 .scroll-progress__fill {
   position: absolute;
   top: 0;
@@ -50,6 +51,10 @@
   height: 100%;
   background: var(--color-white, #ffffff);
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+  /* Magneettinen liike: lyhyt transition tuntuu "vetäytymiseltä"
+     mutta ei hidasta reagointia näkyvästi */
+  transition: width 80ms linear;
+  will-change: width;
 }
 
 /* ── Hexagon-pisteet, sijoitettu sektion oikean scroll-%:n mukaan ── */
@@ -57,8 +62,8 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: var(--gutter);
-  right: var(--gutter);
+  left: 0;
+  right: 0;
 }
 
 .scroll-progress__point {
@@ -70,7 +75,8 @@
   justify-content: center;
   width: 16px;
   height: 16px;
-  transform: translateX(-50%);
+  /* Sentroi hexagon left-arvon päälle */
+  transform: translateX(-50%) translateY(25%);
   background: transparent;
 }
 
@@ -82,14 +88,14 @@
 
 .scroll-progress__hex-outline {
   color: rgba(255, 255, 255, 0.4);
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 
 .scroll-progress__hex-fill {
   opacity: 0;
   transform: scale(0.5);
   transform-origin: center;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
   color: var(--color-white, #ffffff);
 }
 
@@ -104,8 +110,8 @@
 /* ── Pop-animaatio kun checkpoint täyttyy ── */
 @keyframes hexPop {
   0%   { transform: scale(1); }
-  35%  { transform: scale(1.5); }
-  60%  { transform: scale(0.88); }
+  35%  { transform: scale(1.55); }
+  60%  { transform: scale(0.85); }
   100% { transform: scale(1); }
 }
 .scroll-progress__point--pop .scroll-progress__hex {
@@ -115,10 +121,6 @@
 @media (max-width: 768px) {
   .scroll-progress__frame {
     height: 16px;
-  }
-  .scroll-progress__points {
-    left: var(--space-6);
-    right: var(--space-6);
   }
   .scroll-progress__point {
     width: 12px;
