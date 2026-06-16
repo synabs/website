@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import '../styles/ScrollProgress.css'
 
 const sectionIds = [
@@ -15,94 +15,136 @@ const sectionIds = [
   'cta',
 ]
 
+// Luotettavampi absTop: getBoundingClientRect + scrollY
 function getAbsoluteTop(el) {
-  let top = 0
-  let node = el
-  while (node) {
-    top += node.offsetTop || 0
-    node = node.offsetParent
+  const rect = el.getBoundingClientRect()
+  return rect.top + window.scrollY
+}
+
+// Magneetti: palauttaa "magnetized" fill% jos ollaan lähellä hexagonia
+// zone = osuus raidasta (0..1) joka on magnettivetoa
+const MAGNET_ZONE = 0.25
+
+function applyMagnet(rawFill, checkpoints) {
+  if (checkpoints.length === 0) return rawFill
+
+  // Etsi lähin hexagon
+  let closest = null
+  let closestDist = Infinity
+  for (const cp of checkpoints) {
+    const dist = Math.abs(cp.railPct - rawFill)
+    if (dist < closestDist) {
+      closestDist = dist
+      closest = cp
+    }
   }
-  return top
+  if (!closest) return rawFill
+
+  // Laske gap seuraavaan/edelliseen hexagoniin (tai oleta 10 jos ei naapuria)
+  const sorted = [...checkpoints].sort((a, b) => a.railPct - b.railPct)
+  const idx = sorted.findIndex((c) => c.id === closest.id)
+  let gap = 10
+  if (idx > 0 && idx < sorted.length - 1) {
+    gap = Math.min(
+      sorted[idx].railPct - sorted[idx - 1].railPct,
+      sorted[idx + 1].railPct - sorted[idx].railPct
+    )
+  } else if (sorted.length > 1) {
+    gap =
+      idx === 0
+        ? sorted[1].railPct - sorted[0].railPct
+        : sorted[idx].railPct - sorted[idx - 1].railPct
+  }
+
+  const magnetRadius = gap * MAGNET_ZONE
+  const diff = rawFill - closest.railPct
+
+  if (Math.abs(diff) > magnetRadius) return rawFill
+
+  // Sileä snäppäys: cosini-interpolaatio → snäppää hexagoniin kun ollaan lähellä
+  const t = Math.abs(diff) / magnetRadius // 0=center, 1=edge
+  const pull = 1 - t * t                   // parabolinen veto
+  return rawFill - diff * pull * 0.85
 }
 
 export default function ScrollProgress() {
-  const [fillPercent, setFillPercent] = useState(0)
+  const [displayFill, setDisplayFill] = useState(0)
   const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
-  const [heroMinPx, setHeroMinPx] = useState(0)
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
   const filledRef = useRef({})
   const checkpointsRef = useRef([])
   const rangeRef = useRef({ start: 0, end: 1 })
-  const pointsRef = useRef(null)
-  const frameRef = useRef(null)
 
-  useEffect(() => {
-    function computeCheckpoints() {
-      const doc = document.documentElement
-      const scrollHeight = doc.scrollHeight - doc.clientHeight
-      if (scrollHeight <= 0) return
+  const computeCheckpoints = useCallback(() => {
+    const doc = document.documentElement
+    const scrollHeight = doc.scrollHeight - doc.clientHeight
+    if (scrollHeight <= 0) return
 
-      const positions = sectionIds
-        .map((id) => {
-          const el = document.getElementById(id)
-          if (!el) return null
-          return { id, absTop: getAbsoluteTop(el) }
-        })
-        .filter(Boolean)
+    const positions = sectionIds
+      .map((id) => {
+        const el = document.getElementById(id)
+        if (!el) return null
+        return { id, absTop: getAbsoluteTop(el) }
+      })
+      .filter(Boolean)
 
-      if (positions.length === 0) return
+    if (positions.length === 0) return
 
-      const startTop = positions[0].absTop
-      const endTop   = positions[positions.length - 1].absTop
-      const span     = endTop - startTop || 1
+    const startTop = positions[0].absTop
+    const endTop = positions[positions.length - 1].absTop
+    const span = endTop - startTop || 1
 
-      rangeRef.current = { start: startTop, end: endTop }
+    rangeRef.current = { start: startTop, end: endTop }
 
-      const next = positions.map(({ id, absTop }) => ({
-        id,
-        absTop,
-        railPct: Math.min(100, Math.max(0, ((absTop - startTop) / span) * 100)),
-      }))
+    const next = positions.map(({ id, absTop }) => ({
+      id,
+      absTop,
+      // railPct: 0% = hero, 100% = cta
+      railPct: Math.min(100, Math.max(0, ((absTop - startTop) / span) * 100)),
+    }))
 
-      checkpointsRef.current = next
-      setCheckpoints(next)
-
-      if (pointsRef.current && frameRef.current) {
-        const frameRect = frameRef.current.getBoundingClientRect()
-        const pointsRect = pointsRef.current.getBoundingClientRect()
-        const px = pointsRect.left - frameRect.left
-        setHeroMinPx(px)
-      }
-    }
-
-    computeCheckpoints()
-    window.addEventListener('resize', computeCheckpoints)
-    const t = window.setTimeout(computeCheckpoints, 800)
-    return () => {
-      window.removeEventListener('resize', computeCheckpoints)
-      clearTimeout(t)
-    }
+    checkpointsRef.current = next
+    setCheckpoints(next)
   }, [])
 
   useEffect(() => {
+    computeCheckpoints()
+    window.addEventListener('resize', computeCheckpoints)
+    // Uudelleenlasku kun kuvat/fontit ovat ladanneet
+    const t1 = window.setTimeout(computeCheckpoints, 400)
+    const t2 = window.setTimeout(computeCheckpoints, 1200)
+    return () => {
+      window.removeEventListener('resize', computeCheckpoints)
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+  }, [computeCheckpoints])
+
+  useEffect(() => {
     function update() {
-      const doc = document.documentElement
-      const scrollTop = doc.scrollTop || document.body.scrollTop
+      const scrollTop = window.scrollY || document.documentElement.scrollTop
       const { start, end } = rangeRef.current
       const span = end - start || 1
 
-      const fill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
-      setFillPercent(fill)
+      // Raw fill: lineaarinen scrollin mukaan
+      const rawFill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
 
+      // Magneettinen fill UI:hin
+      const magneticFill = applyMagnet(rawFill, checkpointsRef.current)
+      setDisplayFill(magneticFill)
+
+      // Hexagonien täyttö: käytetään RAW filliä (ei magneettieta), jotta
+      // hexagoni täyttyy juuri kun se sektion kohdalle scrollataan
       let changed = false
       const nextFilled = { ...filledRef.current }
 
       checkpointsRef.current.forEach(({ id, railPct }) => {
-        const isPast    = railPct === 0 ? true : fill >= railPct - 0.3
+        // Hero (railPct===0) on aina täynnä heti
+        const isPast = railPct === 0 ? true : rawFill >= railPct
         const wasFilled = !!filledRef.current[id]
 
         if (isPast && !wasFilled) {
@@ -113,7 +155,7 @@ export default function ScrollProgress() {
             if (popTimeoutRef.current) clearTimeout(popTimeoutRef.current)
             popTimeoutRef.current = window.setTimeout(() => {
               setPoppingId((cur) => (cur === id ? null : cur))
-            }, 380)
+            }, 400)
           }
         } else if (!isPast && wasFilled) {
           delete nextFilled[id]
@@ -123,7 +165,7 @@ export default function ScrollProgress() {
 
       if (changed) {
         filledRef.current = nextFilled
-        setFilledMap(nextFilled)
+        setFilledMap({ ...nextFilled })
       }
 
       rafRef.current = null
@@ -135,6 +177,7 @@ export default function ScrollProgress() {
       }
     }
 
+    // Aja heti kun checkpoints on laskettu
     update()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
@@ -148,29 +191,28 @@ export default function ScrollProgress() {
 
   return (
     <div className="scroll-progress" aria-hidden="true">
-      <div className="scroll-progress__frame" ref={frameRef}>
+      <div className="scroll-progress__frame">
         <div className="scroll-progress__rail-line" />
         <div className="scroll-progress__track">
           <div
             className="scroll-progress__fill"
-            style={{
-              width: `${fillPercent}%`,
-              minWidth: `${heroMinPx}px`,
-            }}
+            style={{ width: `${displayFill}%` }}
           />
         </div>
-        <div className="scroll-progress__points" ref={pointsRef}>
+        <div className="scroll-progress__points">
           {checkpoints.map(({ id, railPct }) => {
-            const isFilled  = !!filledMap[id]
+            const isFilled = !!filledMap[id]
             const isPopping = poppingId === id
             return (
               <div
                 key={id}
                 className={[
                   'scroll-progress__point',
-                  isFilled  ? 'scroll-progress__point--filled' : '',
-                  isPopping ? 'scroll-progress__point--pop'    : '',
-                ].filter(Boolean).join(' ')}
+                  isFilled ? 'scroll-progress__point--filled' : '',
+                  isPopping ? 'scroll-progress__point--pop' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
                 style={{ left: `${railPct}%` }}
               >
                 <svg
