@@ -138,7 +138,7 @@ export default function CTA() {
           zIndex: 1,
         }}
       />
-      <div className="cta__overlay" style={{ position: 'relative', zIndex: 2 }}>
+      <div className="cta__overlay" style={{ zIndex: 2 }}>
         <div className="cta__content">
           <h2 className="cta__title">
             START THE<br />
