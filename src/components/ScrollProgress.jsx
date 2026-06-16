@@ -30,7 +30,8 @@ export default function ScrollProgress() {
   const [checkpoints, setCheckpoints] = useState([])
   const [filledMap, setFilledMap] = useState({})
   const [poppingId, setPoppingId] = useState(null)
-  const [heroMinPx, setHeroMinPx] = useState(0)
+  // Hero-hexin sijainti prosentteina framen leveydestä
+  const heroOffsetPctRef = useRef(0)
 
   const rafRef = useRef(null)
   const popTimeoutRef = useRef(null)
@@ -38,6 +39,7 @@ export default function ScrollProgress() {
   const checkpointsRef = useRef([])
   const rangeRef = useRef({ start: 0, end: 1 })
   const pointsRef = useRef(null)
+  const frameRef = useRef(null)
 
   useEffect(() => {
     function computeCheckpoints() {
@@ -70,13 +72,12 @@ export default function ScrollProgress() {
       checkpointsRef.current = next
       setCheckpoints(next)
 
-      // Mittaa points-containerin vasen reuna suhteessa frameen
-      // → tämä on hero-hexin pikselikoordinaatti fillille
-      if (pointsRef.current) {
-        const containerLeft = pointsRef.current.getBoundingClientRect().left
-        const frameLeft = pointsRef.current.offsetParent?.getBoundingClientRect().left ?? 0
-        const px = containerLeft - frameLeft
-        setHeroMinPx(px)
+      // Laske hero-hexin pikselipaikka prosentteina framen leveydestä
+      if (pointsRef.current && frameRef.current) {
+        const frameRect = frameRef.current.getBoundingClientRect()
+        const pointsRect = pointsRef.current.getBoundingClientRect()
+        const heroLeftPx = pointsRect.left - frameRect.left
+        heroOffsetPctRef.current = (heroLeftPx / frameRect.width) * 100
       }
     }
 
@@ -96,14 +97,20 @@ export default function ScrollProgress() {
       const { start, end } = rangeRef.current
       const span = end - start || 1
 
-      const fill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
+      const scrollFill = Math.min(100, Math.max(0, ((scrollTop - start) / span) * 100))
+      const heroOff = heroOffsetPctRef.current
+
+      // Fill = hero-offset + scrollin osuus jäljellä olevasta tilasta
+      // Kun scroll=0 → fill=heroOff (ulottuu juuri hero-hexiin)
+      // Kun scroll=max → fill=100%
+      const fill = heroOff + (scrollFill / 100) * (100 - heroOff)
       setFillPercent(fill)
 
       let changed = false
       const nextFilled = { ...filledRef.current }
 
       checkpointsRef.current.forEach(({ id, railPct }) => {
-        const isPast    = railPct === 0 ? true : fill >= railPct - 0.3
+        const isPast    = railPct === 0 ? true : scrollFill >= railPct - 0.3
         const wasFilled = !!filledRef.current[id]
 
         if (isPast && !wasFilled) {
@@ -149,15 +156,12 @@ export default function ScrollProgress() {
 
   return (
     <div className="scroll-progress" aria-hidden="true">
-      <div className="scroll-progress__frame">
+      <div className="scroll-progress__frame" ref={frameRef}>
         <div className="scroll-progress__rail-line" />
         <div className="scroll-progress__track">
           <div
             className="scroll-progress__fill"
-            style={{
-              width: `${fillPercent}%`,
-              minWidth: `${heroMinPx}px`,
-            }}
+            style={{ width: `${fillPercent}%` }}
           />
         </div>
         <div className="scroll-progress__points" ref={pointsRef}>
