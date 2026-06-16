@@ -176,7 +176,7 @@ export default function FeaturesResults() {
   return (
     <>
       {/* ── Results ── */}
-      <section className="fr-section fr-section--results" ref={statsRef}>
+      <section className="fr-section fr-section--results" id="features-results" ref={statsRef}>
         <div className="fr-inner">
           <p className="fr-label">Early results</p>
           <h2 className="fr-heading">
