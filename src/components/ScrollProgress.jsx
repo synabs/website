@@ -149,7 +149,7 @@ export default function ScrollProgress() {
         <div className="scroll-progress__track">
           <div
             className="scroll-progress__fill"
-            style={{ width: `${fillPercent}%` }}
+            style={{ width: `${fillPercent}%`, minWidth: "8px" }}
           />
         </div>
         <div className="scroll-progress__points">
