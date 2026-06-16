@@ -46,6 +46,39 @@
   margin-left: auto;
 }
 
+/* Desktop inline nav-linkit – piilossa oletuksena, toggle näkyväksi */
+.navbar__desktop-list {
+  display: none;
+}
+@media (min-width: 769px) {
+  .navbar__desktop-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8, 2rem);
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-width 0.3s ease, opacity 0.2s ease;
+    margin-right: auto;
+    margin-left: var(--space-8, 2rem);
+  }
+  .navbar__desktop-list--open {
+    max-width: 600px;
+    opacity: 1;
+  }
+}
+.navbar__desktop-link {
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--font-medium, 500);
+  color: var(--color-black, #111);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color var(--transition-fast, 0.15s ease);
+}
+.navbar__desktop-link:hover {
+  color: var(--text-muted, #555);
+}
+
 /* Start free trial – demo-tyylinen nappi */
 .navbar__trial-link {
   font-size: clamp(var(--text-sm, 0.875rem), 1.2vw, var(--text-base, 1rem));
@@ -137,6 +170,11 @@
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+}
+@media (min-width: 769px) {
+  .navbar__mobile-menu {
+    display: none;
+  }
 }
 .navbar__mobile-list {
   display: flex;
