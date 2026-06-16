@@ -22,7 +22,7 @@ export default function CTA() {
   }, [])
 
   return (
-    <section className="cta">
+    <section className="cta" id="cta">
       <div className="cta__bg" aria-hidden="true">
         <img src="/cta.avif" alt="" />
       </div>
