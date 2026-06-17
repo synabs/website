@@ -136,7 +136,7 @@ export default function Hero() {
               The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
             <div className="hero__watch-row">
-              <a href="#techology" className="hero__watch-button">
+              <a href="#technology" className="hero__watch-button">
                 <span className="hero__watch-icon" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z"/>
