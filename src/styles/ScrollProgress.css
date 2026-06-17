@@ -75,8 +75,10 @@
   justify-content: center;
   width: 16px;
   height: 16px;
-  /* Sentroi hexagon left-arvon päälle */
-  transform: translateX(-50%) translateY(25%);
+  /* Sentroi hexagon left-arvon päälle.
+     Kiinteä 2px = (frame-korkeus − hexagon-korkeus) / 2,
+     toimii samalla tavalla sekä desktopilla (20px/16px) että mobiilissa (16px/12px) */
+  transform: translateX(-50%) translateY(2px);
   background: transparent;
 }
 
