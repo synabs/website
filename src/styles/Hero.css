@@ -52,6 +52,16 @@
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-10);
 }
+.hero__cta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.hero__cta-image {
+  height: 48px;
+  width: auto;
+  border-radius: var(--radius-md);
+}
 .hero__buttons {
   display: flex;
   gap: var(--space-4);
@@ -61,6 +71,7 @@
   .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
   .hero__content { padding-inline: var(--space-6); }
   .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
+  .hero__cta-row { flex-wrap: wrap; }
 }
 
 /* ── Hero two-column layout ── */
