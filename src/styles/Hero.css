@@ -1,169 +1,187 @@
-import { useEffect, useRef } from 'react'
-import '../styles/Hero.css'
+/* ============================================================
+   HERO.CSS — redesigned, no glass
+   ============================================================ */
 
-export default function Hero() {
-  const hexCanvasRef = useRef(null)
+.hero {
+  position: relative;
+  min-height: var(--hero-min-height);
+  background: var(--hero-bg);
+  display: flex;
+  align-items: center;
+  padding-bottom: var(--space-20);
+  overflow: hidden;
+}
 
-  useEffect(() => {
-    const canvas = hexCanvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.07
-    const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
-    let hexes = [], targetOpacity = 1, animFrame = null
-    let t = 0, elapsed = 0, lastTime = 0
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero__bg::after { display: none; }
 
-    function hexPoint(cx, cy, size, i) {
-      const a = Math.PI / 180 * (60 * i - 30)
-      return [cx + size * Math.cos(a), cy + size * Math.sin(a)]
-    }
+/* ── Content wrapper ── */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-top: calc(var(--nav-height) + var(--space-16));
+  margin-left: 0;
+}
 
-    function buildHexes() {
-      hexes = []
-      const w = canvas.width, h = canvas.height
-      const hx = HEX_SIZE * 2 + HEX_GAP
-      const hy = Math.sqrt(3) * HEX_SIZE + HEX_GAP
-      const cols = Math.ceil(w / hx) + 1
-      const rows = Math.ceil(h / hy) + 1
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const x = HEX_SIZE + col * hx + (row % 2) * (hx / 2)
-          const y = HEX_SIZE + row * hy
-          hexes.push({
-            x, y, baseY: y, op: 0,
-            delay: row * 0.08 + col * 0.02 + Math.random() * 0.06,
-            floatOffset: Math.random() * Math.PI * 2,
-            fadeStart: 0.55 + Math.random() * 0.3,
-          })
-        }
-      }
-    }
+/* ── Inner content block ── */
+.hero__inner {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-width);
+}
 
-    function resize() {
-      const parent = canvas.parentElement
-      canvas.width = parent.offsetWidth
-      canvas.height = parent.offsetHeight
-      buildHexes()
-    }
+.hero__left {
+  max-width: 720px;
+}
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      t += 0.016
-      hexes.forEach(h => {
-        const yRatio = h.baseY / canvas.height
-        const edgeFade = yRatio < h.fadeStart ? 1 : Math.max(0, 1 - (yRatio - h.fadeStart) / (1 - h.fadeStart))
-        const op = h.op * MAX_OPACITY * edgeFade
-        if (op < 0.005) return
-        const floatY = h.baseY + Math.sin(t * 0.25 + h.floatOffset) * 3.5
-        ctx.save()
-        ctx.globalAlpha = op
-        ctx.strokeStyle = '#ffffff'
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        const pts = Array.from({ length: 6 }, (_, i) => hexPoint(h.x, floatY, HEX_SIZE, i))
-        ctx.moveTo(pts[0][0], pts[0][1])
-        pts.slice(1).forEach(p => ctx.lineTo(p[0], p[1]))
-        ctx.closePath()
-        ctx.stroke()
-        ctx.restore()
-      })
-    }
+/* ── Title & lead (position unchanged) ── */
+.hero__title {
+  font-size: clamp(4.2rem, 12vw, 10.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  font-weight: var(--font-bold);
+  color: var(--color-white);
+  margin-bottom: var(--space-10);
+  max-width: none;
+  text-align: left;
+}
 
-    function loop(ts) {
-      const dt = (ts - lastTime) / 1000
-      lastTime = ts
-      if (targetOpacity > 0) elapsed += dt; else elapsed = 0
-      hexes.forEach(h => {
-        if (elapsed < h.delay) return
-        h.op = targetOpacity > 0
-          ? Math.min(1, h.op + APPEAR_SPEED)
-          : Math.max(0, h.op - FADE_SPEED)
-      })
-      draw()
-      animFrame = requestAnimationFrame(loop)
-    }
+.hero__lead {
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
+  font-weight: var(--font-light);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-10);
+}
 
-    function onScroll() { targetOpacity = 1; elapsed = 0 }
+/* ── Buttons ── */
+.hero__buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-8);
+}
 
-    resize()
-    window.addEventListener('resize', resize)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    animFrame = requestAnimationFrame(ts => { lastTime = ts; loop(ts) })
+.hero__play-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: #e53e3e;
+  border-radius: 50%;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
 
-    return () => {
-      cancelAnimationFrame(animFrame)
-      window.removeEventListener('resize', resize)
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
+/* ── Trust badges ── */
+.hero__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
 
-  return (
-    <section className="hero" id="hero">
-      <div className="hero__bg" aria-hidden="true">
-        <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
-      </div>
-      <canvas
-        ref={hexCanvasRef}
-        aria-hidden="true"
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
-      />
+.hero__badge-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+  opacity: 0.9;
+}
 
-      <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
-        <div className="hero__inner">
+/* ── Faded pull-quote — right-aligned, vertically centered, movie-review style ── */
+@keyframes reviewFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-          {/* LEFT — title + lead (unchanged position) */}
-          <div className="hero__left">
-            <h1 className="hero__title">
-              EVOLVING<br />
-              AI<br />
-              AGENTS
-            </h1>
-            <p className="hero__lead">
-              The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
-            </p>
+.hero__review {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  max-width: 560px;
+  text-align: right;
+  z-index: 2;
+  animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
-            {/* CTA buttons — global btn styles */}
-            <div className="hero__buttons">
-              <a href="#get-started" className="btn btn--white">
-                Start free trial
-              </a>
-              <a href="#technology" className="btn btn--outline">
-                <span className="hero__play-icon" aria-hidden="true">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </span>
-                Watch demo
-              </a>
-            </div>
+.hero__review-quote {
+  margin: 0 0 var(--space-5);
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  line-height: 1.05;
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  opacity: 0.5;
+}
 
-            {/* Trust badges — images inline below buttons */}
-            <div className="hero__badges">
-              <img src="/cortex-engine.avif" alt="Cortex Engine" className="hero__badge-img" />
-              <img src="/gdpr.avif" alt="GDPR compliant" className="hero__badge-img" />
-            </div>
-          </div>
+.hero__review-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
 
-        </div>
-      </div>
+.hero__review-stars {
+  display: flex;
+  gap: 3px;
+  color: #e53e3e;
+  margin-bottom: 6px;
+}
 
-      {/* RIGHT — giant faded pull-quote, flush against the true right edge of the section */}
-      <div className="hero__review">
-        <blockquote className="hero__review-quote">
-          "It felt almost illegal to use for free."
-        </blockquote>
-        <div className="hero__review-meta">
-          <div className="hero__review-stars" aria-label="5 stars">
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            ))}
-          </div>
-          <p className="hero__review-name">Mirko Asell</p>
-          <p className="hero__review-role">CEO, Somesankarit Oy</p>
-        </div>
-      </div>
-    </section>
-  )
+.hero__review-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-white);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.hero__review-role {
+  font-size: 0.8rem;
+  color: var(--color-white);
+  opacity: 0.55;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
+  .hero__review {
+    position: static;
+    transform: none;
+    max-width: none;
+    text-align: left;
+    margin-top: var(--space-10);
+    padding-inline: var(--gutter);
+  }
+  .hero__review-meta {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__content { padding-inline: var(--space-6); }
+  .hero__review { padding-inline: var(--space-6); }
+  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
+  .hero__buttons { flex-wrap: wrap; }
+  .hero__review-quote { font-size: clamp(1.8rem, 8vw, 2.6rem); }
 }
