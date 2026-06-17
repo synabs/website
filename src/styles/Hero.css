@@ -50,7 +50,7 @@
 
 /* ── Title & lead (position unchanged) ── */
 .hero__title {
-  font-size: clamp(4.2rem, 12vw, 10.5rem); /* ALKUPERÄINEN — EI MUUTETTU */
+  font-size: 12vw; /* FullHD: 12vw = 230px ≈ 10.5rem — skaalautuu luonnollisesti alaspäin */
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
@@ -61,7 +61,7 @@
 }
 
 .hero__lead {
-  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl)); /* ALKUPERÄINEN — EI MUUTETTU */
+  font-size: 1.8vw; /* FullHD: 1.8vw = 34px ≈ text-3xl — skaalautuu luonnollisesti */
   font-weight: var(--font-light);
   color: rgba(255, 255, 255, 0.8);
   max-width: 600px;
@@ -99,7 +99,7 @@
 .hero__review {
   position: absolute;
   top: 50%;
-  right: clamp(2rem, 6vw, 6rem); /* ALKUPERÄINEN — EI MUUTETTU */
+  right: 6vw; /* FullHD: 6vw = 115px ≈ 6rem — skaalautuu luonnollisesti */
   transform: translateY(-50%);
   max-width: 924px;
   text-align: right;
@@ -109,7 +109,7 @@
 
 .hero__review-quote {
   margin: 0 0 calc(var(--space-5) * 1.65);
-  font-size: clamp(3.63rem, 7.26vw, 5.94rem); /* ALKUPERÄINEN — EI MUUTETTU */
+  font-size: 7.26vw; /* FullHD: 7.26vw = 139px ≈ 5.94rem — skaalautuu luonnollisesti */
   line-height: 1.05;
   font-weight: var(--font-bold);
   letter-spacing: -0.02em;
@@ -132,7 +132,7 @@
 }
 
 .hero__review-name {
-  font-size: 1.57rem;
+  font-size: 1.307vw; /* FullHD: ≈ 1.57rem */
   font-weight: 600;
   color: var(--color-white);
   opacity: 0.85;
@@ -140,7 +140,7 @@
 }
 
 .hero__review-role {
-  font-size: 1.32rem;
+  font-size: 1.1vw; /* FullHD: ≈ 1.32rem */
   color: var(--color-white);
   opacity: 0.55;
   margin: 0;
@@ -148,7 +148,7 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
+  .hero__title { font-size: 18vw; } /* skaalautuu luonnollisesti alle 900px */
   .hero__review {
     position: static;
     transform: none;
@@ -165,7 +165,7 @@
 @media (max-width: 768px) {
   .hero__content { padding-inline: var(--space-6); }
   .hero__review { padding-inline: var(--space-6); }
-  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
+  .hero__lead { font-size: 4vw; }
   .hero__buttons { flex-wrap: wrap; }
-  .hero__review-quote { font-size: clamp(2.97rem, 13.2vw, 4.29rem); }
+  .hero__review-quote { font-size: 13.2vw; }
 }
