@@ -50,7 +50,7 @@
 
 /* ── Title & lead (position unchanged) ── */
 .hero__title {
-  font-size: 12vw; /* FullHD: 12vw = 230px ≈ 10.5rem — skaalautuu luonnollisesti alaspäin */
+  font-size: min(12vw, 21vh); /* FullHD 1920×1080: min(230px, 227px) ≈ sama; vh-raja estää ylivuodon matalilla ikkunoilla */
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
@@ -109,7 +109,7 @@
 
 .hero__review-quote {
   margin: 0 0 calc(var(--space-5) * 1.65);
-  font-size: 7.26vw; /* FullHD: 7.26vw = 139px ≈ 5.94rem — skaalautuu luonnollisesti */
+  font-size: min(7.26vw, 12.7vh); /* FullHD 1920×1080: min(139px, 137px) ≈ sama */
   line-height: 1.05;
   font-weight: var(--font-bold);
   letter-spacing: -0.02em;
