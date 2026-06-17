@@ -163,7 +163,7 @@ export default function Hero() {
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </span>
-                Watch it live
+                Watch demo
               </a>
             </div>
           </div>
