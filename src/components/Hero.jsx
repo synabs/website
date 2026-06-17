@@ -1,8 +1,42 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useEffect, useRef, useState } from 'react'
 import '../styles/Hero.css'
 
+const DESIGN_WIDTH = 1920
+const MIN_WIDTH = 1024
+const MIN_SCALE = MIN_WIDTH / DESIGN_WIDTH
+
 export default function Hero() {
+  const heroRef = useRef(null)
+  const stageRef = useRef(null)
   const hexCanvasRef = useRef(null)
+  const [scale, setScale] = useState(1)
+  const [stageHeight, setStageHeight] = useState(0)
+
+  // --- Pixel-perfect scaling -------------------------------------------
+  // Layout is frozen at a 1920px design width (see Hero.css: --vw-design).
+  // We measure the stage's natural (unscaled) size and apply a single
+  // transform: scale() so every element — fonts, gaps, quote position,
+  // hex canvas — shrinks together in lockstep, with zero drift.
+  useLayoutEffect(() => {
+    const hero = heroRef.current
+    const stage = stageRef.current
+    if (!hero || !stage) return
+
+    function applyScale() {
+      const containerWidth = hero.offsetWidth
+      const nextScale = Math.min(1, Math.max(MIN_SCALE, containerWidth / DESIGN_WIDTH))
+      setScale(nextScale)
+      setStageHeight(stage.offsetHeight)
+    }
+
+    applyScale()
+
+    const ro = new ResizeObserver(applyScale)
+    ro.observe(hero)
+    ro.observe(stage)
+
+    return () => ro.disconnect()
+  }, [])
 
   useEffect(() => {
     const canvas = hexCanvasRef.current
@@ -98,64 +132,75 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="hero" id="hero">
-      <div className="hero__bg" aria-hidden="true">
-        <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
-      </div>
-      <canvas
-        ref={hexCanvasRef}
-        aria-hidden="true"
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
-      />
-
-      <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
-        <div className="hero__inner">
-
-          {/* LEFT — title + lead (unchanged position) */}
-          <div className="hero__left">
-            <h1 className="hero__title">
-              EVOLVING<br />
-              AI<br />
-              AGENTS
-            </h1>
-            <p className="hero__lead">
-              The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
-            </p>
-
-            {/* CTA buttons — global btn styles */}
-            <div className="hero__buttons">
-              <a href="#get-started" className="btn btn--white">
-                Start free trial
-              </a>
-              <a href="#technology" className="btn btn--outline">
-                <span className="hero__play-icon" aria-hidden="true">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </span>
-                Watch demo
-              </a>
-            </div>
-          </div>
-
+    <section
+      className="hero"
+      id="hero"
+      ref={heroRef}
+      style={{ height: stageHeight ? stageHeight * scale : undefined }}
+    >
+      <div
+        className="hero__stage"
+        ref={stageRef}
+        style={{ transform: `scale(${scale})` }}
+      >
+        <div className="hero__bg" aria-hidden="true">
+          <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
         </div>
-      </div>
+        <canvas
+          ref={hexCanvasRef}
+          aria-hidden="true"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
+        />
 
-      {/* RIGHT — giant faded pull-quote, flush against the true right edge of the section */}
-      <div className="hero__review">
-        <blockquote className="hero__review-quote">
-          "It felt almost illegal to use for free."
-        </blockquote>
-        <div className="hero__review-meta">
-          <div className="hero__review-stars" aria-label="5 stars">
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            ))}
+        <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
+          <div className="hero__inner">
+
+            {/* LEFT — title + lead (unchanged position) */}
+            <div className="hero__left">
+              <h1 className="hero__title">
+                EVOLVING<br />
+                AI<br />
+                AGENTS
+              </h1>
+              <p className="hero__lead">
+                The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
+              </p>
+
+              {/* CTA buttons — global btn styles */}
+              <div className="hero__buttons">
+                <a href="#get-started" className="btn btn--white">
+                  Start free trial
+                </a>
+                <a href="#technology" className="btn btn--outline">
+                  <span className="hero__play-icon" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </span>
+                  Watch demo
+                </a>
+              </div>
+            </div>
+
           </div>
-          <p className="hero__review-name">Mirko Asell</p>
-          <p className="hero__review-role">CEO, Somesankarit Oy</p>
+        </div>
+
+        {/* RIGHT — giant faded pull-quote, flush against the true right edge of the stage */}
+        <div className="hero__review">
+          <blockquote className="hero__review-quote">
+            "It felt almost illegal to use for free."
+          </blockquote>
+          <div className="hero__review-meta">
+            <div className="hero__review-stars" aria-label="5 stars">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
+            </div>
+            <p className="hero__review-name">Mirko Asell</p>
+            <p className="hero__review-role">CEO, Somesankarit Oy</p>
+          </div>
         </div>
       </div>
     </section>
