@@ -3,12 +3,6 @@ export default function SetupSection() {
   return (
     <section className="ss-section" id="setup-section">
       <div className="ss-section__bg" aria-hidden="true" />
-      <img
-        className="ss-bg-image"
-        src="/setup.avif"
-        alt=""
-        aria-hidden="true"
-      />
       <div className="ss-inner">
         <div className="ss-left">
           <p className="ss-label">Setup</p>
@@ -20,6 +14,13 @@ export default function SetupSection() {
             whether you set it up yourself or with our help.
           </p>
           <a href="#" className="btn btn--white">Try it free 14 days</a>
+        </div>
+        <div className="ss-right" aria-hidden="true">
+          <img
+            className="ss-bg-image"
+            src="/setup.avif"
+            alt=""
+          />
         </div>
       </div>
     </section>
