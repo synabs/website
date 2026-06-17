@@ -15,8 +15,8 @@
   right: 0;
   width: 100%;
   height: calc(100% + 12rem);
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: bottom right;
   z-index: 0;
   pointer-events: none;
   opacity: 0.75;
