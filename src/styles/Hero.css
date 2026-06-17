@@ -22,12 +22,13 @@
 
 .hero {
   position: relative;
-  min-height: var(--hero-min-height);
+  height: var(--hero-min-height); /* kiinteä korkeus, EI min-height — estää ylivuodon */
+  max-height: var(--hero-min-height);
   background: var(--hero-bg);
   display: flex;
   align-items: center;
-  padding-bottom: 4.1667vw; /* space-20, oletus 80px / 1920 */
-  overflow: hidden;
+  padding-bottom: min(4.1667vw, 4vh); /* space-20, rajattu myös vh:lla matalille ikkunoille */
+  overflow: hidden; /* turvaverkko: mikäli sisältö silti ylittäisi korkeuden, se leikkautuu sen sijaan että työntää sivua scrollattavaksi */
 }
 
 .hero__bg {
@@ -51,7 +52,7 @@
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--gutter);
-  padding-top: calc(var(--nav-height) + 6.6667vw); /* space-16, oletus 128px / 1920 */
+  padding-top: calc(var(--nav-height) + min(6.6667vw, 6vh)); /* space-16, rajattu myös vh:lla */
   margin-left: 0;
 }
 
@@ -68,23 +69,23 @@
 
 /* ── Title & lead (position unchanged) ── */
 .hero__title {
-  font-size: 8.75vw; /* 168px (10.5rem, todellinen 1920px-arvo) / 1920 */
+  font-size: min(8.75vw, 13vh); /* 168px @1920px leveydellä; vh-katto estää 3 riviä työntämästä yli ruudun korkealla/kapealla ikkunalla */
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
   color: var(--color-white);
-  margin-bottom: 2.0833vw; /* space-10, oletus 40px / 1920 */
+  margin-bottom: min(2.0833vw, 2vh); /* space-10 */
   max-width: none;
   text-align: left;
 }
 
 .hero__lead {
-  font-size: 1.8vw; /* alkuperäinen vw-kerroin: ei lukkiutunut maksimiin 1920px:llä */
+  font-size: min(1.8vw, 2.6vh); /* alkuperäinen vw-kerroin + vh-katto turvana */
   font-weight: var(--font-light);
   color: rgba(255, 255, 255, 0.8);
   max-width: 31.25vw; /* 600px / 1920 */
   line-height: var(--leading-relaxed);
-  margin-bottom: 2.0833vw; /* space-10 */
+  margin-bottom: min(2.0833vw, 2vh); /* space-10 */
 }
 
 /* ── Buttons ── */
@@ -93,7 +94,7 @@
   align-items: center;
   gap: 0.8333vw; /* space-4, oletus 16px / 1920 */
   flex-wrap: wrap;
-  margin-bottom: 1.6667vw; /* space-8, oletus 32px / 1920 */
+  margin-bottom: min(1.6667vw, 1.5vh); /* space-8, oletus 32px / 1920 */
 }
 
 .hero__play-icon {
@@ -125,14 +126,16 @@
   right: 5vw; /* 96px (6rem, todellinen 1920px-arvo) / 1920 */
   transform: translateY(-50%);
   max-width: 48.125vw; /* 924px / 1920 */
+  max-height: 90%;
+  overflow: hidden;
   text-align: right;
   z-index: 2;
   animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero__review-quote {
-  margin: 0 0 1.7188vw; /* space-5*1.65, oletus 20px*1.65=33px / 1920 */
-  font-size: 4.95vw; /* 95.04px (5.94rem, todellinen 1920px-arvo) / 1920 */
+  margin: 0 0 min(1.7188vw, 2vh); /* space-5*1.65, oletus 20px*1.65=33px / 1920 */
+  font-size: min(4.95vw, 9vh); /* 95.04px (5.94rem, todellinen 1920px-arvo) / 1920 + vh-katto */
   line-height: 1.05;
   font-weight: var(--font-bold);
   letter-spacing: -0.02em;
@@ -182,6 +185,15 @@
    uudelleenasettelua (eli ei enää erillistä 900px/768px-layoutia,
    koska se rikkoisi "kuin yksi kiinteä kuva" -skaalauksen). */
 @media (max-width: 480px) {
+  .hero {
+    height: auto;
+    max-height: none;
+    min-height: var(--hero-min-height);
+    overflow: visible;
+    padding-top: var(--nav-height);
+    padding-bottom: 40px;
+  }
+  .hero__content { padding-top: 32px; }
   .hero__title { font-size: 42px; }
   .hero__review-quote { font-size: 24px; }
   .hero__lead { font-size: 14px; }
@@ -189,6 +201,8 @@
     position: static;
     transform: none;
     max-width: none;
+    max-height: none;
+    overflow: visible;
     text-align: left;
     margin-top: 40px;
     padding-inline: var(--gutter);
