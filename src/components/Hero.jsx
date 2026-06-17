@@ -10,6 +10,7 @@ export default function Hero() {
   const stageRef = useRef(null)
   const hexCanvasRef = useRef(null)
   const [scale, setScale] = useState(1)
+  const [offsetX, setOffsetX] = useState(0)
   const [stageHeight, setStageHeight] = useState(0)
 
   // --- Pixel-perfect scaling -------------------------------------------
@@ -25,7 +26,13 @@ export default function Hero() {
     function applyScale() {
       const containerWidth = hero.offsetWidth
       const nextScale = Math.min(1, Math.max(MIN_SCALE, containerWidth / DESIGN_WIDTH))
+      // Centers the stage only when scale is clamped at 1 (viewport > 1920px).
+      // For every width below that, scale already fills containerWidth
+      // exactly, so this resolves to 0 and the stage sits flush left —
+      // avoiding the flex-centering vs. transform-origin mismatch.
+      const nextOffsetX = (containerWidth - DESIGN_WIDTH * nextScale) / 2
       setScale(nextScale)
+      setOffsetX(nextOffsetX)
       setStageHeight(stage.offsetHeight)
     }
 
@@ -141,7 +148,7 @@ export default function Hero() {
       <div
         className="hero__stage"
         ref={stageRef}
-        style={{ transform: `scale(${scale})` }}
+        style={{ transform: `translateX(${offsetX}px) scale(${scale})` }}
       >
         <div className="hero__bg" aria-hidden="true">
           <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
