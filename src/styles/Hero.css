@@ -1,193 +1,174 @@
-/* ============================================================
-   HERO.CSS — redesigned, no glass
-   SKAALAUS: design on rakennettu 1920px-leveälle (FullHD) näytölle.
-   Kaikki avainmitat (fontit, välit, leveydet, sijainnit) on
-   muunnettu px:stä vw:hen kaavalla vw% = px / 1920 * 100, jolloin
-   hero skaalautuu TÄYSIN SUHTEELLISESTI kuin yksi kiinteä kuva —
-   esim. 1268px-leveydellä kaikki on tarkalleen 1268/1920 = 66 %
-   alkuperäisestä koosta, ei pikseliäkään yli tai ali.
+import { useEffect, useRef } from 'react'
+import '../styles/Hero.css'
 
-   Huom: alkuperäisessä versiossa otsikko (clamp(4.2rem,12vw,10.5rem)),
-   sitaatti (clamp(3.63rem,7.26vw,5.94rem)) ja review-laatikon
-   oikea reunusväli (clamp(2rem,6vw,6rem)) olivat KAIKKI lukkiutuneet
-   maksimi-arvoonsa 1920px-leveydellä (vw-arvo ylitti maksimin).
-   Eli "FullHD-näkymä" jota halutaan säilyttää = nämä maksimiarvot.
-   Juuri tästä syystä eri kapeammilla leveyksillä clamp irtosi
-   maksimista ja alkoi noudattaa vw-kerrointa, joka ei vastannut
-   enää alkuperäistä suhdetta — siksi skaalaus näytti rikkinäiseltä.
-   Tässä versiossa clamp() on poistettu kokonaan keskialueelta ja
-   maksimiarvo on muunnettu suoraan vw:ksi, jolloin suhde lukittuu
-   pysyvästi 1920px-pohjaan.
-   ============================================================ */
+export default function Hero() {
+  const hexCanvasRef = useRef(null)
 
-.hero {
-  position: relative;
-  min-height: var(--hero-min-height);
-  background: var(--hero-bg);
-  display: flex;
-  align-items: center;
-  padding-bottom: 4.1667vw; /* space-20, oletus 80px / 1920 */
-  overflow: hidden;
-}
+  useEffect(() => {
+    const canvas = hexCanvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    // HEX_SIZE/HEX_GAP skaalataan resize()-funktiossa suoraan suhteessa
+    // kontainerin leveyteen verrattuna 1920px-design-pohjaan (FullHD,
+    // johon 28px/4px on suunniteltu), jotta heksagonit skaalaavat
+    // tarkalleen samassa suhteessa kuin muu sisältö — esim. 1268px-
+    // leveydellä HEX_SIZE on 1268/1920 = 66 % alkuperäisestä, ei
+    // clampattuna mihinkään väliin.
+    const REF_WIDTH = 1920, REF_HEX_SIZE = 28, REF_HEX_GAP = 4
+    let HEX_SIZE = REF_HEX_SIZE, HEX_GAP = REF_HEX_GAP
+    const MAX_OPACITY = 0.07
+    const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
+    let hexes = [], targetOpacity = 1, animFrame = null
+    let t = 0, elapsed = 0, lastTime = 0
 
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.hero__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.hero__bg::after { display: none; }
+    function hexPoint(cx, cy, size, i) {
+      const a = Math.PI / 180 * (60 * i - 30)
+      return [cx + size * Math.cos(a), cy + size * Math.sin(a)]
+    }
 
-/* ── Content wrapper ── */
-.hero__content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-  padding-top: calc(var(--nav-height) + 6.6667vw); /* space-16, oletus 128px / 1920 */
-  margin-left: 0;
-}
+    function buildHexes() {
+      hexes = []
+      const w = canvas.width, h = canvas.height
+      const hx = HEX_SIZE * 2 + HEX_GAP
+      const hy = Math.sqrt(3) * HEX_SIZE + HEX_GAP
+      const cols = Math.ceil(w / hx) + 1
+      const rows = Math.ceil(h / hy) + 1
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = HEX_SIZE + col * hx + (row % 2) * (hx / 2)
+          const y = HEX_SIZE + row * hy
+          hexes.push({
+            x, y, baseY: y, op: 0,
+            delay: row * 0.08 + col * 0.02 + Math.random() * 0.06,
+            floatOffset: Math.random() * Math.PI * 2,
+            fadeStart: 0.55 + Math.random() * 0.3,
+          })
+        }
+      }
+    }
 
-/* ── Inner content block ── */
-.hero__inner {
-  position: relative;
-  width: 100%;
-  max-width: var(--max-width);
-}
+    function resize() {
+      const parent = canvas.parentElement
+      canvas.width = parent.offsetWidth
+      canvas.height = parent.offsetHeight
+      const scale = canvas.width / REF_WIDTH
+      HEX_SIZE = REF_HEX_SIZE * scale
+      HEX_GAP = REF_HEX_GAP * scale
+      buildHexes()
+    }
 
-.hero__left {
-  max-width: 37.5vw; /* 720px / 1920 */
-}
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      t += 0.016
+      hexes.forEach(h => {
+        const yRatio = h.baseY / canvas.height
+        const edgeFade = yRatio < h.fadeStart ? 1 : Math.max(0, 1 - (yRatio - h.fadeStart) / (1 - h.fadeStart))
+        const op = h.op * MAX_OPACITY * edgeFade
+        if (op < 0.005) return
+        const floatY = h.baseY + Math.sin(t * 0.25 + h.floatOffset) * (HEX_SIZE * 0.125)
+        ctx.save()
+        ctx.globalAlpha = op
+        ctx.strokeStyle = '#ffffff'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        const pts = Array.from({ length: 6 }, (_, i) => hexPoint(h.x, floatY, HEX_SIZE, i))
+        ctx.moveTo(pts[0][0], pts[0][1])
+        pts.slice(1).forEach(p => ctx.lineTo(p[0], p[1]))
+        ctx.closePath()
+        ctx.stroke()
+        ctx.restore()
+      })
+    }
 
-/* ── Title & lead ── */
-.hero__title {
-  font-size: 8.75vw; /* 168px (10.5rem, todellinen 1920px-arvo) / 1920 */
-  line-height: 0.88;
-  letter-spacing: -0.04em;
-  font-weight: var(--font-bold);
-  color: var(--color-white);
-  margin-bottom: 2.0833vw; /* space-10, oletus 40px / 1920 */
-  max-width: none;
-  text-align: left;
-}
+    function loop(ts) {
+      const dt = (ts - lastTime) / 1000
+      lastTime = ts
+      if (targetOpacity > 0) elapsed += dt; else elapsed = 0
+      hexes.forEach(h => {
+        if (elapsed < h.delay) return
+        h.op = targetOpacity > 0
+          ? Math.min(1, h.op + APPEAR_SPEED)
+          : Math.max(0, h.op - FADE_SPEED)
+      })
+      draw()
+      animFrame = requestAnimationFrame(loop)
+    }
 
-.hero__lead {
-  font-size: 1.8vw; /* alkuperäinen vw-kerroin: ei lukkiutunut maksimiin 1920px:llä */
-  font-weight: var(--font-light);
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 31.25vw; /* 600px / 1920 */
-  line-height: var(--leading-relaxed);
-  margin-bottom: 2.0833vw; /* space-10 */
-}
+    function onScroll() { targetOpacity = 1; elapsed = 0 }
 
-/* ── Buttons ── */
-.hero__buttons {
-  display: flex;
-  align-items: center;
-  gap: 0.8333vw; /* space-4, oletus 16px / 1920 */
-  flex-wrap: wrap;
-  margin-bottom: 1.6667vw; /* space-8, oletus 32px / 1920 */
-}
+    resize()
+    window.addEventListener('resize', resize)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    animFrame = requestAnimationFrame(ts => { lastTime = ts; loop(ts) })
 
-.hero__play-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.1458vw; /* 22px / 1920 */
-  height: 1.1458vw;
-  background: #e53e3e;
-  border-radius: 50%;
-  margin-right: 0.2083vw; /* 4px / 1920 */
-  flex-shrink: 0;
-}
+    return () => {
+      cancelAnimationFrame(animFrame)
+      window.removeEventListener('resize', resize)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
 
-/* ── Faded pull-quote — right-aligned, vertically centered, movie-review style ── */
-@keyframes reviewFadeIn {
-  from { opacity: 0; transform: translateY(0.625vw); } /* 12px / 1920 */
-  to   { opacity: 1; transform: translateY(0); }
-}
+  return (
+    <section className="hero" id="hero">
+      <div className="hero__bg" aria-hidden="true">
+        <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
+      </div>
+      <canvas
+        ref={hexCanvasRef}
+        aria-hidden="true"
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
+      />
 
-.hero__review {
-  position: absolute;
-  top: 50%;
-  right: 5vw; /* 96px (6rem, todellinen 1920px-arvo) / 1920 */
-  transform: translateY(-50%);
-  max-width: 48.125vw; /* 924px / 1920 */
-  text-align: right;
-  z-index: 2;
-  animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
+      <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
+        <div className="hero__inner">
 
-.hero__review-quote {
-  margin: 0 0 1.7188vw; /* space-5*1.65, oletus 20px*1.65=33px / 1920 */
-  font-size: 4.95vw; /* 95.04px (5.94rem, todellinen 1920px-arvo) / 1920 */
-  line-height: 1.05;
-  font-weight: var(--font-bold);
-  letter-spacing: -0.02em;
-  color: var(--color-white);
-  opacity: 0.5;
-}
+          {/* LEFT — title + lead (unchanged position) */}
+          <div className="hero__left">
+            <h1 className="hero__title">
+              EVOLVING<br />
+              AI<br />
+              AGENTS
+            </h1>
+            <p className="hero__lead">
+              The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
+            </p>
 
-.hero__review-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.3646vw; /* 7px / 1920 */
-}
+            {/* CTA buttons — global btn styles */}
+            <div className="hero__buttons">
+              <a href="#get-started" className="btn btn--white">
+                Start free trial
+              </a>
+              <a href="#technology" className="btn btn--outline">
+                <span className="hero__play-icon" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                Watch demo
+              </a>
+            </div>
+          </div>
 
-.hero__review-stars {
-  display: flex;
-  gap: 0.2604vw; /* 5px / 1920 */
-  color: #e53e3e;
-  margin-bottom: 0.5208vw; /* 10px / 1920 */
-}
+        </div>
+      </div>
 
-.hero__review-stars svg {
-  width: 1.3542vw; /* 26px / 1920 */
-  height: 1.3542vw;
-}
-
-.hero__review-name {
-  font-size: 1.3083vw; /* 25.12px (1.57rem) / 1920 */
-  font-weight: 600;
-  color: var(--color-white);
-  opacity: 0.85;
-  margin: 0;
-}
-
-.hero__review-role {
-  font-size: 1.1vw; /* 21.12px (1.32rem) / 1920 */
-  color: var(--color-white);
-  opacity: 0.55;
-  margin: 0;
-}
-
-/* ── Turvaraja erittäin kapeille ikkunoille (alle 480px, esim. puhelimet) ──
-   Tämä EI ole responsiivinen uudelleenasettelu — pelkkä alaraja, jotta
-   teksti ei katoa lukukelvottomaksi todella pienillä leveyksillä.
-   Kaikki normaalit työpöytä-/läppärileveydet 1920px:stä alaspäin
-   (mukaan lukien kysytty 1268px) skaalaavat täysin suhteellisesti
-   tämän rajan yläpuolella, ilman uudelleenasettelua. */
-@media (max-width: 480px) {
-  .hero__title { font-size: 42px; }
-  .hero__review-quote { font-size: 24px; }
-  .hero__lead { font-size: 14px; }
-  .hero__review {
-    position: static;
-    transform: none;
-    max-width: none;
-    text-align: left;
-    margin-top: 40px;
-    padding-inline: var(--gutter);
-  }
-  .hero__review-meta {
-    align-items: flex-start;
-  }
+      {/* RIGHT — giant faded pull-quote, flush against the true right edge of the section */}
+      <div className="hero__review">
+        <blockquote className="hero__review-quote">
+          "It felt almost illegal to use for free."
+        </blockquote>
+        <div className="hero__review-meta">
+          <div className="hero__review-stars" aria-label="5 stars">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+          <p className="hero__review-name">Mirko Asell</p>
+          <p className="hero__review-role">CEO, Somesankarit Oy</p>
+        </div>
+      </div>
+    </section>
+  )
 }
