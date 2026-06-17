@@ -115,7 +115,7 @@
 .hero__review {
   position: absolute;
   top: 50%;
-  right: 0;
+  right: clamp(2rem, 6vw, 6rem);
   transform: translateY(-50%);
   max-width: 560px;
   text-align: right;
