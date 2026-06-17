@@ -1,6 +1,5 @@
 /* ============================================================
-   HERO.CSS — zoom asetetaan JavaScriptistä (Hero.jsx)
-   CSS ei yritä laskea zoom-arvoa itse
+   HERO.CSS — CSS zoom-versio (varmuuskopio)
    ============================================================ */
 
 .hero {
@@ -11,7 +10,7 @@
   align-items: center;
   padding-bottom: var(--space-20);
   overflow: hidden;
-  transform-origin: top left;
+  zoom: clamp(0.65, 0.069444vw + 0.05556, 1);
 }
 
 .hero__bg {
