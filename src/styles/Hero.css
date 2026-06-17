@@ -90,22 +90,6 @@
   flex-shrink: 0;
 }
 
-/* ── Trust badges ── */
-.hero__badges {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-2);
-}
-
-.hero__badge-img {
-  height: 44px;
-  width: auto;
-  display: block;
-  border-radius: var(--radius-sm);
-  opacity: 0.9;
-}
-
 /* ── Faded pull-quote — right-aligned, vertically centered, movie-review style ── */
 @keyframes reviewFadeIn {
   from { opacity: 0; transform: translateY(12px); }
