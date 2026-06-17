@@ -137,7 +137,7 @@ export default function Hero() {
             </p>
             <div className="hero__cta-row">
               <a href="#get-started" className="btn btn--white">
-                Deploy AI Agent
+                Start free trial
               </a>
               <div className="hero__cta-images">
                 <div className="hero__cta-image-wrap">
@@ -184,7 +184,7 @@ export default function Hero() {
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </span>
-                Watch it live
+                Watch demo
               </a>
             </div>
           </div>
