@@ -1,5 +1,5 @@
 /* ============================================================
-   HERO.CSS — pixel-perfect scale-versio
+   HERO.CSS — pixel-perfect scale-versio (zoom-pohjainen)
    ------------------------------------------------------------
    Periaate: .hero__stage on LUKITTU 1920px-leveyteen, ja KAIKKI
    sen sisäiset arvot (fontit, sijainnit) on jäädytetty siihen
@@ -7,17 +7,41 @@
    kiinteä, EI todellinen vw). Stage ei siis enää reagoi
    ikkunan kokoon mitenkään sisäisesti.
 
-   Ainoa skaalauslähde on Hero.jsx:n laskema
-   transform: scale(factor), factor = clamp(1024/1920, vw/1920, 1).
-   Koska transform skaalaa KAIKEN sisällön (tekstit, välit,
-   quoten sijainnin, hex-canvasin) yhdessä samassa suhteessa,
-   mikään ei voi enää ajautua pois linjasta.
+   Ainoa skaalauslähde on Hero.jsx:n laskema CSS `zoom`-arvo,
+   factor = clamp(1024/1920, vw/1920, 1), asetettuna suoraan
+   .hero__stage-elementtiin (style={{ zoom: scale }}).
+
+   MIKSI zoom EIKÄ transform: scale()?
+   transform on puhtaasti visuaalinen — se ei vaikuta layoutiin,
+   joten selain varaa tilaa stagen ALKUPERÄISEN koon mukaan ja
+   JS:n täytyisi erikseen mitata ja asettaa .hero:n korkeus
+   vastaamaan visuaalista kokoa. Tämä mittaus on altis
+   ajoitusongelmille (kuva ei ole latautunut, ResizeObserver
+   laukeaa kesken layoutin) ja jos JOKIN sisäinen muuttuja
+   (esim. --hero-min-height) käyttää oikeaa vh/vw-yksikköä,
+   mitattu korkeus ei pysy vakiona resoluutioiden välillä.
+   Seuraus: .hero:n overflow:hidden leikkaa sisällön väärästä
+   kohdasta, ja syntyy se "viiva" joka rajaa sivun alareunaa
+   pienemmillä resoluutioilla.
+
+   zoom skaalaa myös LAYOUT-jalanjäljen, ei vain ulkoasun — eli
+   selain itse pienentää stage:n varaaman tilan samassa vedossa
+   kuin se piirtää sisällön pienemmäksi. JS:n ei tarvitse mitata
+   eikä asettaa korkeutta käsin ollenkaan, eikä mismatchia voi
+   syntyä. Tuettu kaikissa moderneissa selaimissa (Firefox 126+,
+   Chromium, Safari).
 
    HUOM: jos --gutter, --max-width, --space-*, --text-lg/--text-3xl,
    --nav-height tai --hero-bg on määritelty jossain globaalissa
    tiedostossa vw/vh-yksiköillä, sama jäädytys-logiikka pitää
    tuoda niihinkin — tämä tiedosto ei voi sitä korjata, koska
-   muuttujat tulevat muualta.
+   muuttujat tulevat muualta. Erityisesti --hero-min-height: jos
+   se on esim. "90vh", stage venyy/kutistuu yhä OIKEAN ikkunan
+   KORKEUDEN mukaan eri laitteilla — tämä on eri akseli kuin
+   leveys-skaalaus yllä, eikä zoom korjaa sitä. Jos hero halutaan
+   identtiseksi myös korkeussuunnassa, tämä kannattaa jäädyttää
+   kiinteäksi px-arvoksi tai poistaa kokonaan ja antaa sisällön
+   määrätä korkeus.
    ============================================================ */
 
 .hero {
@@ -25,11 +49,8 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  /* Ei flex-keskitystä: Hero.jsx laskee tarvittavan keskityksen
-     (offsetX) ja paketoi sen suoraan transform: translateX()-arvoon,
-     koska flex-keskitys laskettaisiin stage:n skaalaamattoman
-     1920px-leveyden perusteella ja ajautuisi pois linjasta scale():n
-     kanssa. */
+  display: flex;
+  justify-content: center; /* turvallinen zoomin kanssa: layout-leveys = visuaalinen leveys */
 }
 
 .hero__stage {
@@ -41,8 +62,6 @@
   align-items: center;
   background: var(--hero-bg);
   padding-bottom: var(--space-20);
-  transform-origin: top left;
-  will-change: transform;
 }
 
 .hero__bg {
