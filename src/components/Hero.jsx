@@ -83,35 +83,35 @@ export default function Hero() {
       animFrame = requestAnimationFrame(loop)
     }
 
+    function onScroll() { targetOpacity = 1; elapsed = 0 }
+
     resize()
     window.addEventListener('resize', resize)
-    window.addEventListener('scroll', () => { targetOpacity = 1; elapsed = 0 }, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
     animFrame = requestAnimationFrame(ts => { lastTime = ts; loop(ts) })
 
     return () => {
       cancelAnimationFrame(animFrame)
       window.removeEventListener('resize', resize)
+      window.removeEventListener('scroll', onScroll)
     }
   }, [])
 
   return (
     <section className="hero" id="hero">
-      {/* Background image */}
       <div className="hero__bg" aria-hidden="true">
         <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
       </div>
-
-      {/* Hex canvas */}
       <canvas
         ref={hexCanvasRef}
         aria-hidden="true"
-        className="hero__canvas"
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
       />
 
-      <div className="hero__content">
+      <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
         <div className="hero__inner">
 
-          {/* LEFT — title + lead + CTA */}
+          {/* LEFT — title + lead (unchanged position) */}
           <div className="hero__left">
             <h1 className="hero__title">
               EVOLVING<br />
@@ -119,16 +119,16 @@ export default function Hero() {
               AGENTS
             </h1>
             <p className="hero__lead">
-              The first AI agents designed to adapt and improve over time to qualify leads,
-              answer questions, and drive conversions.
+              The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
 
-            <div className="hero__cta-row">
+            {/* CTA buttons — global btn styles */}
+            <div className="hero__buttons">
               <a href="#get-started" className="btn btn--white">
                 Start free trial
               </a>
-              <a href="#technology" className="hero__watch-btn">
-                <span className="hero__watch-icon" aria-hidden="true">
+              <a href="#technology" className="btn btn--outline">
+                <span className="hero__play-icon" aria-hidden="true">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
@@ -137,31 +137,31 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Badge row */}
+            {/* Trust badges — images inline below buttons */}
             <div className="hero__badges">
               <img src="/cortex-engine.avif" alt="Cortex Engine" className="hero__badge-img" />
               <img src="/gdpr.avif" alt="GDPR compliant" className="hero__badge-img" />
             </div>
           </div>
 
-          {/* RIGHT — review card */}
+          {/* RIGHT — review card, no glass */}
           <div className="hero__right">
-            <div className="hero__quote">
-              <div className="hero__quote-stars" aria-label="5 stars">
+            <div className="hero__review">
+              <div className="hero__review-stars" aria-label="5 stars">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#FFE100" aria-hidden="true">
+                  <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#e53e3e" aria-hidden="true">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                 ))}
               </div>
-              <blockquote className="hero__quote-text">
+              <blockquote className="hero__review-text">
                 "We were honored to be early testers. The value was so good it felt almost illegal to use for free."
               </blockquote>
-              <div className="hero__quote-author">
-                <div className="hero__quote-avatar" aria-hidden="true">MA</div>
+              <div className="hero__review-author">
+                <div className="hero__review-avatar" aria-hidden="true">MA</div>
                 <div>
-                  <p className="hero__quote-name">Mirko Asell</p>
-                  <p className="hero__quote-role">CEO at Somesankarit Oy</p>
+                  <p className="hero__review-name">Mirko Asell</p>
+                  <p className="hero__review-role">CEO, Somesankarit Oy</p>
                 </div>
               </div>
             </div>
