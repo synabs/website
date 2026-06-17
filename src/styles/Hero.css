@@ -57,10 +57,21 @@
   align-items: center;
   gap: var(--space-4);
 }
+.hero__cta-image-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
 .hero__cta-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   height: 48px;
   width: auto;
+  transform: translate(-50%, -50%);
   border-radius: var(--radius-md);
+  transition: transform 0.25s ease, height 0.25s ease;
 }
 .hero__buttons {
   display: flex;
