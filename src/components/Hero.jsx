@@ -1,20 +1,42 @@
 import { useEffect, useRef } from 'react'
 import '../styles/Hero.css'
 
+const REF_WIDTH = 1920 // design-pohjaleveys px
+
 export default function Hero() {
   const hexCanvasRef = useRef(null)
+  const contentRef = useRef(null)
+  const reviewRef = useRef(null)
 
+  // ── Skaalaaja: skaalaa hero-sisältö kuin kuva suhteessa 1920px-pohjaan ──
+  useEffect(() => {
+    function scaleHero() {
+      const ratio = Math.min(window.innerWidth / REF_WIDTH, 1) // ei skaalata yli 1920px
+      if (contentRef.current) {
+        contentRef.current.style.transform = `scale(${ratio})`
+        contentRef.current.style.transformOrigin = 'top left'
+        // Koska scale ei vaikuta layout-tilaan, kompensoidaan korkeus
+        // (muuten elementin alla jää tyhjää / elementti ylivuotaa)
+        const origH = contentRef.current.scrollHeight
+        contentRef.current.style.marginBottom = `${origH * ratio - origH}px`
+      }
+      if (reviewRef.current) {
+        reviewRef.current.style.transform = `translateY(-50%) scale(${ratio})`
+        reviewRef.current.style.transformOrigin = 'top right'
+      }
+    }
+
+    scaleHero()
+    window.addEventListener('resize', scaleHero)
+    return () => window.removeEventListener('resize', scaleHero)
+  }, [])
+
+  // ── Hex canvas (alkuperäinen, koskematon) ──
   useEffect(() => {
     const canvas = hexCanvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    // HEX_SIZE/HEX_GAP skaalataan resize()-funktiossa suoraan suhteessa
-    // kontainerin leveyteen verrattuna 1920px-design-pohjaan (FullHD,
-    // johon 28px/4px on suunniteltu), jotta heksagonit skaalaavat
-    // tarkalleen samassa suhteessa kuin muu sisältö — esim. 1268px-
-    // leveydellä HEX_SIZE on 1268/1920 = 66 % alkuperäisestä, ei
-    // clampattuna mihinkään väliin.
-    const REF_WIDTH = 1920, REF_HEX_SIZE = 28, REF_HEX_GAP = 4
+    const REF_HEX_SIZE = 28, REF_HEX_GAP = 4
     let HEX_SIZE = REF_HEX_SIZE, HEX_GAP = REF_HEX_GAP
     const MAX_OPACITY = 0.07
     const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
@@ -119,10 +141,8 @@ export default function Hero() {
         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
       />
 
-      <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
+      <div ref={contentRef} className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
         <div className="hero__inner">
-
-          {/* LEFT — title + lead (unchanged position) */}
           <div className="hero__left">
             <h1 className="hero__title">
               EVOLVING<br />
@@ -132,8 +152,6 @@ export default function Hero() {
             <p className="hero__lead">
               The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
-
-            {/* CTA buttons — global btn styles */}
             <div className="hero__buttons">
               <a href="#get-started" className="btn btn--white">
                 Start free trial
@@ -148,12 +166,10 @@ export default function Hero() {
               </a>
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* RIGHT — giant faded pull-quote, flush against the true right edge of the section */}
-      <div className="hero__review">
+      <div ref={reviewRef} className="hero__review">
         <blockquote className="hero__review-quote">
           "It felt almost illegal to use for free."
         </blockquote>
