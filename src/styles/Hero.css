@@ -62,6 +62,9 @@
   align-items: center;
   gap: 0;
 }
+.hero__cta-image-wrap + .hero__cta-image-wrap {
+  margin-left: -16px;
+}
 .hero__cta-image-wrap {
   display: flex;
   align-items: center;
