@@ -39,7 +39,6 @@
 
 /* ── Inner content block ── */
 .hero__inner {
-  position: relative;
   width: 100%;
   max-width: var(--max-width);
 }
@@ -115,10 +114,11 @@
 .hero__review {
   position: absolute;
   top: 50%;
-  right: 0;
+  right: var(--space-10, 2.5rem);
   transform: translateY(-50%);
   max-width: 560px;
   text-align: right;
+  z-index: 2;
   animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -170,6 +170,7 @@
     max-width: none;
     text-align: left;
     margin-top: var(--space-10);
+    padding-inline: var(--gutter);
   }
   .hero__review-meta {
     align-items: flex-start;
