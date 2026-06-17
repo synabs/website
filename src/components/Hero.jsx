@@ -139,11 +139,13 @@ export default function Hero() {
               <a href="#get-started" className="btn btn--white">
                 Deploy AI Agent
               </a>
-              <img
-                src="/cortex.avif"
-                alt=""
-                className="hero__cta-image"
-              />
+              <div className="hero__cta-image-wrap">
+                <img
+                  src="/cortex.avif"
+                  alt=""
+                  className="hero__cta-image"
+                />
+              </div>
             </div>
           </div>
           <div className="hero__right">
@@ -173,7 +175,7 @@ export default function Hero() {
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </span>
-                Watch it live
+                Watch demo
               </a>
             </div>
           </div>
