@@ -8,7 +8,7 @@
   background: var(--hero-bg);
   display: flex;
   align-items: center;
-  padding-bottom: var(--space-12); /* TT: space-20 → tiivistetty space-12 scroll-ongelman minimoimiseksi */
+  padding-bottom: var(--space-20);
   overflow: hidden;
 }
 
@@ -33,8 +33,9 @@
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--gutter);
-  padding-top: calc(var(--nav-height) + var(--space-10)); /* TT: space-16 → tiivistetty space-10 */
+  padding-top: calc(var(--nav-height) + var(--space-16));
   margin-left: 0;
+  transform-origin: top left;
 }
 
 /* ── Inner content block ── */
@@ -50,23 +51,23 @@
 
 /* ── Title & lead (position unchanged) ── */
 .hero__title {
-  font-size: min(12vw, 21vh); /* FullHD 1920×1080: min(230px, 227px) ≈ sama; vh-raja estää ylivuodon matalilla ikkunoilla */
+  font-size: clamp(4.2rem, 12vw, 10.5rem);
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
   color: var(--color-white);
-  margin-bottom: var(--space-6); /* TT: space-10 → tiivistetty space-6 */
+  margin-bottom: var(--space-10);
   max-width: none;
   text-align: left;
 }
 
 .hero__lead {
-  font-size: 1.8vw; /* FullHD: 1.8vw = 34px ≈ text-3xl — skaalautuu luonnollisesti */
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl));
   font-weight: var(--font-light);
   color: rgba(255, 255, 255, 0.8);
   max-width: 600px;
   line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-6); /* TT: space-10 → tiivistetty space-6 */
+  margin-bottom: var(--space-10);
 }
 
 /* ── Buttons ── */
@@ -75,7 +76,7 @@
   align-items: center;
   gap: var(--space-4);
   flex-wrap: wrap;
-  margin-bottom: var(--space-6); /* TT: space-8 → tiivistetty space-6 */
+  margin-bottom: var(--space-8);
 }
 
 .hero__play-icon {
@@ -99,17 +100,18 @@
 .hero__review {
   position: absolute;
   top: 50%;
-  right: 6vw; /* FullHD: 6vw = 115px ≈ 6rem — skaalautuu luonnollisesti */
+  right: clamp(2rem, 6vw, 6rem);
   transform: translateY(-50%);
   max-width: 924px;
   text-align: right;
   z-index: 2;
   animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: top right;
 }
 
 .hero__review-quote {
   margin: 0 0 calc(var(--space-5) * 1.65);
-  font-size: min(7.26vw, 12.7vh); /* FullHD 1920×1080: min(139px, 137px) ≈ sama */
+  font-size: clamp(3.63rem, 7.26vw, 5.94rem);
   line-height: 1.05;
   font-weight: var(--font-bold);
   letter-spacing: -0.02em;
@@ -132,7 +134,7 @@
 }
 
 .hero__review-name {
-  font-size: 1.307vw; /* FullHD: ≈ 1.57rem */
+  font-size: 1.57rem;
   font-weight: 600;
   color: var(--color-white);
   opacity: 0.85;
@@ -140,7 +142,7 @@
 }
 
 .hero__review-role {
-  font-size: 1.1vw; /* FullHD: ≈ 1.32rem */
+  font-size: 1.32rem;
   color: var(--color-white);
   opacity: 0.55;
   margin: 0;
@@ -148,7 +150,7 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .hero__title { font-size: 18vw; } /* skaalautuu luonnollisesti alle 900px */
+  .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
   .hero__review {
     position: static;
     transform: none;
@@ -165,7 +167,7 @@
 @media (max-width: 768px) {
   .hero__content { padding-inline: var(--space-6); }
   .hero__review { padding-inline: var(--space-6); }
-  .hero__lead { font-size: 4vw; }
+  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
   .hero__buttons { flex-wrap: wrap; }
-  .hero__review-quote { font-size: 13.2vw; }
+  .hero__review-quote { font-size: clamp(2.97rem, 13.2vw, 4.29rem); }
 }
