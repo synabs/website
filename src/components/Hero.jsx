@@ -10,37 +10,29 @@ export default function Hero() {
   const stageRef = useRef(null)
   const hexCanvasRef = useRef(null)
   const [scale, setScale] = useState(1)
-  const [offsetX, setOffsetX] = useState(0)
-  const [stageHeight, setStageHeight] = useState(0)
 
   // --- Pixel-perfect scaling -------------------------------------------
   // Layout is frozen at a 1920px design width (see Hero.css: --vw-design).
-  // We measure the stage's natural (unscaled) size and apply a single
-  // transform: scale() so every element — fonts, gaps, quote position,
-  // hex canvas — shrinks together in lockstep, with zero drift.
+  // We apply the scale factor via CSS `zoom` instead of `transform: scale()`.
+  // Unlike transform, zoom changes the element's actual layout footprint —
+  // the browser shrinks the box's reserved space itself, in the same pass
+  // as everything else inside it (fonts, gaps, quote position, hex canvas).
+  // No JS height measurement, no ResizeObserver race, no mismatch between
+  // "what we calculated" and "what actually rendered" → nothing to clip.
   useLayoutEffect(() => {
     const hero = heroRef.current
-    const stage = stageRef.current
-    if (!hero || !stage) return
+    if (!hero) return
 
     function applyScale() {
       const containerWidth = hero.offsetWidth
       const nextScale = Math.min(1, Math.max(MIN_SCALE, containerWidth / DESIGN_WIDTH))
-      // Centers the stage only when scale is clamped at 1 (viewport > 1920px).
-      // For every width below that, scale already fills containerWidth
-      // exactly, so this resolves to 0 and the stage sits flush left —
-      // avoiding the flex-centering vs. transform-origin mismatch.
-      const nextOffsetX = (containerWidth - DESIGN_WIDTH * nextScale) / 2
       setScale(nextScale)
-      setOffsetX(nextOffsetX)
-      setStageHeight(stage.offsetHeight)
     }
 
     applyScale()
 
     const ro = new ResizeObserver(applyScale)
     ro.observe(hero)
-    ro.observe(stage)
 
     return () => ro.disconnect()
   }, [])
@@ -143,12 +135,11 @@ export default function Hero() {
       className="hero"
       id="hero"
       ref={heroRef}
-      style={{ height: stageHeight ? stageHeight * scale : undefined }}
     >
       <div
         className="hero__stage"
         ref={stageRef}
-        style={{ transform: `translateX(${offsetX}px) scale(${scale})` }}
+        style={{ zoom: scale }}
       >
         <div className="hero__bg" aria-hidden="true">
           <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
