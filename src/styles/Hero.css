@@ -25,8 +25,11 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  display: flex;
-  justify-content: center; /* keskittää stage-laatikon, jos ikkuna >1920px */
+  /* Ei flex-keskitystä: Hero.jsx laskee tarvittavan keskityksen
+     (offsetX) ja paketoi sen suoraan transform: translateX()-arvoon,
+     koska flex-keskitys laskettaisiin stage:n skaalaamattoman
+     1920px-leveyden perusteella ja ajautuisi pois linjasta scale():n
+     kanssa. */
 }
 
 .hero__stage {
