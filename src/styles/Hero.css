@@ -1,5 +1,7 @@
 /* ============================================================
-   HERO.CSS — redesigned, no glass
+   HERO.CSS — zoom-pohjainen skaalaus, ei media queryjä
+   Suunniteltu 1440px referenssileveylle.
+   Vanhemmat läppärit (1024–1280px) skaalautuvat automaattisesti.
    ============================================================ */
 
 .hero {
@@ -10,6 +12,12 @@
   align-items: center;
   padding-bottom: var(--space-20);
   overflow: hidden;
+
+  /* Skaalaa kaikki hero-sisältö suhteessa viewport-leveyteen.
+     1440 = referenssileveys jolla design näyttää täydeltä.
+     clamp: ei skaalaa yli 100% isoilla näytöillä,
+            ei mene alle 65% pienillä läppäreillä (n. 936px viewport). */
+  zoom: clamp(0.65, calc(100vw / 1440px), 1);
 }
 
 .hero__bg {
@@ -35,7 +43,6 @@
   padding-inline: var(--gutter);
   padding-top: calc(var(--nav-height) + var(--space-16));
   margin-left: 0;
-  transform-origin: top left;
 }
 
 /* ── Inner content block ── */
@@ -49,7 +56,7 @@
   max-width: 720px;
 }
 
-/* ── Title & lead (position unchanged) ── */
+/* ── Title & lead ── */
 .hero__title {
   font-size: clamp(4.2rem, 12vw, 10.5rem);
   line-height: 0.88;
@@ -91,7 +98,7 @@
   flex-shrink: 0;
 }
 
-/* ── Faded pull-quote — right-aligned, vertically centered, movie-review style ── */
+/* ── Faded pull-quote ── */
 @keyframes reviewFadeIn {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -106,7 +113,6 @@
   text-align: right;
   z-index: 2;
   animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
-  transform-origin: top right;
 }
 
 .hero__review-quote {
@@ -148,8 +154,11 @@
   margin: 0;
 }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
+/* ── Mobiili — zoom ei skaalaa tätä pienemmäksi, layout vaihtuu ── */
+@media (max-width: 700px) {
+  .hero {
+    zoom: 1;
+  }
   .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
   .hero__review {
     position: static;
@@ -159,15 +168,8 @@
     margin-top: var(--space-10);
     padding-inline: var(--gutter);
   }
-  .hero__review-meta {
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 768px) {
+  .hero__review-meta { align-items: flex-start; }
+  .hero__review-quote { font-size: clamp(2.2rem, 10vw, 3.5rem); }
   .hero__content { padding-inline: var(--space-6); }
-  .hero__review { padding-inline: var(--space-6); }
-  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
   .hero__buttons { flex-wrap: wrap; }
-  .hero__review-quote { font-size: clamp(2.97rem, 13.2vw, 4.29rem); }
 }
