@@ -146,6 +146,13 @@ export default function Hero() {
                   className="hero__cta-image"
                 />
               </div>
+              <div className="hero__cta-image-wrap">
+                <img
+                  src="/gdpr.avif"
+                  alt=""
+                  className="hero__cta-image"
+                />
+              </div>
             </div>
           </div>
           <div className="hero__right">
@@ -175,7 +182,7 @@ export default function Hero() {
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </span>
-                Watch demo
+                Watch it live
               </a>
             </div>
           </div>
