@@ -11,9 +11,9 @@
 /* ---- Background image — bleeds upward out of the section ---- */
 .ss-bg-image {
   position: absolute;
-  bottom: 0;
+  bottom: 40px;
   right: 0;
-  width: 55%;
+  width: 45%;
   height: calc(100% + 12rem);
   object-fit: cover;
   object-position: top center;
