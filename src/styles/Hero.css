@@ -63,20 +63,17 @@
   gap: 0;
 }
 .hero__cta-image-wrap {
-  position: relative;
-  width: 90px;
-  height: 90px;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
 }
 .hero__cta-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  display: block;
   height: 90px;
   width: auto;
-  transform: translate(-50%, -50%);
   border-radius: var(--radius-md);
-  transition: transform 0.25s ease, height 0.25s ease;
+  transform: scale(1);
+  transition: transform 0.25s ease;
 }
 .hero__buttons {
   display: flex;
