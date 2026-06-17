@@ -5,18 +5,24 @@ export default function Hero() {
   const hexCanvasRef = useRef(null)
 
   useEffect(() => {
+    // ── Zoom scaling ──
+    const heroEl = document.getElementById('hero')
+    function applyZoom() {
+      const vw = window.innerWidth
+      if (vw >= 1440) {
+        heroEl.style.zoom = '1'
+      } else {
+        heroEl.style.zoom = Math.max(0.55, vw / 1440)
+      }
+    }
+    applyZoom()
+    window.addEventListener('resize', applyZoom)
+
+    // ── Hex canvas ──
     const canvas = hexCanvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    // HEX_SIZE/HEX_GAP skaalataan resize()-funktiossa suoraan suhteessa
-    // kontainerin leveyteen verrattuna 1920px-design-pohjaan (FullHD,
-    // johon 28px/4px on suunniteltu), jotta heksagonit skaalaavat
-    // tarkalleen samassa suhteessa kuin muu sisältö — esim. 1268px-
-    // leveydellä HEX_SIZE on 1268/1920 = 66 % alkuperäisestä, ei
-    // clampattuna mihinkään väliin.
-    const REF_WIDTH = 1920, REF_HEX_SIZE = 28, REF_HEX_GAP = 4
-    let HEX_SIZE = REF_HEX_SIZE, HEX_GAP = REF_HEX_GAP
-    const MAX_OPACITY = 0.07
+    const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.07
     const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
     let hexes = [], targetOpacity = 1, animFrame = null
     let t = 0, elapsed = 0, lastTime = 0
@@ -51,9 +57,6 @@ export default function Hero() {
       const parent = canvas.parentElement
       canvas.width = parent.offsetWidth
       canvas.height = parent.offsetHeight
-      const scale = canvas.width / REF_WIDTH
-      HEX_SIZE = REF_HEX_SIZE * scale
-      HEX_GAP = REF_HEX_GAP * scale
       buildHexes()
     }
 
@@ -65,7 +68,7 @@ export default function Hero() {
         const edgeFade = yRatio < h.fadeStart ? 1 : Math.max(0, 1 - (yRatio - h.fadeStart) / (1 - h.fadeStart))
         const op = h.op * MAX_OPACITY * edgeFade
         if (op < 0.005) return
-        const floatY = h.baseY + Math.sin(t * 0.25 + h.floatOffset) * (HEX_SIZE * 0.125)
+        const floatY = h.baseY + Math.sin(t * 0.25 + h.floatOffset) * 3.5
         ctx.save()
         ctx.globalAlpha = op
         ctx.strokeStyle = '#ffffff'
@@ -104,6 +107,7 @@ export default function Hero() {
     return () => {
       cancelAnimationFrame(animFrame)
       window.removeEventListener('resize', resize)
+      window.removeEventListener('resize', applyZoom)
       window.removeEventListener('scroll', onScroll)
     }
   }, [])
@@ -121,8 +125,6 @@ export default function Hero() {
 
       <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
         <div className="hero__inner">
-
-          {/* LEFT — title + lead (unchanged position) */}
           <div className="hero__left">
             <h1 className="hero__title">
               EVOLVING<br />
@@ -132,8 +134,6 @@ export default function Hero() {
             <p className="hero__lead">
               The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
-
-            {/* CTA buttons — global btn styles */}
             <div className="hero__buttons">
               <a href="#get-started" className="btn btn--white">
                 Start free trial
@@ -148,11 +148,9 @@ export default function Hero() {
               </a>
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* RIGHT — giant faded pull-quote, flush against the true right edge of the section */}
       <div className="hero__review">
         <blockquote className="hero__review-quote">
           "It felt almost illegal to use for free."
