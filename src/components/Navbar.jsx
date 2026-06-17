@@ -42,7 +42,7 @@ export default function Navbar() {
           </ul>
 
           <a href="/trial" className="navbar__trial-link">
-            Start free trial
+            Get a demo
           </a>
 
           <button
