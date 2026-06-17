@@ -5,20 +5,6 @@ export default function Hero() {
   const hexCanvasRef = useRef(null)
 
   useEffect(() => {
-    // ── Zoom scaling ──
-    const heroEl = document.getElementById('hero')
-    function applyZoom() {
-      const vw = window.innerWidth
-      if (vw >= 1440) {
-        heroEl.style.zoom = '1'
-      } else {
-        heroEl.style.zoom = Math.max(0.55, vw / 1440)
-      }
-    }
-    applyZoom()
-    window.addEventListener('resize', applyZoom)
-
-    // ── Hex canvas ──
     const canvas = hexCanvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
@@ -107,7 +93,6 @@ export default function Hero() {
     return () => {
       cancelAnimationFrame(animFrame)
       window.removeEventListener('resize', resize)
-      window.removeEventListener('resize', applyZoom)
       window.removeEventListener('scroll', onScroll)
     }
   }, [])
@@ -125,6 +110,8 @@ export default function Hero() {
 
       <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
         <div className="hero__inner">
+
+          {/* LEFT — title + lead (unchanged position) */}
           <div className="hero__left">
             <h1 className="hero__title">
               EVOLVING<br />
@@ -134,6 +121,8 @@ export default function Hero() {
             <p className="hero__lead">
               The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
+
+            {/* CTA buttons — global btn styles */}
             <div className="hero__buttons">
               <a href="#get-started" className="btn btn--white">
                 Start free trial
@@ -148,9 +137,11 @@ export default function Hero() {
               </a>
             </div>
           </div>
+
         </div>
       </div>
 
+      {/* RIGHT — giant faded pull-quote, flush against the true right edge of the section */}
       <div className="hero__review">
         <blockquote className="hero__review-quote">
           "It felt almost illegal to use for free."
