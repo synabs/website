@@ -135,6 +135,16 @@ export default function Hero() {
             <p className="hero__lead">
               The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
+            <div className="hero__cta-row">
+              <a href="#get-started" className="btn btn--white">
+                Deploy AI Agent
+              </a>
+              <img
+                src="/cortex.avif"
+                alt=""
+                className="hero__cta-image"
+              />
+            </div>
           </div>
           <div className="hero__right">
             <div className="hero__quote">
@@ -163,7 +173,7 @@ export default function Hero() {
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </span>
-                Watch demo
+                Watch it live
               </a>
             </div>
           </div>
