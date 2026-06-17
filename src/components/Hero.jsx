@@ -144,24 +144,24 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — giant faded pull-quote, like a movie review blurb */}
-          <div className="hero__review">
-            <blockquote className="hero__review-quote">
-              "It felt almost illegal to use for free."
-            </blockquote>
-            <div className="hero__review-meta">
-              <div className="hero__review-stars" aria-label="5 stars">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                ))}
-              </div>
-              <p className="hero__review-name">Mirko Asell</p>
-              <p className="hero__review-role">CEO, Somesankarit Oy</p>
-            </div>
-          </div>
+        </div>
+      </div>
 
+      {/* RIGHT — giant faded pull-quote, flush against the true right edge of the section */}
+      <div className="hero__review">
+        <blockquote className="hero__review-quote">
+          "It felt almost illegal to use for free."
+        </blockquote>
+        <div className="hero__review-meta">
+          <div className="hero__review-stars" aria-label="5 stars">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+          <p className="hero__review-name">Mirko Asell</p>
+          <p className="hero__review-role">CEO, Somesankarit Oy</p>
         </div>
       </div>
     </section>
