@@ -136,12 +136,6 @@ export default function Hero() {
                 Watch demo
               </a>
             </div>
-
-            {/* Trust badges — images inline below buttons */}
-            <div className="hero__badges">
-              <img src="/cortex-engine.avif" alt="Cortex Engine" className="hero__badge-img" />
-              <img src="/gdpr.avif" alt="GDPR compliant" className="hero__badge-img" />
-            </div>
           </div>
 
         </div>
