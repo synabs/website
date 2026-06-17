@@ -52,19 +52,21 @@
 }
 @media (min-width: 769px) {
   .navbar__desktop-list {
-    display: flex;
+    display: none;
     align-items: center;
     gap: var(--space-8, 2rem);
-    max-width: 0;
-    overflow: hidden;
     opacity: 0;
-    transition: max-width 0.3s ease, opacity 0.2s ease;
   }
   .navbar__desktop-list--open {
-    max-width: 600px;
-    opacity: 1;
+    display: flex;
     margin-right: var(--space-6, 1.5rem);
+    animation: navbarDesktopFadeIn 0.3s ease forwards;
   }
+}
+
+@keyframes navbarDesktopFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 .navbar__desktop-link {
   font-size: var(--text-base, 1rem);
