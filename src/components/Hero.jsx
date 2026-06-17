@@ -10,7 +10,7 @@ export default function Hero() {
     const ctx = canvas.getContext('2d')
     const HEX_SIZE = 28, HEX_GAP = 4, MAX_OPACITY = 0.07
     const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
-    let hexes = [], targetOpacity = 1, scrollTimer = null, animFrame = null
+    let hexes = [], targetOpacity = 1, animFrame = null
     let t = 0, elapsed = 0, lastTime = 0
 
     function hexPoint(cx, cy, size, i) {
@@ -20,8 +20,7 @@ export default function Hero() {
 
     function buildHexes() {
       hexes = []
-      const w = canvas.width
-      const h = canvas.height
+      const w = canvas.width, h = canvas.height
       const hx = HEX_SIZE * 2 + HEX_GAP
       const hy = Math.sqrt(3) * HEX_SIZE + HEX_GAP
       const cols = Math.ceil(w / hx) + 1
@@ -84,48 +83,35 @@ export default function Hero() {
       animFrame = requestAnimationFrame(loop)
     }
 
-    function onScroll() {
-      targetOpacity = 1
-      elapsed = 0
-    }
-
     resize()
     window.addEventListener('resize', resize)
-    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('scroll', () => { targetOpacity = 1; elapsed = 0 }, { passive: true })
     animFrame = requestAnimationFrame(ts => { lastTime = ts; loop(ts) })
 
     return () => {
       cancelAnimationFrame(animFrame)
       window.removeEventListener('resize', resize)
-      window.removeEventListener('scroll', onScroll)
     }
   }, [])
 
   return (
     <section className="hero" id="hero">
+      {/* Background image */}
       <div className="hero__bg" aria-hidden="true">
-        <img
-          src="/synabs-hero.avif"
-          alt=""
-          loading="eager"
-          fetchPriority="high"
-        />
+        <img src="/synabs-hero.avif" alt="" loading="eager" fetchPriority="high" />
       </div>
+
+      {/* Hex canvas */}
       <canvas
         ref={hexCanvasRef}
         aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
+        className="hero__canvas"
       />
-      <div className="hero__content" style={{ position: 'relative', zIndex: 2 }}>
+
+      <div className="hero__content">
         <div className="hero__inner">
+
+          {/* LEFT — title + lead + CTA */}
           <div className="hero__left">
             <h1 className="hero__title">
               EVOLVING<br />
@@ -133,35 +119,37 @@ export default function Hero() {
               AGENTS
             </h1>
             <p className="hero__lead">
-              The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
+              The first AI agents designed to adapt and improve over time to qualify leads,
+              answer questions, and drive conversions.
             </p>
+
             <div className="hero__cta-row">
               <a href="#get-started" className="btn btn--white">
                 Start free trial
               </a>
-              <div className="hero__cta-images">
-                <div className="hero__cta-image-wrap">
-                  <img
-                    src="/cortex-engine.avif"
-                    alt=""
-                    className="hero__cta-image"
-                  />
-                </div>
-                <div className="hero__cta-image-wrap">
-                  <img
-                    src="/gdpr.avif"
-                    alt=""
-                    className="hero__cta-image"
-                  />
-                </div>
-              </div>
+              <a href="#technology" className="hero__watch-btn">
+                <span className="hero__watch-icon" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                Watch demo
+              </a>
+            </div>
+
+            {/* Badge row */}
+            <div className="hero__badges">
+              <img src="/cortex-engine.avif" alt="Cortex Engine" className="hero__badge-img" />
+              <img src="/gdpr.avif" alt="GDPR compliant" className="hero__badge-img" />
             </div>
           </div>
+
+          {/* RIGHT — review card */}
           <div className="hero__right">
             <div className="hero__quote">
-              <div className="hero__quote-stars" aria-label="5 tähteä">
+              <div className="hero__quote-stars" aria-label="5 stars">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#e53e3e" aria-hidden="true">
+                  <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#FFE100" aria-hidden="true">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                 ))}
@@ -177,17 +165,8 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-            <div className="hero__watch-row">
-              <a href="#technology" className="hero__watch-button">
-                <span className="hero__watch-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </span>
-                Watch demo
-              </a>
-            </div>
           </div>
+
         </div>
       </div>
     </section>
