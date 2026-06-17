@@ -117,15 +117,15 @@
   top: 50%;
   right: clamp(2rem, 6vw, 6rem);
   transform: translateY(-50%);
-  max-width: 1120px;
+  max-width: 924px;
   text-align: right;
   z-index: 2;
   animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero__review-quote {
-  margin: 0 0 calc(var(--space-5) * 2);
-  font-size: clamp(4.4rem, 8.8vw, 7.2rem);
+  margin: 0 0 calc(var(--space-5) * 1.65);
+  font-size: clamp(3.63rem, 7.26vw, 5.94rem);
   line-height: 1.05;
   font-weight: var(--font-bold);
   letter-spacing: -0.02em;
@@ -137,18 +137,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px;
+  gap: 7px;
 }
 
 .hero__review-stars {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   color: #e53e3e;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .hero__review-name {
-  font-size: 1.9rem;
+  font-size: 1.57rem;
   font-weight: 600;
   color: var(--color-white);
   opacity: 0.85;
@@ -156,7 +156,7 @@
 }
 
 .hero__review-role {
-  font-size: 1.6rem;
+  font-size: 1.32rem;
   color: var(--color-white);
   opacity: 0.55;
   margin: 0;
@@ -183,5 +183,5 @@
   .hero__review { padding-inline: var(--space-6); }
   .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
   .hero__buttons { flex-wrap: wrap; }
-  .hero__review-quote { font-size: clamp(3.6rem, 16vw, 5.2rem); }
+  .hero__review-quote { font-size: clamp(2.97rem, 13.2vw, 4.29rem); }
 }
