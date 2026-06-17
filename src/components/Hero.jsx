@@ -8,12 +8,13 @@ export default function Hero() {
     const canvas = hexCanvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    // HEX_SIZE/HEX_GAP skaalataan resize()-funktiossa suhteessa kontainerin
-    // leveyteen (referenssinä 1440px-leveä näyttö, jossa 28px/4px on suunniteltu),
-    // jotta heksagonien koko ja tiheys pysyvät visuaalisesti samana kaikilla
-    // resoluutioilla sen sijaan että ne olisivat aina kiinteä pikselikoko.
-    const REF_WIDTH = 1440, REF_HEX_SIZE = 28, REF_HEX_GAP = 4
-    const MIN_SCALE = 0.55, MAX_SCALE = 1.6
+    // HEX_SIZE/HEX_GAP skaalataan resize()-funktiossa suoraan suhteessa
+    // kontainerin leveyteen verrattuna 1920px-design-pohjaan (FullHD,
+    // johon 28px/4px on suunniteltu), jotta heksagonit skaalaavat
+    // tarkalleen samassa suhteessa kuin muu sisältö — esim. 1268px-
+    // leveydellä HEX_SIZE on 1268/1920 = 66 % alkuperäisestä, ei
+    // clampattuna mihinkään väliin.
+    const REF_WIDTH = 1920, REF_HEX_SIZE = 28, REF_HEX_GAP = 4
     let HEX_SIZE = REF_HEX_SIZE, HEX_GAP = REF_HEX_GAP
     const MAX_OPACITY = 0.07
     const FADE_SPEED = 0.006, APPEAR_SPEED = 0.015
@@ -50,7 +51,7 @@ export default function Hero() {
       const parent = canvas.parentElement
       canvas.width = parent.offsetWidth
       canvas.height = parent.offsetHeight
-      const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, canvas.width / REF_WIDTH))
+      const scale = canvas.width / REF_WIDTH
       HEX_SIZE = REF_HEX_SIZE * scale
       HEX_GAP = REF_HEX_GAP * scale
       buildHexes()
@@ -139,7 +140,7 @@ export default function Hero() {
               </a>
               <a href="#technology" className="btn btn--outline">
                 <span className="hero__play-icon" aria-hidden="true">
-                  <svg width="60%" height="60%" viewBox="0 0 24 24" fill="currentColor">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </span>
@@ -159,7 +160,7 @@ export default function Hero() {
         <div className="hero__review-meta">
           <div className="hero__review-stars" aria-label="5 stars">
             {[...Array(5)].map((_, i) => (
-              <svg key={i} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <svg key={i} width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
             ))}
