@@ -1,11 +1,23 @@
 /* ============================================================
    HERO.CSS — redesigned, no glass
-   Skaalaus: kaikki avainmitat sidottu vw:hen samassa suhteessa,
-   jotta mittasuhteet (otsikko vs. sitaatti vs. layout) pysyvät
-   identtisinä kaikilla resoluutioilla. Ei "tasaantuvia" clamp-
-   maksimeja/minimeja keskialueella — vain ääripäissä (erittäin
-   pienet/suuret näytöt) lukitaan arvo, jotta teksti ei räjähdä
-   tai katoa mikroskooppiseksi.
+   SKAALAUS: design on rakennettu 1920px-leveälle (FullHD) näytölle.
+   Kaikki avainmitat (fontit, välit, leveydet, sijainnit) on
+   muunnettu px:stä vw:hen kaavalla vw% = px / 1920 * 100, jolloin
+   hero skaalautuu TÄYSIN SUHTEELLISESTI kuin yksi kiinteä kuva —
+   esim. 1268px-leveydellä kaikki on tarkalleen 1268/1920 = 66 %
+   alkuperäisestä koosta, ei pikseliäkään yli tai ali.
+
+   Huom: alkuperäisessä versiossa otsikko (clamp(4.2rem,12vw,10.5rem)),
+   sitaatti (clamp(3.63rem,7.26vw,5.94rem)) ja review-laatikon
+   oikea reunusväli (clamp(2rem,6vw,6rem)) olivat KAIKKI lukkiutuneet
+   maksimi-arvoonsa 1920px-leveydellä (vw-arvo ylitti maksimin).
+   Eli "FullHD-näkymä" jota halutaan säilyttää = nämä maksimiarvot.
+   Juuri tästä syystä eri kapeammilla leveyksillä clamp irtosi
+   maksimista ja alkoi noudattaa vw-kerrointa, joka ei vastannut
+   enää alkuperäistä suhdetta — siksi skaalaus näytti rikkinäiseltä.
+   Tässä versiossa clamp() on poistettu kokonaan keskialueelta ja
+   maksimiarvo on muunnettu suoraan vw:ksi, jolloin suhde lukittuu
+   pysyvästi 1920px-pohjaan.
    ============================================================ */
 
 .hero {
@@ -14,7 +26,7 @@
   background: var(--hero-bg);
   display: flex;
   align-items: center;
-  padding-bottom: var(--space-20);
+  padding-bottom: 4.1667vw; /* space-20, oletus 80px / 1920 */
   overflow: hidden;
 }
 
@@ -39,7 +51,7 @@
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--gutter);
-  padding-top: calc(var(--nav-height) + var(--space-16));
+  padding-top: calc(var(--nav-height) + 6.6667vw); /* space-16, oletus 128px / 1920 */
   margin-left: 0;
 }
 
@@ -51,80 +63,71 @@
 }
 
 .hero__left {
-  max-width: 37.5vw;
+  max-width: 37.5vw; /* 720px / 1920 */
 }
 
-/* ── Title & lead ──
-   12vw kautta koko skaalan: ei kiinteää min/max-rem-rajaa,
-   joten suhde sitaattiin (joka skaalaa 7.26vw) pysyy vakiona.
-   Ääripäät lukitaan vain turvarajoiksi (ei normaalilla
-   selausalueella vaikuttavia). */
+/* ── Title & lead ── */
 .hero__title {
-  font-size: clamp(2.4rem, 12vw, 14rem);
+  font-size: 8.75vw; /* 168px (10.5rem, todellinen 1920px-arvo) / 1920 */
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
   color: var(--color-white);
-  margin-bottom: 5.2vw;
+  margin-bottom: 2.0833vw; /* space-10, oletus 40px / 1920 */
   max-width: none;
   text-align: left;
 }
 
 .hero__lead {
-  font-size: clamp(0.95rem, 1.8vw, 2.4rem);
+  font-size: 1.8vw; /* alkuperäinen vw-kerroin: ei lukkiutunut maksimiin 1920px:llä */
   font-weight: var(--font-light);
   color: rgba(255, 255, 255, 0.8);
-  max-width: 31.25vw;
+  max-width: 31.25vw; /* 600px / 1920 */
   line-height: var(--leading-relaxed);
-  margin-bottom: 5.2vw;
+  margin-bottom: 2.0833vw; /* space-10 */
 }
 
 /* ── Buttons ── */
 .hero__buttons {
   display: flex;
   align-items: center;
-  gap: 2.1vw;
+  gap: 0.8333vw; /* space-4, oletus 16px / 1920 */
   flex-wrap: wrap;
-  margin-bottom: 4.2vw;
+  margin-bottom: 1.6667vw; /* space-8, oletus 32px / 1920 */
 }
 
 .hero__play-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.65vw;
-  height: 1.65vw;
-  min-width: 16px;
-  min-height: 16px;
+  width: 1.1458vw; /* 22px / 1920 */
+  height: 1.1458vw;
   background: #e53e3e;
   border-radius: 50%;
-  margin-right: 0.3vw;
+  margin-right: 0.2083vw; /* 4px / 1920 */
   flex-shrink: 0;
 }
 
-/* ── Faded pull-quote — right-aligned, vertically centered, movie-review style ──
-   Kaikki mitat vw-pohjaisia samalla kertoimella kuin otsikko (12vw),
-   jolloin suhde otsikkoon säilyy täysin kiinteänä resoluutiosta
-   riippumatta. */
+/* ── Faded pull-quote — right-aligned, vertically centered, movie-review style ── */
 @keyframes reviewFadeIn {
-  from { opacity: 0; transform: translateY(0.83vw); }
+  from { opacity: 0; transform: translateY(0.625vw); } /* 12px / 1920 */
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .hero__review {
   position: absolute;
   top: 50%;
-  right: 4.5vw;
+  right: 5vw; /* 96px (6rem, todellinen 1920px-arvo) / 1920 */
   transform: translateY(-50%);
-  max-width: 64.2vw;
+  max-width: 48.125vw; /* 924px / 1920 */
   text-align: right;
   z-index: 2;
   animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero__review-quote {
-  margin: 0 0 5.7vw;
-  font-size: clamp(1.7rem, 7.26vw, 8.5rem);
+  margin: 0 0 1.7188vw; /* space-5*1.65, oletus 20px*1.65=33px / 1920 */
+  font-size: 4.95vw; /* 95.04px (5.94rem, todellinen 1920px-arvo) / 1920 */
   line-height: 1.05;
   font-weight: var(--font-bold);
   letter-spacing: -0.02em;
@@ -136,25 +139,23 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.49vw;
+  gap: 0.3646vw; /* 7px / 1920 */
 }
 
 .hero__review-stars {
   display: flex;
-  gap: 0.35vw;
+  gap: 0.2604vw; /* 5px / 1920 */
   color: #e53e3e;
-  margin-bottom: 0.69vw;
+  margin-bottom: 0.5208vw; /* 10px / 1920 */
 }
 
 .hero__review-stars svg {
-  width: 1.8vw;
-  height: 1.8vw;
-  min-width: 18px;
-  min-height: 18px;
+  width: 1.3542vw; /* 26px / 1920 */
+  height: 1.3542vw;
 }
 
 .hero__review-name {
-  font-size: clamp(0.95rem, 1.09vw, 2rem);
+  font-size: 1.3083vw; /* 25.12px (1.57rem) / 1920 */
   font-weight: 600;
   color: var(--color-white);
   opacity: 0.85;
@@ -162,49 +163,31 @@
 }
 
 .hero__review-role {
-  font-size: clamp(0.8rem, 0.92vw, 1.7rem);
+  font-size: 1.1vw; /* 21.12px (1.32rem) / 1920 */
   color: var(--color-white);
   opacity: 0.55;
   margin: 0;
 }
 
-/* ── Responsive ──
-   Samalla periaatteella: alle 900px siirrytään pystysuuntaiseen
-   asetteluun, mutta sisällä mitat skaalaavat edelleen vw:n
-   mukaan (suhteessa pienemmän viewportin leveyteen), ei hyppää
-   kiinteisiin rem-arvoihin. */
-@media (max-width: 900px) {
-  .hero__left {
-    max-width: 100%;
-  }
-  .hero__title {
-    font-size: clamp(2.6rem, 16vw, 7rem);
-    margin-bottom: 6vw;
-  }
-  .hero__lead {
-    max-width: 100%;
-    font-size: clamp(0.95rem, 4vw, 1.6rem);
-    margin-bottom: 6vw;
-  }
+/* ── Turvaraja erittäin kapeille ikkunoille (alle 480px, esim. puhelimet) ──
+   Tämä EI ole responsiivinen uudelleenasettelu — pelkkä alaraja, jotta
+   teksti ei katoa lukukelvottomaksi todella pienillä leveyksillä.
+   Kaikki normaalit työpöytä-/läppärileveydet 1920px:stä alaspäin
+   (mukaan lukien kysytty 1268px) skaalaavat täysin suhteellisesti
+   tämän rajan yläpuolella, ilman uudelleenasettelua. */
+@media (max-width: 480px) {
+  .hero__title { font-size: 42px; }
+  .hero__review-quote { font-size: 24px; }
+  .hero__lead { font-size: 14px; }
   .hero__review {
     position: static;
     transform: none;
     max-width: none;
     text-align: left;
-    margin-top: 8vw;
+    margin-top: 40px;
     padding-inline: var(--gutter);
   }
   .hero__review-meta {
     align-items: flex-start;
   }
-  .hero__review-quote {
-    font-size: clamp(1.6rem, 9vw, 4rem);
-    margin-bottom: 4vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero__content { padding-inline: var(--space-6); }
-  .hero__review { padding-inline: var(--space-6); }
-  .hero__buttons { flex-wrap: wrap; }
 }
