@@ -68,17 +68,17 @@
 
 .scroll-progress__point {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  /* (frame-korkeus − hexagon-korkeus) / 2 → keskittää hexagonin palkkiin.
+     Kiinteä top, ei enää top:0/bottom:0 + translateY-temppua, jotta selain
+     ei voi "ohittaa" arvoa ja tulos on aina ennustettava. */
+  top: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 16px;
   height: 16px;
-  /* Sentroi hexagon left-arvon päälle.
-     Kiinteä 2px = (frame-korkeus − hexagon-korkeus) / 2,
-     toimii samalla tavalla sekä desktopilla (20px/16px) että mobiilissa (16px/12px) */
-  transform: translateX(-50%) translateY(2px);
+  /* Sentroi hexagon left-arvon päälle (vain vaakasuunta) */
+  transform: translateX(-50%);
   background: transparent;
 }
 
