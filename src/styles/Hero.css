@@ -1,34 +1,15 @@
 /* ============================================================
    HERO.CSS — redesigned, no glass
-   SKAALAUS: design on rakennettu 1920px-leveälle (FullHD) näytölle.
-   Kaikki avainmitat (fontit, välit, leveydet, sijainnit) on
-   muunnettu px:stä vw:hen kaavalla vw% = px / 1920 * 100, jolloin
-   hero skaalautuu TÄYSIN SUHTEELLISESTI kuin yksi kiinteä kuva —
-   esim. 1268px-leveydellä kaikki on tarkalleen 1268/1920 = 66 %
-   alkuperäisestä koosta, ei pikseliäkään yli tai ali.
-
-   Huom: alkuperäisessä versiossa otsikko (clamp(4.2rem,12vw,10.5rem)),
-   sitaatti (clamp(3.63rem,7.26vw,5.94rem)) ja review-laatikon
-   oikea reunusväli (clamp(2rem,6vw,6rem)) olivat KAIKKI lukkiutuneet
-   maksimi-arvoonsa 1920px-leveydellä (vw-arvo ylitti maksimin).
-   Eli "FullHD-näkymä" jota halutaan säilyttää = nämä maksimiarvot.
-   Juuri tästä syystä eri kapeammilla leveyksillä clamp irtosi
-   maksimista ja alkoi noudattaa vw-kerrointa, joka ei vastannut
-   enää alkuperäistä suhdetta — siksi skaalaus näytti rikkinäiseltä.
-   Tässä versiossa clamp() on poistettu kokonaan keskialueelta ja
-   maksimiarvo on muunnettu suoraan vw:ksi, jolloin suhde lukittuu
-   pysyvästi 1920px-pohjaan.
    ============================================================ */
 
 .hero {
   position: relative;
-  height: var(--hero-min-height); /* kiinteä korkeus, EI min-height — estää ylivuodon */
-  max-height: var(--hero-min-height);
+  min-height: var(--hero-min-height);
   background: var(--hero-bg);
   display: flex;
   align-items: center;
-  padding-bottom: min(4.1667vw, 4vh); /* space-20, rajattu myös vh:lla matalille ikkunoille */
-  overflow: hidden; /* turvaverkko: mikäli sisältö silti ylittäisi korkeuden, se leikkautuu sen sijaan että työntää sivua scrollattavaksi */
+  padding-bottom: var(--space-12); /* TT: space-20 → tiivistetty space-12 scroll-ongelman minimoimiseksi */
+  overflow: hidden;
 }
 
 .hero__bg {
@@ -52,7 +33,7 @@
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--gutter);
-  padding-top: calc(var(--nav-height) + min(6.6667vw, 6vh)); /* space-16, rajattu myös vh:lla */
+  padding-top: calc(var(--nav-height) + var(--space-10)); /* TT: space-16 → tiivistetty space-10 */
   margin-left: 0;
 }
 
@@ -64,78 +45,71 @@
 }
 
 .hero__left {
-  max-width: 37.5vw; /* 720px / 1920 */
+  max-width: 720px;
 }
 
 /* ── Title & lead (position unchanged) ── */
 .hero__title {
-  font-size: min(8.75vw, 13vh); /* 168px @1920px leveydellä; vh-katto estää 3 riviä työntämästä yli ruudun korkealla/kapealla ikkunalla */
+  font-size: clamp(4.2rem, 12vw, 10.5rem); /* ALKUPERÄINEN — EI MUUTETTU */
   line-height: 0.88;
   letter-spacing: -0.04em;
   font-weight: var(--font-bold);
   color: var(--color-white);
-  margin-bottom: min(2.0833vw, 2vh); /* space-10 */
+  margin-bottom: var(--space-6); /* TT: space-10 → tiivistetty space-6 */
   max-width: none;
   text-align: left;
 }
 
 .hero__lead {
-  font-size: min(1.8vw, 2.6vh); /* alkuperäinen vw-kerroin + vh-katto turvana */
+  font-size: clamp(var(--text-lg), 1.8vw, var(--text-3xl)); /* ALKUPERÄINEN — EI MUUTETTU */
   font-weight: var(--font-light);
   color: rgba(255, 255, 255, 0.8);
-  max-width: 31.25vw; /* 600px / 1920 */
+  max-width: 600px;
   line-height: var(--leading-relaxed);
-  margin-bottom: min(2.0833vw, 2vh); /* space-10 */
+  margin-bottom: var(--space-6); /* TT: space-10 → tiivistetty space-6 */
 }
 
 /* ── Buttons ── */
 .hero__buttons {
   display: flex;
   align-items: center;
-  gap: 0.8333vw; /* space-4, oletus 16px / 1920 */
+  gap: var(--space-4);
   flex-wrap: wrap;
-  margin-bottom: min(1.6667vw, 1.5vh); /* space-8, oletus 32px / 1920 */
+  margin-bottom: var(--space-6); /* TT: space-8 → tiivistetty space-6 */
 }
 
 .hero__play-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.1458vw; /* 22px / 1920 */
-  height: 1.1458vw;
+  width: 22px;
+  height: 22px;
   background: #e53e3e;
   border-radius: 50%;
-  margin-right: 0.2083vw; /* 4px / 1920 */
+  margin-right: 4px;
   flex-shrink: 0;
-}
-
-.hero__play-icon svg {
-  width: 0.625vw; /* 12px / 1920 */
-  height: 0.625vw;
 }
 
 /* ── Faded pull-quote — right-aligned, vertically centered, movie-review style ── */
 @keyframes reviewFadeIn {
-  from { opacity: 0; transform: translateY(0.625vw); } /* 12px / 1920 */
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .hero__review {
   position: absolute;
   top: 50%;
-  right: 5vw; /* 96px (6rem, todellinen 1920px-arvo) / 1920 */
+  right: clamp(2rem, 6vw, 6rem); /* ALKUPERÄINEN — EI MUUTETTU */
   transform: translateY(-50%);
-  max-width: 48.125vw; /* 924px / 1920 */
-  max-height: 90%;
-  overflow: hidden;
+  max-width: 924px;
   text-align: right;
   z-index: 2;
   animation: reviewFadeIn 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero__review-quote {
-  margin: 0 0 min(1.7188vw, 2vh); /* space-5*1.65, oletus 20px*1.65=33px / 1920 */
-  font-size: min(4.95vw, 9vh); /* 95.04px (5.94rem, todellinen 1920px-arvo) / 1920 + vh-katto */
+  margin: 0 0 calc(var(--space-5) * 1.65);
+  font-size: clamp(3.63rem, 7.26vw, 5.94rem); /* ALKUPERÄINEN — EI MUUTETTU */
   line-height: 1.05;
   font-weight: var(--font-bold);
   letter-spacing: -0.02em;
@@ -147,23 +121,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.3646vw; /* 7px / 1920 */
+  gap: 7px;
 }
 
 .hero__review-stars {
   display: flex;
-  gap: 0.2604vw; /* 5px / 1920 */
+  gap: 5px;
   color: #e53e3e;
-  margin-bottom: 0.5208vw; /* 10px / 1920 */
-}
-
-.hero__review-stars svg {
-  width: 1.3542vw; /* 26px / 1920 */
-  height: 1.3542vw;
+  margin-bottom: 10px;
 }
 
 .hero__review-name {
-  font-size: 1.3083vw; /* 25.12px (1.57rem) / 1920 */
+  font-size: 1.57rem;
   font-weight: 600;
   color: var(--color-white);
   opacity: 0.85;
@@ -171,43 +140,32 @@
 }
 
 .hero__review-role {
-  font-size: 1.1vw; /* 21.12px (1.32rem) / 1920 */
+  font-size: 1.32rem;
   color: var(--color-white);
   opacity: 0.55;
   margin: 0;
 }
 
-/* ── Turvaraja erittäin kapeille ikkunoille (alle 480px, esim. puhelimet) ──
-   Tämä EI ole responsiivinen uudelleenasettelu — pelkkä alaraja, jotta
-   teksti ei katoa lukukelvottomaksi todella pienillä leveyksillä.
-   Kaikki normaalit työpöytä-/läppärileveydet 1920px:stä alaspäin
-   skaalaavat täysin suhteellisesti tämän rajan yläpuolella, ilman
-   uudelleenasettelua (eli ei enää erillistä 900px/768px-layoutia,
-   koska se rikkoisi "kuin yksi kiinteä kuva" -skaalauksen). */
-@media (max-width: 480px) {
-  .hero {
-    height: auto;
-    max-height: none;
-    min-height: var(--hero-min-height);
-    overflow: visible;
-    padding-top: var(--nav-height);
-    padding-bottom: 40px;
-  }
-  .hero__content { padding-top: 32px; }
-  .hero__title { font-size: 42px; }
-  .hero__review-quote { font-size: 24px; }
-  .hero__lead { font-size: 14px; }
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
   .hero__review {
     position: static;
     transform: none;
     max-width: none;
-    max-height: none;
-    overflow: visible;
     text-align: left;
-    margin-top: 40px;
+    margin-top: var(--space-10);
     padding-inline: var(--gutter);
   }
   .hero__review-meta {
     align-items: flex-start;
   }
+}
+
+@media (max-width: 768px) {
+  .hero__content { padding-inline: var(--space-6); }
+  .hero__review { padding-inline: var(--space-6); }
+  .hero__lead { font-size: clamp(var(--text-lg), 4vw, var(--text-2xl)); }
+  .hero__buttons { flex-wrap: wrap; }
+  .hero__review-quote { font-size: clamp(2.97rem, 13.2vw, 4.29rem); }
 }
