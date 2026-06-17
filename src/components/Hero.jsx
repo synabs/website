@@ -135,17 +135,6 @@ export default function Hero() {
             <p className="hero__lead">
               The first AI agents designed to adapt and improve over time to qualify leads, answer questions, and drive conversions.
             </p>
-            <div className="hero__watch-row">
-              <a href="#technology" className="hero__watch-button">
-                <span className="hero__watch-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </span>
-                Watch it live
-              </a>
-            </div>
-
           </div>
           <div className="hero__right">
             <div className="hero__quote">
@@ -166,6 +155,16 @@ export default function Hero() {
                   <p className="hero__quote-role">CEO at Somesankarit Oy</p>
                 </div>
               </div>
+            </div>
+            <div className="hero__watch-row">
+              <a href="#technology" className="hero__watch-button">
+                <span className="hero__watch-icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                Watch it live
+              </a>
             </div>
           </div>
         </div>
