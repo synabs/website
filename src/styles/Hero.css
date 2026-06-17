@@ -114,6 +114,7 @@
 /* ── Watch live button ── */
 .hero__watch-row {
   margin-top: 0;
+  animation: cardSlideIn 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .hero__watch-button {
   display: inline-flex;
