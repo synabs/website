@@ -4,8 +4,8 @@
 .ss-section {
   position: relative;
   background: var(--color-black);
-  padding-block-start: 0;
-  padding-block-end: 40px;
+  padding-block-start: calc(var(--section-padding) / 2);
+  padding-block-end: var(--section-padding);
   padding-inline: var(--gutter);
   overflow: visible; /* allow image to bleed upward */
 }
