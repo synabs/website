@@ -142,7 +142,7 @@ export default function Hero() {
               <div className="hero__cta-images">
                 <div className="hero__cta-image-wrap">
                   <img
-                    src="/cortex.avif"
+                    src="/cortex-engine.avif"
                     alt=""
                     className="hero__cta-image"
                   />
