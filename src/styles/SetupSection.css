@@ -12,18 +12,16 @@
 .ss-bg-image {
   position: absolute;
   bottom: 40px;
-  right: 0;
+  left: 0;
   width: 100%;
   height: calc(100% + 12rem);
   object-fit: contain;
-  object-position: bottom right;
+  object-position: bottom left;
   z-index: 0;
   pointer-events: none;
   opacity: 0.75;
   transform: scale(0.75);
-  transform-origin: bottom right;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
+  transform-origin: bottom left;
 }
 /* ---- Layout ---- */
 .ss-inner {
