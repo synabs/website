@@ -112,9 +112,13 @@
 }
 
 /* ── Watch live button ── */
+@keyframes ctaSlideIn {
+  from { transform: translateX(418px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
 .hero__watch-row {
   margin-top: 0;
-  animation: cardSlideIn 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: ctaSlideIn 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .hero__watch-button {
   display: inline-flex;
